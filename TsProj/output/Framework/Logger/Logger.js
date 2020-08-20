@@ -1,12 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const CS = require('csharp');
+const GameConfig_1 = require("../../Global/GameConfig");
 class Logger {
     static log(msg) {
-        CS.Logger.Log(msg);
+        if (GameConfig_1.GameConfig.debug)
+            CS.Logger.Log(msg);
     }
     static logError(msg) {
-        CS.Logger.LogError(msg);
+        if (GameConfig_1.GameConfig.debug)
+            CS.Logger.LogError(msg);
     }
 }
 exports.Logger = Logger;

@@ -1,17 +1,20 @@
 const CS = require('csharp');
 
+import {GameConfig} from '../../Global/GameConfig';
 
 export class Logger{
 
     public static log(msg:string):void{
         
-        CS.Logger.Log(msg);
+        if(GameConfig.debug)
+            CS.Logger.Log(msg);
     }
 
 
     public static logError(msg:string):void{
 
-        CS.Logger.LogError(msg);
+        if(GameConfig.debug)
+            CS.Logger.LogError(msg);
 
     }
 }
