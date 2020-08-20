@@ -21,41 +21,14 @@ public class GameLaunch : MonoBehaviour
     IEnumerator Start()
     {
         LoggerHelper.Instance.Startup();
-        //注释掉IOS的推送服务
-        //#if UNITY_IPHONE
-        //        UnityEngine.iOS.NotificationServices.RegisterForNotifications(UnityEngine.iOS.NotificationType.Alert | UnityEngine.iOS.NotificationType.Badge | UnityEngine.iOS.NotificationType.Sound);
-        //        UnityEngine.iOS.Device.SetNoBackupFlag(Application.persistentDataPath);
-        //#endif
 
         var start = DateTime.Now;
 
         // 启动资源管理模块
-        start = DateTime.Now;
         yield return AddressablesManager.Instance.Initialize();
         Logger.Log(string.Format("AssetBundleManager Initialize use {0}ms", (DateTime.Now - start).Milliseconds));
 
-        // 启动xlua热修复模块
-        start = DateTime.Now;
-        //XLuaManager.Instance.Startup();
-
-
-#if !UNITY_EDITOR
-        //预加载Lua
-        BaseAssetAsyncLoader loader = AddressablesManager.Instance.LoadAssetAsync(AddressableConfig.AssetsPathMapFileName, typeof(TextAsset));
-        yield return loader;
-
-        TextAsset maptext = loader.asset as TextAsset;
-        string[] luas = maptext.text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-
-        AddressablesManager.Instance.ReleaseAsset(loader.asset);
-        loader.Dispose();
-        LuaAsyncLoader luaLoader = AddressablesManager.Instance.LoadLuaAsync(luas);
-        yield return luaLoader;
-#endif
-
-        //XLuaManager.Instance.OnInit();
-        // XLuaManager.Instance.StartHotfix();
-        Logger.Log(string.Format("XLuaManager StartHotfix use {0}ms", (DateTime.Now - start).Milliseconds));
+       
 
         // 初始化UI界面
         yield return InitLaunchPrefab();

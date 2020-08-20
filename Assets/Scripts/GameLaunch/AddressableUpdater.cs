@@ -119,7 +119,8 @@ public class AddressableUpdater : MonoBehaviour
     {
         statusText.text = "正在准备资源...";
 
-        //XLuaManager.Instance.StartGame();
+        JsManager.Instance.StartGame();
+
         UINoticeTip.Instance.DestroySelf();
         Destroy(gameObject, 0.5f);
         yield break;
@@ -134,20 +135,10 @@ public class AddressableUpdater : MonoBehaviour
         // 重启资源管理器
         yield return AddressablesManager.Instance.Cleanup();
         yield return AddressablesManager.Instance.Initialize();
-        AddressablesManager.Instance.ReleaseLuas();
+       
 
-        BaseAssetAsyncLoader loader = AddressablesManager.Instance.LoadAssetAsync(AddressableConfig.AssetsPathMapFileName, typeof(TextAsset));
-        yield return loader;
+        JsManager.Instance.Restart();
 
-        TextAsset maptext = loader.asset as TextAsset;
-        string[] luas = maptext.text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-
-        AddressablesManager.Instance.ReleaseAsset(loader.asset);
-        loader.Dispose();
-        LuaAsyncLoader luaLoader = AddressablesManager.Instance.LoadLuaAsync(luas);
-        yield return luaLoader;
-
-        //XLuaManager.Instance.Restart();
         yield break;
     }
 
