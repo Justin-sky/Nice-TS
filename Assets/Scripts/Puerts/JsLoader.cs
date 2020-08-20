@@ -23,10 +23,10 @@ public class JsLoader : ILoader
     public string ReadFile(string filepath, out string debugpath)
     {
         StringBuilder scriptPath = new StringBuilder();
-        scriptPath.Append(filepath).Append(".txt");
+        scriptPath.Append(filepath);
 
 #if UNITY_EDITOR
-        var scriptDir = Path.Combine(Application.dataPath, "AssetsPackage/Js");
+        var scriptDir = Path.Combine(Application.dataPath, "../TsProj/output");
         var jsPath = Path.Combine(scriptDir, scriptPath.ToString());
 
         debugpath = jsPath.Replace("/", "\\");

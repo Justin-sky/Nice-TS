@@ -1,5 +1,6 @@
 
 const CS = require('csharp');
+import {Logger} from "./Framework/Logger/Logger";
 
 class GameMain{
 
@@ -11,16 +12,16 @@ class GameMain{
 
     start():void {
 
-        console.log("Game start in JS....");
+        Logger.log("Game start in JS....");
     }
 
     onApplicationQuit():void {
 
-        console.log("Game onApplicationQuit in JS....");
+        Logger.log("Game onApplicationQuit in JS....");
     }
 
     onDispose():void {
-        console.log("Game onDispose in JS....");
+        Logger.log("Game onDispose in JS....");
     }
     
 }

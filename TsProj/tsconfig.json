@@ -4,7 +4,7 @@
     "module": "commonjs",
     "jsx": "react",
     "sourceMap": true,
-    "watch": false,
+    "watch": true,
     "allowJs":true,
     "typeRoots": [
       "../Assets/Puerts/Typing",
