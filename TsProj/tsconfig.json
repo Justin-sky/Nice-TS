@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "jsx": "react",
+    "sourceMap": true,
+    "watch": true,
+    "allowJs":true,
+    "typeRoots": [
+      "../Assets/Puerts/Typing",
+      "../Assets/Gen/Typing",
+      "./node_modules/@types",
+    ],
+    "outDir": "output",
+  },
+  "include": [
+    "libs",
+    "src"
+  ],
+  "scripts":{
+    
+  }
+}
