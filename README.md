@@ -3,7 +3,7 @@
 
 Road Map ：
 
-* 资源管理修改为Addressables（
+* Addressables资源管理
 * UI框架支持MVVM 
 * 渲染管线修改为URP
 * 网络模块采用protobuf3, 支持断线重连，消息重发
@@ -18,7 +18,7 @@ Road Map ：
 
 请在Unity2019.4以上环境运行
 
-Clone[服务器：https://github.com/Justin-sky/Nice-ET ](https://github.com/Justin-sky/Nice-ET)代码到本地，VS安装.net core 3.0开发环境
+Clone[服务器：https://github.com/Justin-sky/Nice-ET ](https://github.com/Justin-sky/Nice-ET)代码到本地，VS安装.net core 3.1开发环境
 
 [Addressable配置说明文档](https://zhuanlan.zhihu.com/p/184846532)
 
