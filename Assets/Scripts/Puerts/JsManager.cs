@@ -17,7 +17,8 @@ public class JsManager:MonoSingleton<JsManager>
 
     void InitJsEnv()
     {
-        jsEnv = new JsEnv(new JsLoader());
+        //调试端口：8080
+        jsEnv = new JsEnv(new JsLoader(),8080);
 
         if(jsEnv == null)
         {
