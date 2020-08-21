@@ -1,6 +1,8 @@
 
 const CS = require('csharp');
-import {Logger} from "./Framework/Logger/Logger";
+import {Logger} from './Framework/Logger/Logger';
+import {UnitTest} from './UnitTest/UnitTest';
+
 
 class GameMain{
 
@@ -11,6 +13,13 @@ class GameMain{
     }
 
     start():void {
+
+
+        //do Unit Test
+        UnitTest.doTest();
+
+
+
 
         Logger.log("Game start in JS....");
     }

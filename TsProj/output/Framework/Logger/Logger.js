@@ -5,11 +5,11 @@ const GameConfig_1 = require("../../Global/GameConfig");
 class Logger {
     static log(msg) {
         if (GameConfig_1.GameConfig.debug)
-            CS.Logger.Log(msg);
+            CS.Logger.Log(`${msg}`);
     }
     static logError(msg) {
         if (GameConfig_1.GameConfig.debug)
-            CS.Logger.LogError(msg);
+            CS.Logger.LogError(`${msg}`);
     }
 }
 exports.Logger = Logger;

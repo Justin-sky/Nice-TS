@@ -4,17 +4,17 @@ import {GameConfig} from '../../Global/GameConfig';
 
 export class Logger{
 
-    public static log(msg:string):void{
+    public static log(msg:any):void{
         
         if(GameConfig.debug)
-            CS.Logger.Log(msg);
+            CS.Logger.Log(`${msg}`);
     }
 
 
-    public static logError(msg:string):void{
+    public static logError(msg:any):void{
 
         if(GameConfig.debug)
-            CS.Logger.LogError(msg);
+            CS.Logger.LogError(`${msg}`);
 
     }
 }
