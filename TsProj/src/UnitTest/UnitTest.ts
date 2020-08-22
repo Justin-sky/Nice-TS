@@ -71,6 +71,17 @@ export class UnitTest{
         inst.name = "Test Ch";
 
 
+        Logger.log("引用类型 =============================");
+        let testMap:Map<string,Array<number>> = new Map();
+        testMap.set("key1" ,new Array());
+
+        let arr1:Array<number> = testMap.get("key1");
+        arr1.push(12);
+        arr1.push(333);
+
+        let arr2:Array<number> = testMap.get("key1");
+        Logger.log(arr2);
+        
     }
 
     

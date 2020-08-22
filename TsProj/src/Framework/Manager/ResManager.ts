@@ -65,4 +65,9 @@ export class ResManager extends Singleton<ResManager>{
         }
     }
 
+
+    public releaseAddressGO(go:any){
+
+        csResMgr.ReleaseAddressGO(go);
+    }
 }

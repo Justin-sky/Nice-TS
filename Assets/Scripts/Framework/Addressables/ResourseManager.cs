@@ -36,6 +36,10 @@ namespace Addressable
             return res;
         }
 
+        public void ReleaseAddressGO(UnityEngine.Object go)
+        {
+            Addressables.Release(go);
+        }
 
     }
 }

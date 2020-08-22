@@ -42,6 +42,9 @@ class ResManager extends Singleton_1.Singleton {
             return null;
         }
     }
+    releaseAddressGO(go) {
+        csResMgr.ReleaseAddressGO(go);
+    }
 }
 exports.ResManager = ResManager;
 //# sourceMappingURL=ResManager.js.map

@@ -49,6 +49,14 @@ class UnitTest {
         Logger_1.Logger.log(prefab);
         let inst = CS.UnityEngine.GameObject.Instantiate(prefab);
         inst.name = "Test Ch";
+        Logger_1.Logger.log("引用类型 =============================");
+        let testMap = new Map();
+        testMap.set("key1", new Array());
+        let arr1 = testMap.get("key1");
+        arr1.push(12);
+        arr1.push(333);
+        let arr2 = testMap.get("key1");
+        Logger_1.Logger.log(arr2);
     }
 }
 UnitTest.testVar = 10000;
