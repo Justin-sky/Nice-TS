@@ -67,8 +67,8 @@ export class UnitTest{
         
         Logger.log(prefab);
 
-        let inst = CS.UnityEngine.GameObject.Instantiate(prefab);
-        inst.name = "Test Ch";
+        //let inst = CS.UnityEngine.GameObject.Instantiate(prefab);
+        //inst.name = "Test Ch";
 
 
         Logger.log("引用类型 =============================");

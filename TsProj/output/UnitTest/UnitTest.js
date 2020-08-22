@@ -47,8 +47,8 @@ class UnitTest {
         Logger_1.Logger.log("ResourceManager =============================");
         let prefab = await ResManager_1.ResManager.Instance(ResManager_1.ResManager).loadPrefab("Models/1001/Character.prefab");
         Logger_1.Logger.log(prefab);
-        let inst = CS.UnityEngine.GameObject.Instantiate(prefab);
-        inst.name = "Test Ch";
+        //let inst = CS.UnityEngine.GameObject.Instantiate(prefab);
+        //inst.name = "Test Ch";
         Logger_1.Logger.log("引用类型 =============================");
         let testMap = new Map();
         testMap.set("key1", new Array());

@@ -40,6 +40,7 @@ class GameMain {
     }
     onApplicationQuit() {
         TimeManager_1.TimeManager.Instance(TimeManager_1.TimeManager).dispose();
+        GameObjectPool_1.GameObjectPool.Instance(GameObjectPool_1.GameObjectPool).cleanup(true);
         Logger_1.Logger.log("Game onApplicationQuit in JS....");
     }
     onDispose() {

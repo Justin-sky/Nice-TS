@@ -65,7 +65,7 @@ class GameMain{
     public onApplicationQuit():void {
 
         TimeManager.Instance(TimeManager).dispose();
-
+        GameObjectPool.Instance(GameObjectPool).cleanup(true);
 
         Logger.log("Game onApplicationQuit in JS....");
     }

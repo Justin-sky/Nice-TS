@@ -24,11 +24,6 @@ public class GameLaunch : MonoBehaviour
 
         var start = DateTime.Now;
 
-        // 启动资源管理模块
-        yield return AddressablesManager.Instance.Initialize();
-        Logger.Log(string.Format("AssetBundleManager Initialize use {0}ms", (DateTime.Now - start).Milliseconds));
-
-       
 
         // 初始化UI界面
         yield return InitLaunchPrefab();

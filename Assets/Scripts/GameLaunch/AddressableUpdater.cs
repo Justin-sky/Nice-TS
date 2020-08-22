@@ -117,7 +117,7 @@ public class AddressableUpdater : MonoBehaviour
 
     IEnumerator StartGame()
     {
-        statusText.text = "正在准备资源...";
+        statusText.text = "正在进入游戏...";
 
         JsManager.Instance.StartGame();
 
@@ -131,11 +131,6 @@ public class AddressableUpdater : MonoBehaviour
         slider.normalizedValue = 1f;
         statusText.text = "正在准备资源...";
 
-
-        // 重启资源管理器
-        yield return AddressablesManager.Instance.Cleanup();
-        yield return AddressablesManager.Instance.Initialize();
-       
 
         JsManager.Instance.Restart();
 
