@@ -2,14 +2,18 @@ import {TimeUtil} from '../Framework/Util/TimeUtil';
 import {SingletonTest} from './SingletonTest';
 import {Logger} from '../Framework/Logger/Logger';
 import {Messenger} from '../Framework/Common/Messenger';
-import { TimeManager } from '../Framework/Updater/TimeManager';
-import { Timer } from '../Framework/Updater/Timer';
+import { TimeManager } from '../Framework/Manager/TimeManager';
+import { Timer } from '../Framework/Timer/Timer';
+import { ResManager } from '../Framework/Manager/ResManager';
+
+const CS = require('csharp');
+
 
 export class UnitTest{
     public static testVar:number = 10000;
 
 
-    public static doTest():void{
+    public static async doTest(){
 
         Logger.log("TimeUtil =============================");
         TimeUtil.test();
@@ -55,8 +59,16 @@ export class UnitTest{
             Logger.log("timer tick..");
         };
         let timer:Timer = TimeManager.Instance(TimeManager).getTImer(5,timeFun,this);
-        timer.start();
+        //timer.start();
 
+        Logger.log("ResourceManager =============================");
+
+        let prefab = await ResManager.Instance(ResManager).loadPrefab("Models/1001/Character.prefab") ;
+        
+        Logger.log(prefab);
+
+        let inst = CS.UnityEngine.GameObject.Instantiate(prefab);
+        inst.name = "Test Ch";
 
 
     }

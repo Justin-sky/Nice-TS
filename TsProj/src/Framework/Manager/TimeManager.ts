@@ -1,6 +1,6 @@
 import { Singleton } from '../Common/Singleton';
 import { Logger } from '../Logger/Logger';
-import { Timer } from './Timer';
+import { Timer } from '../Timer/Timer';
 
 
 // -- 定时器管理：负责定时器获取、回收、缓存、调度等管理
@@ -178,13 +178,6 @@ export class TimeManager extends Singleton<TimeManager>{
 
     }
 
-
-    //-- 启动
-    public startup():void{
-
-
-
-    }
 
     //-- 释放
     public dispose():void{

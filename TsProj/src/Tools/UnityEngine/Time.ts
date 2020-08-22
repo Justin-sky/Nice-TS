@@ -2,6 +2,7 @@
 const CS = require('csharp');
 const unity_time = CS.UnityEngine.Time;
 import {Singleton} from '../../Framework/Common/Singleton';
+import { Logger } from '../../Framework/Logger/Logger';
 
 export class Time extends Singleton<Time>{
 

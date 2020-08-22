@@ -3,7 +3,8 @@ const CS = require('csharp');
 import {Logger} from './Framework/Logger/Logger';
 import {UnitTest} from './UnitTest/UnitTest';
 import {Time} from './Tools/UnityEngine/Time';
-import {TimeManager} from './Framework/Updater/TimeManager';
+import {TimeManager} from './Framework/Manager/TimeManager';
+import { GameObjectPool } from './Framework/Common/GameObjectPool';
 
 class GameMain{
 
@@ -31,7 +32,7 @@ class GameMain{
         //启动单例
         Time.Instance(Time);
         TimeManager.Instance(TimeManager);
-
+        GameObjectPool.Instance(GameObjectPool);
 
 
     }

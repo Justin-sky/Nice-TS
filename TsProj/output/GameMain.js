@@ -4,7 +4,8 @@ const CS = require('csharp');
 const Logger_1 = require("./Framework/Logger/Logger");
 const UnitTest_1 = require("./UnitTest/UnitTest");
 const Time_1 = require("./Tools/UnityEngine/Time");
-const TimeManager_1 = require("./Framework/Updater/TimeManager");
+const TimeManager_1 = require("./Framework/Manager/TimeManager");
+const GameObjectPool_1 = require("./Framework/Common/GameObjectPool");
 class GameMain {
     constructor() {
         CS.JsManager.Instance.JsOnApplicationQuit = () => this.onApplicationQuit();
@@ -20,6 +21,7 @@ class GameMain {
         //启动单例
         Time_1.Time.Instance(Time_1.Time);
         TimeManager_1.TimeManager.Instance(TimeManager_1.TimeManager);
+        GameObjectPool_1.GameObjectPool.Instance(GameObjectPool_1.GameObjectPool);
     }
     onUpdate(deltaTime, unscaledDeltaTime) {
         Time_1.Time.Instance(Time_1.Time).setDeltaTime(deltaTime, unscaledDeltaTime);
