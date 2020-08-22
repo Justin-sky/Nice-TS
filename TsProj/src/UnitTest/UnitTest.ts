@@ -2,9 +2,12 @@ import {TimeUtil} from '../Framework/Util/TimeUtil';
 import {SingletonTest} from './SingletonTest';
 import {Logger} from '../Framework/Logger/Logger';
 import {Messenger} from '../Framework/Common/Messenger';
-
+import { TimeManager } from '../Framework/Updater/TimeManager';
+import { Timer } from '../Framework/Updater/Timer';
 
 export class UnitTest{
+    public static testVar:number = 10000;
+
 
     public static doTest():void{
 
@@ -45,7 +48,19 @@ export class UnitTest{
         messenger.clearup();
         messenger.broadcast(EVENT_CODE, 999," Hello");
 
+
+        Logger.log("Timer =============================");
+        let timeFun = function(){
+            Logger.log(this.testVar);
+            Logger.log("timer tick..");
+        };
+        let timer:Timer = TimeManager.Instance(TimeManager).getTImer(5,timeFun,this);
+        timer.start();
+
+
+
     }
 
+    
 
 }

@@ -4,6 +4,7 @@ const TimeUtil_1 = require("../Framework/Util/TimeUtil");
 const SingletonTest_1 = require("./SingletonTest");
 const Logger_1 = require("../Framework/Logger/Logger");
 const Messenger_1 = require("../Framework/Common/Messenger");
+const TimeManager_1 = require("../Framework/Updater/TimeManager");
 class UnitTest {
     static doTest() {
         Logger_1.Logger.log("TimeUtil =============================");
@@ -34,7 +35,15 @@ class UnitTest {
         messenger.broadcast(EVENT_CODE, 999, " Hello");
         messenger.clearup();
         messenger.broadcast(EVENT_CODE, 999, " Hello");
+        Logger_1.Logger.log("Timer =============================");
+        let timeFun = function () {
+            Logger_1.Logger.log(this.testVar);
+            Logger_1.Logger.log("timer tick..");
+        };
+        let timer = TimeManager_1.TimeManager.Instance(TimeManager_1.TimeManager).getTImer(5, timeFun, this);
+        timer.start();
     }
 }
+UnitTest.testVar = 10000;
 exports.UnitTest = UnitTest;
 //# sourceMappingURL=UnitTest.js.map

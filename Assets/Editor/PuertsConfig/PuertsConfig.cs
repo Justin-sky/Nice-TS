@@ -26,7 +26,8 @@ public class PuertsConfig
                 typeof(GameObject),
                 typeof(UnityEngine.Object),
                 typeof(Delegate),
-
+                typeof(Action<float,float>),
+                typeof(Action<float>)
             };
         }
     }
