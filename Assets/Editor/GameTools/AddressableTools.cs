@@ -23,7 +23,8 @@ public class AddressableTools
          "static_shaders",
          "static_ui",
          "static_fb",
-         "static_jsmap"
+         "static_jsmap",
+         "static_fairygui"
         };
 
 

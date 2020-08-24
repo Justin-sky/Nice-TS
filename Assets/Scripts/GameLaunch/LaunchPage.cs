@@ -1,44 +1,45 @@
 ﻿using Addressable;
+using FairyGUI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Policy;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.AddressableAssets.ResourceLocators;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
-public class AddressableUpdater : MonoBehaviour
+public class LaunchPage : GComponent
 {
-    Text statusText;
-    Slider slider;
+    public const string URL = "ui://l64dumk9pyg64t";
 
-    float totalTime = 0f;
-    bool needUpdateRes = false;
+    private GTextField gTextField;
+    private GProgressBar gProgress; 
 
-    void Awake()
+
+    public static LaunchPage CreateInstance()
     {
-        statusText = transform.Find("ContentRoot/LoadingDesc").GetComponent<Text>();
-        slider = transform.Find("ContentRoot/SliderBar").GetComponent<Slider>();
-        slider.gameObject.SetActive(false);
+        
+
+        return UIPackage.CreateObjectFromURL(URL) as LaunchPage;
     }
 
-    void Start()
+    public LaunchPage() { }
+
+    public LaunchPage BindAll()
     {
-        totalTime = 0f;
-        statusText.text = "正在检测资源更新...";
+        gTextField = this.GetChild("updateTxt") as GTextField;
+        gProgress = this.GetChild("updateProgress") as GProgressBar;
+
+        return this;
     }
 
-
-    public void StartCheckUpdate()
-    {
-        StartCoroutine(checkUpdate());
-    }
-
-    IEnumerator checkUpdate()
+    public IEnumerator checkUpdate()
     {
         var start = DateTime.Now;
 
+        gTextField.text = "正在检查资源更新...";
 
         var initHandle = Addressables.InitializeAsync();
         yield return initHandle;
@@ -54,11 +55,11 @@ public class AddressableUpdater : MonoBehaviour
             if (catalogs != null && catalogs.Count > 0)
             {
 
-                needUpdateRes = true;
+          
 
-                statusText.text = "正在更新资源...";
-                slider.normalizedValue = 0f;
-                slider.gameObject.SetActive(true);
+                gTextField.text = "正在更新资源...";
+
+                gProgress.value = 0;
 
 
                 start = DateTime.Now;
@@ -90,7 +91,7 @@ public class AddressableUpdater : MonoBehaviour
                         {
                             float percentage = downloadHandle.PercentComplete;
                             Logger.Log($"download pregress: {percentage}");
-                            slider.normalizedValue = percentage;
+                            gProgress.value = percentage * 100;
 
                             yield return null;
                         }
@@ -108,7 +109,7 @@ public class AddressableUpdater : MonoBehaviour
         }
 
 
-        needUpdateRes = false;
+
 
   
         yield return StartGame();
@@ -117,19 +118,19 @@ public class AddressableUpdater : MonoBehaviour
 
     IEnumerator StartGame()
     {
-        statusText.text = "正在进入游戏...";
+        gTextField.text = "正在进入游戏...";
 
         JsManager.Instance.StartGame();
 
-        UINoticeTip.Instance.DestroySelf();
-        Destroy(gameObject, 0.5f);
+        
         yield break;
     }
 
     IEnumerator UpdateFinish()
     {
-        slider.normalizedValue = 1f;
-        statusText.text = "正在准备资源...";
+        gProgress.value = 100;
+
+        gTextField.text = "正在准备资源...";
 
 
         JsManager.Instance.Restart();
@@ -137,15 +138,5 @@ public class AddressableUpdater : MonoBehaviour
         yield break;
     }
 
-    private void Update()
-    {
-        if (needUpdateRes)
-        {
-            totalTime += Time.deltaTime;
-
-            var progress = totalTime % 10;
-            slider.normalizedValue = progress / 10;
-        }
-
-    }
+ 
 }

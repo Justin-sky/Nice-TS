@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720">
+  <displayList>
+    <image id="n0_pyg6" name="n0" src="pyg62a" fileName="atlas/images/Login_01.png" xy="-36,0" size="1364,720"/>
+    <text id="n1_pyg6" name="n1" xy="374,436" size="79,35" fontSize="25" text="账号："/>
+    <text id="n2_pyg6" name="n2" xy="376,488" size="79,35" fontSize="25" text="密码："/>
+    <text id="n3_pyg6" name="n3" xy="374,542" size="104,35" fontSize="25" text="服务器："/>
+    <text id="n4_pyg6" name="account" xy="485,436" size="400,35" fontSize="25" color="#333333" autoSize="none" text="" input="true" prompt="请输入帐号"/>
+    <text id="n5_pyg6" name="password" xy="484,483" size="400,35" fontSize="25" color="#333333" autoSize="none" text="请输入密码：" input="true"/>
+    <component id="n6_pyg6" name="loginBtn" src="pyg64s" fileName="ui/common/CommonButton.xml" xy="531,617">
+      <Button title="登录"/>
+    </component>
+  </displayList>
+</component>

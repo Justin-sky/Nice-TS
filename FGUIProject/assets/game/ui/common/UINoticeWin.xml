@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="600,300">
+  <displayList>
+    <image id="n0_pyg6" name="n0" src="pyg62n" fileName="atlas/common/ui_comm_bg_underlay_d.png" xy="0,0" size="600,300"/>
+    <text id="n1_pyg6" name="n1" xy="279,20" size="58,26" fontSize="18" autoSize="none" text="警告"/>
+    <text id="n2_pyg6" name="n2" xy="212,110" pivot="0.5,0.5" size="181,26" fontSize="18" text="游戏更新时发生错误..."/>
+    <component id="n3_pyg6" name="backBtn" src="pyg64s" fileName="ui/common/CommonButton.xml" xy="62,203">
+      <Button title="返回"/>
+    </component>
+    <component id="n4_pyg6" name="retryBtn" src="pyg64s" fileName="ui/common/CommonButton.xml" xy="225,201">
+      <Button title="重试"/>
+    </component>
+    <component id="n5_pyg6" name="okBtn" src="pyg64s" fileName="ui/common/CommonButton.xml" xy="397,199">
+      <Button title="确定"/>
+    </component>
+  </displayList>
+</component>

@@ -1,0 +1,11 @@
+{
+  "name": "gen-ts",
+  "displayName": "",
+  "description": "生成TS模板代码",
+  "version": "1.0",
+  "author": {
+    "name": "Justin"
+  },
+  "icon": "",
+  "main": "main.lua"
+}

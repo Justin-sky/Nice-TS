@@ -1,9 +1,12 @@
 ﻿using Addressable;
+using FairyGUI;
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.XR;
 
 #if !UNITY_EDITOR
 using Addressable;
@@ -12,95 +15,61 @@ using Addressable;
 public class GameLaunch : MonoBehaviour
 {
 
-    const string launchPrefabPath = "UI/Prefabs/View/UILaunch.prefab";
-    const string noticeTipPrefabPath = "UI/Prefabs/Common/UINoticeTip.prefab";
-    GameObject launchPrefab;
-    GameObject noticeTipPrefab;
-    AddressableUpdater updater;
+    const string fairy_package = "game_fui.bytes";
+
 
     IEnumerator Start()
     {
         LoggerHelper.Instance.Startup();
 
-        var start = DateTime.Now;
+        //初始化FairyGUI
+        GRoot.inst.SetContentScaleFactor(1280, 720, UIContentScaler.ScreenMatchMode.MatchWidthOrHeight);
+        UIPackage.unloadBundleByFGUI = false;
+
+        NTexture.CustomDestroyMethod = (Texture t) =>
+        {
+            Addressables.Release(t);
+            Logger.Log(".... release addressable: " + t.name);
+        };
+
+        UIObjectFactory.SetPackageItemExtension(LaunchPage.URL, typeof(LaunchPage));
 
 
-        // 初始化UI界面
-        yield return InitLaunchPrefab();
-        yield return null;
-        yield return InitNoticeTipPrefab();
 
+        //加载FairyGUI Package
+        AsyncOperationHandle<TextAsset> handle = Addressables.LoadAssetAsync<TextAsset>(fairy_package);
+        yield return handle;
+        TextAsset pkgAsset = handle.Result;
+        UIPackage.AddPackage(
+            pkgAsset.bytes, 
+            "game",
+            async (string name, string extension, Type type, PackageItem ite) => {
+                Logger.Log($"{name}, {extension}, {type.ToString()}, {ite.ToString()}");
+
+                if (type == typeof(Texture))
+                {
+                    Texture t = await Addressables.LoadAssetAsync<Texture>(name+extension).Task ;
+                    ite.owner.SetItemAsset(ite, t, DestroyMethod.Custom);
+ 
+                }      
+            });
+        Addressables.Release(handle);
+
+
+
+        //加载更新界面
+        LaunchPage launchPage = LaunchPage.CreateInstance();
+        launchPage.BindAll();
+
+        GRoot.inst.AddChild(launchPage);
 
         // 开始更新
-        if (updater != null)
+        if (launchPage != null)
         {
-            updater.StartCheckUpdate();
+            StartCoroutine(launchPage.checkUpdate());
         }
         yield break;
     }
 
-
-    GameObject InstantiateGameObject(GameObject prefab)
-    {
-        var start = DateTime.Now;
-        GameObject go = GameObject.Instantiate(prefab);
-        Logger.Log(string.Format("Instantiate use {0}ms", (DateTime.Now - start).Milliseconds));
-
-        var luanchLayer = GameObject.Find("UIRoot/LuanchLayer");
-        go.transform.SetParent(luanchLayer.transform);
-        var rectTransform = go.GetComponent<RectTransform>();
-        rectTransform.offsetMax = Vector2.zero;
-        rectTransform.offsetMin = Vector2.zero;
-        rectTransform.localScale = Vector3.one;
-        rectTransform.localPosition = Vector3.zero;
-
-        return go;
-    }
-
-    IEnumerator InitNoticeTipPrefab()
-    {
-        var start = DateTime.Now;
-
-        AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(noticeTipPrefabPath);
-        yield return handle;
-        if (handle.Status == AsyncOperationStatus.Succeeded)
-        {
-            Logger.Log(string.Format("Load noticeTipPrefab use {0}ms", (DateTime.Now - start).Milliseconds));
-
-            noticeTipPrefab = handle.Result;
-            var go = InstantiateGameObject(noticeTipPrefab);
-            UINoticeTip.Instance.UIGameObject = go;
-            yield break;
-        }
-        else
-        {
-            Logger.LogError("LoadAssetAsync noticeTipPrefab err : " + noticeTipPrefabPath);
-            yield break;
-        }
-
-    }
-
-    IEnumerator InitLaunchPrefab()
-    {
-        var start = DateTime.Now;
-
-        AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(launchPrefabPath);
-        yield return handle;
-        if (handle.Status == AsyncOperationStatus.Succeeded)
-        {
-            Logger.Log(string.Format("Load launchPrefab use {0}ms", (DateTime.Now - start).Milliseconds));
-
-            launchPrefab = handle.Result;
-            var go = InstantiateGameObject(launchPrefab);
-            updater = go.AddComponent<AddressableUpdater>();
-            yield break;
-        }
-        else
-        {
-            Logger.LogError("LoadAssetAsync launchPrefab err : " + launchPrefabPath);
-            yield break;
-        }
-
-    }
 
 }
