@@ -121,7 +121,7 @@ namespace Puerts.Editor
             var ExpectJsType = GeneralGetterManager.GetJsTypeMask(parameterInfo.ParameterType);
             var result = new ParameterGenInfo()
             {
-                IsOut = !parameterInfo.IsIn && parameterInfo.IsOut,
+                IsOut = !parameterInfo.IsIn && parameterInfo.IsOut && parameterInfo.ParameterType.IsByRef,
                 IsByRef = parameterInfo.ParameterType.IsByRef,
                 TypeName = (parameterInfo.ParameterType.IsByRef ? parameterInfo.ParameterType.GetElementType() : parameterInfo.ParameterType).GetFriendlyName(),
                 ExpectJsType = ToCode(ExpectJsType),
@@ -490,7 +490,15 @@ namespace Puerts.Editor
 
             if (genTypeSet.Contains(type) && !type.IsEnum && type.BaseType != null && type != typeof(object) && !result.IsDelegate && !result.IsInterface)
             {
-                result.BaseType = ToTsTypeGenInfo(type.BaseType, genTypeSet);
+                result.BaseType = new TsTypeGenInfo()
+                {
+                    Name = type.BaseType.IsGenericType ? GetTsTypeName(type.BaseType): type.BaseType.Name.Replace('`', '$'),
+                    Namespace = type.BaseType.Namespace
+                };
+                if (type.BaseType.IsGenericType && type.BaseType.Namespace != null)
+                {
+                    result.BaseType.Name = result.BaseType.Name.Substring(type.BaseType.Namespace.Length + 1);
+                }
             }
 
             if (type.IsEnum)
@@ -553,6 +561,13 @@ namespace Puerts.Editor
 
         static void AddRefType(HashSet<Type> refTypes, Type type)
         {
+            if (type.IsGenericType)
+            {
+                foreach (var gt in type.GetGenericArguments())
+                {
+                    AddRefType(refTypes, gt);
+                }
+            }
             type = GetRawType(type);
             if (type.IsGenericParameter) return;
             refTypes.Add(type);
@@ -623,7 +638,7 @@ namespace Puerts.Editor
             };
         }
 
-        [MenuItem("tgame.js/Generate Code", false, 1)]
+        [MenuItem("puerts/Generate Code", false, 1)]
         public static void GenerateCode()
         {
             var start = DateTime.Now;
@@ -635,7 +650,7 @@ namespace Puerts.Editor
             AssetDatabase.Refresh();
         }
 
-        [MenuItem("tgame.js/Generate index.d.ts", false, 1)]
+        [MenuItem("puerts/Generate index.d.ts", false, 1)]
         public static void GenerateDTS()
         {
             var start = DateTime.Now;
@@ -647,7 +662,7 @@ namespace Puerts.Editor
             AssetDatabase.Refresh();
         }
 
-        [MenuItem("tgame.js/Clear Generated Code", false, 2)]
+        [MenuItem("puerts/Clear Generated Code", false, 2)]
         public static void ClearAll()
         {
             var saveTo = Application.dataPath + "/Gen/";

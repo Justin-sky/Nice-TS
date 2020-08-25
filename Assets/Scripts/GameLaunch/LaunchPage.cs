@@ -54,13 +54,8 @@ public class LaunchPage : GComponent
             List<string> catalogs = checkHandle.Result;
             if (catalogs != null && catalogs.Count > 0)
             {
-
-          
-
                 gTextField.text = "正在更新资源...";
-
                 gProgress.value = 0;
-
 
                 start = DateTime.Now;
                 AsyncOperationHandle<List<IResourceLocator>> updateHandle = Addressables.UpdateCatalogs(catalogs, false);

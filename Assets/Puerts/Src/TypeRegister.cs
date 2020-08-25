@@ -1,4 +1,4 @@
-/*
+Ôªø/*
 * Tencent is pleased to support the open source community by making Puerts available.
 * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
 * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may be subject to their corresponding license terms. 
@@ -24,7 +24,7 @@ namespace Puerts
             assemblies.Add(Assembly.GetExecutingAssembly());
             var assembliesUsorted = AppDomain.CurrentDomain.GetAssemblies();
 #endif
-            AddAssemblieByName(assembliesUsorted, "mscorlib,"); //Œ™¡À»√’‚º∏∏ˆ≥Ã–ÚºØ≈≈«∞√Ê
+            AddAssemblieByName(assembliesUsorted, "mscorlib,"); //‰∏∫‰∫ÜËÆ©ËøôÂá†‰∏™Á®ãÂ∫èÈõÜÊéíÂâçÈù¢
             AddAssemblieByName(assembliesUsorted, "System,");
             AddAssemblieByName(assembliesUsorted, "System.Core,");
             foreach (Assembly assembly in assembliesUsorted)
@@ -83,7 +83,7 @@ namespace Puerts
         {
             arrayTypeId = PuertsDLL.RegisterClass(jsEnv.isolate, GetTypeId(isolate, typeof(Array)), "__puerts.Array", null, null, 0);
             PuertsDLL.RegisterProperty(jsEnv.isolate, arrayTypeId, "length", false, callbackWrap, jsEnv.AddCallback(ArrayLength), null, 0);
-            PuertsDLL.RegisterIndexedProperty(jsEnv.isolate, arrayTypeId, StatiCallbacks.IndexedGetterWrap, StatiCallbacks.IndexedSetterWrap, Utils.TwoIntToLong(jsEnv.Idx, 0));
+            PuertsDLL.RegisterIndexedProperty(jsEnv.isolate, arrayTypeId, StaticCallbacks.IndexedGetterWrap, StaticCallbacks.IndexedSetterWrap, Utils.TwoIntToLong(jsEnv.Idx, 0));
         }
 
         void AddAssemblieByName(IEnumerable<Assembly> assembliesUsorted, string name)
@@ -175,9 +175,9 @@ namespace Puerts
             return null;
         }
 
-        private readonly V8FunctionCallback callbackWrap = new V8FunctionCallback(StatiCallbacks.JsEnvCallbackWrap);
+        private readonly V8FunctionCallback callbackWrap = new V8FunctionCallback(StaticCallbacks.JsEnvCallbackWrap);
 
-        private readonly V8ConstructorCallback constructorWrap = new V8ConstructorCallback(StatiCallbacks.ConstructorWrap);
+        private readonly V8ConstructorCallback constructorWrap = new V8ConstructorCallback(StaticCallbacks.ConstructorWrap);
 
         private readonly Dictionary<Type, int> typeIdMap = new Dictionary<Type, int>();
 
@@ -441,6 +441,12 @@ namespace Puerts
 
                 PuertsDLL.RegisterProperty(jsEnv.isolate, typeId, field.Name, field.IsStatic, callbackWrap, getterData, setter, setterData);
             }
+
+            var translateFunc = jsEnv.GeneralSetterManager.GetTranslateFunc(typeof(Type));
+            PuertsDLL.RegisterProperty(jsEnv.isolate, typeId, "__p_innerType", true, callbackWrap, jsEnv.AddCallback((IntPtr isolate1, IntPtr info, IntPtr self, int argumentsLen) =>
+            {
+                translateFunc(isolate1, NativeValueApi.SetValueToResult, info, type);
+            }), null, 0);
 
             return typeId;
         }
