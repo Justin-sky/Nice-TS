@@ -11,9 +11,9 @@ namespace NiceTS
         public const string URL = "ui://l64dumk9pyg64q";
 
         private GTextField gText;
-        private CommonBtn bakBtn;
-        private CommonBtn retryBtn;
-        private CommonBtn okBtn;
+        private GButton bakBtn;
+        private GButton retryBtn;
+        private GButton okBtn;
 
         private int lastClickIndex = -1;
 
@@ -22,9 +22,9 @@ namespace NiceTS
             base.ConstructFromXML(xml);
 
             gText = this.GetChild("noticeText") as GTextField;
-            bakBtn = this.GetChild("backBtn") as CommonBtn;
-            retryBtn = this.GetChild("retryBtn") as CommonBtn;
-            okBtn = this.GetChild("okBtn") as CommonBtn;
+            bakBtn = this.GetChild("backBtn") as GButton;
+            retryBtn = this.GetChild("retryBtn") as GButton;
+            okBtn = this.GetChild("okBtn") as GButton;
 
             
         }

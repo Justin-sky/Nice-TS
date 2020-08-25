@@ -180,5 +180,5 @@
     <component id="pyg64x" name="AreaBtn.xml" path="/ui/login/"/>
     <component id="pyg64y" name="serverItem.xml" path="/ui/login/" exported="true"/>
   </resources>
-  <publish name=""/>
+  <publish name="" genCode="true"/>
 </packageDescription>

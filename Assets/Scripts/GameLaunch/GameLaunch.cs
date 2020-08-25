@@ -33,7 +33,6 @@ public class GameLaunch : MonoBehaviour
             Logger.Log(".... release addressable: " + t.name);
         };
 
-        UIObjectFactory.SetPackageItemExtension(CommonBtn.URL, typeof(CommonBtn));
         UIObjectFactory.SetPackageItemExtension(LaunchPage.URL, typeof(LaunchPage));
         UIObjectFactory.SetPackageItemExtension(UINoticeWin.URL, typeof(UINoticeWin));
 
@@ -55,7 +54,6 @@ public class GameLaunch : MonoBehaviour
                 }      
             });
         Addressables.Release(handle);
-
 
         //加载更新界面
         LaunchPage launchPage = LaunchPage.CreateInstance();
