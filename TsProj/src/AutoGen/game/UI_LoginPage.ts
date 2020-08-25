@@ -16,7 +16,7 @@ export class UI_LoginPage {
     public constructor(){
         Logger.log("Hello");
         this._ui = CS.FairyGUI.UIPackage.CreateObject("game", "LoginPage");
-        Logger.log(this._ui);
+        Logger.log(this._ui.GetChild);
         
         this.m_account = this._ui.GetChild("account");
 

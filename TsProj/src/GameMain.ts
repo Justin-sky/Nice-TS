@@ -68,6 +68,7 @@ class GameMain{
     }
 
     public onDispose():void {
+        
         Logger.log("Game onDispose in JS....");
     }
     

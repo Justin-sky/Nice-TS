@@ -6,7 +6,7 @@ class UI_LoginPage {
     constructor() {
         Logger_1.Logger.log("Hello");
         this._ui = CS.FairyGUI.UIPackage.CreateObject("game", "LoginPage");
-        Logger_1.Logger.log(this._ui);
+        Logger_1.Logger.log(this._ui.GetChild);
         this.m_account = this._ui.GetChild("account");
         Logger_1.Logger.log(this.m_account);
         this.m_password = this._ui.GetChild("password");
