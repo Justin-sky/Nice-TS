@@ -64,7 +64,6 @@ public class GameLaunch : MonoBehaviour
             notice.Hide();
         });
         yield return notice.WaitForResponse();
-        Logger.Log("waite...............");
         // 开始更新
         if (launchPage != null)
         {

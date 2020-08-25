@@ -6,6 +6,7 @@ const Logger_1 = require("../Framework/Logger/Logger");
 const Messenger_1 = require("../Framework/Common/Messenger");
 const TimeManager_1 = require("../Framework/Manager/TimeManager");
 const ResManager_1 = require("../Framework/Manager/ResManager");
+const UI_LoginPage_1 = require("../AutoGen/game/UI_LoginPage");
 const CS = require('csharp');
 class UnitTest {
     static async doTest() {
@@ -57,6 +58,11 @@ class UnitTest {
         arr1.push(333);
         let arr2 = testMap.get("key1");
         Logger_1.Logger.log(arr2);
+        Logger_1.Logger.log("FariyGUI =============================");
+        //CS.FairyGUI.UIObjectFactory.SetPackageItemExtension(UI_LoginPage.URL, typeof(UI_LoginPage));
+        let page = new UI_LoginPage_1.UI_LoginPage();
+        CS.FairyGUI.GRoot.inst.addChild(page._ui);
+        Logger_1.Logger.log(page._ui);
     }
 }
 UnitTest.testVar = 10000;

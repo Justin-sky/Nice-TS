@@ -23,9 +23,6 @@ class GameMain{
         //do Unit Test
         UnitTest.doTest();
 
-
-
-
         Logger.log("Game start in JS....");
 
 
