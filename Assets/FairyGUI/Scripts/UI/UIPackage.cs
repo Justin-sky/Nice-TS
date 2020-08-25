@@ -1256,7 +1256,7 @@ namespace FairyGUI
             }
         }
 
-        void  LoadAtlas(PackageItem item)
+        void LoadAtlas(PackageItem item)
         {
             string ext = Path.GetExtension(item.file);
             string fileName = item.file.Substring(0, item.file.Length - ext.Length);
@@ -1266,7 +1266,7 @@ namespace FairyGUI
                 _loadAysncFunc(fileName, ext, typeof(Texture), item);
                 if (item.texture == null)
                     item.texture = new NTexture(null, new Rect(0, 0, item.width, item.height));
-                //item.texture.destroyMethod = DestroyMethod.None;
+                item.texture.destroyMethod = DestroyMethod.None;
             }
             else
             {

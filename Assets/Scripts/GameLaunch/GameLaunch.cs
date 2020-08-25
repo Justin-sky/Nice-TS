@@ -1,5 +1,6 @@
 ﻿using Addressable;
 using FairyGUI;
+using NiceTS;
 using System;
 using System.Collections;
 using System.Threading.Tasks;
@@ -32,9 +33,9 @@ public class GameLaunch : MonoBehaviour
             Logger.Log(".... release addressable: " + t.name);
         };
 
+        UIObjectFactory.SetPackageItemExtension(CommonBtn.URL, typeof(CommonBtn));
         UIObjectFactory.SetPackageItemExtension(LaunchPage.URL, typeof(LaunchPage));
-
-
+        UIObjectFactory.SetPackageItemExtension(UINoticeWin.URL, typeof(UINoticeWin));
 
         //加载FairyGUI Package
         AsyncOperationHandle<TextAsset> handle = Addressables.LoadAssetAsync<TextAsset>(fairy_package);
@@ -56,17 +57,20 @@ public class GameLaunch : MonoBehaviour
         Addressables.Release(handle);
 
 
-
         //加载更新界面
         LaunchPage launchPage = LaunchPage.CreateInstance();
-        launchPage.BindAll();
+        launchPage.Show();
 
-        GRoot.inst.AddChild(launchPage);
-
+        UINoticeWin notice = UINoticeWin.CreateInstance();
+        notice.ShowOneButton("test test",()=> {
+            notice.Hide();
+        });
+        yield return notice.WaitForResponse();
+        Logger.Log("waite...............");
         // 开始更新
         if (launchPage != null)
         {
-            StartCoroutine(launchPage.checkUpdate());
+            StartCoroutine(launchPage.CheckUpdate());
         }
         yield break;
     }

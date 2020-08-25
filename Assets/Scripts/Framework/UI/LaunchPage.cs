@@ -1,41 +1,48 @@
-﻿using Addressable;
-using FairyGUI;
+﻿using FairyGUI;
+using FairyGUI.Utils;
+using NiceTS;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Policy;
-using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.AddressableAssets.ResourceLocators;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.UI;
 
 public class LaunchPage : GComponent
 {
     public const string URL = "ui://l64dumk9pyg64t";
 
     private GTextField gTextField;
-    private GProgressBar gProgress; 
+    private GProgressBar gProgress;
+
+
+    public override void ConstructFromXML(XML xml)
+    {
+        base.ConstructFromXML(xml);
+
+        gTextField = this.GetChild("updateTxt") as GTextField;
+        gProgress = this.GetChild("updateProgress") as GProgressBar;
+        gProgress.visible = false;
+    }
 
 
     public static LaunchPage CreateInstance()
-    {
-        
-
+    { 
         return UIPackage.CreateObjectFromURL(URL) as LaunchPage;
     }
 
-    public LaunchPage() { }
-
-    public LaunchPage BindAll()
+    public void Show()
     {
-        gTextField = this.GetChild("updateTxt") as GTextField;
-        gProgress = this.GetChild("updateProgress") as GProgressBar;
-
-        return this;
+        GRoot.inst.AddChild(this);
     }
 
-    public IEnumerator checkUpdate()
+    public void Hide(bool disposed = false)
+    {
+        GRoot.inst.RemoveChild(this, disposed);
+    }
+
+
+    public IEnumerator CheckUpdate()
     {
         var start = DateTime.Now;
 
@@ -55,6 +62,7 @@ public class LaunchPage : GComponent
             if (catalogs != null && catalogs.Count > 0)
             {
                 gTextField.text = "正在更新资源...";
+                gProgress.visible = true;
                 gProgress.value = 0;
 
                 start = DateTime.Now;
@@ -77,9 +85,11 @@ public class LaunchPage : GComponent
 
                     if (size > 0)
                     {
-                        UINoticeTip.Instance.ShowOneButtonTip("更新提示", $"本次更新大小：{size}", "确定", null);
-                        yield return UINoticeTip.Instance.WaitForResponse();
-
+                        UINoticeWin notice = UINoticeWin.CreateInstance();
+                        notice.ShowOneButton($"本次更新大小：{size}",()=> {
+                            notice.Hide();
+                        });
+                        yield return notice.WaitForResponse();
 
                         var downloadHandle = Addressables.DownloadDependenciesAsync(keys, Addressables.MergeMode.Union);
                         while (!downloadHandle.IsDone)
@@ -103,10 +113,6 @@ public class LaunchPage : GComponent
             Addressables.Release(checkHandle);
         }
 
-
-
-
-  
         yield return StartGame();
 
     }
