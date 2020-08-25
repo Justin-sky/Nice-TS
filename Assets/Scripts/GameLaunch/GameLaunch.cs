@@ -22,6 +22,7 @@ public class GameLaunch : MonoBehaviour
     IEnumerator Start()
     {
         LoggerHelper.Instance.Startup();
+        JsManager.Instance.Startup();
 
         //初始化FairyGUI
         GRoot.inst.SetContentScaleFactor(1280, 720, UIContentScaler.ScreenMatchMode.MatchWidthOrHeight);
@@ -59,11 +60,14 @@ public class GameLaunch : MonoBehaviour
         LaunchPage launchPage = LaunchPage.CreateInstance();
         launchPage.Show();
 
+        //Test
         UINoticeWin notice = UINoticeWin.CreateInstance();
-        notice.ShowOneButton("test test",()=> {
+        notice.ShowOneButton("test test", () => {
             notice.Hide();
         });
         yield return notice.WaitForResponse();
+
+
         // 开始更新
         if (launchPage != null)
         {

@@ -85,12 +85,8 @@ export class UnitTest{
 
 
         Logger.log("FariyGUI =============================");
-        
-        //CS.FairyGUI.UIObjectFactory.SetPackageItemExtension(UI_LoginPage.URL, typeof(UI_LoginPage));
-        
         let page:UI_LoginPage = new UI_LoginPage();
-        CS.FairyGUI.GRoot.inst.addChild(page._ui);
-
+        CS.FairyGUI.GRoot.inst.AddChild(page._ui);
         Logger.log(page._ui);
     }
 

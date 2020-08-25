@@ -123,7 +123,7 @@ public class LaunchPage : GComponent
 
         JsManager.Instance.StartGame();
 
-        
+
         yield break;
     }
 

@@ -59,9 +59,8 @@ class UnitTest {
         let arr2 = testMap.get("key1");
         Logger_1.Logger.log(arr2);
         Logger_1.Logger.log("FariyGUI =============================");
-        //CS.FairyGUI.UIObjectFactory.SetPackageItemExtension(UI_LoginPage.URL, typeof(UI_LoginPage));
         let page = new UI_LoginPage_1.UI_LoginPage();
-        CS.FairyGUI.GRoot.inst.addChild(page._ui);
+        CS.FairyGUI.GRoot.inst.AddChild(page._ui);
         Logger_1.Logger.log(page._ui);
     }
 }

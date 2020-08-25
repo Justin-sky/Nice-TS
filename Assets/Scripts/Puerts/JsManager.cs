@@ -1,5 +1,7 @@
-﻿using Puerts;
+﻿using NiceTS;
+using Puerts;
 using System;
+using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
 
@@ -43,7 +45,6 @@ public class JsManager:MonoSingleton<JsManager>
     {
         //调试端口：8080
         jsEnv = new JsEnv(new JsLoader(),8080);
-
         if(jsEnv == null)
         {
             Logger.LogError("InitJsEnv null!!!");
@@ -52,7 +53,6 @@ public class JsManager:MonoSingleton<JsManager>
         //声明Action
         jsEnv.UsingAction<float>();
         jsEnv.UsingAction<float, float>();
-
 
     }
 
