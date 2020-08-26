@@ -5,6 +5,7 @@ import {UnitTest} from './UnitTest/UnitTest';
 import {Time} from './Tools/UnityEngine/Time';
 import {TimeManager} from './Framework/Manager/TimeManager';
 import { GameObjectPool } from './Framework/Common/GameObjectPool';
+import { ModuleManager } from './Framework/Module/ModuleManager';
 
 class GameMain{
 
@@ -30,7 +31,7 @@ class GameMain{
         Time.Instance(Time);
         TimeManager.Instance(TimeManager);
         GameObjectPool.Instance(GameObjectPool);
-
+        ModuleManager.Instance(ModuleManager);
 
     }
 
@@ -63,6 +64,7 @@ class GameMain{
 
         TimeManager.Instance(TimeManager).dispose();
         GameObjectPool.Instance(GameObjectPool).cleanup(true);
+        ModuleManager.Instance(ModuleManager).cleanup();
 
         Logger.log("Game onApplicationQuit in JS....");
     }

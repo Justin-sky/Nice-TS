@@ -6,6 +6,8 @@ import { TimeManager } from '../Framework/Manager/TimeManager';
 import { Timer } from '../Framework/Timer/Timer';
 import { ResManager } from '../Framework/Manager/ResManager';
 import { UI_LoginPage } from '../AutoGen/game/UI_LoginPage';
+import { ModuleManager } from '../Framework/Module/ModuleManager';
+import { ModuleDef } from '../Modules/ModuleDef';
 
 const CS = require('csharp');
 
@@ -84,10 +86,17 @@ export class UnitTest{
         Logger.log(arr2);
 
 
-        Logger.log("FariyGUI =============================");
-        let page:UI_LoginPage = new UI_LoginPage();
-        CS.FairyGUI.GRoot.inst.AddChild(page._ui);
-        Logger.log(page._ui);
+        // Logger.log("FariyGUI =============================");
+        //  let page:UI_LoginPage = new UI_LoginPage();
+        //  CS.FairyGUI.GRoot.inst.AddChild(page._ui);
+        //  Logger.log(page._ui);
+
+        Logger.log("ModuleManager =============================");
+
+        ModuleManager.Instance(ModuleManager).createModule(ModuleDef.LoginModule,"create login");
+
+        ModuleManager.Instance(ModuleManager).sendMessage(ModuleDef.LoginModule, "test1",2233);
+
     }
 
     

@@ -6,7 +6,8 @@ const Logger_1 = require("../Framework/Logger/Logger");
 const Messenger_1 = require("../Framework/Common/Messenger");
 const TimeManager_1 = require("../Framework/Manager/TimeManager");
 const ResManager_1 = require("../Framework/Manager/ResManager");
-const UI_LoginPage_1 = require("../AutoGen/game/UI_LoginPage");
+const ModuleManager_1 = require("../Framework/Module/ModuleManager");
+const ModuleDef_1 = require("../Modules/ModuleDef");
 const CS = require('csharp');
 class UnitTest {
     static async doTest() {
@@ -58,10 +59,13 @@ class UnitTest {
         arr1.push(333);
         let arr2 = testMap.get("key1");
         Logger_1.Logger.log(arr2);
-        Logger_1.Logger.log("FariyGUI =============================");
-        let page = new UI_LoginPage_1.UI_LoginPage();
-        CS.FairyGUI.GRoot.inst.AddChild(page._ui);
-        Logger_1.Logger.log(page._ui);
+        // Logger.log("FariyGUI =============================");
+        //  let page:UI_LoginPage = new UI_LoginPage();
+        //  CS.FairyGUI.GRoot.inst.AddChild(page._ui);
+        //  Logger.log(page._ui);
+        Logger_1.Logger.log("ModuleManager =============================");
+        ModuleManager_1.ModuleManager.Instance(ModuleManager_1.ModuleManager).createModule(ModuleDef_1.ModuleDef.LoginModule, "create login");
+        ModuleManager_1.ModuleManager.Instance(ModuleManager_1.ModuleManager).sendMessage(ModuleDef_1.ModuleDef.LoginModule, "test1", 2233);
     }
 }
 UnitTest.testVar = 10000;

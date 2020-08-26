@@ -3,7 +3,7 @@ import { Logger } from "../../Framework/Logger/Logger";
 const CS = require('csharp');
 
 
-export class UI_LoginPage {
+export  class UI_LoginPage {
 
     public m_account:any;
     public m_password:any;
