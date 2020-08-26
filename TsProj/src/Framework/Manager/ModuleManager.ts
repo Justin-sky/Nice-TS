@@ -1,7 +1,7 @@
 import { Singleton } from "../Common/Singleton";
-import { GeneralModule } from "./GeneralModule";
+import { GeneralModule } from "../Module/GeneralModule";
 import { Logger } from "../Logger/Logger";
-import { ModuleFactory } from "./ModuleFactory";
+import { ModuleFactory } from "../Module/ModuleFactory";
 
 
 export class MessageObject{

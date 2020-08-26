@@ -6,7 +6,7 @@ const UnitTest_1 = require("./UnitTest/UnitTest");
 const Time_1 = require("./Tools/UnityEngine/Time");
 const TimeManager_1 = require("./Framework/Manager/TimeManager");
 const GameObjectPool_1 = require("./Framework/Common/GameObjectPool");
-const ModuleManager_1 = require("./Framework/Module/ModuleManager");
+const ModuleManager_1 = require("./Framework/Manager/ModuleManager");
 class GameMain {
     constructor() {
         CS.JsManager.Instance.JsOnApplicationQuit = () => this.onApplicationQuit();

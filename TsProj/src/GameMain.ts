@@ -5,7 +5,7 @@ import {UnitTest} from './UnitTest/UnitTest';
 import {Time} from './Tools/UnityEngine/Time';
 import {TimeManager} from './Framework/Manager/TimeManager';
 import { GameObjectPool } from './Framework/Common/GameObjectPool';
-import { ModuleManager } from './Framework/Module/ModuleManager';
+import { ModuleManager } from './Framework/Manager/ModuleManager';
 
 class GameMain{
 

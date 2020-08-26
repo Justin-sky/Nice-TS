@@ -6,8 +6,8 @@ const Logger_1 = require("../Framework/Logger/Logger");
 const Messenger_1 = require("../Framework/Common/Messenger");
 const TimeManager_1 = require("../Framework/Manager/TimeManager");
 const ResManager_1 = require("../Framework/Manager/ResManager");
-const ModuleManager_1 = require("../Framework/Module/ModuleManager");
-const ModuleDef_1 = require("../Modules/ModuleDef");
+const ModuleManager_1 = require("../Framework/Manager/ModuleManager");
+const ModuleDef_1 = require("../game/Modules/ModuleDef");
 const CS = require('csharp');
 class UnitTest {
     static async doTest() {

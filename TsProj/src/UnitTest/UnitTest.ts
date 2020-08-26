@@ -6,8 +6,8 @@ import { TimeManager } from '../Framework/Manager/TimeManager';
 import { Timer } from '../Framework/Timer/Timer';
 import { ResManager } from '../Framework/Manager/ResManager';
 import { UI_LoginPage } from '../AutoGen/game/UI_LoginPage';
-import { ModuleManager } from '../Framework/Module/ModuleManager';
-import { ModuleDef } from '../Modules/ModuleDef';
+import { ModuleManager } from '../Framework/Manager/ModuleManager';
+import { ModuleDef } from '../game/Modules/ModuleDef';
 
 const CS = require('csharp');
 
