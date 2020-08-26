@@ -1,6 +1,6 @@
 import { ModuleDef } from "../../game/Modules/ModuleDef";
-import { LoginModule } from "../../game/Modules/LoginModule";
-import { HomeModule } from "../../game/Modules/HomeModule";
+import { LoginModule } from "../../game/Modules/Login/LoginModule";
+import { HomeModule } from "../../game/Modules/Home/HomeModule";
 import { GeneralModule } from "./GeneralModule";
 import { Logger } from "../Logger/Logger";
 
