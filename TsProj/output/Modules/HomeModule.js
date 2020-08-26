@@ -6,6 +6,9 @@ class HomeModule extends GeneralModule_1.GeneralModule {
     create(args) {
         Logger_1.Logger.log(" Home creeate,args: " + args);
     }
+    show(args) {
+        Logger_1.Logger.log(" Show,args: " + args);
+    }
     release() {
         Logger_1.Logger.log("Home Release ");
     }

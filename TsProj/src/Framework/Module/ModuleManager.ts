@@ -104,4 +104,16 @@ export class ModuleManager extends Singleton<ModuleManager>{
 
     }
 
+
+    public show(target:string, ...args:any[]){
+
+        let model = this.getModule(target);
+
+        if(model != undefined){
+            model.show(args);
+        }else{
+            Logger.log(`Model 不存在 :${target}`);
+        }
+        
+    }
 }

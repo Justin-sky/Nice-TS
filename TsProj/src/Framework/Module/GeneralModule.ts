@@ -17,24 +17,21 @@ export abstract class GeneralModule extends ModuleBase{
 
    }
 
-   //创建模块
-   public create(args:any):void{
-
-        Logger.log("args: "+args);
-   }
-
-   //释放模块
-    public  release(): void{
-
-
-    }
-
-    //当模块收到消息后，对消息进行一些处理
+     //当模块收到消息后，对消息进行一些处理
     public handleMessage(msg:string, ...args:any[]){
 
         this.onModuleMessage(msg, args);
     }
 
+
+   //创建模块
+   public abstract create(args:any):void;
+
+   //Show
+   public abstract show(args:any):void;
+
+   //释放模块
+    public abstract  release(): void;
 
     //由派生类去实现，用于处理消息
     public abstract onModuleMessage(msg:string, ...args:any[]);

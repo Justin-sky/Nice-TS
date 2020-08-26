@@ -69,6 +69,15 @@ class ModuleManager extends Singleton_1.Singleton {
             list.push(obj);
         }
     }
+    show(target, ...args) {
+        let model = this.getModule(target);
+        if (model != undefined) {
+            model.show(args);
+        }
+        else {
+            Logger_1.Logger.log(`Model 不存在 :${target}`);
+        }
+    }
 }
 exports.ModuleManager = ModuleManager;
 //# sourceMappingURL=ModuleManager.js.map

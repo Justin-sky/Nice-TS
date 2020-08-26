@@ -66,6 +66,9 @@ class UnitTest {
         Logger_1.Logger.log("ModuleManager =============================");
         ModuleManager_1.ModuleManager.Instance(ModuleManager_1.ModuleManager).createModule(ModuleDef_1.ModuleDef.LoginModule, "create login");
         ModuleManager_1.ModuleManager.Instance(ModuleManager_1.ModuleManager).sendMessage(ModuleDef_1.ModuleDef.LoginModule, "test1", 2233);
+        ModuleManager_1.ModuleManager.Instance(ModuleManager_1.ModuleManager).sendMessage(ModuleDef_1.ModuleDef.HomeModule, "test2", 2233);
+        Logger_1.Logger.log("then create Home");
+        ModuleManager_1.ModuleManager.Instance(ModuleManager_1.ModuleManager).createModule(ModuleDef_1.ModuleDef.HomeModule, "create login");
     }
 }
 UnitTest.testVar = 10000;

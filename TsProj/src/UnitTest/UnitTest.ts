@@ -96,7 +96,11 @@ export class UnitTest{
         ModuleManager.Instance(ModuleManager).createModule(ModuleDef.LoginModule,"create login");
 
         ModuleManager.Instance(ModuleManager).sendMessage(ModuleDef.LoginModule, "test1",2233);
-
+        ModuleManager.Instance(ModuleManager).sendMessage(ModuleDef.HomeModule, "test2",2233);
+        Logger.log("then create Home");
+        ModuleManager.Instance(ModuleManager).createModule(ModuleDef.HomeModule,"create login");
+    
+    
     }
 
     

@@ -9,6 +9,10 @@ export class LoginModule extends GeneralModule{
         Logger.log(" Login creeate,args: "+args);
    }
 
+   public show(args:any):void{
+       
+        Logger.log(" Show,args: "+args);
+   }
    
     public  release(): void{
 
