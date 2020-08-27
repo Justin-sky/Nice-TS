@@ -172,7 +172,7 @@
     <image id="pyg64o" name="ui_comm_frame_choose_L.png" path="/atlas/common/"/>
     <image id="pyg64p" name="ui_comm_frame_choose.png" path="/atlas/common/"/>
     <component id="pyg64q" name="UINoticeWin.xml" path="/ui/common/" exported="true"/>
-    <component id="pyg64s" name="CommonBtn.xml" path="/ui/common/" exported="true"/>
+    <component id="pyg64s" name="CommonBtn.xml" path="/ui/common/"/>
     <component id="pyg64t" name="LaunchPage.xml" path="/ui/launch/" exported="true"/>
     <component id="pyg64u" name="LaunchProgress.xml" path="/ui/launch/"/>
     <component id="pyg64v" name="LoginPage.xml" path="/ui/login/" exported="true"/>
@@ -180,5 +180,5 @@
     <component id="pyg64x" name="AreaBtn.xml" path="/ui/login/"/>
     <component id="pyg64y" name="serverItem.xml" path="/ui/login/" exported="true"/>
   </resources>
-  <publish name="" genCode="true"/>
+  <publish name=""/>
 </packageDescription>

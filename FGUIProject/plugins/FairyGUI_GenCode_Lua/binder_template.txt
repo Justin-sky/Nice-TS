@@ -1,9 +1,0 @@
-$requireStatement
-
-local $binderClassName = class("$binderClassName");
-
-function $binderClassName:BindAll()
-$bindStatement
-end
-
-return $binderClassName;

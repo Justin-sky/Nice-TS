@@ -100,7 +100,11 @@ export class UnitTest{
         Logger.log("then create Home");
         ModuleManager.Instance(ModuleManager).createModule(ModuleDef.HomeModule,"create login");
     
-    
+        
+        Logger.log("UIManager =============================");
+
+
+
     }
 
     
