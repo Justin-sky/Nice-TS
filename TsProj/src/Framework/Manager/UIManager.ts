@@ -19,7 +19,7 @@ export class UIPageTrack{
 
 export class UIManager extends Singleton<UIManager>{
 
-    public static MainScene = "SceneDef.HomeScene";
+    public static MainScene = SceneDef.HomeScene;
     public static MainPage = UIDefs.UIHomePage;
     public static SceneLoading = SceneDef.LoadingScene;
 

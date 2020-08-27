@@ -152,7 +152,7 @@ class UIManager extends Singleton_1.Singleton {
         }
     }
 }
-UIManager.MainScene = "SceneDef.HomeScene";
+UIManager.MainScene = ModuleDef_1.SceneDef.HomeScene;
 UIManager.MainPage = UIDefine_1.UIDefs.UIHomePage;
 UIManager.SceneLoading = ModuleDef_1.SceneDef.LoadingScene;
 UIManager.BackBtn = "back_btn";
