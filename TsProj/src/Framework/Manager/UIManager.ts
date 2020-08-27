@@ -19,13 +19,6 @@ export class UIPageTrack{
 
 export class UIManager extends Singleton<UIManager>{
 
-    public static MainScene = SceneDef.HomeScene;
-    public static MainPage = UIDefs.UIHomePage;
-    public static SceneLoading = SceneDef.LoadingScene;
-
-    public static BackBtn = "back_btn";
-    public static WindowCloseBtn = "win_close_btn";
-
     private  m_pageTrackStack:Array<UIPageTrack>;
     private m_currentPage:UIPageTrack;
 
@@ -130,11 +123,11 @@ export class UIManager extends Singleton<UIManager>{
                 this.onSceneLoadedOnly = null;
                 if(onLoadComplete != null) onLoadComplete();
 
-                this.closeLoading(UIManager.SceneLoading);
+                this.closeLoading(UIDefs.UILoadingPage);
             }
         };
 
-        this.openLoading(UIManager.SceneLoading);
+        this.openLoading(UIDefs.UILoadingPage);
         CS.UnityEngine.SceneManagement.LoadScene(scene);
 
     }
@@ -190,7 +183,7 @@ export class UIManager extends Singleton<UIManager>{
     public enterMainPage():void{
 
         this.m_pageTrackStack.length = 0;
-        this.openPageInScene(UIManager.MainScene, UIManager.MainPage,null)
+        this.openPageInScene(SceneDef.HomeScene, UIDefs.UIHomePage,null)
     }
 
     //==========================================================UIWindow

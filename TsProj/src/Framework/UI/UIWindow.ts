@@ -1,5 +1,5 @@
 import { UIPanel } from "./UIPanel";
-import { UITypeDef } from "./UIDefine";
+import { UITypeDef, UIComDefs } from "./UIDefine";
 import { UIManager } from "../Manager/UIManager";
 
 
@@ -14,7 +14,7 @@ export abstract class  UIWindow extends UIPanel{
 
     public onAwake():void{
         
-        this.m_btnClose = this.fui.GetChild(UIManager.WindowCloseBtn);
+        this.m_btnClose = this.fui.GetChild(UIComDefs.WindowCloseBtn);
 
     }
 

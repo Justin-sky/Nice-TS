@@ -8,6 +8,8 @@ import { GameObjectPool } from './Framework/Common/GameObjectPool';
 import { ModuleManager } from './Framework/Manager/ModuleManager';
 import { ModuleDef } from './game/Modules/ModuleDef';
 import { UIManager } from './Framework/Manager/UIManager';
+import { UIFactory } from './Framework/UI/UIFactory';
+
 
 class GameMain{
 
@@ -28,7 +30,10 @@ class GameMain{
         TimeManager.Instance(TimeManager);
         GameObjectPool.Instance(GameObjectPool);
         ModuleManager.Instance(ModuleManager);
+        UIFactory.Instance(UIFactory);
         UIManager.Instance(UIManager);
+
+
 
         //do Unit Test
         UnitTest.doTest();

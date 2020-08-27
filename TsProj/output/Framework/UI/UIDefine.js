@@ -32,8 +32,14 @@ class UIPackages {
 }
 UIPackages.Game = "game";
 exports.UIPackages = UIPackages;
+class UIComDefs {
+}
+UIComDefs.BackBtn = "back_btn";
+UIComDefs.WindowCloseBtn = "win_close_btn";
+exports.UIComDefs = UIComDefs;
 class UIDefs {
 }
+UIDefs.UILoadingPage = "LoadingPage";
 UIDefs.UILoginPage = "LoginPage";
 UIDefs.UIHomePage = "HomePage";
 UIDefs.UILevelage = "LevelPage";

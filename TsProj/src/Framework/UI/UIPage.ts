@@ -1,5 +1,5 @@
 import { UIPanel } from "./UIPanel";
-import { UITypeDef, UILayerDef } from "./UIDefine";
+import { UITypeDef, UIComDefs } from "./UIDefine";
 import { UIManager } from "../Manager/UIManager";
 
 
@@ -15,7 +15,7 @@ export abstract class UIPage extends UIPanel{
 
     public onAwake():void{
         
-        this.m_btnGoBack = this.fui.GetChild(UIManager.BackBtn);
+        this.m_btnGoBack = this.fui.GetChild(UIComDefs.BackBtn);
 
     }
 
@@ -36,7 +36,7 @@ export abstract class UIPage extends UIPanel{
     }
 
     private onBtnGoBack(){
-        UIManager.Instance(UIManager).goBackPage();
+        //UIManager.Instance(UIManager).goBackPage();
     }
 
 } 

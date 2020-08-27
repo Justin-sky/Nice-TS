@@ -77,10 +77,10 @@ class UIManager extends Singleton_1.Singleton {
                 this.onSceneLoadedOnly = null;
                 if (onLoadComplete != null)
                     onLoadComplete();
-                this.closeLoading(UIManager.SceneLoading);
+                this.closeLoading(UIDefine_1.UIDefs.UILoadingPage);
             }
         };
-        this.openLoading(UIManager.SceneLoading);
+        this.openLoading(UIDefine_1.UIDefs.UILoadingPage);
         CS.UnityEngine.SceneManagement.LoadScene(scene);
     }
     //==========================================================Page
@@ -123,7 +123,7 @@ class UIManager extends Singleton_1.Singleton {
     //回到主城
     enterMainPage() {
         this.m_pageTrackStack.length = 0;
-        this.openPageInScene(UIManager.MainScene, UIManager.MainPage, null);
+        this.openPageInScene(ModuleDef_1.SceneDef.HomeScene, UIDefine_1.UIDefs.UIHomePage, null);
     }
     //==========================================================UIWindow
     //打开窗口
@@ -152,10 +152,5 @@ class UIManager extends Singleton_1.Singleton {
         }
     }
 }
-UIManager.MainScene = ModuleDef_1.SceneDef.HomeScene;
-UIManager.MainPage = UIDefine_1.UIDefs.UIHomePage;
-UIManager.SceneLoading = ModuleDef_1.SceneDef.LoadingScene;
-UIManager.BackBtn = "back_btn";
-UIManager.WindowCloseBtn = "win_close_btn";
 exports.UIManager = UIManager;
 //# sourceMappingURL=UIManager.js.map

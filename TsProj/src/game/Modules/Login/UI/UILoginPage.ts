@@ -1,4 +1,5 @@
 import { UIPage } from "../../../../Framework/UI/UIPage";
+import { UIManager } from "../../../../Framework/Manager/UIManager";
 
 
 
@@ -17,6 +18,8 @@ export class UILoginPage extends UIPage{
         this.m_account = this.fui.GetChild("account");
         this.m_password = this.fui.GetChild("password");
         this.m_loginBtn = this.fui.GetChild("loginBtn");
+
+
     }
 
   

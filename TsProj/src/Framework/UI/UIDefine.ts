@@ -41,7 +41,14 @@ export class UIPackages{
 }
 
 
+export class UIComDefs{
+    public static BackBtn = "back_btn";
+    public static WindowCloseBtn = "win_close_btn";
+}
+
 export class UIDefs{
+
+    public static UILoadingPage:string = "LoadingPage";
 
     public static UILoginPage:string = "LoginPage";
     public static UIHomePage:string = "HomePage";
