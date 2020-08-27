@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720">
+  <displayList>
+    <text id="n0_pyg6" name="n0" xy="574,103" size="64,42" fontSize="30" text="商城"/>
+    <component id="n1_pyg6" name="back_btn" src="pyg64s" fileName="ui/common/CommonBtn.xml" xy="39,28">
+      <Button title="返回"/>
+    </component>
+  </displayList>
+</component>

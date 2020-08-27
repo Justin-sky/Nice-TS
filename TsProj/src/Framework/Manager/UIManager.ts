@@ -6,6 +6,8 @@ import { UIWindow } from '../UI/UIWindow';
 import { UIWidge } from '../UI/UIWidge';
 import { UIPanel } from '../UI/UIPanel';
 import { UIFactory } from '../UI/UIFactory';
+import { SceneDef } from '../../game/Modules/ModuleDef';
+import { UIDefs } from '../UI/UIDefine';
 
 const CS = require('csharp');
 
@@ -17,9 +19,10 @@ export class UIPageTrack{
 
 export class UIManager extends Singleton<UIManager>{
 
-    public static MainScene = "Main";
-    public static MainPage = "UIMainPage";
-    public static SceneLoading = "SceneLoading";
+    public static MainScene = "SceneDef.HomeScene";
+    public static MainPage = UIDefs.UIHomePage;
+    public static SceneLoading = SceneDef.LoadingScene;
+
     public static BackBtn = "back_btn";
     public static WindowCloseBtn = "win_close_btn";
 
@@ -101,14 +104,15 @@ export class UIManager extends Singleton<UIManager>{
     }
 
 
-    //UILoading
+    //==========================================================UILoading
+    //打开Loading界面
     public openLoading(name:string, arg?:any):UILoading{
 
         let ui:UILoading = this.open(name, arg);
 
         return ui;
     }
-
+    //关闭Loading界面
     public closeLoading(name:string, arg?:any):void{
         let ui:UILoading = this.getUI(name) as UILoading;
         if(ui != null){
@@ -117,7 +121,8 @@ export class UIManager extends Singleton<UIManager>{
     }
 
 
-    //Scene
+    //==========================================================Scene
+    //加载场景 
     public loadScene(scene:string, onLoadComplete:Function):void{
 
         this.onSceneLoadedOnly = (sceneName)=>{
@@ -135,7 +140,7 @@ export class UIManager extends Singleton<UIManager>{
     }
 
 
-    //Page
+    //==========================================================Page
     private openPageWorker(page:string, arg:any){
         this.m_currentPage = new UIPageTrack();
         this.m_currentPage.name = name;
@@ -146,6 +151,7 @@ export class UIManager extends Singleton<UIManager>{
         this.open(page, arg);
     }
 
+    //打开页面, 会关闭上一个页面上的所有窗口,Widiget等
     public openPage(name:string, arg?:any){
 
         if(this.m_currentPage != undefined && this.m_currentPage.name!=name){
@@ -155,6 +161,7 @@ export class UIManager extends Singleton<UIManager>{
         this.openPageWorker(name, arg);
     }
 
+    //返回上一个页面
     public goBackPage():void{
 
         if(this.m_pageTrackStack.length > 0){
@@ -165,7 +172,8 @@ export class UIManager extends Singleton<UIManager>{
         }
     }
 
-    public openPageInScene(scene:string, page:string, arg:any, type:any){
+    //打开场景页面,此页面不计入页面栈,无返回上一面按钮
+    public openPageInScene(scene:string, page:string, arg:any){
 
         let oldScene:string = CS.UnityEngine.SceneManagement.GetActiveScene().name;
 
@@ -178,13 +186,15 @@ export class UIManager extends Singleton<UIManager>{
         }
     }
 
+    //回到主城
     public enterMainPage():void{
 
         this.m_pageTrackStack.length = 0;
-        this.openPageInScene(UIManager.MainScene, UIManager.MainPage,null,null)
+        this.openPageInScene(UIManager.MainScene, UIManager.MainPage,null)
     }
 
-    //UIWindow
+    //==========================================================UIWindow
+    //打开窗口
     public openWindow(name:string, arg:any):UIWindow{
 
         let ui:UIWindow = this.open(name, arg);
@@ -192,6 +202,7 @@ export class UIManager extends Singleton<UIManager>{
         return ui;
     }
 
+    //关闭窗口
     public closeWindow(name:string, arg:any){
 
         let ui:UIWindow = this.getUI(name) as UIWindow;
@@ -200,7 +211,8 @@ export class UIManager extends Singleton<UIManager>{
         }
     }
 
-    //UIWidget
+    //==========================================================UIWidget
+    //打开Widiget
     public openWidget(name:string, arg:any):UIWidge{
 
         let ui:UIWidge = this.open(name, arg);
@@ -208,6 +220,7 @@ export class UIManager extends Singleton<UIManager>{
         return ui;
     }
 
+    //u关闭Widiget
     public closeWidget(name:string, arg:any){
 
         let ui:UIWidge = this.getUI(name) as UIWidge;

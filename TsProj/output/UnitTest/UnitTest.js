@@ -6,8 +6,6 @@ const Logger_1 = require("../Framework/Logger/Logger");
 const Messenger_1 = require("../Framework/Common/Messenger");
 const TimeManager_1 = require("../Framework/Manager/TimeManager");
 const ResManager_1 = require("../Framework/Manager/ResManager");
-const ModuleManager_1 = require("../Framework/Manager/ModuleManager");
-const ModuleDef_1 = require("../game/Modules/ModuleDef");
 const CS = require('csharp');
 class UnitTest {
     static async doTest() {
@@ -63,12 +61,12 @@ class UnitTest {
         //  let page:UI_LoginPage = new UI_LoginPage();
         //  CS.FairyGUI.GRoot.inst.AddChild(page._ui);
         //  Logger.log(page._ui);
-        Logger_1.Logger.log("ModuleManager =============================");
-        ModuleManager_1.ModuleManager.Instance(ModuleManager_1.ModuleManager).createModule(ModuleDef_1.ModuleDef.LoginModule, "create login");
-        ModuleManager_1.ModuleManager.Instance(ModuleManager_1.ModuleManager).sendMessage(ModuleDef_1.ModuleDef.LoginModule, "test1", 2233);
-        ModuleManager_1.ModuleManager.Instance(ModuleManager_1.ModuleManager).sendMessage(ModuleDef_1.ModuleDef.HomeModule, "test2", 2233);
-        Logger_1.Logger.log("then create Home");
-        ModuleManager_1.ModuleManager.Instance(ModuleManager_1.ModuleManager).createModule(ModuleDef_1.ModuleDef.HomeModule, "create login");
+        // Logger.log("ModuleManager =============================");
+        // ModuleManager.Instance(ModuleManager).createModule(ModuleDef.LoginModule,"create login");
+        // ModuleManager.Instance(ModuleManager).sendMessage(ModuleDef.LoginModule, "test1",2233);
+        // ModuleManager.Instance(ModuleManager).sendMessage(ModuleDef.HomeModule, "test2",2233);
+        // Logger.log("then create Home");
+        // ModuleManager.Instance(ModuleManager).createModule(ModuleDef.HomeModule,"create login");
         Logger_1.Logger.log("UIManager =============================");
     }
 }

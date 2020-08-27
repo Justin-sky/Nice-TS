@@ -32,8 +32,12 @@ class UIPackages {
 }
 UIPackages.Game = "game";
 exports.UIPackages = UIPackages;
-class UINames {
+class UIDefs {
 }
-UINames.UILoginPage = "UILoginPage";
-exports.UINames = UINames;
+UIDefs.UILoginPage = "LoginPage";
+UIDefs.UIHomePage = "HomePage";
+UIDefs.UILevelage = "LevelPage";
+UIDefs.UIShopPage = "ShopPage";
+UIDefs.UISelServerWin = "SelServerWin";
+exports.UIDefs = UIDefs;
 //# sourceMappingURL=UIDefine.js.map

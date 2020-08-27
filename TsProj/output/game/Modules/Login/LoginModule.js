@@ -8,6 +8,8 @@ class LoginModule extends GeneralModule_1.GeneralModule {
     }
     show(args) {
         Logger_1.Logger.log(" Show,args: " + args);
+        // UIManager.Instance(UIManager).openLoading(UIDefs.UIHomePage);
+        // UIManager.Instance(UIManager).openPageInScene(SceneDef.LoginScene, UIDefs.UILoginPage, null);
     }
     release() {
         Logger_1.Logger.log("Login Release ");

@@ -41,10 +41,13 @@ export class UIPackages{
 }
 
 
-export class UINames{
+export class UIDefs{
 
-    public static UILoginPage:string = "UILoginPage";
+    public static UILoginPage:string = "LoginPage";
+    public static UIHomePage:string = "HomePage";
+    public static UILevelage:string = "LevelPage";
+    public static UIShopPage:string = "ShopPage";
+    public static UISelServerWin:string = "SelServerWin";
     
-
 
 }

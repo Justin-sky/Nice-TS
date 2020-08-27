@@ -6,6 +6,8 @@ import {Time} from './Tools/UnityEngine/Time';
 import {TimeManager} from './Framework/Manager/TimeManager';
 import { GameObjectPool } from './Framework/Common/GameObjectPool';
 import { ModuleManager } from './Framework/Manager/ModuleManager';
+import { ModuleDef } from './game/Modules/ModuleDef';
+import { UIManager } from './Framework/Manager/UIManager';
 
 class GameMain{
 
@@ -19,19 +21,21 @@ class GameMain{
     }
 
     public start():void {
-
-
-        //do Unit Test
-        UnitTest.doTest();
-
         Logger.log("Game start in JS....");
-
 
         //启动单例
         Time.Instance(Time);
         TimeManager.Instance(TimeManager);
         GameObjectPool.Instance(GameObjectPool);
         ModuleManager.Instance(ModuleManager);
+        UIManager.Instance(UIManager);
+
+        //do Unit Test
+        UnitTest.doTest();
+
+        //进入登录模块
+        //let module = ModuleManager.Instance(ModuleManager).createModule(ModuleDef.LoginModule);
+       // module.show();
 
     }
 

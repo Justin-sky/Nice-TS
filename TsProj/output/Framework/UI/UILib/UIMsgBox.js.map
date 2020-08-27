@@ -1,1 +1,1 @@
-{"version":3,"file":"UIMsgBox.js","sourceRoot":"","sources":["../../../../src/Framework/UI/UILib/UIMsgBox.ts"],"names":[],"mappings":""}
+{"version":3,"file":"UIMsgBox.js","sourceRoot":"","sources":["../../../../src/Framework/UI/UILib/UIMsgBox.ts"],"names":[],"mappings":";;AAAA,0CAAuC;AAGvC,MAAa,WAAW;IAAxB;QAEW,UAAK,GAAU,EAAE,CAAC;QAClB,YAAO,GAAU,EAAE,CAAC;QACpB,YAAO,GAAU,EAAE,CAAC,CAAA,YAAY;IAC3C,CAAC;CAAA;AALD,kCAKC;AAGD,MAAa,QAAS,SAAQ,mBAAQ;IAM3B,OAAO;QACV,KAAK,CAAC,OAAO,EAAE,CAAC;QAEjB,iDAAiD;IACpD,CAAC;CAGJ;AAbD,4BAaC"}

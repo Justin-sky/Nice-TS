@@ -5,7 +5,6 @@ import {Messenger} from '../Framework/Common/Messenger';
 import { TimeManager } from '../Framework/Manager/TimeManager';
 import { Timer } from '../Framework/Timer/Timer';
 import { ResManager } from '../Framework/Manager/ResManager';
-import { UI_LoginPage } from '../AutoGen/game/UI_LoginPage';
 import { ModuleManager } from '../Framework/Manager/ModuleManager';
 import { ModuleDef } from '../game/Modules/ModuleDef';
 
@@ -91,14 +90,14 @@ export class UnitTest{
         //  CS.FairyGUI.GRoot.inst.AddChild(page._ui);
         //  Logger.log(page._ui);
 
-        Logger.log("ModuleManager =============================");
+        // Logger.log("ModuleManager =============================");
 
-        ModuleManager.Instance(ModuleManager).createModule(ModuleDef.LoginModule,"create login");
+        // ModuleManager.Instance(ModuleManager).createModule(ModuleDef.LoginModule,"create login");
 
-        ModuleManager.Instance(ModuleManager).sendMessage(ModuleDef.LoginModule, "test1",2233);
-        ModuleManager.Instance(ModuleManager).sendMessage(ModuleDef.HomeModule, "test2",2233);
-        Logger.log("then create Home");
-        ModuleManager.Instance(ModuleManager).createModule(ModuleDef.HomeModule,"create login");
+        // ModuleManager.Instance(ModuleManager).sendMessage(ModuleDef.LoginModule, "test1",2233);
+        // ModuleManager.Instance(ModuleManager).sendMessage(ModuleDef.HomeModule, "test2",2233);
+        // Logger.log("then create Home");
+        // ModuleManager.Instance(ModuleManager).createModule(ModuleDef.HomeModule,"create login");
     
         
         Logger.log("UIManager =============================");

@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Singleton_1 = require("../Common/Singleton");
 const UIFactory_1 = require("../UI/UIFactory");
+const ModuleDef_1 = require("../../game/Modules/ModuleDef");
+const UIDefine_1 = require("../UI/UIDefine");
 const CS = require('csharp');
 class UIPageTrack {
 }
@@ -54,18 +56,21 @@ class UIManager extends Singleton_1.Singleton {
         }
         return null;
     }
-    //UILoading
+    //==========================================================UILoading
+    //打开Loading界面
     openLoading(name, arg) {
         let ui = this.open(name, arg);
         return ui;
     }
+    //关闭Loading界面
     closeLoading(name, arg) {
         let ui = this.getUI(name);
         if (ui != null) {
             ui.close(arg);
         }
     }
-    //Scene
+    //==========================================================Scene
+    //加载场景 
     loadScene(scene, onLoadComplete) {
         this.onSceneLoadedOnly = (sceneName) => {
             if (sceneName == scene) {
@@ -78,7 +83,7 @@ class UIManager extends Singleton_1.Singleton {
         this.openLoading(UIManager.SceneLoading);
         CS.UnityEngine.SceneManagement.LoadScene(scene);
     }
-    //Page
+    //==========================================================Page
     openPageWorker(page, arg) {
         this.m_currentPage = new UIPageTrack();
         this.m_currentPage.name = name;
@@ -86,12 +91,14 @@ class UIManager extends Singleton_1.Singleton {
         this.closeAllLoadedPanel();
         this.open(page, arg);
     }
+    //打开页面, 会关闭上一个页面上的所有窗口,Widiget等
     openPage(name, arg) {
         if (this.m_currentPage != undefined && this.m_currentPage.name != name) {
             this.m_pageTrackStack.push(this.m_currentPage);
         }
         this.openPageWorker(name, arg);
     }
+    //返回上一个页面
     goBackPage() {
         if (this.m_pageTrackStack.length > 0) {
             let track = this.m_pageTrackStack.pop();
@@ -101,7 +108,8 @@ class UIManager extends Singleton_1.Singleton {
             this.enterMainPage();
         }
     }
-    openPageInScene(scene, page, arg, type) {
+    //打开场景页面,此页面不计入页面栈,无返回上一面按钮
+    openPageInScene(scene, page, arg) {
         let oldScene = CS.UnityEngine.SceneManagement.GetActiveScene().name;
         if (oldScene == scene) {
             this.openPageWorker(page, arg);
@@ -112,26 +120,31 @@ class UIManager extends Singleton_1.Singleton {
             });
         }
     }
+    //回到主城
     enterMainPage() {
         this.m_pageTrackStack.length = 0;
-        this.openPageInScene(UIManager.MainScene, UIManager.MainPage, null, null);
+        this.openPageInScene(UIManager.MainScene, UIManager.MainPage, null);
     }
-    //UIWindow
+    //==========================================================UIWindow
+    //打开窗口
     openWindow(name, arg) {
         let ui = this.open(name, arg);
         return ui;
     }
+    //关闭窗口
     closeWindow(name, arg) {
         let ui = this.getUI(name);
         if (ui != null) {
             ui.close(arg);
         }
     }
-    //UIWidget
+    //==========================================================UIWidget
+    //打开Widiget
     openWidget(name, arg) {
         let ui = this.open(name, arg);
         return ui;
     }
+    //u关闭Widiget
     closeWidget(name, arg) {
         let ui = this.getUI(name);
         if (ui != null) {
@@ -139,9 +152,9 @@ class UIManager extends Singleton_1.Singleton {
         }
     }
 }
-UIManager.MainScene = "Main";
-UIManager.MainPage = "UIMainPage";
-UIManager.SceneLoading = "SceneLoading";
+UIManager.MainScene = "SceneDef.HomeScene";
+UIManager.MainPage = UIDefine_1.UIDefs.UIHomePage;
+UIManager.SceneLoading = ModuleDef_1.SceneDef.LoadingScene;
 UIManager.BackBtn = "back_btn";
 UIManager.WindowCloseBtn = "win_close_btn";
 exports.UIManager = UIManager;

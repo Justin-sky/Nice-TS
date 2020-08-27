@@ -1,4 +1,4 @@
-import { UINames } from "./UIDefine";
+import { UIDefs } from "./UIDefine";
 import { UILoginPage } from "../../game/Modules/Login/UI/UILoginPage";
 import { UIPanel } from "./UIPanel";
 
@@ -13,7 +13,7 @@ export class UIFactory{
         
         let ui:UIPanel = null;
 
-        if(name == UINames.UILoginPage){
+        if(name == UIDefs.UILoginPage){
             ui = new UILoginPage();
         }
 

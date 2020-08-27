@@ -35,13 +35,13 @@ export class ModuleManager extends Singleton<ModuleManager>{
 
     }
 
-    public createModule(name:string, args:any):GeneralModule{
+    public createModule(name:string, args?:any):GeneralModule{
 
         Logger.log(`name = ${name}, args = ${args}`);
 
         if(this.hasModule(name)){
             Logger.logError(`The Module<${name}> Has Existed!`);
-            return null;
+            return this.getModule(name);
         }
 
         let module : GeneralModule = ModuleFactory.createModule(name);
@@ -77,6 +77,13 @@ export class ModuleManager extends Singleton<ModuleManager>{
         return this.m_mapModules.get(name);
     }
 
+    private removeModule(name: string):void{
+        
+        let module = this.getModule(name);
+        if(module != undefined)
+            module.release();
+        this.m_mapModules.delete(name);
+    }
 
     private getCacheMessageList(target: string){
         let list:Array<MessageObject> = this.m_mapCacheMessage.get(target);

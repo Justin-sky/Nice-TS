@@ -25,10 +25,10 @@ export abstract class GeneralModule extends ModuleBase{
 
 
    //创建模块
-   public abstract create(args:any):void;
+   public abstract create(args?:any):void;
 
    //Show
-   public abstract show(args:any):void;
+   public abstract show(args?:any):void;
 
    //释放模块
     public abstract  release(): void;

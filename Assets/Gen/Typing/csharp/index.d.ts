@@ -4,6 +4,87 @@ declare module 'csharp' {
     
     interface $Task<T> {}
     
+    namespace System {
+        class Object {
+            
+        }
+        class ValueType extends System.Object {
+            
+        }
+        class Void extends System.ValueType {
+            
+        }
+        class Single extends System.ValueType {
+            
+        }
+        class Boolean extends System.ValueType {
+            
+        }
+        class String extends System.Object {
+            
+        }
+        class Array extends System.Object {
+            
+        }
+        class Enum extends System.ValueType {
+            
+        }
+        class Exception extends System.Object {
+            
+        }
+        class Int32 extends System.ValueType {
+            
+        }
+        class Delegate extends System.Object {
+            public Method: System.Reflection.MethodInfo;
+            public Target: any;
+            public static CreateDelegate(type: System.Type, firstArgument: any, method: System.Reflection.MethodInfo, throwOnBindFailure: boolean):Function;
+            public static CreateDelegate(type: System.Type, firstArgument: any, method: System.Reflection.MethodInfo):Function;
+            public static CreateDelegate(type: System.Type, method: System.Reflection.MethodInfo, throwOnBindFailure: boolean):Function;
+            public static CreateDelegate(type: System.Type, method: System.Reflection.MethodInfo):Function;
+            public static CreateDelegate(type: System.Type, target: any, method: string):Function;
+            public static CreateDelegate(type: System.Type, target: System.Type, method: string, ignoreCase: boolean, throwOnBindFailure: boolean):Function;
+            public static CreateDelegate(type: System.Type, target: System.Type, method: string):Function;
+            public static CreateDelegate(type: System.Type, target: System.Type, method: string, ignoreCase: boolean):Function;
+            public static CreateDelegate(type: System.Type, target: any, method: string, ignoreCase: boolean, throwOnBindFailure: boolean):Function;
+            public static CreateDelegate(type: System.Type, target: any, method: string, ignoreCase: boolean):Function;
+            public DynamicInvoke(...args: any[]):any;
+            public Clone():any;
+            public Equals(obj: any):boolean;
+            public GetHashCode():number;
+            public GetObjectData(info: System.Runtime.Serialization.SerializationInfo, context: System.Runtime.Serialization.StreamingContext):void;
+            public GetInvocationList():Function[];
+            public static Combine(a: Function, b: Function):Function;
+            public static Combine(...delegates: Function[]):Function;
+            public static Remove(source: Function, value: Function):Function;
+            public static RemoveAll(source: Function, value: Function):Function;
+            public static op_Equality(d1: Function, d2: Function):boolean;
+            public static op_Inequality(d1: Function, d2: Function):boolean;
+            
+        }
+        type MulticastDelegate = (...args:any[]) => any;
+        var MulticastDelegate: {new (func: (...args:any[]) => any): MulticastDelegate;}
+        type Converter$2<TInput,TOutput> = (input: TInput) => TOutput;
+        type Predicate$1<T> = (obj: T) => boolean;
+        type Action$1<T> = (obj: T) => void;
+        type Comparison$1<T> = (x: T, y: T) => number;
+        class Type extends System.Reflection.MemberInfo {
+            
+        }
+        class UInt64 extends System.ValueType {
+            
+        }
+        type Action$2<T1,T2> = (arg1: T1, arg2: T2) => void;
+        interface IAsyncResult {
+            
+        }
+        type AsyncCallback = (ar: System.IAsyncResult) => void;
+        var AsyncCallback: {new (func: (ar: System.IAsyncResult) => void): AsyncCallback;}
+        class IntPtr extends System.ValueType {
+            
+        }
+        
+    }
     namespace UnityEngine {
         class Debug extends System.Object {
             public static unityLogger: UnityEngine.ILogger;
@@ -125,7 +206,7 @@ declare module 'csharp' {
             public static Exclude(excludeThis: UnityEngine.Vector3, fromThat: UnityEngine.Vector3):UnityEngine.Vector3;
             
         }
-        class Color {
+        class Color extends System.ValueType {
             
         }
         class Object extends System.Object {
@@ -181,6 +262,38 @@ declare module 'csharp' {
             public static captureFramerate: number;
             public static inFixedTimeStep: boolean;
             public constructor();
+            
+        }
+        class Component extends UnityEngine.Object {
+            public transform: UnityEngine.Transform;
+            public gameObject: UnityEngine.GameObject;
+            public tag: string;
+            public constructor();
+            public GetComponent(type: System.Type):UnityEngine.Component;
+            public TryGetComponent(type: System.Type, component: $Ref<UnityEngine.Component>):boolean;
+            public GetComponent(type: string):UnityEngine.Component;
+            public GetComponentInChildren(t: System.Type, includeInactive: boolean):UnityEngine.Component;
+            public GetComponentInChildren(t: System.Type):UnityEngine.Component;
+            public GetComponentsInChildren(t: System.Type, includeInactive: boolean):UnityEngine.Component[];
+            public GetComponentsInChildren(t: System.Type):UnityEngine.Component[];
+            public GetComponentInParent(t: System.Type):UnityEngine.Component;
+            public GetComponentsInParent(t: System.Type, includeInactive: boolean):UnityEngine.Component[];
+            public GetComponentsInParent(t: System.Type):UnityEngine.Component[];
+            public GetComponents(type: System.Type):UnityEngine.Component[];
+            public GetComponents(type: System.Type, results: System.Collections.Generic.List$1<UnityEngine.Component>):void;
+            public CompareTag(tag: string):boolean;
+            public SendMessageUpwards(methodName: string, value: any, options: UnityEngine.SendMessageOptions):void;
+            public SendMessageUpwards(methodName: string, value: any):void;
+            public SendMessageUpwards(methodName: string):void;
+            public SendMessageUpwards(methodName: string, options: UnityEngine.SendMessageOptions):void;
+            public SendMessage(methodName: string, value: any):void;
+            public SendMessage(methodName: string):void;
+            public SendMessage(methodName: string, value: any, options: UnityEngine.SendMessageOptions):void;
+            public SendMessage(methodName: string, options: UnityEngine.SendMessageOptions):void;
+            public BroadcastMessage(methodName: string, parameter: any, options: UnityEngine.SendMessageOptions):void;
+            public BroadcastMessage(methodName: string, parameter: any):void;
+            public BroadcastMessage(methodName: string):void;
+            public BroadcastMessage(methodName: string, options: UnityEngine.SendMessageOptions):void;
             
         }
         class Transform extends UnityEngine.Component {
@@ -250,45 +363,13 @@ declare module 'csharp' {
             public GetChildCount():number;
             
         }
-        class Quaternion {
+        class Quaternion extends System.ValueType {
             
         }
-        class Matrix4x4 {
+        class Matrix4x4 extends System.ValueType {
             
         }
         enum Space { World = 0, Self = 1 }
-        class Component extends UnityEngine.Object {
-            public transform: UnityEngine.Transform;
-            public gameObject: UnityEngine.GameObject;
-            public tag: string;
-            public constructor();
-            public GetComponent(type: System.Type):UnityEngine.Component;
-            public TryGetComponent(type: System.Type, component: $Ref<UnityEngine.Component>):boolean;
-            public GetComponent(type: string):UnityEngine.Component;
-            public GetComponentInChildren(t: System.Type, includeInactive: boolean):UnityEngine.Component;
-            public GetComponentInChildren(t: System.Type):UnityEngine.Component;
-            public GetComponentsInChildren(t: System.Type, includeInactive: boolean):UnityEngine.Component[];
-            public GetComponentsInChildren(t: System.Type):UnityEngine.Component[];
-            public GetComponentInParent(t: System.Type):UnityEngine.Component;
-            public GetComponentsInParent(t: System.Type, includeInactive: boolean):UnityEngine.Component[];
-            public GetComponentsInParent(t: System.Type):UnityEngine.Component[];
-            public GetComponents(type: System.Type):UnityEngine.Component[];
-            public GetComponents(type: System.Type, results: System.Collections.Generic.List$1<UnityEngine.Component>):void;
-            public CompareTag(tag: string):boolean;
-            public SendMessageUpwards(methodName: string, value: any, options: UnityEngine.SendMessageOptions):void;
-            public SendMessageUpwards(methodName: string, value: any):void;
-            public SendMessageUpwards(methodName: string):void;
-            public SendMessageUpwards(methodName: string, options: UnityEngine.SendMessageOptions):void;
-            public SendMessage(methodName: string, value: any):void;
-            public SendMessage(methodName: string):void;
-            public SendMessage(methodName: string, value: any, options: UnityEngine.SendMessageOptions):void;
-            public SendMessage(methodName: string, options: UnityEngine.SendMessageOptions):void;
-            public BroadcastMessage(methodName: string, parameter: any, options: UnityEngine.SendMessageOptions):void;
-            public BroadcastMessage(methodName: string, parameter: any):void;
-            public BroadcastMessage(methodName: string):void;
-            public BroadcastMessage(methodName: string, options: UnityEngine.SendMessageOptions):void;
-            
-        }
         class GameObject extends UnityEngine.Object {
             public transform: UnityEngine.Transform;
             public layer: number;
@@ -341,81 +422,6 @@ declare module 'csharp' {
         enum SendMessageOptions { RequireReceiver = 0, DontRequireReceiver = 1 }
         enum PrimitiveType { Sphere = 0, Capsule = 1, Cylinder = 2, Cube = 3, Plane = 4, Quad = 5 }
         enum HideFlags { None = 0, HideInHierarchy = 1, HideInInspector = 2, DontSaveInEditor = 4, NotEditable = 8, DontSaveInBuild = 16, DontUnloadUnusedAsset = 32, DontSave = 52, HideAndDontSave = 61 }
-        
-    }
-    namespace System {
-        class Void {
-            
-        }
-        class Single {
-            
-        }
-        class Boolean {
-            
-        }
-        class Object {
-            
-        }
-        class String {
-            
-        }
-        class Exception {
-            
-        }
-        class Int32 {
-            
-        }
-        class ValueType {
-            
-        }
-        type Converter$2<TInput,TOutput> = (input: TInput) => TOutput;
-        type Predicate$1<T> = (obj: T) => boolean;
-        type Action$1<T> = (obj: T) => void;
-        type Comparison$1<T> = (x: T, y: T) => number;
-        class Type {
-            
-        }
-        class UInt64 {
-            
-        }
-        class Delegate extends System.Object {
-            public Method: System.Reflection.MethodInfo;
-            public Target: any;
-            public static CreateDelegate(type: System.Type, firstArgument: any, method: System.Reflection.MethodInfo, throwOnBindFailure: boolean):Function;
-            public static CreateDelegate(type: System.Type, firstArgument: any, method: System.Reflection.MethodInfo):Function;
-            public static CreateDelegate(type: System.Type, method: System.Reflection.MethodInfo, throwOnBindFailure: boolean):Function;
-            public static CreateDelegate(type: System.Type, method: System.Reflection.MethodInfo):Function;
-            public static CreateDelegate(type: System.Type, target: any, method: string):Function;
-            public static CreateDelegate(type: System.Type, target: System.Type, method: string, ignoreCase: boolean, throwOnBindFailure: boolean):Function;
-            public static CreateDelegate(type: System.Type, target: System.Type, method: string):Function;
-            public static CreateDelegate(type: System.Type, target: System.Type, method: string, ignoreCase: boolean):Function;
-            public static CreateDelegate(type: System.Type, target: any, method: string, ignoreCase: boolean, throwOnBindFailure: boolean):Function;
-            public static CreateDelegate(type: System.Type, target: any, method: string, ignoreCase: boolean):Function;
-            public DynamicInvoke(...args: any[]):any;
-            public Clone():any;
-            public Equals(obj: any):boolean;
-            public GetHashCode():number;
-            public GetObjectData(info: System.Runtime.Serialization.SerializationInfo, context: System.Runtime.Serialization.StreamingContext):void;
-            public GetInvocationList():Function[];
-            public static Combine(a: Function, b: Function):Function;
-            public static Combine(...delegates: Function[]):Function;
-            public static Remove(source: Function, value: Function):Function;
-            public static RemoveAll(source: Function, value: Function):Function;
-            public static op_Equality(d1: Function, d2: Function):boolean;
-            public static op_Inequality(d1: Function, d2: Function):boolean;
-            
-        }
-        type Action$2<T1,T2> = (arg1: T1, arg2: T2) => void;
-        interface IAsyncResult {
-            
-        }
-        type AsyncCallback = (ar: System.IAsyncResult) => void;
-        var AsyncCallback: {new (func: (ar: System.IAsyncResult) => void): AsyncCallback;}
-        class IntPtr {
-            
-        }
-        type MulticastDelegate = (...args:any[]) => any;
-        var MulticastDelegate: {new (func: (...args:any[]) => any): MulticastDelegate;}
         
     }
     namespace System.Collections.Generic {
@@ -484,13 +490,13 @@ declare module 'csharp' {
         
     }
     namespace System.Collections.ObjectModel {
-        class ReadOnlyCollection$1<T> {
+        class ReadOnlyCollection$1<T> extends System.Object {
             
         }
         
     }
     namespace System.Collections.Generic.List$1 {
-        class Enumerator<T> {
+        class Enumerator<T> extends System.ValueType {
             
         }
         
@@ -501,23 +507,29 @@ declare module 'csharp' {
         }
         
     }
-    namespace UnityEngine.SceneManagement {
-        class Scene {
+    namespace System.Reflection {
+        class MemberInfo extends System.Object {
+            
+        }
+        class MethodBase extends System.Reflection.MemberInfo {
+            
+        }
+        class MethodInfo extends System.Reflection.MethodBase {
             
         }
         
     }
-    namespace System.Reflection {
-        class MethodInfo {
+    namespace UnityEngine.SceneManagement {
+        class Scene extends System.ValueType {
             
         }
         
     }
     namespace System.Runtime.Serialization {
-        class SerializationInfo {
+        class SerializationInfo extends System.Object {
             
         }
-        class StreamingContext {
+        class StreamingContext extends System.ValueType {
             
         }
         

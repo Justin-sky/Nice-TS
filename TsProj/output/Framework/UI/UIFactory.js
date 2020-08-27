@@ -7,7 +7,7 @@ class UIFactory {
     static createUI(pkg, name) {
         let comp = CS.FairyGUI.UIPackage.CreateObject(pkg, name).asCom;
         let ui = null;
-        if (name == UIDefine_1.UINames.UILoginPage) {
+        if (name == UIDefine_1.UIDefs.UILoginPage) {
             ui = new UILoginPage_1.UILoginPage();
         }
         if (ui != null) {

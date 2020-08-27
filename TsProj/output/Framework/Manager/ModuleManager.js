@@ -23,7 +23,7 @@ class ModuleManager extends Singleton_1.Singleton {
         Logger_1.Logger.log(`name = ${name}, args = ${args}`);
         if (this.hasModule(name)) {
             Logger_1.Logger.logError(`The Module<${name}> Has Existed!`);
-            return null;
+            return this.getModule(name);
         }
         let module = ModuleFactory_1.ModuleFactory.createModule(name);
         if (module == null) {
@@ -47,6 +47,12 @@ class ModuleManager extends Singleton_1.Singleton {
     }
     getModule(name) {
         return this.m_mapModules.get(name);
+    }
+    removeModule(name) {
+        let module = this.getModule(name);
+        if (module != undefined)
+            module.release();
+        this.m_mapModules.delete(name);
     }
     getCacheMessageList(target) {
         let list = this.m_mapCacheMessage.get(target);
