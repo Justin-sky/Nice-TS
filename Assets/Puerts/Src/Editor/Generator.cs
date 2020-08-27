@@ -488,7 +488,7 @@ namespace Puerts.Editor
                 }
             }
 
-            if (!type.IsEnum && type.BaseType != null && type != typeof(object) && !result.IsDelegate && !result.IsInterface)
+            if (genTypeSet.Contains(type) && !type.IsEnum && type.BaseType != null && type != typeof(object) && !result.IsDelegate && !result.IsInterface)
             {
                 result.BaseType = new TsTypeGenInfo()
                 {
@@ -568,13 +568,6 @@ namespace Puerts.Editor
                     AddRefType(refTypes, gt);
                 }
             }
-
-            var baseType = type.BaseType;
-            while (baseType != null)
-            {
-                AddRefType(refTypes, baseType);
-                baseType = baseType.BaseType;
-            }
             type = GetRawType(type);
             if (type.IsGenericParameter) return;
             refTypes.Add(type);
@@ -617,6 +610,13 @@ namespace Puerts.Editor
                     {
                         AddRefType(refTypes, pinfo.ParameterType);
                     }
+                }
+
+                var baseType = type.BaseType;
+                while (baseType != null)
+                {
+                    AddRefType(refTypes, baseType);
+                    baseType = baseType.BaseType;
                 }
             }
 
