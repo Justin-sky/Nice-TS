@@ -28,4 +28,12 @@ UILayerDef.Widget = 4000;
 UILayerDef.Loading = 5000;
 UILayerDef.Unkown = 9999;
 exports.UILayerDef = UILayerDef;
+class UIPackages {
+}
+UIPackages.Game = "game";
+exports.UIPackages = UIPackages;
+class UINames {
+}
+UINames.UILoginPage = "UILoginPage";
+exports.UINames = UINames;
 //# sourceMappingURL=UIDefine.js.map

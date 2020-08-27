@@ -59,7 +59,7 @@ public class GameLaunch : MonoBehaviour
         //加载更新界面
         LaunchPage launchPage = LaunchPage.CreateInstance();
         launchPage.Show();
-
+        
         //Test
         UINoticeWin notice = UINoticeWin.CreateInstance();
         notice.ShowOneButton("test test", () => {

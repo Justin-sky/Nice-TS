@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Singleton_1 = require("../Common/Singleton");
-const UILoginPage_1 = require("../../game/Modules/Login/UI/UILoginPage");
+const UIFactory_1 = require("../UI/UIFactory");
 const CS = require('csharp');
 class UIPageTrack {
 }
@@ -15,10 +15,10 @@ class UIManager extends Singleton_1.Singleton {
     init() {
         this.m_pageTrackStack.length = 0;
         this.m_listLoadedPanel.length = 0;
-        // SceneManager.sceneLoaded += (scene, mode) =>
-        //     {
-        //         if (onSceneLoadedOnly != null) onSceneLoadedOnly(scene.name);
-        //     };
+        CS.UnityEngine.SceneManagement.SceneManager.sceneLoaded = (scene, mode) => {
+            if (this.onSceneLoadedOnly != null)
+                this.onSceneLoadedOnly(scene.name);
+        };
     }
     closeAllLoadedPanel() {
         for (let i = this.m_listLoadedPanel.length - 1; i >= 0; i--) {
@@ -27,6 +27,7 @@ class UIManager extends Singleton_1.Singleton {
                 panel.close();
             }
             this.m_listLoadedPanel.slice(i, 1);
+            panel.dispose();
         }
     }
     clean() {
@@ -34,27 +35,22 @@ class UIManager extends Singleton_1.Singleton {
         this.m_pageTrackStack.length = 0;
         this.m_listLoadedPanel.length = 0;
     }
-    open(name, arg, implType = null) {
+    open(pkg, name, arg) {
         let ui = this.getUI(name);
         if (ui == null) {
-            ui = this.load(name, implType);
+            ui = UIFactory_1.UIFactory.createUI(pkg, name);
+            this.m_listLoadedPanel.push(ui);
         }
-        if (ui != undefined) {
-            if (this.m_listLoadedPanel.indexOf(ui) < 0) {
-                this.m_listLoadedPanel.push(ui);
-            }
+        if (ui != null) {
             ui.open(arg);
         }
         return ui;
     }
-    load(name, implType) {
-        let comp = CS.FairyGUI.UIPackage.CreateObject("game", "LoginPage").asCom;
-        let loginPage = new UILoginPage_1.UILoginPage();
-        return loginPage;
-    }
     getUI(name) {
         for (const panel of this.m_listLoadedPanel) {
-            // panel.name
+            if (panel.name == name) {
+                panel;
+            }
         }
         return null;
     }
@@ -83,24 +79,23 @@ class UIManager extends Singleton_1.Singleton {
         CS.UnityEngine.SceneManagement.LoadScene(scene);
     }
     //Page
-    openPageWorker(page, arg, type) {
+    openPageWorker(page, arg) {
         this.m_currentPage = new UIPageTrack();
         this.m_currentPage.name = name;
         this.m_currentPage.arg = arg;
-        this.m_currentPage.type = type;
         this.closeAllLoadedPanel();
-        this.open(page, arg, type);
+        this.open(page, arg);
     }
     openPage(name, arg) {
         if (this.m_currentPage != undefined && this.m_currentPage.name != name) {
             this.m_pageTrackStack.push(this.m_currentPage);
         }
-        this.openPageWorker(name, arg, null);
+        this.openPageWorker(name, arg);
     }
     goBackPage() {
         if (this.m_pageTrackStack.length > 0) {
             let track = this.m_pageTrackStack.pop();
-            this.openPageWorker(track.name, track.arg, track.type);
+            this.openPageWorker(track.name, track.arg);
         }
         else {
             this.enterMainPage();
@@ -109,11 +104,11 @@ class UIManager extends Singleton_1.Singleton {
     openPageInScene(scene, page, arg, type) {
         let oldScene = CS.UnityEngine.SceneManagement.GetActiveScene().name;
         if (oldScene == scene) {
-            this.openPageWorker(page, arg, type);
+            this.openPageWorker(page, arg);
         }
         else {
             this.loadScene(scene, () => {
-                this.openPageWorker(page, arg, type);
+                this.openPageWorker(page, arg);
             });
         }
     }
@@ -147,5 +142,7 @@ class UIManager extends Singleton_1.Singleton {
 UIManager.MainScene = "Main";
 UIManager.MainPage = "UIMainPage";
 UIManager.SceneLoading = "SceneLoading";
+UIManager.BackBtn = "back_btn";
+UIManager.WindowCloseBtn = "win_close_btn";
 exports.UIManager = UIManager;
 //# sourceMappingURL=UIManager.js.map

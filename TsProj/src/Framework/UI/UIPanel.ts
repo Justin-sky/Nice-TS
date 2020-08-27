@@ -1,7 +1,19 @@
 import { UITypeDef, UILayerDef } from "./UIDefine";
 
+const CS = require('csharp');
 
 export abstract class UIPanel {
+
+    public fui:any;  //FairyGUI 对象
+
+
+    private _name:string;
+    public set name(v:string){
+        this._name = v;
+    }
+    public get name():string{
+        return this._name;
+    }
 
     public get uiType(): UITypeDef {    
         return UITypeDef.Unkown;
@@ -15,18 +27,13 @@ export abstract class UIPanel {
         this.m_layer = v;
     }
     
-    private m_openAniClip:any;  //打开时动画 
-    private m_closeAniClip:any; //关闭时动画 
+    public  get isOpen() : boolean{
 
-    //public Signal<object> onClose = new Signal<object>();
-
-    public abstract get isOpen() : boolean;
+        return this.fui.visiable;
+    }
 
 
-    public onAwake():void{}
-    public onDestroy():void{}
-    public onEnable():void{}
-    public onDisable():void{}
+    public abstract onAwake():void;
     public onUpdate():void{}
 
     public onOpen(arg:any):void{
@@ -44,32 +51,24 @@ export abstract class UIPanel {
     }
 
     public open(arg:any):void{
-        //显示UI
-        // this.gameObject.SetActive(true);
-
+        
         this.onOpen(arg);
 
-        //播放动画 
+        CS.FairyGUI.GRoot.inst.AddChild(this.fui);
 
 
     }
 
-    public close(arg:any = null):any{
+    public close(arg:any = null):void{
+
 
         this.onClose(arg);
 
-    }
-
-
-    public addUIClickListener(controlName:string, listener:Function){
-
+        CS.FairyGUI.GRoot.inst.RemoveChild(this.fui);
 
     }
 
-
-    public removeUIClickListener(controlName:string, listener){
-
-        
+    public dispose():void{
+        this.fui.Dispose();
     }
-
 }

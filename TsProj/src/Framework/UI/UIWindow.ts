@@ -1,5 +1,6 @@
 import { UIPanel } from "./UIPanel";
 import { UITypeDef } from "./UIDefine";
+import { UIManager } from "../Manager/UIManager";
 
 
 
@@ -9,18 +10,29 @@ export abstract class  UIWindow extends UIPanel{
         return UITypeDef.Window;
     }
 
-    private m_btnClose:string;
+    private m_btnClose:any;
 
-    public onEnable():void{
+    public onAwake():void{
+        
+        this.m_btnClose = this.fui.GetChild(UIManager.WindowCloseBtn);
 
-        this.addUIClickListener(this.m_btnClose,this.onBtnClose);
     }
+
+    public onOpen(arg:any):void{
+        super.onOpen(arg);
+
+        if(this.m_btnClose!=undefined){
+            this.m_btnClose.Add(this.onBtnClose);
+        }
     
-    public onDisable():void{
-
-        this.removeUIClickListener(this.m_btnClose,this.onBtnClose);
     }
+    public onClose(arg:any):void{
+        super.onClose(arg);
 
+        if(this.m_btnClose!=undefined){
+            this.m_btnClose.Remove(this.onBtnClose);
+        }
+    }
 
     private onBtnClose(){
         this.close(0);

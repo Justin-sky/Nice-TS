@@ -1,5 +1,6 @@
 import { UIPanel } from "./UIPanel";
-import { UITypeDef } from "./UIDefine";
+import { UITypeDef, UILayerDef } from "./UIDefine";
+import { UIManager } from "../Manager/UIManager";
 
 
 export abstract class UIPage extends UIPanel{
@@ -9,22 +10,33 @@ export abstract class UIPage extends UIPanel{
     }
 
 
-    private m_btnGoBack:string;
+    private m_btnGoBack:any;
 
 
-    public onEnable():void{
+    public onAwake():void{
+        
+        this.m_btnGoBack = this.fui.GetChild(UIManager.BackBtn);
 
-        this.addUIClickListener(this.m_btnGoBack,this.onBtnGoBack);
     }
+
+    public onOpen(arg:any):void{
+        super.onOpen(arg);
+
+        if(this.m_btnGoBack!=undefined){
+            this.m_btnGoBack.Add(this.onBtnGoBack);
+        }
     
-    public onDisable():void{
-
-        this.removeUIClickListener(this.m_btnGoBack,this.onBtnGoBack);
     }
+    public onClose(arg:any):void{
+        super.onClose(arg);
 
+        if(this.m_btnGoBack!=undefined){
+            this.m_btnGoBack.Remove(this.onBtnGoBack);
+        }
+    }
 
     private onBtnGoBack(){
-
+        UIManager.Instance(UIManager).goBackPage();
     }
 
 } 

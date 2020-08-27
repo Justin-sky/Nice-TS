@@ -1,9 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const UIDefine_1 = require("./UIDefine");
+const CS = require('csharp');
 class UIPanel {
     constructor() {
         this.m_layer = UIDefine_1.UILayerDef.Unkown;
+    }
+    set name(v) {
+        this._name = v;
+    }
+    get name() {
+        return this._name;
     }
     get uiType() {
         return UIDefine_1.UITypeDef.Unkown;
@@ -14,10 +21,9 @@ class UIPanel {
     set layer(v) {
         this.m_layer = v;
     }
-    onAwake() { }
-    onDestroy() { }
-    onEnable() { }
-    onDisable() { }
+    get isOpen() {
+        return this.fui.visiable;
+    }
     onUpdate() { }
     onOpen(arg) {
         this.layer = UIDefine_1.UILayerDef.getDefaultLayer(this.uiType);
@@ -30,17 +36,15 @@ class UIPanel {
         this.onUpdate();
     }
     open(arg) {
-        //显示UI
-        // this.gameObject.SetActive(true);
         this.onOpen(arg);
-        //播放动画 
+        CS.FairyGUI.GRoot.inst.AddChild(this.fui);
     }
     close(arg = null) {
         this.onClose(arg);
+        CS.FairyGUI.GRoot.inst.RemoveChild(this.fui);
     }
-    addUIClickListener(controlName, listener) {
-    }
-    removeUIClickListener(controlName, listener) {
+    dispose() {
+        this.fui.Dispose();
     }
 }
 exports.UIPanel = UIPanel;

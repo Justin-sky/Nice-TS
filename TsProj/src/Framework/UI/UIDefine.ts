@@ -31,3 +31,20 @@ export class UILayerDef{
         }
     }
 }
+
+
+export class UIPackages{
+
+    public static Game:string = "game";
+
+
+}
+
+
+export class UINames{
+
+    public static UILoginPage:string = "UILoginPage";
+    
+
+
+}
