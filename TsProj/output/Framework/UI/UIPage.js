@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const UIPanel_1 = require("./UIPanel");
 const UIDefine_1 = require("./UIDefine");
-const UIManager_1 = require("../Manager/UIManager");
 class UIPage extends UIPanel_1.UIPanel {
     get uiType() {
         return UIDefine_1.UITypeDef.Page;
@@ -23,7 +22,7 @@ class UIPage extends UIPanel_1.UIPanel {
         }
     }
     onBtnGoBack() {
-        UIManager_1.UIManager.Instance(UIManager_1.UIManager).goBackPage();
+        // UIManager.Instance(UIManager).goBackPage();
     }
 }
 exports.UIPage = UIPage;

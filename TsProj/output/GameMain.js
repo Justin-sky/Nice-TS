@@ -7,6 +7,7 @@ const Time_1 = require("./Tools/UnityEngine/Time");
 const TimeManager_1 = require("./Framework/Manager/TimeManager");
 const GameObjectPool_1 = require("./Framework/Common/GameObjectPool");
 const ModuleManager_1 = require("./Framework/Manager/ModuleManager");
+const UIManager_1 = require("./Framework/Manager/UIManager");
 const ResManager_1 = require("./Framework/Manager/ResManager");
 class GameMain {
     constructor() {
@@ -19,12 +20,12 @@ class GameMain {
     async start() {
         Logger_1.Logger.log("Game start in JS....");
         //启动单例
-        ResManager_1.ResManager.Instance(ResManager_1.ResManager);
         Time_1.Time.Instance(Time_1.Time);
         TimeManager_1.TimeManager.Instance(TimeManager_1.TimeManager);
         GameObjectPool_1.GameObjectPool.Instance(GameObjectPool_1.GameObjectPool);
         ModuleManager_1.ModuleManager.Instance(ModuleManager_1.ModuleManager);
-        //UIManager.Instance(UIManager);
+        UIManager_1.UIManager.Instance(UIManager_1.UIManager);
+        ResManager_1.ResManager.Instance(ResManager_1.ResManager);
         //预加载Flatbuffer数据
         await ResManager_1.ResManager.Instance(ResManager_1.ResManager).preloadPBs();
         //do Unit Test

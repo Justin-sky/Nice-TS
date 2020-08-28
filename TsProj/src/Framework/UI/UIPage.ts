@@ -36,7 +36,7 @@ export abstract class UIPage extends UIPanel{
     }
 
     private onBtnGoBack(){
-        UIManager.Instance(UIManager).goBackPage();
+       // UIManager.Instance(UIManager).goBackPage();
     }
 
 } 

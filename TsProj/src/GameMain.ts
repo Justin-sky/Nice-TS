@@ -8,7 +8,6 @@ import { GameObjectPool } from './Framework/Common/GameObjectPool';
 import { ModuleManager } from './Framework/Manager/ModuleManager';
 import { ModuleDef } from './Game/Modules/ModuleDef';
 import { UIManager } from './Framework/Manager/UIManager';
-import { UIFactory } from './Framework/UI/UIFactory';
 import { ResManager } from './Framework/Manager/ResManager';
 
 
@@ -27,14 +26,14 @@ class GameMain{
         Logger.log("Game start in JS....");
 
         //启动单例
-        ResManager.Instance(ResManager);
+       
         Time.Instance(Time);
         TimeManager.Instance(TimeManager);
         GameObjectPool.Instance(GameObjectPool);
         ModuleManager.Instance(ModuleManager);
 
-        //UIManager.Instance(UIManager);
-
+        UIManager.Instance(UIManager);
+        ResManager.Instance(ResManager);
 
 
         //预加载Flatbuffer数据
