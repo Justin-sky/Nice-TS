@@ -68,6 +68,7 @@ class UnitTest {
         // Logger.log("then create Home");
         // ModuleManager.Instance(ModuleManager).createModule(ModuleDef.HomeModule,"create login");
         Logger_1.Logger.log("UIManager =============================");
+        Logger_1.Logger.log("Flatbuffer =============================");
     }
 }
 UnitTest.testVar = 10000;

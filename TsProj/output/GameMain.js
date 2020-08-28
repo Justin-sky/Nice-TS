@@ -7,6 +7,7 @@ const Time_1 = require("./Tools/UnityEngine/Time");
 const TimeManager_1 = require("./Framework/Manager/TimeManager");
 const GameObjectPool_1 = require("./Framework/Common/GameObjectPool");
 const ModuleManager_1 = require("./Framework/Manager/ModuleManager");
+const ResManager_1 = require("./Framework/Manager/ResManager");
 class GameMain {
     constructor() {
         CS.JsManager.Instance.JsOnApplicationQuit = () => this.onApplicationQuit();
@@ -15,14 +16,17 @@ class GameMain {
         CS.JsManager.Instance.JsLateUpdate = () => this.onLateUpdate();
         CS.JsManager.Instance.JsFixedUpdate = (fixedDeltaTime) => this.onFixedUpdate(fixedDeltaTime);
     }
-    start() {
+    async start() {
         Logger_1.Logger.log("Game start in JS....");
         //启动单例
+        ResManager_1.ResManager.Instance(ResManager_1.ResManager);
         Time_1.Time.Instance(Time_1.Time);
         TimeManager_1.TimeManager.Instance(TimeManager_1.TimeManager);
         GameObjectPool_1.GameObjectPool.Instance(GameObjectPool_1.GameObjectPool);
         ModuleManager_1.ModuleManager.Instance(ModuleManager_1.ModuleManager);
         //UIManager.Instance(UIManager);
+        //预加载Flatbuffer数据
+        await ResManager_1.ResManager.Instance(ResManager_1.ResManager).preloadPBs();
         //do Unit Test
         UnitTest_1.UnitTest.doTest();
         //进入登录模块

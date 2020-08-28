@@ -8,6 +8,25 @@ const puerts_1 = require("puerts");
 class ResManager extends Singleton_1.Singleton {
     constructor() {
         super();
+        this.fblabel = "FB";
+        this.fbcaches = new Map();
+        CS.Addressable.ResourceManager.OnFBLoadedHandle = this.onFBLoadedHandle;
+    }
+    onFBLoadedHandle(name, data) {
+        this.fbcaches.set(name, data);
+    }
+    async preloadPBs() {
+        try {
+            let task = csResMgr.PreadloadFB(this.fblabel);
+            return await puerts_1.$promise(task);
+        }
+        catch (ex) {
+            Logger_1.Logger.logError(`Load fb error: : ${ex}`);
+            return 0;
+        }
+    }
+    getFB(name) {
+        return this.fbcaches.get(name);
     }
     async loadPrefab(address) {
         try {

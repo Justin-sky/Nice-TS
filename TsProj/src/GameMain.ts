@@ -9,6 +9,7 @@ import { ModuleManager } from './Framework/Manager/ModuleManager';
 import { ModuleDef } from './Game/Modules/ModuleDef';
 import { UIManager } from './Framework/Manager/UIManager';
 import { UIFactory } from './Framework/UI/UIFactory';
+import { ResManager } from './Framework/Manager/ResManager';
 
 
 class GameMain{
@@ -22,18 +23,22 @@ class GameMain{
         CS.JsManager.Instance.JsFixedUpdate = (fixedDeltaTime:number) => this.onFixedUpdate(fixedDeltaTime);
     }
 
-    public start():void {
+    public async start() {
         Logger.log("Game start in JS....");
 
         //启动单例
+        ResManager.Instance(ResManager);
         Time.Instance(Time);
         TimeManager.Instance(TimeManager);
         GameObjectPool.Instance(GameObjectPool);
         ModuleManager.Instance(ModuleManager);
- 
+
         //UIManager.Instance(UIManager);
 
 
+
+        //预加载Flatbuffer数据
+        await ResManager.Instance(ResManager).preloadPBs();
 
         //do Unit Test
         UnitTest.doTest();

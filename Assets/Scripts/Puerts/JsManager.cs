@@ -53,6 +53,7 @@ public class JsManager:MonoSingleton<JsManager>
         //声明Action
         jsEnv.UsingAction<float>();
         jsEnv.UsingAction<float, float>();
+        jsEnv.UsingAction<string, byte[]>();
 
     }
 
