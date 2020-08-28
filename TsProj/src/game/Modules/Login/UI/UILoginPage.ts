@@ -22,5 +22,26 @@ export class UILoginPage extends UIPage{
 
     }
 
-  
+    
+    public onOpen(arg:any):void{
+        super.onOpen(arg);
+
+        this.m_loginBtn.Add(this.onLoginClick);
+    }
+    public onClose(arg:any):void{
+        super.onClose(arg);
+
+        this.m_loginBtn.Remove(this.onLoginClick);
+    }
+
+
+
+
+    public onLoginClick(){
+
+        let account = this.m_account.text;
+        let password = this.m_password.text;
+
+        
+    }
 }

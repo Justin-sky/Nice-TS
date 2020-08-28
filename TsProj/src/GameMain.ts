@@ -6,7 +6,7 @@ import {Time} from './Tools/UnityEngine/Time';
 import {TimeManager} from './Framework/Manager/TimeManager';
 import { GameObjectPool } from './Framework/Common/GameObjectPool';
 import { ModuleManager } from './Framework/Manager/ModuleManager';
-import { ModuleDef } from './game/Modules/ModuleDef';
+import { ModuleDef } from './Game/Modules/ModuleDef';
 import { UIManager } from './Framework/Manager/UIManager';
 import { UIFactory } from './Framework/UI/UIFactory';
 
@@ -30,8 +30,8 @@ class GameMain{
         TimeManager.Instance(TimeManager);
         GameObjectPool.Instance(GameObjectPool);
         ModuleManager.Instance(ModuleManager);
-        UIFactory.Instance(UIFactory);
-        UIManager.Instance(UIManager);
+ 
+        //UIManager.Instance(UIManager);
 
 
 

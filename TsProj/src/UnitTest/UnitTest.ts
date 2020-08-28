@@ -6,7 +6,7 @@ import { TimeManager } from '../Framework/Manager/TimeManager';
 import { Timer } from '../Framework/Timer/Timer';
 import { ResManager } from '../Framework/Manager/ResManager';
 import { ModuleManager } from '../Framework/Manager/ModuleManager';
-import { ModuleDef } from '../game/Modules/ModuleDef';
+import { ModuleDef } from '../Game/Modules/ModuleDef';
 
 const CS = require('csharp');
 

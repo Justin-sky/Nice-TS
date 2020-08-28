@@ -6,8 +6,9 @@ import { UIWindow } from '../UI/UIWindow';
 import { UIWidge } from '../UI/UIWidge';
 import { UIPanel } from '../UI/UIPanel';
 import { UIFactory } from '../UI/UIFactory';
-import { SceneDef } from '../../game/Modules/ModuleDef';
+import { SceneDef } from '../../Game/Modules/ModuleDef';
 import { UIDefs } from '../UI/UIDefine';
+import { Messenger } from '../Common/Messenger';
 
 const CS = require('csharp');
 
@@ -16,6 +17,13 @@ export class UIPageTrack{
     public arg:any;
 }
 
+export enum UIMessageNames {
+    UIFRRAME_ON_PANEL_CREATE,
+    UIFRRAME_ON_PANEL_OPEN,
+    UIFRRAME_ON_PANEL_CLOSE,
+    UIFRRAME_ON_PAGE_BACK,
+    UIFRRAME_ON_WINDOW_CLOSE
+}
 
 export class UIManager extends Singleton<UIManager>{
 
@@ -31,19 +39,14 @@ export class UIManager extends Singleton<UIManager>{
 
         this.m_pageTrackStack = new Array<UIPageTrack>();
         this.m_listLoadedPanel = new Array<UIPanel>();
-    }
-
-
-    public init():void{
-
-        this.m_pageTrackStack.length = 0;
-        this.m_listLoadedPanel.length = 0;
 
         CS.UnityEngine.SceneManagement.SceneManager.sceneLoaded = (scene, mode) =>
             {
                 if (this.onSceneLoadedOnly != null) this.onSceneLoadedOnly(scene.name);
             };
+
     }
+
 
 
     private closeAllLoadedPanel():void{

@@ -1,10 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const UIDefine_1 = require("./UIDefine");
-const UILoginPage_1 = require("../../game/Modules/Login/UI/UILoginPage");
-const Singleton_1 = require("../Common/Singleton");
+const UILoginPage_1 = require("../../Game/Modules/Login/UI/UILoginPage");
 const CS = require('csharp');
-class UIFactory extends Singleton_1.Singleton {
+class UIFactory {
     static createUI(pkg, name) {
         let comp = CS.FairyGUI.UIPackage.CreateObject(pkg, name).asCom;
         let ui = null;

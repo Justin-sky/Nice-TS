@@ -5,5 +5,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "postbuild": ""
+  },
+  "dependencies": {
+    "flatbuffers": "^1.12.0"
   }
 }

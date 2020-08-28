@@ -2,21 +2,25 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Singleton_1 = require("../Common/Singleton");
 const UIFactory_1 = require("../UI/UIFactory");
-const ModuleDef_1 = require("../../game/Modules/ModuleDef");
+const ModuleDef_1 = require("../../Game/Modules/ModuleDef");
 const UIDefine_1 = require("../UI/UIDefine");
 const CS = require('csharp');
 class UIPageTrack {
 }
 exports.UIPageTrack = UIPageTrack;
+var UIMessageNames;
+(function (UIMessageNames) {
+    UIMessageNames[UIMessageNames["UIFRRAME_ON_PANEL_CREATE"] = 0] = "UIFRRAME_ON_PANEL_CREATE";
+    UIMessageNames[UIMessageNames["UIFRRAME_ON_PANEL_OPEN"] = 1] = "UIFRRAME_ON_PANEL_OPEN";
+    UIMessageNames[UIMessageNames["UIFRRAME_ON_PANEL_CLOSE"] = 2] = "UIFRRAME_ON_PANEL_CLOSE";
+    UIMessageNames[UIMessageNames["UIFRRAME_ON_PAGE_BACK"] = 3] = "UIFRRAME_ON_PAGE_BACK";
+    UIMessageNames[UIMessageNames["UIFRRAME_ON_WINDOW_CLOSE"] = 4] = "UIFRRAME_ON_WINDOW_CLOSE";
+})(UIMessageNames = exports.UIMessageNames || (exports.UIMessageNames = {}));
 class UIManager extends Singleton_1.Singleton {
     constructor() {
         super();
         this.m_pageTrackStack = new Array();
         this.m_listLoadedPanel = new Array();
-    }
-    init() {
-        this.m_pageTrackStack.length = 0;
-        this.m_listLoadedPanel.length = 0;
         CS.UnityEngine.SceneManagement.SceneManager.sceneLoaded = (scene, mode) => {
             if (this.onSceneLoadedOnly != null)
                 this.onSceneLoadedOnly(scene.name);

@@ -7,8 +7,6 @@ const Time_1 = require("./Tools/UnityEngine/Time");
 const TimeManager_1 = require("./Framework/Manager/TimeManager");
 const GameObjectPool_1 = require("./Framework/Common/GameObjectPool");
 const ModuleManager_1 = require("./Framework/Manager/ModuleManager");
-const UIManager_1 = require("./Framework/Manager/UIManager");
-const UIFactory_1 = require("./Framework/UI/UIFactory");
 class GameMain {
     constructor() {
         CS.JsManager.Instance.JsOnApplicationQuit = () => this.onApplicationQuit();
@@ -24,8 +22,7 @@ class GameMain {
         TimeManager_1.TimeManager.Instance(TimeManager_1.TimeManager);
         GameObjectPool_1.GameObjectPool.Instance(GameObjectPool_1.GameObjectPool);
         ModuleManager_1.ModuleManager.Instance(ModuleManager_1.ModuleManager);
-        UIFactory_1.UIFactory.Instance(UIFactory_1.UIFactory);
-        UIManager_1.UIManager.Instance(UIManager_1.UIManager);
+        //UIManager.Instance(UIManager);
         //do Unit Test
         UnitTest_1.UnitTest.doTest();
         //进入登录模块
