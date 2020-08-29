@@ -1,6 +1,6 @@
 /*eslint-disable block-scoped-var, no-redeclare, no-control-regex, no-prototype-builtins*/
 "use strict";
-var $protobuf = require("protobuf");
+var $protobuf = require("protobufjs/light");
 // Common aliases
 var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
 // Exported root namespace
