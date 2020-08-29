@@ -1,4 +1,4 @@
-import { Singleton } from "../Common/Singleton";
+import { Singleton } from "../common/Singleton";
 
 
 

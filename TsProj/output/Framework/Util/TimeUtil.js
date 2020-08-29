@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TimeUtil = void 0;
-const Logger_1 = require("../Logger/Logger");
+const Logger_1 = require("../logger/Logger");
 class TimeUtil {
     static prefixInteger(num, length) {
         return (Array(length).join('0') + num).slice(-length);

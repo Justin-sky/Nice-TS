@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameObjectPool = void 0;
 const Singleton_1 = require("./Singleton");
-const ResManager_1 = require("../Manager/ResManager");
+const ResManager_1 = require("../manager/ResManager");
 const CS = require('csharp');
 // -- GameObject缓存池
 // -- 注意：

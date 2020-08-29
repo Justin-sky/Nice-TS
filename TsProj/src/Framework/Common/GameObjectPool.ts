@@ -1,7 +1,7 @@
 
-import { Logger } from '../Logger/Logger';
+import { Logger } from '../logger/Logger';
 import { Singleton } from './Singleton';
-import { ResManager } from '../Manager/ResManager';
+import { ResManager } from '../manager/ResManager';
 
 
 const CS = require('csharp');

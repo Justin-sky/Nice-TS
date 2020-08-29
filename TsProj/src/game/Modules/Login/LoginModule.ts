@@ -1,8 +1,8 @@
-import { GeneralModule } from "../../../Framework/Module/GeneralModule";
-import { Logger } from "../../../Framework/Logger/Logger";
-import { UIManager } from "../../../Framework/Manager/UIManager";
+import { GeneralModule } from "../../../framework/module/GeneralModule";
+import { Logger } from "../../../framework/logger/Logger";
+import { UIManager } from "../../../framework/manager/UIManager";
 import { SceneDef } from "../ModuleDef";
-import { UIDefs } from "../../../Framework/UI/UIDefine";
+import { UIDefs } from "../../../framework/ui/UIDefine";
 
 
 export class LoginModule extends GeneralModule{

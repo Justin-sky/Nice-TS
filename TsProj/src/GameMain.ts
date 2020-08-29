@@ -1,14 +1,16 @@
 
 const CS = require('csharp');
-import {Logger} from './Framework/Logger/Logger';
-import {UnitTest} from './UnitTest/UnitTest';
-import {Time} from './Tools/UnityEngine/Time';
-import {TimeManager} from './Framework/Manager/TimeManager';
-import { GameObjectPool } from './Framework/Common/GameObjectPool';
-import { ModuleManager } from './Framework/Manager/ModuleManager';
+import {Logger} from './framework/logger/Logger';
+import {UnitTest} from './unittest/UnitTest';
+import {Time} from './tools/unityengine/Time';
+import {TimeManager} from './framework/manager/TimeManager';
+import { GameObjectPool } from './framework/common/GameObjectPool';
+import { ModuleManager } from './framework/manager/ModuleManager';
 import { ModuleDef } from './Game/Modules/ModuleDef';
-import { UIManager } from './Framework/Manager/UIManager';
-import { ResManager } from './Framework/Manager/ResManager';
+import { UIManager } from './framework/manager/UIManager';
+import { ResManager } from './framework/manager/ResManager';
+import { ExcelManager } from './data/excel/ExcelManager';
+import { HeroConfigTB } from './data/excel/HeroConfig';
 
 
 class GameMain{
@@ -23,28 +25,35 @@ class GameMain{
     }
 
     public async start() {
-        Logger.log("Game start in JS....");
+        
+        try{
+            Logger.log("Game start in JS....");
 
-        //启动单例
-       
-        Time.Instance(Time);
-        TimeManager.Instance(TimeManager);
-        GameObjectPool.Instance(GameObjectPool);
-        ModuleManager.Instance(ModuleManager);
+            //启动单例
+            Time.Instance(Time);
+            TimeManager.Instance(TimeManager);
+            GameObjectPool.Instance(GameObjectPool);
+            ModuleManager.Instance(ModuleManager);
+    
+            UIManager.Instance(UIManager);
+            ResManager.Instance(ResManager);
+    
+    
+            //预加载excel数据
+            ExcelManager.Instance(ExcelManager);
 
-        UIManager.Instance(UIManager);
-        ResManager.Instance(ResManager);
+      
+            //do Unit Test
+            UnitTest.doTest();
+
+            //进入登录模块
+            //let module = ModuleManager.Instance(ModuleManager).createModule(ModuleDef.LoginModule);
+              // module.show();
 
 
-        //预加载Flatbuffer数据
-       // await ResManager.Instance(ResManager).preloadPBs();
-
-        //do Unit Test
-        UnitTest.doTest();
-
-        //进入登录模块
-        //let module = ModuleManager.Instance(ModuleManager).createModule(ModuleDef.LoginModule);
-       // module.show();
+        }catch(ex){
+            Logger.logError(ex);
+        }
 
     }
 

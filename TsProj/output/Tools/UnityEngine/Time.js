@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Time = void 0;
 const CS = require('csharp');
 const unity_time = CS.UnityEngine.Time;
-const Singleton_1 = require("../../Framework/Common/Singleton");
+const Singleton_1 = require("../../framework/common/Singleton");
 class Time extends Singleton_1.Singleton {
     constructor() {
         super();

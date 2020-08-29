@@ -1,25 +1,24 @@
 const CS = require('csharp');
 const csResMgr = CS.Addressable.ResourceManager;
 
-import { Singleton } from '../Common/Singleton';
-import { Logger } from '../Logger/Logger';
+import { Singleton } from '../common/Singleton';
+import { Logger } from '../logger/Logger';
 import { $promise } from 'puerts';
 
 
 export class ResManager extends Singleton<ResManager>{
 
     private fblabel :string = "FB";
-    private fbcaches : Map<string,any>;
+    private static fbcaches : Map<string,any> = new Map<string,any>();;
 
     constructor(){
         super();
 
-        this.fbcaches = new Map<string,any>();
         CS.Addressable.ResourceManager.OnFBLoadedHandle = this.onFBLoadedHandle;
     }
 
     private onFBLoadedHandle(name, data){
-        //this.fbcaches.set(name, data);
+        ResManager.fbcaches.set(name, data);
     }
 
     async preloadPBs(){
@@ -33,7 +32,7 @@ export class ResManager extends Singleton<ResManager>{
         }
     }
 
-    public getFB(name:string){
+    public static getFB(name:string){
         return this.fbcaches.get(name);
     }
 

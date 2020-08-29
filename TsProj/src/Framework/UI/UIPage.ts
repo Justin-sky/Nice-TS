@@ -1,6 +1,6 @@
 import { UIPanel } from "./UIPanel";
 import { UITypeDef, UIComDefs } from "./UIDefine";
-import { UIManager } from "../Manager/UIManager";
+import { UIManager } from "../manager/UIManager";
 
 
 export abstract class UIPage extends UIPanel{

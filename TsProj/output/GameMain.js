@@ -1,14 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const CS = require('csharp');
-const Logger_1 = require("./Framework/Logger/Logger");
-const UnitTest_1 = require("./UnitTest/UnitTest");
-const Time_1 = require("./Tools/UnityEngine/Time");
-const TimeManager_1 = require("./Framework/Manager/TimeManager");
-const GameObjectPool_1 = require("./Framework/Common/GameObjectPool");
-const ModuleManager_1 = require("./Framework/Manager/ModuleManager");
-const UIManager_1 = require("./Framework/Manager/UIManager");
-const ResManager_1 = require("./Framework/Manager/ResManager");
+const Logger_1 = require("./framework/logger/Logger");
+const UnitTest_1 = require("./unittest/UnitTest");
+const Time_1 = require("./tools/unityengine/Time");
+const TimeManager_1 = require("./framework/manager/TimeManager");
+const GameObjectPool_1 = require("./framework/common/GameObjectPool");
+const ModuleManager_1 = require("./framework/manager/ModuleManager");
+const UIManager_1 = require("./framework/manager/UIManager");
+const ResManager_1 = require("./framework/manager/ResManager");
+const ExcelManager_1 = require("./data/excel/ExcelManager");
 class GameMain {
     constructor() {
         CS.JsManager.Instance.JsOnApplicationQuit = () => this.onApplicationQuit();
@@ -18,21 +19,26 @@ class GameMain {
         CS.JsManager.Instance.JsFixedUpdate = (fixedDeltaTime) => this.onFixedUpdate(fixedDeltaTime);
     }
     async start() {
-        Logger_1.Logger.log("Game start in JS....");
-        //启动单例
-        Time_1.Time.Instance(Time_1.Time);
-        TimeManager_1.TimeManager.Instance(TimeManager_1.TimeManager);
-        GameObjectPool_1.GameObjectPool.Instance(GameObjectPool_1.GameObjectPool);
-        ModuleManager_1.ModuleManager.Instance(ModuleManager_1.ModuleManager);
-        UIManager_1.UIManager.Instance(UIManager_1.UIManager);
-        ResManager_1.ResManager.Instance(ResManager_1.ResManager);
-        //预加载Flatbuffer数据
-        // await ResManager.Instance(ResManager).preloadPBs();
-        //do Unit Test
-        UnitTest_1.UnitTest.doTest();
-        //进入登录模块
-        //let module = ModuleManager.Instance(ModuleManager).createModule(ModuleDef.LoginModule);
-        // module.show();
+        try {
+            Logger_1.Logger.log("Game start in JS....");
+            //启动单例
+            Time_1.Time.Instance(Time_1.Time);
+            TimeManager_1.TimeManager.Instance(TimeManager_1.TimeManager);
+            GameObjectPool_1.GameObjectPool.Instance(GameObjectPool_1.GameObjectPool);
+            ModuleManager_1.ModuleManager.Instance(ModuleManager_1.ModuleManager);
+            UIManager_1.UIManager.Instance(UIManager_1.UIManager);
+            ResManager_1.ResManager.Instance(ResManager_1.ResManager);
+            //预加载excel数据
+            ExcelManager_1.ExcelManager.Instance(ExcelManager_1.ExcelManager);
+            //do Unit Test
+            UnitTest_1.UnitTest.doTest();
+            //进入登录模块
+            //let module = ModuleManager.Instance(ModuleManager).createModule(ModuleDef.LoginModule);
+            // module.show();
+        }
+        catch (ex) {
+            Logger_1.Logger.logError(ex);
+        }
     }
     onUpdate(deltaTime, unscaledDeltaTime) {
         Time_1.Time.Instance(Time_1.Time).setDeltaTime(deltaTime, unscaledDeltaTime);

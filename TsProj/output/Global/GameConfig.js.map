@@ -1,1 +1,1 @@
-{"version":3,"file":"GameConfig.js","sourceRoot":"","sources":["../../src/Global/GameConfig.ts"],"names":[],"mappings":";;;AACA,MAAc,UAAU;;AAAxB,gCAKC;AAHiB,gBAAK,GAAW,IAAI,CAAC"}
+{"version":3,"file":"GameConfig.js","sourceRoot":"","sources":["../../src/global/GameConfig.ts"],"names":[],"mappings":";;;AACA,MAAc,UAAU;;AAAxB,gCAKC;AAHiB,gBAAK,GAAW,IAAI,CAAC"}

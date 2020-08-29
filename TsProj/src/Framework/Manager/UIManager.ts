@@ -1,14 +1,14 @@
 
-import { Singleton } from '../Common/Singleton';
-import { Logger } from '../Logger/Logger';
-import { UILoading } from '../UI/UILoading';
-import { UIWindow } from '../UI/UIWindow';
-import { UIWidge } from '../UI/UIWidge';
-import { UIPanel } from '../UI/UIPanel';
-import { UIFactory } from '../UI/UIFactory';
+import { Singleton } from '../common/Singleton';
+import { Logger } from '../logger/Logger';
+import { UILoading } from '../ui/UILoading';
+import { UIWindow } from '../ui/UIWindow';
+import { UIWidge } from '../ui/UIWidge';
+import { UIPanel } from '../ui/UIPanel';
+import { UIFactory } from '../ui/UIFactory';
 import { SceneDef } from '../../Game/Modules/ModuleDef';
-import { UIDefs } from '../UI/UIDefine';
-import { Messenger } from '../Common/Messenger';
+import { UIDefs } from '../ui/UIDefine';
+import { Messenger } from '../common/Messenger';
 
 const CS = require('csharp');
 

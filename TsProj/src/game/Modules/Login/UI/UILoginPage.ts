@@ -1,5 +1,5 @@
-import { UIPage } from "../../../../Framework/UI/UIPage";
-import { UIManager } from "../../../../Framework/Manager/UIManager";
+import { UIPage } from "../../../../framework/ui/UIPage";
+import { UIManager } from "../../../../framework/manager/UIManager";
 
 
 

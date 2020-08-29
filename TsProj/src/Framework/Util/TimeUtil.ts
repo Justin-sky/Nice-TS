@@ -1,4 +1,4 @@
-import {Logger} from '../Logger/Logger';
+import {Logger} from '../logger/Logger';
 
 export class TimeUtil{
 

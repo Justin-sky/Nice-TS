@@ -1,5 +1,5 @@
 import { ModuleBase } from "./ModuleBase";
-import { Logger } from "../Logger/Logger";
+import { Logger } from "../logger/Logger";
 
 
 export abstract class GeneralModule extends ModuleBase{

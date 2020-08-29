@@ -1,14 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UnitTest = void 0;
-const TimeUtil_1 = require("../Framework/Util/TimeUtil");
+const TimeUtil_1 = require("../framework/util/TimeUtil");
 const SingletonTest_1 = require("./SingletonTest");
-const Logger_1 = require("../Framework/Logger/Logger");
-const Messenger_1 = require("../Framework/Common/Messenger");
-const TimeManager_1 = require("../Framework/Manager/TimeManager");
-const ResManager_1 = require("../Framework/Manager/ResManager");
-const OuterMessage_1 = require("../PB/OuterMessage");
+const Logger_1 = require("../framework/logger/Logger");
+const Messenger_1 = require("../framework/common/Messenger");
+const TimeManager_1 = require("../framework/manager/TimeManager");
+const ResManager_1 = require("../framework/manager/ResManager");
+const OuterMessage_1 = require("../data/pb/OuterMessage");
+const SkillConfig_1 = require("../data/excel/SkillConfig");
 const CS = require('csharp');
+const flatbuffers = require("../fb/flatbuffers");
 class UnitTest {
     static async doTest() {
         Logger_1.Logger.log("TimeUtil =============================");
@@ -70,7 +72,12 @@ class UnitTest {
         // Logger.log("then create Home");
         // ModuleManager.Instance(ModuleManager).createModule(ModuleDef.HomeModule,"create login");
         Logger_1.Logger.log("UIManager =============================");
-        Logger_1.Logger.log("Flatbuffer =============================");
+        Logger_1.Logger.log("excel data =============================");
+        let skillMap = SkillConfig_1.SkillConfigTB.Instance(SkillConfig_1.SkillConfigTB).trs;
+        let skilltr = skillMap.get(1003);
+        Logger_1.Logger.log(`${skilltr._Name} : ${skilltr._AttackType}`);
+        let impacttype = skilltr._ImpactType;
+        Logger_1.Logger.log(impacttype);
         Logger_1.Logger.log("Protobuf =============================");
         try {
             let c2m_req = {

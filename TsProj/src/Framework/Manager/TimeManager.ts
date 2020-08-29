@@ -1,6 +1,6 @@
-import { Singleton } from '../Common/Singleton';
-import { Logger } from '../Logger/Logger';
-import { Timer } from '../Timer/Timer';
+import { Singleton } from '../common/Singleton';
+import { Logger } from '../logger/Logger';
+import { Timer } from '../timer/Timer';
 
 
 // -- 定时器管理：负责定时器获取、回收、缓存、调度等管理

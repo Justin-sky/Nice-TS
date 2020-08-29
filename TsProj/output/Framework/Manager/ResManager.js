@@ -3,18 +3,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ResManager = void 0;
 const CS = require('csharp');
 const csResMgr = CS.Addressable.ResourceManager;
-const Singleton_1 = require("../Common/Singleton");
-const Logger_1 = require("../Logger/Logger");
+const Singleton_1 = require("../common/Singleton");
+const Logger_1 = require("../logger/Logger");
 const puerts_1 = require("puerts");
 class ResManager extends Singleton_1.Singleton {
     constructor() {
         super();
         this.fblabel = "FB";
-        this.fbcaches = new Map();
         CS.Addressable.ResourceManager.OnFBLoadedHandle = this.onFBLoadedHandle;
     }
+    ;
     onFBLoadedHandle(name, data) {
-        //this.fbcaches.set(name, data);
+        ResManager.fbcaches.set(name, data);
     }
     async preloadPBs() {
         try {
@@ -26,7 +26,7 @@ class ResManager extends Singleton_1.Singleton {
             return 0;
         }
     }
-    getFB(name) {
+    static getFB(name) {
         return this.fbcaches.get(name);
     }
     async loadPrefab(address) {
@@ -67,4 +67,5 @@ class ResManager extends Singleton_1.Singleton {
     }
 }
 exports.ResManager = ResManager;
+ResManager.fbcaches = new Map();
 //# sourceMappingURL=ResManager.js.map

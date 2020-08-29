@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UILoginPage = void 0;
-const UIPage_1 = require("../../../../Framework/UI/UIPage");
+const UIPage_1 = require("../../../../framework/ui/UIPage");
 class UILoginPage extends UIPage_1.UIPage {
     onAwake() {
         super.onAwake();

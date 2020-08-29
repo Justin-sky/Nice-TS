@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ModuleFactory = void 0;
 const ModuleDef_1 = require("../../Game/Modules/ModuleDef");
-const LoginModule_1 = require("../../Game/Modules/Login/LoginModule");
-const HomeModule_1 = require("../../Game/Modules/Home/HomeModule");
-const Logger_1 = require("../Logger/Logger");
+const LoginModule_1 = require("../../game/Modules/login/LoginModule");
+const HomeModule_1 = require("../../game/Modules/home/HomeModule");
+const Logger_1 = require("../logger/Logger");
 class ModuleFactory {
     static createModule(name) {
         if (name == ModuleDef_1.ModuleDef.LoginModule) {

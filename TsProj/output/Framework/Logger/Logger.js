@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Logger = void 0;
 const CS = require('csharp');
-const GameConfig_1 = require("../../Global/GameConfig");
+const GameConfig_1 = require("../../global/GameConfig");
 class Logger {
     static log(msg) {
         if (GameConfig_1.GameConfig.debug)

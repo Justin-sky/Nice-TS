@@ -1,7 +1,7 @@
 import { UIDefs } from "./UIDefine";
-import { UILoginPage } from "../../Game/Modules/Login/UI/UILoginPage";
+import { UILoginPage } from "../../game/Modules/login/UI/UILoginPage";
 import { UIPanel } from "./UIPanel";
-import { Singleton } from "../Common/Singleton";
+import { Singleton } from "../common/Singleton";
 
 const CS = require('csharp');
 

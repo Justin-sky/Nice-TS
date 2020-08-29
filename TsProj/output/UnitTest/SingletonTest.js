@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SingletonTest = void 0;
-const Singleton_1 = require("../Framework/Common/Singleton");
-const Logger_1 = require("../Framework/Logger/Logger");
+const Singleton_1 = require("../framework/common/Singleton");
+const Logger_1 = require("../framework/logger/Logger");
 class SingletonTest extends Singleton_1.Singleton {
     constructor() {
         super();

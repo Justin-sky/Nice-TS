@@ -1,8 +1,8 @@
 import { ModuleDef } from "../../Game/Modules/ModuleDef";
-import { LoginModule } from "../../Game/Modules/Login/LoginModule";
-import { HomeModule } from "../../Game/Modules/Home/HomeModule";
+import { LoginModule } from "../../game/Modules/login/LoginModule";
+import { HomeModule } from "../../game/Modules/home/HomeModule";
 import { GeneralModule } from "./GeneralModule";
-import { Logger } from "../Logger/Logger";
+import { Logger } from "../logger/Logger";
 
 
 export class ModuleFactory{

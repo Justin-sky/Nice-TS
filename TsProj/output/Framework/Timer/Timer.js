@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Timer = void 0;
 const CS = require('csharp');
-const Time_1 = require("../../Tools/UnityEngine/Time");
-const Logger_1 = require("../Logger/Logger");
+const Time_1 = require("../../tools/unityengine/Time");
+const Logger_1 = require("../logger/Logger");
 class Timer {
     constructor(delay, func, obj, one_shot, use_frame, unscaled) {
         this.delay = 0; //时长，秒或者帧

@@ -1,16 +1,17 @@
-import {TimeUtil} from '../Framework/Util/TimeUtil';
+import {TimeUtil} from '../framework/util/TimeUtil';
 import {SingletonTest} from './SingletonTest';
-import {Logger} from '../Framework/Logger/Logger';
-import {Messenger} from '../Framework/Common/Messenger';
-import { TimeManager } from '../Framework/Manager/TimeManager';
-import { Timer } from '../Framework/Timer/Timer';
-import { ResManager } from '../Framework/Manager/ResManager';
-import { ModuleManager } from '../Framework/Manager/ModuleManager';
+import {Logger} from '../framework/logger/Logger';
+import {Messenger} from '../framework/common/Messenger';
+import { TimeManager } from '../framework/manager/TimeManager';
+import { Timer } from '../framework/timer/Timer';
+import { ResManager } from '../framework/manager/ResManager';
+import { ModuleManager } from '../framework/manager/ModuleManager';
 import { ModuleDef } from '../Game/Modules/ModuleDef';
-import { NiceET } from '../PB/OuterMessage';
+import { NiceET } from '../data/pb/OuterMessage';
+import { SkillConfigTB, SkillConfigTR } from '../data/excel/SkillConfig';
 
 const CS = require('csharp');
-
+const flatbuffers = require("../fb/flatbuffers");
 
 export class UnitTest{
     public static testVar:number = 10000;
@@ -104,8 +105,14 @@ export class UnitTest{
         Logger.log("UIManager =============================");
 
 
-        Logger.log("Flatbuffer =============================");
-        
+
+        Logger.log("excel data =============================");
+        let skillMap = SkillConfigTB.Instance(SkillConfigTB).trs;
+        let skilltr:SkillConfigTR = skillMap.get(1003);
+        Logger.log(`${skilltr._Name} : ${skilltr._AttackType}`)
+        let impacttype = skilltr._ImpactType;
+        Logger.log(impacttype);
+
 
 
         Logger.log("Protobuf =============================");

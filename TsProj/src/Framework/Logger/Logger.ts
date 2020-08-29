@@ -1,6 +1,6 @@
 const CS = require('csharp');
 
-import {GameConfig} from '../../Global/GameConfig';
+import {GameConfig} from '../../global/GameConfig';
 
 export class Logger{
 

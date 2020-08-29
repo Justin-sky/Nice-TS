@@ -1,7 +1,7 @@
 const CS = require('csharp');
 
-import {Time} from '../../Tools/UnityEngine/Time';
-import { Logger } from '../Logger/Logger';
+import {Time} from '../../tools/unityengine/Time';
+import { Logger } from '../logger/Logger';
 
 export class Timer{
 
