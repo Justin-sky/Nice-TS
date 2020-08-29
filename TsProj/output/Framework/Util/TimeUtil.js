@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.TimeUtil = void 0;
 const Logger_1 = require("../Logger/Logger");
 class TimeUtil {
     static prefixInteger(num, length) {
@@ -100,7 +101,7 @@ class TimeUtil {
         Logger_1.Logger.log("getMonthDays: " + t6);
     }
 }
+exports.TimeUtil = TimeUtil;
 //每个月对应的天数
 TimeUtil.months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-exports.TimeUtil = TimeUtil;
 //# sourceMappingURL=TimeUtil.js.map

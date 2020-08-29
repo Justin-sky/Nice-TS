@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ResManager = void 0;
 const CS = require('csharp');
 const csResMgr = CS.Addressable.ResourceManager;
 const Singleton_1 = require("../Common/Singleton");
@@ -13,7 +14,7 @@ class ResManager extends Singleton_1.Singleton {
         CS.Addressable.ResourceManager.OnFBLoadedHandle = this.onFBLoadedHandle;
     }
     onFBLoadedHandle(name, data) {
-        this.fbcaches.set(name, data);
+        //this.fbcaches.set(name, data);
     }
     async preloadPBs() {
         try {

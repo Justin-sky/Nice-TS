@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ModuleManager = exports.MessageObject = void 0;
 const Singleton_1 = require("../Common/Singleton");
 const Logger_1 = require("../Logger/Logger");
 const ModuleFactory_1 = require("../Module/ModuleFactory");

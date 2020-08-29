@@ -19,7 +19,7 @@ export class ResManager extends Singleton<ResManager>{
     }
 
     private onFBLoadedHandle(name, data){
-        this.fbcaches.set(name, data);
+        //this.fbcaches.set(name, data);
     }
 
     async preloadPBs(){

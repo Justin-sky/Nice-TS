@@ -1,11 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UnitTest = void 0;
 const TimeUtil_1 = require("../Framework/Util/TimeUtil");
 const SingletonTest_1 = require("./SingletonTest");
 const Logger_1 = require("../Framework/Logger/Logger");
 const Messenger_1 = require("../Framework/Common/Messenger");
 const TimeManager_1 = require("../Framework/Manager/TimeManager");
 const ResManager_1 = require("../Framework/Manager/ResManager");
+const OuterMessage_1 = require("../PB/OuterMessage");
 const CS = require('csharp');
 class UnitTest {
     static async doTest() {
@@ -69,8 +71,32 @@ class UnitTest {
         // ModuleManager.Instance(ModuleManager).createModule(ModuleDef.HomeModule,"create login");
         Logger_1.Logger.log("UIManager =============================");
         Logger_1.Logger.log("Flatbuffer =============================");
+        Logger_1.Logger.log("Protobuf =============================");
+        try {
+            let c2m_req = {
+                "RpcId": 11,
+                "ActorId": 998,
+                "request": "test"
+            };
+            //验证
+            let v1 = OuterMessage_1.NiceET.C2M_TestRequest.verify(c2m_req);
+            Logger_1.Logger.log("verify pb: " + v1);
+            let msg = OuterMessage_1.NiceET.C2M_TestRequest.create(c2m_req);
+            msg["RpcId"] = 99;
+            msg["ActorId"] = 888;
+            msg["request"] = "tell me why";
+            Logger_1.Logger.log(msg);
+            let buf = OuterMessage_1.NiceET.C2M_TestRequest.encode(msg).finish();
+            Logger_1.Logger.log(buf);
+            let de_buf = OuterMessage_1.NiceET.C2M_TestRequest.decode(buf);
+            Logger_1.Logger.log(de_buf["RpcId"]);
+            Logger_1.Logger.log(de_buf["request"]);
+        }
+        catch (ex) {
+            Logger_1.Logger.log(ex);
+        }
     }
 }
-UnitTest.testVar = 10000;
 exports.UnitTest = UnitTest;
+UnitTest.testVar = 10000;
 //# sourceMappingURL=UnitTest.js.map

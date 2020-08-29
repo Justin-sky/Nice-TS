@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UIPanel = void 0;
 const UIDefine_1 = require("./UIDefine");
 const CS = require('csharp');
 class UIPanel {

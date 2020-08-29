@@ -7,6 +7,7 @@ import { Timer } from '../Framework/Timer/Timer';
 import { ResManager } from '../Framework/Manager/ResManager';
 import { ModuleManager } from '../Framework/Manager/ModuleManager';
 import { ModuleDef } from '../Game/Modules/ModuleDef';
+import { NiceET } from '../PB/OuterMessage';
 
 const CS = require('csharp');
 
@@ -106,6 +107,40 @@ export class UnitTest{
         Logger.log("Flatbuffer =============================");
         
 
+
+        Logger.log("Protobuf =============================");
+
+        try{
+            let c2m_req = {
+                "RpcId" : 11,
+                "ActorId" : 998,
+                "request" : "test"
+            };
+
+
+            //验证
+           let v1 = NiceET.C2M_TestRequest.verify(c2m_req);
+            Logger.log("verify pb: "+ v1);
+            
+            let msg = NiceET.C2M_TestRequest.create(c2m_req);
+            msg["RpcId"] = 99;
+            msg["ActorId"] = 888;
+            msg["request"] = "tell me why"
+
+            Logger.log(msg);
+
+            let buf = NiceET.C2M_TestRequest.encode(msg).finish();
+            Logger.log(buf);
+
+            let de_buf = NiceET.C2M_TestRequest.decode(buf);
+            Logger.log(de_buf["RpcId"]);
+            Logger.log(de_buf["request"]);
+
+        }catch(ex){
+            Logger.log(ex);
+        }
+
+       
 
 
     }

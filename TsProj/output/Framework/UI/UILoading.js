@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UILoading = exports.UILoadingArg = void 0;
 const UIPanel_1 = require("./UIPanel");
 const UIDefine_1 = require("./UIDefine");
 class UILoadingArg {

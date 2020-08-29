@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.GeneralModule = void 0;
 const ModuleBase_1 = require("./ModuleBase");
 class GeneralModule extends ModuleBase_1.ModuleBase {
     constructor() {

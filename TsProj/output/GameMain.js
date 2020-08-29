@@ -27,7 +27,7 @@ class GameMain {
         UIManager_1.UIManager.Instance(UIManager_1.UIManager);
         ResManager_1.ResManager.Instance(ResManager_1.ResManager);
         //预加载Flatbuffer数据
-        await ResManager_1.ResManager.Instance(ResManager_1.ResManager).preloadPBs();
+        // await ResManager.Instance(ResManager).preloadPBs();
         //do Unit Test
         UnitTest_1.UnitTest.doTest();
         //进入登录模块

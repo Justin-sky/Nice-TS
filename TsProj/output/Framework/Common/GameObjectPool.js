@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.GameObjectPool = void 0;
 const Singleton_1 = require("./Singleton");
 const ResManager_1 = require("../Manager/ResManager");
 const CS = require('csharp');

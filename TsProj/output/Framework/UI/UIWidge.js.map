@@ -1,1 +1,1 @@
-{"version":3,"file":"UIWidge.js","sourceRoot":"","sources":["../../../src/Framework/UI/UIWidge.ts"],"names":[],"mappings":";;AAAA,uCAAoC;AACpC,yCAAuC;AAKvC,MAAsB,OAAQ,SAAQ,iBAAO;IAEzC,IAAW,MAAM;QACb,OAAO,oBAAS,CAAC,MAAM,CAAC;IAC5B,CAAC;CACJ;AALD,0BAKC"}
+{"version":3,"file":"UIWidge.js","sourceRoot":"","sources":["../../../src/Framework/UI/UIWidge.ts"],"names":[],"mappings":";;;AAAA,uCAAoC;AACpC,yCAAuC;AAKvC,MAAsB,OAAQ,SAAQ,iBAAO;IAEzC,IAAW,MAAM;QACb,OAAO,oBAAS,CAAC,MAAM,CAAC;IAC5B,CAAC;CACJ;AALD,0BAKC"}

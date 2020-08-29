@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Singleton = void 0;
 class Singleton {
     static Instance(c) {
         if (this.instance == null) {
@@ -8,6 +9,6 @@ class Singleton {
         return this.instance;
     }
 }
-Singleton.instance = null;
 exports.Singleton = Singleton;
+Singleton.instance = null;
 //# sourceMappingURL=Singleton.js.map

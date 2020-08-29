@@ -37,7 +37,7 @@ class GameMain{
 
 
         //预加载Flatbuffer数据
-        await ResManager.Instance(ResManager).preloadPBs();
+       // await ResManager.Instance(ResManager).preloadPBs();
 
         //do Unit Test
         UnitTest.doTest();

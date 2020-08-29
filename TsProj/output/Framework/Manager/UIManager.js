@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UIManager = exports.UIMessageNames = exports.UIPageTrack = void 0;
 const Singleton_1 = require("../Common/Singleton");
 const UIFactory_1 = require("../UI/UIFactory");
 const ModuleDef_1 = require("../../Game/Modules/ModuleDef");
