@@ -6,7 +6,7 @@ import { UIWindow } from '../ui/UIWindow';
 import { UIWidge } from '../ui/UIWidge';
 import { UIPanel } from '../ui/UIPanel';
 import { UIFactory } from '../ui/UIFactory';
-import { SceneDef } from '../../Game/Modules/ModuleDef';
+import { SceneDef } from '../../game/modules/ModuleDef';
 import { UIDefs } from '../ui/UIDefine';
 import { Messenger } from '../common/Messenger';
 

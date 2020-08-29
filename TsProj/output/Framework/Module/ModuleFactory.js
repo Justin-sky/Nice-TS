@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ModuleFactory = void 0;
-const ModuleDef_1 = require("../../Game/Modules/ModuleDef");
-const LoginModule_1 = require("../../game/Modules/login/LoginModule");
-const HomeModule_1 = require("../../game/Modules/home/HomeModule");
+const ModuleDef_1 = require("../../game/modules/ModuleDef");
+const LoginModule_1 = require("../../game/modules/login/LoginModule");
+const HomeModule_1 = require("../../game/modules/home/HomeModule");
 const Logger_1 = require("../logger/Logger");
 class ModuleFactory {
     static createModule(name) {

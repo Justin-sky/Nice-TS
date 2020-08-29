@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UIManager = exports.UIMessageNames = exports.UIPageTrack = void 0;
 const Singleton_1 = require("../common/Singleton");
 const UIFactory_1 = require("../ui/UIFactory");
-const ModuleDef_1 = require("../../Game/Modules/ModuleDef");
+const ModuleDef_1 = require("../../game/modules/ModuleDef");
 const UIDefine_1 = require("../ui/UIDefine");
 const CS = require('csharp');
 class UIPageTrack {

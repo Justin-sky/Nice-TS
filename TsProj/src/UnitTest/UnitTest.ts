@@ -6,7 +6,7 @@ import { TimeManager } from '../framework/manager/TimeManager';
 import { Timer } from '../framework/timer/Timer';
 import { ResManager } from '../framework/manager/ResManager';
 import { ModuleManager } from '../framework/manager/ModuleManager';
-import { ModuleDef } from '../Game/Modules/ModuleDef';
+import { ModuleDef } from '../game/modules/ModuleDef';
 import { NiceET } from '../data/pb/OuterMessage';
 import { SkillConfigTB, SkillConfigTR } from '../data/excel/SkillConfig';
 

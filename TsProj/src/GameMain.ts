@@ -6,7 +6,7 @@ import {Time} from './tools/unityengine/Time';
 import {TimeManager} from './framework/manager/TimeManager';
 import { GameObjectPool } from './framework/common/GameObjectPool';
 import { ModuleManager } from './framework/manager/ModuleManager';
-import { ModuleDef } from './Game/Modules/ModuleDef';
+import { ModuleDef } from './game/modules/ModuleDef';
 import { UIManager } from './framework/manager/UIManager';
 import { ResManager } from './framework/manager/ResManager';
 import { ExcelManager } from './data/excel/ExcelManager';
