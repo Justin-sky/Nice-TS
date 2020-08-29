@@ -1,5 +1,5 @@
 import { UIDefs } from "./UIDefine";
-import { UILoginPage } from "../../game/Modules/login/UI/UILoginPage";
+import { UILoginPage } from "../../game/Modules/login/ui/UILoginPage";
 import { UIPanel } from "./UIPanel";
 import { Singleton } from "../common/Singleton";
 
