@@ -130,9 +130,9 @@ export class UnitTest{
             Logger.log("verify pb: "+ v1);
             
             let msg = NiceET.C2M_TestRequest.create(c2m_req);
-            msg["RpcId"] = 99;
-            msg["ActorId"] = 888;
-            msg["request"] = "tell me why"
+            msg.RpcId = 100000;
+            msg.request = "good bye";
+            msg.ActorId = 88888;
 
             Logger.log(msg);
 
@@ -140,8 +140,8 @@ export class UnitTest{
             Logger.log(buf);
 
             let de_buf = NiceET.C2M_TestRequest.decode(buf);
-            Logger.log(de_buf["RpcId"]);
-            Logger.log(de_buf["request"]);
+            Logger.log(de_buf.RpcId);
+            Logger.log(de_buf.request);
 
         }catch(ex){
             Logger.log(ex);
