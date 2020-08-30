@@ -23,6 +23,8 @@ Clone[服务器：https://github.com/Justin-sky/Nice-ET ](https://github.com/Jus
 
 ##文档
 
+[新手指南](https://zhuanlan.zhihu.com/p/206578729)
+
 [Addressable配置说明文档](https://zhuanlan.zhihu.com/p/184846532)
 
 [Protobufjs集成文档](https://zhuanlan.zhihu.com/p/205342984)
