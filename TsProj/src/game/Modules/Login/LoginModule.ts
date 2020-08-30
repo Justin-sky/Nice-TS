@@ -2,7 +2,7 @@ import { GeneralModule } from "../../../framework/module/GeneralModule";
 import { Logger } from "../../../framework/logger/Logger";
 import { UIManager } from "../../../framework/manager/UIManager";
 import { SceneDef } from "../ModuleDef";
-import { UIDefs } from "../../../framework/ui/UIDefine";
+import { UIDefs, UIPackages } from "../../../framework/ui/UIDefine";
 
 
 export class LoginModule extends GeneralModule{
@@ -16,8 +16,7 @@ export class LoginModule extends GeneralModule{
        
         Logger.log(" Show,args: "+args);
 
-       // UIManager.Instance(UIManager).openLoading(UIDefs.UIHomePage);
-       // UIManager.Instance(UIManager).openPageInScene(SceneDef.LoginScene, UIDefs.UILoginPage, null);
+        UIManager.Instance(UIManager).openPageInScene(SceneDef.LoginScene, UIPackages.Game, UIDefs.UILoginPage, null);
    }
    
     public  release(): void{

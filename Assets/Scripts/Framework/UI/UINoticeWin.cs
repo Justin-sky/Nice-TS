@@ -41,7 +41,7 @@ namespace NiceTS
             this.x = 500;
             this.y = 200;
             this.lastClickIndex = -1;
-
+            
             gText.text = msg;
             okBtn.onClick.Add(()=> {
                 Logger.Log("button click");

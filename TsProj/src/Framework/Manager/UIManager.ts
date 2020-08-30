@@ -7,12 +7,13 @@ import { UIWidge } from '../ui/UIWidge';
 import { UIPanel } from '../ui/UIPanel';
 import { UIFactory } from '../ui/UIFactory';
 import { SceneDef } from '../../game/modules/ModuleDef';
-import { UIDefs } from '../ui/UIDefine';
+import { UIDefs, UIPackages } from '../ui/UIDefine';
 import { Messenger } from '../common/Messenger';
 
 const CS = require('csharp');
 
 export class UIPageTrack{
+    public pkg:string;
     public name:string;
     public arg:any;
 }
@@ -40,10 +41,11 @@ export class UIManager extends Singleton<UIManager>{
         this.m_pageTrackStack = new Array<UIPageTrack>();
         this.m_listLoadedPanel = new Array<UIPanel>();
 
-        CS.UnityEngine.SceneManagement.SceneManager.sceneLoaded = (scene, mode) =>
-            {
-                if (this.onSceneLoadedOnly != null) this.onSceneLoadedOnly(scene.name);
-            };
+        CS.UnityEngine.SceneManagement.SceneManager.add_sceneLoaded((scene, mode) =>
+        {
+            if (this.onSceneLoadedOnly != null) this.onSceneLoadedOnly(scene.name);
+        }); 
+        
 
     }
 
@@ -102,9 +104,9 @@ export class UIManager extends Singleton<UIManager>{
 
     //==========================================================UILoading
     //打开Loading界面
-    public openLoading(name:string, arg?:any):UILoading{
+    public openLoading(pkg:string, name:string, arg?:any):UILoading{
 
-        let ui:UILoading = this.open(name, arg);
+        let ui:UILoading = this.open(pkg, name, arg);
 
         return ui;
     }
@@ -130,31 +132,32 @@ export class UIManager extends Singleton<UIManager>{
             }
         };
 
-        this.openLoading(UIDefs.UILoadingPage);
-        CS.UnityEngine.SceneManagement.LoadScene(scene);
+        this.openLoading(UIPackages.Game, UIDefs.UILoadingPage);
+        CS.UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
 
     }
 
 
     //==========================================================Page
-    private openPageWorker(page:string, arg:any){
+    private openPageWorker(pkg:string, page:string, arg:any){
         this.m_currentPage = new UIPageTrack();
-        this.m_currentPage.name = name;
+        this.m_currentPage.pkg = pkg;
+        this.m_currentPage.name = page;
         this.m_currentPage.arg = arg;
 
         this.closeAllLoadedPanel();
 
-        this.open(page, arg);
+        this.open(pkg, page, arg);
     }
 
     //打开页面, 会关闭上一个页面上的所有窗口,Widiget等
-    public openPage(name:string, arg?:any){
+    public openPage(pkg:string, name:string, arg?:any){
 
         if(this.m_currentPage != undefined && this.m_currentPage.name!=name){
             this.m_pageTrackStack.push(this.m_currentPage);
         }
 
-        this.openPageWorker(name, arg);
+        this.openPageWorker(pkg, name, arg);
     }
 
     //返回上一个页面
@@ -162,38 +165,38 @@ export class UIManager extends Singleton<UIManager>{
 
         if(this.m_pageTrackStack.length > 0){
             let track = this.m_pageTrackStack.pop();
-            this.openPageWorker(track.name, track.arg);
+            this.openPageWorker(track.pkg ,track.name, track.arg);
         }else{
             this.enterMainPage();
         }
     }
 
     //打开场景页面,此页面不计入页面栈,无返回上一面按钮
-    public openPageInScene(scene:string, page:string, arg:any){
-
-        let oldScene:string = CS.UnityEngine.SceneManagement.GetActiveScene().name;
-
+    public openPageInScene(scene:string, pkg:string, page:string, arg:any){
+        let oldScene:string = CS.UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         if(oldScene == scene){
-            this.openPageWorker(page, arg);
+            this.openPageWorker(pkg, page, arg);
         }else{
             this.loadScene(scene, ()=>{
-                this.openPageWorker(page, arg);
+                 //场景加载完成
+                this.openPageWorker(pkg, page, arg);
             });
         }
+
     }
 
     //回到主城
     public enterMainPage():void{
 
         this.m_pageTrackStack.length = 0;
-        this.openPageInScene(SceneDef.HomeScene, UIDefs.UIHomePage,null)
+        this.openPageInScene(SceneDef.HomeScene, UIPackages.Game ,UIDefs.UIHomePage,null)
     }
 
     //==========================================================UIWindow
     //打开窗口
-    public openWindow(name:string, arg:any):UIWindow{
+    public openWindow(pkg:string, name:string, arg:any):UIWindow{
 
-        let ui:UIWindow = this.open(name, arg);
+        let ui:UIWindow = this.open(pkg, name, arg);
 
         return ui;
     }
@@ -209,9 +212,9 @@ export class UIManager extends Singleton<UIManager>{
 
     //==========================================================UIWidget
     //打开Widiget
-    public openWidget(name:string, arg:any):UIWidge{
+    public openWidget(pkg:string, name:string, arg:any):UIWidge{
 
-        let ui:UIWidge = this.open(name, arg);
+        let ui:UIWidge = this.open(pkg, name, arg);
 
         return ui;
     }

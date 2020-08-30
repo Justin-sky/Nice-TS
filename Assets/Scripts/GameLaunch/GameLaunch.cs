@@ -23,7 +23,7 @@ public class GameLaunch : MonoBehaviour
     {
         LoggerHelper.Instance.Startup();
         JsManager.Instance.Startup();
-
+      
         //初始化FairyGUI
         GRoot.inst.SetContentScaleFactor(1280, 720, UIContentScaler.ScreenMatchMode.MatchWidthOrHeight);
         UIPackage.unloadBundleByFGUI = false;

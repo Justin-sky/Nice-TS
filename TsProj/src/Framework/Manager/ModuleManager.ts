@@ -35,7 +35,7 @@ export class ModuleManager extends Singleton<ModuleManager>{
 
     }
 
-    public createModule(name:string, args?:any):GeneralModule{
+    private createModule(name:string, args?:any):GeneralModule{
 
         Logger.log(`name = ${name}, args = ${args}`);
 
@@ -116,11 +116,10 @@ export class ModuleManager extends Singleton<ModuleManager>{
 
         let model = this.getModule(target);
 
-        if(model != undefined){
-            model.show(args);
-        }else{
-            Logger.log(`Model 不存在 :${target}`);
+        if(!model){
+            model = this.createModule(target);
         }
+        model.show(args);
         
     }
 }

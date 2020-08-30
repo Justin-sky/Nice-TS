@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="771,44" extention="ProgressBar">
+  <displayList>
+    <image id="n0_10wwi" name="n0" src="pyg62f" fileName="atlas/common/ui_comm_btn_c.png" xy="0,0" size="771,44">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <image id="n1_10wwi" name="bar" src="pyg62h" fileName="atlas/common/ui_comm_btn_b.png" xy="0,0" size="769,44"/>
+  </displayList>
+  <ProgressBar/>
+</component>

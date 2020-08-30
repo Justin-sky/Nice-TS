@@ -44,11 +44,10 @@ class GameMain{
 
       
             //do Unit Test
-            UnitTest.doTest();
+            //UnitTest.doTest();
 
             //进入登录模块
-            //let module = ModuleManager.Instance(ModuleManager).createModule(ModuleDef.LoginModule);
-              // module.show();
+            ModuleManager.Instance(ModuleManager).show(ModuleDef.LoginModule);
 
 
         }catch(ex){

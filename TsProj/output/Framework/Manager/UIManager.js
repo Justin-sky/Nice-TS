@@ -22,10 +22,10 @@ class UIManager extends Singleton_1.Singleton {
         super();
         this.m_pageTrackStack = new Array();
         this.m_listLoadedPanel = new Array();
-        CS.UnityEngine.SceneManagement.SceneManager.sceneLoaded = (scene, mode) => {
+        CS.UnityEngine.SceneManagement.SceneManager.add_sceneLoaded((scene, mode) => {
             if (this.onSceneLoadedOnly != null)
                 this.onSceneLoadedOnly(scene.name);
-        };
+        });
     }
     closeAllLoadedPanel() {
         for (let i = this.m_listLoadedPanel.length - 1; i >= 0; i--) {
@@ -63,8 +63,8 @@ class UIManager extends Singleton_1.Singleton {
     }
     //==========================================================UILoading
     //打开Loading界面
-    openLoading(name, arg) {
-        let ui = this.open(name, arg);
+    openLoading(pkg, name, arg) {
+        let ui = this.open(pkg, name, arg);
         return ui;
     }
     //关闭Loading界面
@@ -85,55 +85,57 @@ class UIManager extends Singleton_1.Singleton {
                 this.closeLoading(UIDefine_1.UIDefs.UILoadingPage);
             }
         };
-        this.openLoading(UIDefine_1.UIDefs.UILoadingPage);
-        CS.UnityEngine.SceneManagement.LoadScene(scene);
+        this.openLoading(UIDefine_1.UIPackages.Game, UIDefine_1.UIDefs.UILoadingPage);
+        CS.UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
     }
     //==========================================================Page
-    openPageWorker(page, arg) {
+    openPageWorker(pkg, page, arg) {
         this.m_currentPage = new UIPageTrack();
-        this.m_currentPage.name = name;
+        this.m_currentPage.pkg = pkg;
+        this.m_currentPage.name = page;
         this.m_currentPage.arg = arg;
         this.closeAllLoadedPanel();
-        this.open(page, arg);
+        this.open(pkg, page, arg);
     }
     //打开页面, 会关闭上一个页面上的所有窗口,Widiget等
-    openPage(name, arg) {
+    openPage(pkg, name, arg) {
         if (this.m_currentPage != undefined && this.m_currentPage.name != name) {
             this.m_pageTrackStack.push(this.m_currentPage);
         }
-        this.openPageWorker(name, arg);
+        this.openPageWorker(pkg, name, arg);
     }
     //返回上一个页面
     goBackPage() {
         if (this.m_pageTrackStack.length > 0) {
             let track = this.m_pageTrackStack.pop();
-            this.openPageWorker(track.name, track.arg);
+            this.openPageWorker(track.pkg, track.name, track.arg);
         }
         else {
             this.enterMainPage();
         }
     }
     //打开场景页面,此页面不计入页面栈,无返回上一面按钮
-    openPageInScene(scene, page, arg) {
-        let oldScene = CS.UnityEngine.SceneManagement.GetActiveScene().name;
+    openPageInScene(scene, pkg, page, arg) {
+        let oldScene = CS.UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         if (oldScene == scene) {
-            this.openPageWorker(page, arg);
+            this.openPageWorker(pkg, page, arg);
         }
         else {
             this.loadScene(scene, () => {
-                this.openPageWorker(page, arg);
+                //场景加载完成
+                this.openPageWorker(pkg, page, arg);
             });
         }
     }
     //回到主城
     enterMainPage() {
         this.m_pageTrackStack.length = 0;
-        this.openPageInScene(ModuleDef_1.SceneDef.HomeScene, UIDefine_1.UIDefs.UIHomePage, null);
+        this.openPageInScene(ModuleDef_1.SceneDef.HomeScene, UIDefine_1.UIPackages.Game, UIDefine_1.UIDefs.UIHomePage, null);
     }
     //==========================================================UIWindow
     //打开窗口
-    openWindow(name, arg) {
-        let ui = this.open(name, arg);
+    openWindow(pkg, name, arg) {
+        let ui = this.open(pkg, name, arg);
         return ui;
     }
     //关闭窗口
@@ -145,8 +147,8 @@ class UIManager extends Singleton_1.Singleton {
     }
     //==========================================================UIWidget
     //打开Widiget
-    openWidget(name, arg) {
-        let ui = this.open(name, arg);
+    openWidget(pkg, name, arg) {
+        let ui = this.open(pkg, name, arg);
         return ui;
     }
     //u关闭Widiget

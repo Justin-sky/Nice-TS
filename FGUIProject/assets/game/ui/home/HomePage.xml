@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1280,720">
   <displayList>
-    <image id="n0_pyg6" name="n0" src="pyg62a" fileName="atlas/images/Login_01.png" xy="-69,1"/>
+    <image id="n0_pyg6" name="n0" src="pyg62a" fileName="atlas/images/Login_01.png" xy="-69,2"/>
     <image id="n4_pyg6" name="n4" src="pyg610" fileName="atlas/hyper/ui_hyper_career_01.png" xy="-30,19" group="n12_pyg6"/>
     <image id="n5_pyg6" name="n5" src="pyg6y" fileName="atlas/hyper/ui_hyper_career_02.png" xy="192,18" group="n12_pyg6"/>
     <image id="n6_pyg6" name="n6" src="pyg6z" fileName="atlas/hyper/ui_hyper_career_03.png" xy="425,19" group="n12_pyg6"/>

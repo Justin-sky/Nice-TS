@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class JsManager:MonoSingleton<JsManager>
 {
@@ -54,7 +55,7 @@ public class JsManager:MonoSingleton<JsManager>
         jsEnv.UsingAction<float>();
         jsEnv.UsingAction<float, float>();
         jsEnv.UsingAction<string, byte[]>();
-
+        jsEnv.UsingAction<Scene, LoadSceneMode>();
     }
 
     public JsEnv GetJsEnv()

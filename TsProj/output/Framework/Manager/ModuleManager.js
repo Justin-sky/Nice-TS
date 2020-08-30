@@ -78,12 +78,10 @@ class ModuleManager extends Singleton_1.Singleton {
     }
     show(target, ...args) {
         let model = this.getModule(target);
-        if (model != undefined) {
-            model.show(args);
+        if (!model) {
+            model = this.createModule(target);
         }
-        else {
-            Logger_1.Logger.log(`Model 不存在 :${target}`);
-        }
+        model.show(args);
     }
 }
 exports.ModuleManager = ModuleManager;

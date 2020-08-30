@@ -88,9 +88,9 @@
     <image id="pyg62c" name="ui_comm_btn_e.png" path="/atlas/common/"/>
     <image id="pyg62d" name="ui_comm_btn_d.png" path="/atlas/common/"/>
     <image id="pyg62e" name="ui_comm_btn_close.png" path="/atlas/common/"/>
-    <image id="pyg62f" name="ui_comm_btn_c.png" path="/atlas/common/"/>
+    <image id="pyg62f" name="ui_comm_btn_c.png" path="/atlas/common/" scale="9grid" scale9grid="11,9,22,18"/>
     <image id="pyg62g" name="ui_comm_btn_a.png" path="/atlas/common/"/>
-    <image id="pyg62h" name="ui_comm_btn_b.png" path="/atlas/common/"/>
+    <image id="pyg62h" name="ui_comm_btn_b.png" path="/atlas/common/" scale="9grid" scale9grid="9,11,18,22"/>
     <image id="pyg62i" name="ui_comm_bg_underlay_pic.png" path="/atlas/common/"/>
     <image id="pyg62j" name="ui_comm_bg_underlay_h.png" path="/atlas/common/"/>
     <image id="pyg62k" name="ui_comm_bg_underlay_g.png" path="/atlas/common/"/>
@@ -182,6 +182,8 @@
     <component id="pyg650" name="HomePage.xml" path="/ui/home/" exported="true"/>
     <component id="pyg651" name="LevelPage.xml" path="/ui/level/" exported="true"/>
     <component id="pyg652" name="ShopPage.xml" path="/ui/shop/" exported="true"/>
+    <component id="10wwi53" name="LoadingPage.xml" path="/ui/common/" exported="true"/>
+    <component id="10wwi54" name="LoadingProgress.xml" path="/ui/common/"/>
   </resources>
   <publish name=""/>
 </packageDescription>

@@ -2,11 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const CS = require('csharp');
 const Logger_1 = require("./framework/logger/Logger");
-const UnitTest_1 = require("./unittest/UnitTest");
 const Time_1 = require("./tools/unityengine/Time");
 const TimeManager_1 = require("./framework/manager/TimeManager");
 const GameObjectPool_1 = require("./framework/common/GameObjectPool");
 const ModuleManager_1 = require("./framework/manager/ModuleManager");
+const ModuleDef_1 = require("./game/modules/ModuleDef");
 const UIManager_1 = require("./framework/manager/UIManager");
 const ResManager_1 = require("./framework/manager/ResManager");
 const ExcelManager_1 = require("./data/excel/ExcelManager");
@@ -31,10 +31,9 @@ class GameMain {
             //预加载excel数据
             ExcelManager_1.ExcelManager.Instance(ExcelManager_1.ExcelManager);
             //do Unit Test
-            UnitTest_1.UnitTest.doTest();
+            //UnitTest.doTest();
             //进入登录模块
-            //let module = ModuleManager.Instance(ModuleManager).createModule(ModuleDef.LoginModule);
-            // module.show();
+            ModuleManager_1.ModuleManager.Instance(ModuleManager_1.ModuleManager).show(ModuleDef_1.ModuleDef.LoginModule);
         }
         catch (ex) {
             Logger_1.Logger.logError(ex);

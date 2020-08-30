@@ -1,5 +1,8 @@
 import { UIPage } from "../../../../framework/ui/UIPage";
 import { UIManager } from "../../../../framework/manager/UIManager";
+import { ModuleManager } from "../../../../framework/manager/ModuleManager";
+import { ModuleDef } from "../../ModuleDef";
+import { Logger } from "../../../../framework/logger/Logger";
 
 
 
@@ -19,19 +22,20 @@ export class UILoginPage extends UIPage{
         this.m_password = this.fui.GetChild("password");
         this.m_loginBtn = this.fui.GetChild("loginBtn");
 
-
+        this.m_loginBtn.onClick.Add(()=>{
+            this.onLoginClick();
+        });
     }
 
     
     public onOpen(arg:any):void{
         super.onOpen(arg);
 
-        this.m_loginBtn.Add(this.onLoginClick);
+        
     }
     public onClose(arg:any):void{
         super.onClose(arg);
 
-        this.m_loginBtn.Remove(this.onLoginClick);
     }
 
 
@@ -42,6 +46,11 @@ export class UILoginPage extends UIPage{
         let account = this.m_account.text;
         let password = this.m_password.text;
 
-        
+        Logger.log(`account:${account} - password: ${password}`);
+
+        if(account != "" && password != ""){
+            UIManager.Instance(UIManager).enterMainPage();
+        }
+
     }
 }

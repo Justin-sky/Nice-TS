@@ -17,26 +17,26 @@ export abstract class UIPage extends UIPanel{
         
         this.m_btnGoBack = this.fui.GetChild(UIComDefs.BackBtn);
 
+        if(this.m_btnGoBack!=undefined){
+            this.m_btnGoBack.onClick.Add(()=>{
+                this.onBtnGoBack();
+            });
+        }
     }
 
     public onOpen(arg:any):void{
         super.onOpen(arg);
 
-        if(this.m_btnGoBack!=undefined){
-            this.m_btnGoBack.Add(this.onBtnGoBack);
-        }
+        
     
     }
     public onClose(arg:any):void{
         super.onClose(arg);
 
-        if(this.m_btnGoBack!=undefined){
-            this.m_btnGoBack.Remove(this.onBtnGoBack);
-        }
     }
 
     private onBtnGoBack(){
-       // UIManager.Instance(UIManager).goBackPage();
+        UIManager.Instance(UIManager).goBackPage();
     }
 
 } 
