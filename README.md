@@ -5,10 +5,10 @@ puerts 热更新框架
 Road Map ：
 
 * Addressables资源管理
-* UI框架支持MVVM 
+* UI框架MVP
 * 渲染管线修改为URP
-* 网络模块采用protobuf3, 支持断线重连，消息重发
-* 数据采用flatbuffer
+* 网络模块采用protobufjs, 支持断线重连，消息重发
+* Excel导出TS工具
 * 新手引导系统
 * 任务系统
 * 聊天系统
