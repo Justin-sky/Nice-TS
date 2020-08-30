@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TimeManager = void 0;
 const Singleton_1 = require("../common/Singleton");
 const Timer_1 = require("../timer/Timer");
 // -- 定时器管理：负责定时器获取、回收、缓存、调度等管理

@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UnitConfigTB = exports.UnitConfigTR = void 0;
 const Singleton_1 = require("../../framework/common/Singleton");
 class UnitConfigTR {
     constructor(_id, _Name, _Desc, _Position, _Height, _Weight) {

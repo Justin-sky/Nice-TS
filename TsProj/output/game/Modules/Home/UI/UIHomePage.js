@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UIHomePage = void 0;
 const UIPage_1 = require("../../../../framework/ui/UIPage");
 const Logger_1 = require("../../../../framework/logger/Logger");
 class UIHomePage extends UIPage_1.UIPage {

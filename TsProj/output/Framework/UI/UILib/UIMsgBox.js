@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UIMsgBox = exports.UIMsgBoxArg = void 0;
 const UIWindow_1 = require("../UIWindow");
 class UIMsgBoxArg {
     constructor() {

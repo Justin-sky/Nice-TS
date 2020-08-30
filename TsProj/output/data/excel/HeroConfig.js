@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HeroConfigTB = exports.HeroConfigTR = void 0;
 const Singleton_1 = require("../../framework/common/Singleton");
 class HeroConfigTR {
     constructor(_id, _BaseATK, _SP, _HP, _AttackDistance, _AttackInterval) {

@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UnitTest = void 0;
 const TimeUtil_1 = require("../framework/util/TimeUtil");
 const SingletonTest_1 = require("./SingletonTest");
 const Logger_1 = require("../framework/logger/Logger");
@@ -104,6 +103,6 @@ class UnitTest {
         }
     }
 }
-exports.UnitTest = UnitTest;
 UnitTest.testVar = 10000;
+exports.UnitTest = UnitTest;
 //# sourceMappingURL=UnitTest.js.map

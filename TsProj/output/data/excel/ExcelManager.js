@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ExcelManager = void 0;
 const Singleton_1 = require("../../framework/common/Singleton");
 const HeroConfig_1 = require("./HeroConfig");
 const SkillConfig_1 = require("./SkillConfig");

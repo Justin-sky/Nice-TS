@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Time = void 0;
 const CS = require('csharp');
 const unity_time = CS.UnityEngine.Time;
 const Singleton_1 = require("../../framework/common/Singleton");

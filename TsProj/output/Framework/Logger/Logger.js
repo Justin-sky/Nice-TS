@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Logger = void 0;
 const CS = require('csharp');
 const GameConfig_1 = require("../../global/GameConfig");
 class Logger {

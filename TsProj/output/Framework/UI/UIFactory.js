@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UIFactory = void 0;
 const UIDefine_1 = require("./UIDefine");
 const UILoginPage_1 = require("../../game/modules/login/ui/UILoginPage");
 const UISimpleLoading_1 = require("./UILib/UISimpleLoading");

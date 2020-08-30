@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ResManager = void 0;
 const CS = require('csharp');
 const csResMgr = CS.Addressable.ResourceManager;
 const Singleton_1 = require("../common/Singleton");
@@ -66,6 +65,6 @@ class ResManager extends Singleton_1.Singleton {
         csResMgr.ReleaseAddressGO(go);
     }
 }
-exports.ResManager = ResManager;
 ResManager.fbcaches = new Map();
+exports.ResManager = ResManager;
 //# sourceMappingURL=ResManager.js.map

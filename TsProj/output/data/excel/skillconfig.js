@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SkillConfigTB = exports.SkillConfigTR = void 0;
 const Singleton_1 = require("../../framework/common/Singleton");
 class SkillConfigTR {
     constructor(_id, _Name, _Description, _CoolTime, _CostSP, _AttackDistance, _AttackAngle, _AttackTargetTags, _ImpactType, _NextBattlerId, _AtkRatio, _DurationTime, _AtkInterval, _SkillPrefab, _AnimationName, _HitFxPrefab, _Level, _AttackType, _SelectorType) {

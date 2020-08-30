@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UIDefs = exports.UIComDefs = exports.UIPackages = exports.UILayerDef = exports.UITypeDef = void 0;
 var UITypeDef;
 (function (UITypeDef) {
     UITypeDef[UITypeDef["Unkown"] = 0] = "Unkown";
@@ -21,7 +20,6 @@ class UILayerDef {
         }
     }
 }
-exports.UILayerDef = UILayerDef;
 UILayerDef.Background = 0;
 UILayerDef.Page = 1000;
 UILayerDef.NormalWindow = 2000;
@@ -29,22 +27,23 @@ UILayerDef.TopWindow = 3000;
 UILayerDef.Widget = 4000;
 UILayerDef.Loading = 5000;
 UILayerDef.Unkown = 9999;
+exports.UILayerDef = UILayerDef;
 class UIPackages {
 }
-exports.UIPackages = UIPackages;
 UIPackages.Game = "game";
+exports.UIPackages = UIPackages;
 class UIComDefs {
 }
-exports.UIComDefs = UIComDefs;
 UIComDefs.BackBtn = "back_btn";
 UIComDefs.WindowCloseBtn = "win_close_btn";
+exports.UIComDefs = UIComDefs;
 class UIDefs {
 }
-exports.UIDefs = UIDefs;
 UIDefs.UILoadingPage = "LoadingPage";
 UIDefs.UILoginPage = "LoginPage";
 UIDefs.UIHomePage = "HomePage";
 UIDefs.UILevelage = "LevelPage";
 UIDefs.UIShopPage = "ShopPage";
 UIDefs.UISelServerWin = "SelServerWin";
+exports.UIDefs = UIDefs;
 //# sourceMappingURL=UIDefine.js.map

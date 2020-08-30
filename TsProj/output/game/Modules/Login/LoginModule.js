@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LoginModule = void 0;
 const GeneralModule_1 = require("../../../framework/module/GeneralModule");
 const Logger_1 = require("../../../framework/logger/Logger");
 const UIManager_1 = require("../../../framework/manager/UIManager");

@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Timer = void 0;
 const CS = require('csharp');
 const Time_1 = require("../../tools/unityengine/Time");
 const Logger_1 = require("../logger/Logger");
