@@ -44,11 +44,13 @@ class GameMain{
 
       
             //do Unit Test
-            //UnitTest.doTest();
+            UnitTest.doTest();
 
             //进入登录模块
             ModuleManager.Instance(ModuleManager).show(ModuleDef.LoginModule);
 
+            //JS启动完成，通知C#层
+            CS.GameLaunch.Instance.JsLuanchFinish();
 
         }catch(ex){
             Logger.logError(ex);

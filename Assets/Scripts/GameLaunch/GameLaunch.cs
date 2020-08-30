@@ -13,11 +13,11 @@ using UnityEngine.XR;
 using Addressable;
 #endif
 
-public class GameLaunch : MonoBehaviour
+public class GameLaunch : MonoSingleton<GameLaunch>
 {
 
     const string fairy_package = "game_fui.bytes";
-
+    public LaunchPage launchPage;
 
     IEnumerator Start()
     {
@@ -57,7 +57,7 @@ public class GameLaunch : MonoBehaviour
         Addressables.Release(handle);
 
         //加载更新界面
-        LaunchPage launchPage = LaunchPage.CreateInstance();
+        launchPage = LaunchPage.CreateInstance();
         launchPage.Show();
         
         //Test
@@ -76,5 +76,11 @@ public class GameLaunch : MonoBehaviour
         yield break;
     }
 
-
+    public void JsLuanchFinish()
+    {
+        if (this.launchPage != null)
+        {
+            this.launchPage.Dispose();
+        }
+    }
 }
