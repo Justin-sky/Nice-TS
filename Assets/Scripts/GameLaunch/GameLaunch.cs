@@ -3,6 +3,7 @@ using FairyGUI;
 using NiceTS;
 using System;
 using System.Collections;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -21,6 +22,8 @@ public class GameLaunch : MonoSingleton<GameLaunch>
 
     IEnumerator Start()
     {
+        SynchronizationContext.SetSynchronizationContext(OneThreadSynchronizationContext.Instance);
+
         LoggerHelper.Instance.Startup();
         JsManager.Instance.Startup();
       
