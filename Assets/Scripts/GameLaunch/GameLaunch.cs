@@ -22,8 +22,6 @@ public class GameLaunch : MonoSingleton<GameLaunch>
 
     IEnumerator Start()
     {
-        SynchronizationContext.SetSynchronizationContext(OneThreadSynchronizationContext.Instance);
-
         LoggerHelper.Instance.Startup();
         JsManager.Instance.Startup();
       

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading;
 
 namespace NiceTS
 {
@@ -16,6 +17,8 @@ namespace NiceTS
         {
             TChannel channel = new TChannel(iPEndPoint, this);
             this.idChannels[channel.Id] = channel;
+
+            SynchronizationContext.SetSynchronizationContext(OneThreadSynchronizationContext.Instance);
 
             return channel;
         }

@@ -51,7 +51,7 @@ namespace NiceTS
 		private readonly MemoryStream memoryStream;
 		private readonly byte[] packetSizeCache;
 		private readonly PacketParser parser;
-		private readonly IPEndPoint remoteIpEndPoint;
+
 		public string RemoteAddress { get; protected set; }
 
 		public TChannel(IPEndPoint ipEndPoint, TService service)
@@ -68,7 +68,6 @@ namespace NiceTS
 			this.outArgs.Completed += this.OnComplete;
 
 			this.RemoteAddress = ipEndPoint.ToString();
-			this.remoteIpEndPoint = ipEndPoint;
 			this.isConnected = false;
 			this.isSending = false;
 		}
