@@ -57,7 +57,7 @@ class GameSession extends Singleton_1.Singleton {
             this.requestCallback.delete(rpcId);
         }
     }
-    checkMsgTimeout() {
+    checkTimeoutMsg() {
         let currTime = new Date().getTime();
         this.requestCallback.forEach((value, key) => {
             if (value.retryTimes >= this.maxReSendTimes) {

@@ -20,8 +20,6 @@ export class GameSession extends Singleton<GameSession>{
     private channel:any;
     private requestCallback:Map<number,MsgPack> = new Map<number,MsgPack>();
 
-
-
     constructor(){
         super();
     }
@@ -40,11 +38,9 @@ export class GameSession extends Singleton<GameSession>{
         };
     }
 
-
     //发送protoubf消息
     public send(opcode:number,rpcid:number, message:Uint8Array, callBack:Function){
         
-
         //封装消息：opcode+msg
         let sendArray:Uint8Array = new Uint8Array();
 
@@ -64,13 +60,11 @@ export class GameSession extends Singleton<GameSession>{
         this.channel.Send(bytes);
     }
 
-
     public onReceive(bytes:Uint8Array){
 
         let  opcode = 0;
         let msg:any = null;
         let rpcId = 0;
- 
 
 
         if(!this.requestCallback.has(rpcId)){
@@ -85,8 +79,7 @@ export class GameSession extends Singleton<GameSession>{
 
     }
 
-
-    private checkMsgTimeout(){
+    private checkTimeoutMsg(){
 
         let currTime = new Date().getTime();
         this.requestCallback.forEach((value, key) =>{

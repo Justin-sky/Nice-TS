@@ -108,6 +108,26 @@ class UnitTest {
         catch (ex) {
             Logger_1.Logger.log(ex);
         }
+        Logger_1.Logger.log("UintArray =============================");
+        let opcode_arr = new Uint8Array([257, 25]);
+        Logger_1.Logger.log(opcode_arr.subarray(0, 1));
+        Logger_1.Logger.log(opcode_arr.length);
+        let opcode_arr2 = new Uint8Array([33]);
+        //合并 Uint8Array
+        let merge_arr = new Uint8Array(opcode_arr.length + opcode_arr2.length);
+        merge_arr.set(opcode_arr2);
+        merge_arr.set(opcode_arr, opcode_arr2.length);
+        Logger_1.Logger.log(merge_arr.length);
+        let n = 5678;
+        let buffer = new Uint8Array(4);
+        //n转uint8Array
+        buffer[0] = n >>> 24;
+        buffer[1] = n >>> 16;
+        buffer[2] = n >>> 8;
+        buffer[3] = n & 0xff;
+        //unit8Array转n
+        n = buffer[0] << 24 | buffer[1] << 16 | buffer[2] << 8 | buffer[3];
+        Logger_1.Logger.log(n);
     }
 }
 UnitTest.testVar = 10000;
