@@ -135,8 +135,6 @@ namespace NiceTS
 		#endregion
 
 		#region Send
-
-
 		private void Send(byte[] bytes)
 		{
 			if (this.Id == 0)
