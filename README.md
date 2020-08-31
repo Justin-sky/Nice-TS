@@ -5,7 +5,7 @@ puerts 热更新框架
 Road Map ：
 
 * Addressables资源管理
-* UI框架MVP
+* UI集成FairyGUI
 * 渲染管线修改为URP
 * 网络模块采用protobufjs, 支持断线重连，消息重发
 * Excel导出TS工具

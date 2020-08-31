@@ -8,6 +8,7 @@ const TimeManager_1 = require("../framework/manager/TimeManager");
 const ResManager_1 = require("../framework/manager/ResManager");
 const OuterMessage_1 = require("../data/pb/OuterMessage");
 const SkillConfig_1 = require("../data/excel/SkillConfig");
+const Opcode_1 = require("../data/pb/Opcode");
 const CS = require('csharp');
 const flatbuffers = require("../fb/flatbuffers");
 class UnitTest {
@@ -97,6 +98,12 @@ class UnitTest {
             let de_buf = OuterMessage_1.NiceET.C2M_TestRequest.decode(buf);
             Logger_1.Logger.log(de_buf.RpcId);
             Logger_1.Logger.log(de_buf.request);
+            let de_m = OuterMessage_1.NiceET.C2M_TestRequest.decode;
+            let de_m_t = de_m(buf);
+            Logger_1.Logger.log("========:" + de_m_t.request);
+            Logger_1.Logger.log("protobuf opcode:");
+            let op_test = Opcode_1.Opcode.map[Opcode_1.Opcode.C2M_TESTREQUEST](buf);
+            Logger_1.Logger.log("test opcode: " + op_test.request);
         }
         catch (ex) {
             Logger_1.Logger.log(ex);

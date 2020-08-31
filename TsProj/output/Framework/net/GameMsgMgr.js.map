@@ -1,0 +1,1 @@
+{"version":3,"file":"GameMsgMgr.js","sourceRoot":"","sources":["../../../src/framework/net/GameMsgMgr.ts"],"names":[],"mappings":";;AAAA,mDAAgD;AAChD,uCAAoC;AAIpC,MAAa,UAAW,SAAQ,qBAAqB;IAIjD;QACI,KAAK,EAAE,CAAC;QAER,IAAI,CAAC,OAAO,GAAG,IAAI,iBAAO,EAAE,CAAC;IACjC,CAAC;IAGM,OAAO,CAAC,OAAc;QAEzB,IAAI,CAAC,OAAO,CAAC,cAAc,CAAC,OAAO,CAAC,CAAC;IACzC,CAAC;CAIJ;AAlBD,gCAkBC"}

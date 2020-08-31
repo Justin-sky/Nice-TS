@@ -9,6 +9,7 @@ import { ModuleManager } from '../framework/manager/ModuleManager';
 import { ModuleDef } from '../game/modules/ModuleDef';
 import { NiceET } from '../data/pb/OuterMessage';
 import { SkillConfigTB, SkillConfigTR } from '../data/excel/SkillConfig';
+import { Opcode } from '../data/pb/Opcode';
 
 const CS = require('csharp');
 const flatbuffers = require("../fb/flatbuffers");
@@ -142,6 +143,14 @@ export class UnitTest{
             let de_buf = NiceET.C2M_TestRequest.decode(buf);
             Logger.log(de_buf.RpcId);
             Logger.log(de_buf.request);
+
+            let de_m = NiceET.C2M_TestRequest.decode;
+            let de_m_t = de_m(buf);
+            Logger.log("========:"+de_m_t.request);
+
+            Logger.log("protobuf opcode:");
+            let op_test = Opcode.map[Opcode.C2M_TESTREQUEST](buf);
+            Logger.log("test opcode: "+ op_test.request);
 
         }catch(ex){
             Logger.log(ex);
