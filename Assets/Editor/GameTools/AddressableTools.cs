@@ -21,7 +21,6 @@ public class AddressableTools
          "static_js",
          "static_models",
          "static_shaders",
-         "static_ui",
          "static_fb",
          "static_jsmap",
          "static_fairygui"
