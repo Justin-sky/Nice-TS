@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Puerts;
 using System;
 using UnityEngine;
+using System.Reflection;
 
 //1、配置类必须打[Configure]标签
 //2、必须放Editor目录
@@ -43,5 +44,13 @@ public class PuertsConfig
                 //typeof(Vector3),
             };
         }
+    }
+
+    [Filter]
+    static bool Filter(MemberInfo memberInfo)
+    {
+        return memberInfo.Name == "runInEditMode" ||
+            memberInfo.Name == "get_runInEditMode" ||
+            memberInfo.Name == "set_runInEditMode";
     }
 }

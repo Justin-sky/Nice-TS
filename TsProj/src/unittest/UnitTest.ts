@@ -173,6 +173,7 @@ export class UnitTest{
         let n:number = 5678;
         let buffer:Uint8Array = new Uint8Array(4);
 
+        // << 左移  >> 右移  >>> 无符号右移
         //n转uint8Array
         buffer[0] = n >>> 24;
         buffer[1] = n >>> 16;
