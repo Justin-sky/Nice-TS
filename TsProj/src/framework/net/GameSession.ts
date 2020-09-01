@@ -30,12 +30,19 @@ export class GameSession extends Singleton<GameSession>{
     }
 
     //address-> ip:port
-    public connectChannel(address:string){
+    public connectChannel(address:string, connCaback:any){
 
-        this.channel = CS.NiceTS.TService.Instance.ConnectChannel(address);
-        this.channel.ReadCallback = (bytes:Uint8Array)=>{
+        this.channel = CS.NiceTS.TService.Instance.GetChannel();
+        
+        this.channel.add_ErrorCallback(connCaback);
+        
+        this.channel.add_ReadCallback = (bytes:Uint8Array)=>{
             this.onReceive(bytes);
         };
+
+
+        this.channel.Connect(address);
+
         return this;
     }
 

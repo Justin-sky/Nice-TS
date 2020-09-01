@@ -15,6 +15,8 @@ const CS = require('csharp');
 
 export class LoginModule extends GeneralModule{
 
+    private sessionReam:GameSession;
+
     public create(args:any):void{
         this.messenger.addListener(ModuleMessage.LOGIN_REAMSERVER,this, this.loginReamServer);
    }
@@ -34,14 +36,13 @@ export class LoginModule extends GeneralModule{
         Logger.log(account + "======="+password );
 
         //登录验证服
-        let reamChannel:any = CS.NiceTS.TService.Instance.GetChannel();
-        reamChannel.add_ErrorCallback((channel:any, code:number)=>{
-            this.onReamSocketErr(channel, code);
-        });
-        
-        reamChannel.Connect(
-            GameConfig.realmServerIP+":"+GameConfig.realmServerPort
-            );
+        this.sessionReam = GameSession.Instance(GameSession).connectChannel(
+            GameConfig.realmServerIP+":"+GameConfig.realmServerPort,
+            (channel:any,code:number)=>{
+                this.onReamSocketErr(channel, code);
+            }
+        );
+
 
        // UIManager.Instance(UIManager).enterMainPage();
     }

@@ -22,11 +22,13 @@ class GameSession extends Singleton_1.Singleton {
         return this.rpcId;
     }
     //address-> ip:port
-    connectChannel(address) {
-        this.channel = CS.NiceTS.TService.Instance.ConnectChannel(address);
-        this.channel.ReadCallback = (bytes) => {
+    connectChannel(address, connCaback) {
+        this.channel = CS.NiceTS.TService.Instance.GetChannel();
+        this.channel.add_ErrorCallback(connCaback);
+        this.channel.add_ReadCallback = (bytes) => {
             this.onReceive(bytes);
         };
+        this.channel.Connect(address);
         return this;
     }
     //发送protoubf消息
