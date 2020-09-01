@@ -56,8 +56,8 @@ public class JsManager:MonoSingleton<JsManager>
         jsEnv.UsingAction<float, float>();
         jsEnv.UsingAction<string, byte[]>();
         jsEnv.UsingAction<Scene, LoadSceneMode>();
-        jsEnv.UsingAction<Action<TChannel, int>>();
-        jsEnv.UsingAction<Action<byte[]>>();
+        jsEnv.UsingAction<TChannel, int>();
+        jsEnv.UsingAction<byte[]>();
     }
 
     public JsEnv GetJsEnv()

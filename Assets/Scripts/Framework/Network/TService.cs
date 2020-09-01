@@ -13,21 +13,14 @@ namespace NiceTS
         public RecyclableMemoryStreamManager MemoryStreamManager = new RecyclableMemoryStreamManager();
         public List<long> needStartSendChannel = new List<long>();
 
-        public TChannel ConnectChannel(IPEndPoint iPEndPoint)
+        public TChannel GetChannel()
         {
-            TChannel channel = new TChannel(iPEndPoint, this);
+            TChannel channel = new TChannel(this);
             this.idChannels[channel.Id] = channel;
-
-            SynchronizationContext.SetSynchronizationContext(OneThreadSynchronizationContext.Instance);
 
             return channel;
         }
 
-        public TChannel ConnectChannel(string address)
-        {
-            IPEndPoint ipEndPoint = NetworkHelper.ToIPEndPoint(address);
-            return this.ConnectChannel(ipEndPoint);
-        }
 
         public void MarkNeedStartSend(long id)
         {

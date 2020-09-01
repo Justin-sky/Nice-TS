@@ -36,6 +36,7 @@ export class GameSession extends Singleton<GameSession>{
         this.channel.ReadCallback = (bytes:Uint8Array)=>{
             this.onReceive(bytes);
         };
+        return this;
     }
 
     //发送protoubf消息

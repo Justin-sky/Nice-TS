@@ -10,8 +10,9 @@ namespace NiceTS
         private bool isSending;
 		private bool isConnected;
 
-		public TService Service { get; }
+		public TService Service { get;  }
 		private Socket socket;
+	
 		private SocketAsyncEventArgs innArgs = new SocketAsyncEventArgs();
 		private SocketAsyncEventArgs outArgs = new SocketAsyncEventArgs();
 
@@ -54,22 +55,31 @@ namespace NiceTS
 
 		public string RemoteAddress { get; protected set; }
 
-		public TChannel(IPEndPoint ipEndPoint, TService service)
-        {
+		public TChannel(TService service) {
 			this.Service = service;
-
 			this.packetSizeCache = new byte[4];
 			this.memoryStream = service.MemoryStreamManager.GetStream("message", ushort.MaxValue);
+			this.parser = new PacketParser(this.recvBuffer, this.memoryStream);
+		
+			this.innArgs.Completed += this.OnComplete;
+			this.outArgs.Completed += this.OnComplete;
+		}
+		public void Connect(string address)
+        {
+			IPEndPoint ipEndPoint = NetworkHelper.ToIPEndPoint(address);
 
 			this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 			this.socket.NoDelay = true;
-			this.parser = new PacketParser(this.recvBuffer, this.memoryStream);
-			this.innArgs.Completed += this.OnComplete;
-			this.outArgs.Completed += this.OnComplete;
-
+			
 			this.RemoteAddress = ipEndPoint.ToString();
 			this.isConnected = false;
 			this.isSending = false;
+
+			this.outArgs.RemoteEndPoint = ipEndPoint;
+
+			this.socket.ConnectAsync(this.outArgs);
+
+			
 		}
 
 		private void OnComplete(object sender, SocketAsyncEventArgs e)
@@ -77,16 +87,16 @@ namespace NiceTS
 			switch (e.LastOperation)
 			{
 				case SocketAsyncOperation.Connect:
-					OneThreadSynchronizationContext.Instance.Post(this.OnConnectComplete, e);
+					this.OnConnectComplete(e);
 					break;
 				case SocketAsyncOperation.Receive:
-					OneThreadSynchronizationContext.Instance.Post(this.OnRecvComplete, e);
+					this.OnRecvComplete(e);
 					break;
 				case SocketAsyncOperation.Send:
-					OneThreadSynchronizationContext.Instance.Post(this.OnSendComplete, e);
+					this.OnSendComplete(e);
 					break;
 				case SocketAsyncOperation.Disconnect:
-					OneThreadSynchronizationContext.Instance.Post(this.OnDisconnectComplete, e);
+					this.OnDisconnectComplete(e);
 					break;
 				default:
 					throw new Exception($"socket error: {e.LastOperation}");
@@ -119,6 +129,8 @@ namespace NiceTS
 				return;
 			}
 
+			//连接成功
+			this.OnError(ErrorCode.ERR_SocketConnSucc);
 			e.RemoteEndPoint = null;
 			this.isConnected = true;
 			this.StartRecv();

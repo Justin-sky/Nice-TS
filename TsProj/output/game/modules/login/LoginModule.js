@@ -5,23 +5,28 @@ const Logger_1 = require("../../../framework/logger/Logger");
 const UIManager_1 = require("../../../framework/manager/UIManager");
 const ModuleDef_1 = require("../ModuleDef");
 const game_1 = require("../../../data/ui/game");
+const GameConfig_1 = require("../../../global/GameConfig");
+const CS = require('csharp');
 class LoginModule extends GeneralModule_1.GeneralModule {
-    constructor() {
-        super(...arguments);
-        this.a = 9999;
-    }
     create(args) {
         this.messenger.addListener(ModuleDef_1.ModuleMessage.LOGIN_REAMSERVER, this, this.loginReamServer);
     }
     show(args) {
-        UIManager_1.UIManager.Instance(UIManager_1.UIManager).openPageInScene(ModuleDef_1.SceneDef.LoginScene, game_1.gameUI.PackageName, game_1.gameUI.UILoginPage, null);
+        UIManager_1.UIManager.Instance(UIManager_1.UIManager).openPageInScene(ModuleDef_1.SceneDef.LoginScene, game_1.gameUI.PackageName, game_1.gameUI.UILoginPage, args);
     }
     release() {
         this.messenger.removeListener(ModuleDef_1.ModuleMessage.LOGIN_REAMSERVER, this.loginReamServer);
     }
     loginReamServer(account, password) {
-        Logger_1.Logger.log(account + "=======" + password + " ==" + this.a);
-        UIManager_1.UIManager.Instance(UIManager_1.UIManager).enterMainPage();
+        Logger_1.Logger.log(account + "=======" + password);
+        //登录验证服
+        let reamChannel = CS.NiceTS.TService.Instance.GetChannel();
+        reamChannel.add_ErrorCallback(this.onSocketErr);
+        reamChannel.Connect(GameConfig_1.GameConfig.realmServerIP + ":" + GameConfig_1.GameConfig.realmServerPort);
+        // UIManager.Instance(UIManager).enterMainPage();
+    }
+    onSocketErr(channel, code) {
+        Logger_1.Logger.log("socket code: " + code);
     }
 }
 exports.LoginModule = LoginModule;

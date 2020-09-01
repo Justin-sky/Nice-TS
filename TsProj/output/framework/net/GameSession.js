@@ -27,6 +27,7 @@ class GameSession extends Singleton_1.Singleton {
         this.channel.ReadCallback = (bytes) => {
             this.onReceive(bytes);
         };
+        return this;
     }
     //发送protoubf消息
     send(opcode, rpcid, message, callBack) {
