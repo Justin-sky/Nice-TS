@@ -1,0 +1,11 @@
+{
+  "name": "export_ui_const",
+  "displayName": "导出UI常量",
+  "description": "",
+  "version": "1.0",
+  "author": {
+    "name": "Justin"
+  },
+  "icon": "",
+  "main": "main.lua"
+}

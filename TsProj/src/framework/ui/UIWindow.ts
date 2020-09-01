@@ -1,6 +1,7 @@
 import { UIPanel } from "./UIPanel";
-import { UITypeDef, UIComDefs } from "./UIDefine";
 import { UIManager } from "../manager/UIManager";
+import { UITypeDef, UIComDefs } from "./UIDefine";
+
 
 
 

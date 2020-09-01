@@ -9,8 +9,8 @@
   "compressPNG": false,
   "codeGeneration": {
     "allowGenCode": true,
-    "codePath": "C:\\Users\\Justin\\Documents\\u3dWorkspace\\NICE_Framework\\Nice-TS\\TsProj\\src\\AutoGen",
-    "classNamePrefix": "UI_",
+    "codePath": "C:\\Users\\Justin\\Documents\\u3dWorkspace\\NICE_Framework\\Nice-TS\\TsProj\\src\\data\\ui",
+    "classNamePrefix": "",
     "memberNamePrefix": "m_",
     "packageName": null,
     "ignoreNoname": true,

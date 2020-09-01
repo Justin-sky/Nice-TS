@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1280,720">
   <displayList>
-    <component id="n0_pyg6" name="n0" src="pyg64s" fileName="ui/common/CommonBtn.xml" xy="367,352">
+    <component id="n0_pyg6" name="fightBtn" src="pyg64s" fileName="ui/common/CommonBtn.xml" xy="367,352">
       <Button title="开始战斗"/>
     </component>
-    <component id="n1_pyg6" name="n1" src="pyg64s" fileName="ui/common/CommonBtn.xml" xy="668,353">
+    <component id="n1_pyg6" name="goHomeBtn" src="pyg64s" fileName="ui/common/CommonBtn.xml" xy="668,353">
       <Button title="返回主城&#xA;"/>
     </component>
   </displayList>

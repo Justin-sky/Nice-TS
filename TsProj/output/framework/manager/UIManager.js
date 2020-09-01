@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Singleton_1 = require("../common/Singleton");
 const UIFactory_1 = require("../ui/UIFactory");
 const ModuleDef_1 = require("../../game/modules/ModuleDef");
-const UIDefine_1 = require("../ui/UIDefine");
+const game_1 = require("../../data/ui/game");
 const CS = require('csharp');
 class UIPageTrack {
 }
@@ -81,10 +81,10 @@ class UIManager extends Singleton_1.Singleton {
                 this.onSceneLoadedOnly = null;
                 if (onLoadComplete != null)
                     onLoadComplete();
-                this.closeLoading(UIDefine_1.UIDefs.UILoadingPage);
+                this.closeLoading(game_1.gameUI.UILoadingPage);
             }
         };
-        this.openLoading(UIDefine_1.UIPackages.Game, UIDefine_1.UIDefs.UILoadingPage);
+        this.openLoading(game_1.gameUI.PackageName, game_1.gameUI.UILoadingPage);
         CS.UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
     }
     //==========================================================Page
@@ -129,7 +129,7 @@ class UIManager extends Singleton_1.Singleton {
     //回到主城
     enterMainPage() {
         this.m_pageTrackStack.length = 0;
-        this.openPageInScene(ModuleDef_1.SceneDef.HomeScene, UIDefine_1.UIPackages.Game, UIDefine_1.UIDefs.UIHomePage, null);
+        this.openPageInScene(ModuleDef_1.SceneDef.HomeScene, game_1.gameUI.PackageName, game_1.gameUI.UIHomePage, null);
     }
     //==========================================================UIWindow
     //打开窗口

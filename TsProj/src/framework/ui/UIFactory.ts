@@ -1,10 +1,12 @@
-import { UIDefs } from "./UIDefine";
+
 import { UILoginPage } from "../../game/modules/login/ui/UILoginPage";
 import { UIPanel } from "./UIPanel";
 import { Singleton } from "../common/Singleton";
 import { UISimpleLoading } from "./UILib/UISimpleLoading";
 import { Logger } from "../logger/Logger";
 import { UIHomePage } from "../../game/modules/home/ui/UIHomePage";
+import { gameUI } from "../../data/ui/game";
+
 
 const CS = require('csharp');
 
@@ -20,13 +22,13 @@ export class UIFactory{
 
 
         switch (name){
-            case UIDefs.UILoginPage:
+            case gameUI.UILoginPage:
                 ui = new UILoginPage();
                 break;
-            case UIDefs.UILoadingPage:
+            case gameUI.UILoadingPage:
                 ui = new UISimpleLoading();
                 break;
-            case UIDefs.UIHomePage:
+            case gameUI.UIHomePage:
                 ui = new UIHomePage();
                 break;
         }

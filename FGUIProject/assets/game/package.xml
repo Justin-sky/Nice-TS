@@ -185,5 +185,5 @@
     <component id="10wwi53" name="LoadingPage.xml" path="/ui/common/" exported="true"/>
     <component id="10wwi54" name="LoadingProgress.xml" path="/ui/common/"/>
   </resources>
-  <publish name=""/>
+  <publish name="" genCode="true" codePath="C:\Users\Justin\Documents\u3dWorkspace\NICE_Framework\Nice-TS\TsProj\src\data\ui"/>
 </packageDescription>

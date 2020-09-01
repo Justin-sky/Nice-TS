@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1280,720">
   <displayList>
-    <component id="n0_10wwi" name="n0" src="10wwi54" fileName="ui/common/LoadingProgress.xml" xy="137,623">
+    <component id="n0_10wwi" name="loading_pregress" src="10wwi54" fileName="ui/common/LoadingProgress.xml" xy="137,623">
       <ProgressBar value="1" max="100"/>
     </component>
-    <text id="n1_10wwi" name="n1" xy="326,344" size="342,107" fontSize="40" autoSize="none" text="正在切换场景..."/>
+    <text id="n1_10wwi" name="loadTxt" xy="326,344" size="342,107" fontSize="40" autoSize="none" text="正在切换场景..."/>
   </displayList>
 </component>

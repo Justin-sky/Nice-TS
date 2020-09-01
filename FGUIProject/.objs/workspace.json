@@ -1,0 +1,35 @@
+{
+  "doc.openedDocs": [
+    "ui://l64dumk910wwi53",
+    "ui://l64dumk9pyg64v",
+    "ui://l64dumk9pyg650",
+    "ui://l64dumk910wwi54"
+  ],
+  "libview.firstColumnWidth": 364,
+  "auxline1": true,
+  "libview.iconScale": 0,
+  "backgroundColor": 6710886,
+  "doc.activeDoc": "ui://l64dumk9pyg650",
+  "libview.currentGroup": "",
+  "canvasColor": 10066329,
+  "auxline2": true,
+  "libview.twoColumn": false,
+  "libview.expandedNodes": [
+    "l64dumk9",
+    "/",
+    "l64dumk9",
+    "/ui/",
+    "l64dumk9",
+    "/ui/common/",
+    "l64dumk9",
+    "/ui/home/",
+    "l64dumk9",
+    "/ui/launch/",
+    "l64dumk9",
+    "/ui/level/",
+    "l64dumk9",
+    "/ui/login/",
+    "l64dumk9",
+    "/ui/shop/"
+  ]
+}

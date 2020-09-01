@@ -7,8 +7,7 @@ import { UIWidge } from '../ui/UIWidge';
 import { UIPanel } from '../ui/UIPanel';
 import { UIFactory } from '../ui/UIFactory';
 import { SceneDef } from '../../game/modules/ModuleDef';
-import { UIDefs, UIPackages } from '../ui/UIDefine';
-import { Messenger } from '../common/Messenger';
+import { gameUI } from '../../data/ui/game';
 
 const CS = require('csharp');
 
@@ -128,11 +127,11 @@ export class UIManager extends Singleton<UIManager>{
                 this.onSceneLoadedOnly = null;
                 if(onLoadComplete != null) onLoadComplete();
 
-                this.closeLoading(UIDefs.UILoadingPage);
+                this.closeLoading(gameUI.UILoadingPage);
             }
         };
 
-        this.openLoading(UIPackages.Game, UIDefs.UILoadingPage);
+        this.openLoading(gameUI.PackageName, gameUI.UILoadingPage);
         CS.UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
 
     }
@@ -189,7 +188,7 @@ export class UIManager extends Singleton<UIManager>{
     public enterMainPage():void{
 
         this.m_pageTrackStack.length = 0;
-        this.openPageInScene(SceneDef.HomeScene, UIPackages.Game ,UIDefs.UIHomePage,null)
+        this.openPageInScene(SceneDef.HomeScene, gameUI.PackageName ,gameUI.UIHomePage,null)
     }
 
     //==========================================================UIWindow
