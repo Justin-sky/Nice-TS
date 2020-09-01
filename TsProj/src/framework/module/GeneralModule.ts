@@ -1,28 +1,35 @@
-import { ModuleBase } from "./ModuleBase";
+
+
 import { Logger } from "../logger/Logger";
+import { Messenger, MesObj } from "../common/Messenger";
 
 
-export abstract class GeneralModule extends ModuleBase{
+export abstract class GeneralModule{
    
     private m_name:string = "";
     public title:string;
+
+    protected messenger:Messenger = new Messenger();
 
     public get Name() : string {
         return this.m_name
     }
 
    constructor(){
-       super();
-
 
    }
 
      //当模块收到消息后，对消息进行一些处理
-    public handleMessage(msg:string, ...args:any[]){
+    public handleMessage(msg:number, args:any[]){
+        
+       let mesObj:MesObj =  this.messenger.getListener(msg);
+       if(typeof(mesObj) != "undefined"){
+            for(let l of mesObj.listeners){
+                l.apply(mesObj.obj, args);
+            }
+        }
 
-        this.onModuleMessage(msg, args);
     }
-
 
    //创建模块
    public abstract create(args?:any):void;
@@ -32,9 +39,6 @@ export abstract class GeneralModule extends ModuleBase{
 
    //释放模块
     public abstract  release(): void;
-
-    //由派生类去实现，用于处理消息
-    public abstract onModuleMessage(msg:string, ...args:any[]);
 
 
 

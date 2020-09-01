@@ -18,3 +18,11 @@ export class SceneDef{
     public static LoginScene = "LoginScene";
     public static BattleScene = "BattleScene";
 }
+
+
+
+export class ModuleMessage{
+
+    public static LOGIN_REAMSERVER:number = 1000;
+
+}

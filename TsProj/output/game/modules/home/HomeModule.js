@@ -12,9 +12,6 @@ class HomeModule extends GeneralModule_1.GeneralModule {
     release() {
         Logger_1.Logger.log("Home Release ");
     }
-    onModuleMessage(msg, ...args) {
-        Logger_1.Logger.log(`Home: ${msg} : ${args}`);
-    }
 }
 exports.HomeModule = HomeModule;
 //# sourceMappingURL=HomeModule.js.map

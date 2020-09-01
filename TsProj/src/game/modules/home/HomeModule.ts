@@ -19,11 +19,6 @@ export class HomeModule extends GeneralModule{
         Logger.log("Home Release ");
     }
 
-    public onModuleMessage(msg:string, ...args:any[]){
-
-        Logger.log(`Home: ${msg} : ${args}`);
-    }
-
 
 
 }

@@ -5,7 +5,7 @@ import { ModuleFactory } from "../module/ModuleFactory";
 
 
 export class MessageObject{
-    public msg:string;
+    public msg:number;
     public args:any[];
 }
 
@@ -96,7 +96,7 @@ export class ModuleManager extends Singleton<ModuleManager>{
         return list;
     }
 
-    public sendMessage(target:string, msg:string, ...args:any[]){
+    public sendMessage(target:string, msg:number, ...args:any){
 
         let module:GeneralModule = this.getModule(target);
         if(module != undefined){
@@ -112,7 +112,7 @@ export class ModuleManager extends Singleton<ModuleManager>{
     }
 
 
-    public show(target:string, ...args:any[]){
+    public show(target:string, ...args:any){
 
         let model = this.getModule(target);
 

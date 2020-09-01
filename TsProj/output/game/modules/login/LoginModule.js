@@ -6,18 +6,22 @@ const UIManager_1 = require("../../../framework/manager/UIManager");
 const ModuleDef_1 = require("../ModuleDef");
 const game_1 = require("../../../data/ui/game");
 class LoginModule extends GeneralModule_1.GeneralModule {
+    constructor() {
+        super(...arguments);
+        this.a = 9999;
+    }
     create(args) {
-        Logger_1.Logger.log(" Login creeate,args: " + args);
+        this.messenger.addListener(ModuleDef_1.ModuleMessage.LOGIN_REAMSERVER, this, this.loginReamServer);
     }
     show(args) {
-        Logger_1.Logger.log(" Show,args: " + args);
         UIManager_1.UIManager.Instance(UIManager_1.UIManager).openPageInScene(ModuleDef_1.SceneDef.LoginScene, game_1.gameUI.PackageName, game_1.gameUI.UILoginPage, null);
     }
     release() {
-        Logger_1.Logger.log("Login Release ");
+        this.messenger.removeListener(ModuleDef_1.ModuleMessage.LOGIN_REAMSERVER, this.loginReamServer);
     }
-    onModuleMessage(msg, ...args) {
-        Logger_1.Logger.log(`Login: ${msg} : ${args}`);
+    loginReamServer(account, password) {
+        Logger_1.Logger.log(account + "=======" + password + " ==" + this.a);
+        UIManager_1.UIManager.Instance(UIManager_1.UIManager).enterMainPage();
     }
 }
 exports.LoginModule = LoginModule;

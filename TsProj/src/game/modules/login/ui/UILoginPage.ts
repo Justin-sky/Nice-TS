@@ -1,7 +1,7 @@
 import { UIPage } from "../../../../framework/ui/UIPage";
 import { UIManager } from "../../../../framework/manager/UIManager";
 import { ModuleManager } from "../../../../framework/manager/ModuleManager";
-import { ModuleDef } from "../../ModuleDef";
+import { ModuleDef, ModuleMessage } from "../../ModuleDef";
 import { Logger } from "../../../../framework/logger/Logger";
 
 
@@ -49,7 +49,11 @@ export class UILoginPage extends UIPage{
         Logger.log(`account:${account} - password: ${password}`);
 
         if(account != "" && password != ""){
-            UIManager.Instance(UIManager).enterMainPage();
+            ModuleManager.Instance(ModuleManager).sendMessage(
+                ModuleDef.LoginModule,
+                ModuleMessage.LOGIN_REAMSERVER,
+                account,password
+                );
         }
 
     }

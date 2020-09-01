@@ -34,8 +34,8 @@ class UnitTest {
             Logger_1.Logger.log(`listen call2: ${a} , ${b}`);
         };
         let EVENT_CODE = 100;
-        messenger.addListener(EVENT_CODE, listen);
-        messenger.addListener(EVENT_CODE, listen2);
+        messenger.addListener(EVENT_CODE, this, listen);
+        messenger.addListener(EVENT_CODE, this, listen2);
         messenger.broadcast(EVENT_CODE, 999, " Hello");
         messenger.removeListener(EVENT_CODE, listen);
         messenger.broadcast(EVENT_CODE, 999, " Hello");

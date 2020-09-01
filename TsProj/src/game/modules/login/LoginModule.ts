@@ -1,32 +1,38 @@
 import { GeneralModule } from "../../../framework/module/GeneralModule";
 import { Logger } from "../../../framework/logger/Logger";
 import { UIManager } from "../../../framework/manager/UIManager";
-import { SceneDef } from "../ModuleDef";
+import { SceneDef, ModuleMessage } from "../ModuleDef";
 import { gameUI } from "../../../data/ui/game";
 
 export class LoginModule extends GeneralModule{
 
     public create(args:any):void{
-
-        Logger.log(" Login creeate,args: "+args);
+        this.messenger.addListener(ModuleMessage.LOGIN_REAMSERVER,this, this.loginReamServer);
    }
 
    public show(args:any):void{
-       
-        Logger.log(" Show,args: "+args);
-
         UIManager.Instance(UIManager).openPageInScene(SceneDef.LoginScene, gameUI.PackageName, gameUI.UILoginPage, null);
    }
    
     public  release(): void{
-
-        Logger.log("Login Release ");
+        this.messenger.removeListener(ModuleMessage.LOGIN_REAMSERVER,this.loginReamServer);
     }
 
-    public onModuleMessage(msg:string, ...args:any[]){
+    private a = 9999;
 
-        Logger.log(`Login: ${msg} : ${args}`);
+    public loginReamServer(account:string, password:string){
+
+
+        Logger.log(account + "======="+password + " =="+ this.a);
+
+        UIManager.Instance(UIManager).enterMainPage();
     }
+
+
+
+
+
+
 
 
 }

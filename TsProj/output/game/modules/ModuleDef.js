@@ -15,4 +15,8 @@ SceneDef.HomeScene = "HomeScene";
 SceneDef.LoginScene = "LoginScene";
 SceneDef.BattleScene = "BattleScene";
 exports.SceneDef = SceneDef;
+class ModuleMessage {
+}
+ModuleMessage.LOGIN_REAMSERVER = 1000;
+exports.ModuleMessage = ModuleMessage;
 //# sourceMappingURL=ModuleDef.js.map

@@ -1,33 +1,47 @@
 import {Logger} from '../logger/Logger';
 
+
+
+export class MesObj{
+    public listeners:Array<Function>;
+    public obj:any;
+}
+
+
 export class Messenger{
 
-    private listenerMap = new Map<number,Array<Function>>();
+    private listenerMap = new Map<number,MesObj>();
 
     constructor(){
 
     }
 
-    public addListener(e_type:number, e_listner:Function, ...params:any[] ):void{
+    public addListener(e_type:number, e_obj:any, e_listner:Function):void{
 
-        let listeners = this.listenerMap.get(e_type);
+        let msgObj = this.listenerMap.get(e_type);
 
-        if(typeof(listeners) == "undefined"){
-            listeners = Array<Function>();
+        if(typeof(msgObj) == "undefined"){
+            msgObj = new MesObj();
+            msgObj.obj = e_obj;
+            msgObj.listeners = new Array<Function>();
         }
-        listeners.push(e_listner);
+        msgObj.listeners.push(e_listner);
 
-        this.listenerMap.set(e_type, listeners);
+        this.listenerMap.set(e_type, msgObj);
     }
 
+    public getListener(e_type:number):MesObj{
+        return this.listenerMap.get(e_type);
+    }
 
     public broadcast(e_type:number, ...params:any[]) : void {
 
-        let listeners = this.listenerMap.get(e_type);
+        let msgObj = this.listenerMap.get(e_type);
         
-        if(typeof(listeners) != "undefined"){
-            for(let l of listeners){
-                l.apply(this, params);
+        if(typeof(msgObj) != "undefined"){
+            for(let l of msgObj.listeners){
+               l.apply(msgObj.obj, params);
+
             }
         }
 
@@ -42,13 +56,13 @@ export class Messenger{
 
     public removeListener(e_type:number, e_listener:Function ):void{
 
-        let listeners = this.listenerMap.get(e_type);
+        let msgObj = this.listenerMap.get(e_type);
 
-        if(typeof(listeners) != "undefined"){
+        if(typeof(msgObj) != "undefined"){
             
-            for(let i:number =0; i< listeners.length; i++){
-                if(listeners[i] == e_listener){
-                    listeners.splice(i,1);
+            for(let i:number =0; i< msgObj.listeners.length; i++){
+                if(msgObj.listeners[i] == e_listener){
+                    msgObj.listeners.splice(i,1);
                 }
             }
         }

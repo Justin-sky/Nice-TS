@@ -47,8 +47,8 @@ export class UnitTest{
         }
 
         let  EVENT_CODE:number = 100;
-        messenger.addListener(EVENT_CODE, listen);
-        messenger.addListener(EVENT_CODE,listen2);
+        messenger.addListener(EVENT_CODE,this, listen);
+        messenger.addListener(EVENT_CODE,this, listen2);
         messenger.broadcast(EVENT_CODE, 999," Hello");
 
         messenger.removeListener(EVENT_CODE,listen);
