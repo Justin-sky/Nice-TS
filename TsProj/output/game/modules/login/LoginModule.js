@@ -6,6 +6,7 @@ const UIManager_1 = require("../../../framework/manager/UIManager");
 const ModuleDef_1 = require("../ModuleDef");
 const game_1 = require("../../../data/ui/game");
 const GameConfig_1 = require("../../../global/GameConfig");
+const NetErrorCode_1 = require("../../../framework/net/NetErrorCode");
 const CS = require('csharp');
 class LoginModule extends GeneralModule_1.GeneralModule {
     create(args) {
@@ -21,12 +22,16 @@ class LoginModule extends GeneralModule_1.GeneralModule {
         Logger_1.Logger.log(account + "=======" + password);
         //登录验证服
         let reamChannel = CS.NiceTS.TService.Instance.GetChannel();
-        reamChannel.add_ErrorCallback(this.onSocketErr);
+        reamChannel.add_ErrorCallback((channel, code) => {
+            this.onReamSocketErr(channel, code);
+        });
         reamChannel.Connect(GameConfig_1.GameConfig.realmServerIP + ":" + GameConfig_1.GameConfig.realmServerPort);
         // UIManager.Instance(UIManager).enterMainPage();
     }
-    onSocketErr(channel, code) {
+    onReamSocketErr(channel, code) {
         Logger_1.Logger.log("socket code: " + code);
+        if (code == NetErrorCode_1.NetErrorCode.ERR_SocketConnSucc) {
+        }
     }
 }
 exports.LoginModule = LoginModule;
