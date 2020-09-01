@@ -1,5 +1,6 @@
 import { Singleton } from "../common/Singleton";
 import { Logger } from "../logger/Logger";
+import { Opcode } from "../../data/pb/Opcode";
 
 const CS = require('csharp');
 
@@ -13,6 +14,7 @@ export class MsgPack{
 
 export class GameSession extends Singleton<GameSession>{
 
+    public id:number = 0;  //session ID
     private reSendInterval:number = 10; //10秒重发一次
     private maxReSendTimes:number = 5; //最大重发次数
 
@@ -39,8 +41,6 @@ export class GameSession extends Singleton<GameSession>{
         this.channel.add_ReadCallback = (bytes:Uint8Array)=>{
             this.onReceive(bytes);
         };
-
-
         this.channel.Connect(address);
 
         return this;
@@ -50,8 +50,15 @@ export class GameSession extends Singleton<GameSession>{
     public send(opcode:number,rpcid:number, message:Uint8Array, callBack:Function){
         
         //封装消息：opcode+msg
-        let sendArray:Uint8Array = new Uint8Array();
+        let lenBuf:Uint8Array = new Uint8Array(4);
+        lenBuf[0] = opcode >>> 24;
+        lenBuf[1] = opcode >>> 16;
+        lenBuf[2] = opcode >>> 8;
+        lenBuf[3] = opcode & 0xff;
 
+        let sendArray:Uint8Array = new Uint8Array(message.length + 4);
+        sendArray.set(lenBuf);
+        sendArray.set(message,4);
         
         if(callBack != null){
             let msgPack:MsgPack = new MsgPack();
@@ -70,9 +77,11 @@ export class GameSession extends Singleton<GameSession>{
 
     public onReceive(bytes:Uint8Array){
 
-        let  opcode = 0;
-        let msg:any = null;
-        let rpcId = 0;
+        let  opcode = bytes[0] << 24 | bytes[1] << 16 | bytes[2] << 8 | bytes[3];;
+        let msgBytes:Uint8Array = bytes.subarray(4);
+        
+        let msg = Opcode.map[opcode](msgBytes);
+        let rpcId = msg.rpcId;
 
 
         if(!this.requestCallback.has(rpcId)){
@@ -110,4 +119,7 @@ export class GameSession extends Singleton<GameSession>{
     }
 
 
+    public disconnect():void{
+        this.channel.Dispose();
+    }
 }

@@ -8,7 +8,7 @@ Road Map ：
 * UI集成FairyGUI
 * 渲染管线修改为URP
 * 网络模块采用protobufjs, 支持断线重连，消息重发
-* Excel导出TS工具
+* Excel导出TS工具 [NiceET](https://github.com/Justin-sky/Nice-ET/tree/master/Tools/ExcelExporter)
 * 新手引导系统
 * 任务系统
 * 聊天系统

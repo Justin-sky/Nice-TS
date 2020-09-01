@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Singleton_1 = require("../common/Singleton");
 const Logger_1 = require("../logger/Logger");
+const Opcode_1 = require("../../data/pb/Opcode");
 const CS = require('csharp');
 class MsgPack {
     constructor() {
@@ -12,6 +13,7 @@ exports.MsgPack = MsgPack;
 class GameSession extends Singleton_1.Singleton {
     constructor() {
         super();
+        this.id = 0; //session ID
         this.reSendInterval = 10; //10秒重发一次
         this.maxReSendTimes = 5; //最大重发次数
         this._rpcId = 1;
@@ -34,7 +36,14 @@ class GameSession extends Singleton_1.Singleton {
     //发送protoubf消息
     send(opcode, rpcid, message, callBack) {
         //封装消息：opcode+msg
-        let sendArray = new Uint8Array();
+        let lenBuf = new Uint8Array(4);
+        lenBuf[0] = opcode >>> 24;
+        lenBuf[1] = opcode >>> 16;
+        lenBuf[2] = opcode >>> 8;
+        lenBuf[3] = opcode & 0xff;
+        let sendArray = new Uint8Array(message.length + 4);
+        sendArray.set(lenBuf);
+        sendArray.set(message, 4);
         if (callBack != null) {
             let msgPack = new MsgPack();
             msgPack.sendTime = new Date().getTime();
@@ -48,9 +57,11 @@ class GameSession extends Singleton_1.Singleton {
         this.channel.Send(bytes);
     }
     onReceive(bytes) {
-        let opcode = 0;
-        let msg = null;
-        let rpcId = 0;
+        let opcode = bytes[0] << 24 | bytes[1] << 16 | bytes[2] << 8 | bytes[3];
+        ;
+        let msgBytes = bytes.subarray(4);
+        let msg = Opcode_1.Opcode.map[opcode](msgBytes);
+        let rpcId = msg.rpcId;
         if (!this.requestCallback.has(rpcId)) {
             Logger_1.Logger.logError(`not found rpc, response message:${rpcId}`);
         }
@@ -78,6 +89,9 @@ class GameSession extends Singleton_1.Singleton {
                 }
             }
         });
+    }
+    disconnect() {
+        this.channel.Dispose();
     }
 }
 exports.GameSession = GameSession;

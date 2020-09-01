@@ -7,6 +7,7 @@ import { GameSession } from "../../../framework/net/GameSession";
 import { GameConfig } from "../../../global/GameConfig";
 import { Opcode } from "../../../data/pb/Opcode";
 import { NetErrorCode } from "../../../framework/net/NetErrorCode";
+import { NiceET } from "../../../data/pb/OuterMessage";
 
 
 const CS = require('csharp');
@@ -16,6 +17,8 @@ const CS = require('csharp');
 export class LoginModule extends GeneralModule{
 
     private sessionReam:GameSession;
+    private account:string;
+    private password:string;
 
     public create(args:any):void{
         this.messenger.addListener(ModuleMessage.LOGIN_REAMSERVER,this, this.loginReamServer);
@@ -32,8 +35,8 @@ export class LoginModule extends GeneralModule{
 
     public loginReamServer(account:string, password:string){
 
-
-        Logger.log(account + "======="+password );
+        this.account = account;
+        this.password = password;
 
         //登录验证服
         this.sessionReam = GameSession.Instance(GameSession).connectChannel(
@@ -43,16 +46,27 @@ export class LoginModule extends GeneralModule{
             }
         );
 
-
        // UIManager.Instance(UIManager).enterMainPage();
     }
 
 
     public onReamSocketErr(channel:any, code:number){
-        Logger.log("socket code: "+code);
+        Logger.log("socket code: "+code + ",id:"+this.sessionReam.id);
 
         if(code == NetErrorCode.ERR_SocketConnSucc){
+            this.sessionReam.id = channel.Id;
 
+            //发送登录指令
+            let rpcID = this.sessionReam.rpcId;
+            let msg = NiceET.C2R_Login.create();
+            msg.RpcId = rpcID;
+            msg.Account = this.account;
+            msg.Password = this.password;
+            let buf = NiceET.C2R_Login.encode(msg).finish();
+            // this.sessionReam.send(Opcode.C2R_LOGIN, rpcID, buf, (response:any)=>{
+            //     Logger.log(response);
+            //     this.sessionReam.disconnect();
+            // });
         }
     }
 

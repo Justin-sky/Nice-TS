@@ -63,9 +63,12 @@ namespace NiceTS
 		
 			this.innArgs.Completed += this.OnComplete;
 			this.outArgs.Completed += this.OnComplete;
+
+			this.Id = IdGenerater.GenerateId();
 		}
 		public void Connect(string address)
         {
+			
 			IPEndPoint ipEndPoint = NetworkHelper.ToIPEndPoint(address);
 
 			this.socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -333,7 +336,13 @@ namespace NiceTS
 		public void Dispose()
         {
 			this.Id = 0;
+			this.memoryStream.Flush();
+			this.memoryStream.Dispose();
 
+			if (this.socket.Connected)
+            {
+				this.socket.Disconnect(false);
+			}
         }
 
 

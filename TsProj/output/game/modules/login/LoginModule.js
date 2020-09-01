@@ -8,6 +8,7 @@ const game_1 = require("../../../data/ui/game");
 const GameSession_1 = require("../../../framework/net/GameSession");
 const GameConfig_1 = require("../../../global/GameConfig");
 const NetErrorCode_1 = require("../../../framework/net/NetErrorCode");
+const OuterMessage_1 = require("../../../data/pb/OuterMessage");
 const CS = require('csharp');
 class LoginModule extends GeneralModule_1.GeneralModule {
     create(args) {
@@ -20,7 +21,8 @@ class LoginModule extends GeneralModule_1.GeneralModule {
         this.messenger.removeListener(ModuleDef_1.ModuleMessage.LOGIN_REAMSERVER, this.loginReamServer);
     }
     loginReamServer(account, password) {
-        Logger_1.Logger.log(account + "=======" + password);
+        this.account = account;
+        this.password = password;
         //登录验证服
         this.sessionReam = GameSession_1.GameSession.Instance(GameSession_1.GameSession).connectChannel(GameConfig_1.GameConfig.realmServerIP + ":" + GameConfig_1.GameConfig.realmServerPort, (channel, code) => {
             this.onReamSocketErr(channel, code);
@@ -28,8 +30,20 @@ class LoginModule extends GeneralModule_1.GeneralModule {
         // UIManager.Instance(UIManager).enterMainPage();
     }
     onReamSocketErr(channel, code) {
-        Logger_1.Logger.log("socket code: " + code);
+        Logger_1.Logger.log("socket code: " + code + ",id:" + this.sessionReam.id);
         if (code == NetErrorCode_1.NetErrorCode.ERR_SocketConnSucc) {
+            this.sessionReam.id = channel.Id;
+            //发送登录指令
+            let rpcID = this.sessionReam.rpcId;
+            let msg = OuterMessage_1.NiceET.C2R_Login.create();
+            msg.RpcId = rpcID;
+            msg.Account = this.account;
+            msg.Password = this.password;
+            let buf = OuterMessage_1.NiceET.C2R_Login.encode(msg).finish();
+            // this.sessionReam.send(Opcode.C2R_LOGIN, rpcID, buf, (response:any)=>{
+            //     Logger.log(response);
+            //     this.sessionReam.disconnect();
+            // });
         }
     }
 }
