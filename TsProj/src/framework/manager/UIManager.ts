@@ -17,13 +17,6 @@ export class UIPageTrack{
     public arg:any;
 }
 
-export enum UIMessageNames {
-    UIFRRAME_ON_PANEL_CREATE,
-    UIFRRAME_ON_PANEL_OPEN,
-    UIFRRAME_ON_PANEL_CLOSE,
-    UIFRRAME_ON_PAGE_BACK,
-    UIFRRAME_ON_WINDOW_CLOSE
-}
 
 export class UIManager extends Singleton<UIManager>{
 
@@ -47,8 +40,6 @@ export class UIManager extends Singleton<UIManager>{
         
 
     }
-
-
 
     private closeAllLoadedPanel():void{
 

@@ -8,14 +8,6 @@ const CS = require('csharp');
 class UIPageTrack {
 }
 exports.UIPageTrack = UIPageTrack;
-var UIMessageNames;
-(function (UIMessageNames) {
-    UIMessageNames[UIMessageNames["UIFRRAME_ON_PANEL_CREATE"] = 0] = "UIFRRAME_ON_PANEL_CREATE";
-    UIMessageNames[UIMessageNames["UIFRRAME_ON_PANEL_OPEN"] = 1] = "UIFRRAME_ON_PANEL_OPEN";
-    UIMessageNames[UIMessageNames["UIFRRAME_ON_PANEL_CLOSE"] = 2] = "UIFRRAME_ON_PANEL_CLOSE";
-    UIMessageNames[UIMessageNames["UIFRRAME_ON_PAGE_BACK"] = 3] = "UIFRRAME_ON_PAGE_BACK";
-    UIMessageNames[UIMessageNames["UIFRRAME_ON_WINDOW_CLOSE"] = 4] = "UIFRRAME_ON_WINDOW_CLOSE";
-})(UIMessageNames = exports.UIMessageNames || (exports.UIMessageNames = {}));
 class UIManager extends Singleton_1.Singleton {
     constructor() {
         super();
