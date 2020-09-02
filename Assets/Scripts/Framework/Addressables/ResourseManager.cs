@@ -26,6 +26,11 @@ namespace Addressable
             };
         }
 
+        public static void ReleaseFGUIPackage(string packageName)
+        {
+            UIPackage.RemovePackage(packageName);
+        }
+
         public static async Task LoadFairyGUIPackage(string address, string packageName)
         {
 
