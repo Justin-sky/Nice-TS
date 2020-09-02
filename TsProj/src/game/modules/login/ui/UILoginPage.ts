@@ -5,14 +5,11 @@ import { ModuleDef, ModuleMessage } from "../../ModuleDef";
 import { Logger } from "../../../../framework/logger/Logger";
 
 
-
-
 export class UILoginPage extends UIPage{
-    
+
     public m_account:any;
     public m_password:any;
     public m_loginBtn:any;
-
 
 
     public onAwake():void{
@@ -22,12 +19,13 @@ export class UILoginPage extends UIPage{
         this.m_password = this.fui.GetChild("password");
         this.m_loginBtn = this.fui.GetChild("loginBtn");
 
+
         this.m_loginBtn.onClick.Add(()=>{
             this.onLoginClick();
         });
     }
-
     
+
     public onOpen(arg:any):void{
         super.onOpen(arg);
 
@@ -37,8 +35,6 @@ export class UILoginPage extends UIPage{
         super.onClose(arg);
 
     }
-
-
 
 
     public onLoginClick(){
