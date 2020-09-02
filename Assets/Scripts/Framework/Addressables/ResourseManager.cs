@@ -26,15 +26,11 @@ namespace Addressable
             };
         }
 
-
-        //fairy_package  
-        public static IEnumerator LoadFairyGUIPackage(string address, string packageName)
+        public static async Task LoadFairyGUIPackage(string address, string packageName)
         {
 
-            var  handler = Addressables.LoadAssetAsync<TextAsset>(address);
-            yield return handler;
+            var pkgAsset = await Addressables.LoadAssetAsync<TextAsset>(address).Task;
 
-            TextAsset pkgAsset = handler.Result;
             UIPackage.AddPackage(
                 pkgAsset.bytes,
                 packageName,
@@ -48,10 +44,9 @@ namespace Addressable
 
                     }
                 });
-            Addressables.Release(handler);
-   
+            Addressables.Release(pkgAsset);
+ 
         }
-
 
         public static async Task<bool> PreadloadFB(string fbLabel)
         {
@@ -67,13 +62,11 @@ namespace Addressable
 
                     OnFBLoadedHandle?.Invoke(txt.name, txt.bytes);
                 }
-
                 return true;
             }
             else
             {
                 Logger.LogError("加载Flatbuffer失败......");
-
                 return false;
             }
 
@@ -84,7 +77,7 @@ namespace Addressable
         public static async Task<GameObject> LoadPrefab(string address)
         {
             var res =  await Addressables.LoadAssetAsync<GameObject>(address).Task;
-
+           
             return res;
         }
 

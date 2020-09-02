@@ -20,7 +20,7 @@ public class GameLaunch : MonoSingleton<GameLaunch>
     const string fairy_package = "game_fui.bytes";
     public LaunchPage launchPage;
 
-    IEnumerator Start()
+    async Task Start()
     {
         LoggerHelper.Instance.Startup();
         JsManager.Instance.Startup();
@@ -35,7 +35,7 @@ public class GameLaunch : MonoSingleton<GameLaunch>
 
         //加载FairyGUI Package
         ResourceManager.init();
-        yield return  ResourceManager.LoadFairyGUIPackage(fairy_package, "game");
+        await ResourceManager.LoadFairyGUIPackage(fairy_package, "game");
 
 
         //加载更新界面
@@ -47,15 +47,15 @@ public class GameLaunch : MonoSingleton<GameLaunch>
         notice.ShowOneButton("test test", () => {
             notice.Hide();
         });
-        yield return notice.WaitForResponse();
+        await notice.WaitForResponse();
 
 
         // 开始更新
         if (launchPage != null)
         {
-            StartCoroutine(launchPage.CheckUpdate());
+            await launchPage.CheckUpdate();
         }
-        yield break;
+ 
     }
 
     public void JsLuanchFinish()

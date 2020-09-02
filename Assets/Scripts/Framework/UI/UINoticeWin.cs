@@ -2,6 +2,7 @@
 using FairyGUI.Utils;
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace NiceTS
@@ -15,7 +16,24 @@ namespace NiceTS
         private GButton retryBtn;
         private GButton okBtn;
 
-        private int lastClickIndex = -1;
+        private TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+
+        private int _lastClickIndex = -1;
+        public int LastClickIndex
+        {
+            get
+            {
+                return this._lastClickIndex;
+            }
+            set
+            {
+                if(value != -1)
+                {
+                    this.tcs.SetResult(true);
+                }
+                this._lastClickIndex = value;
+            }
+        }
 
         public override void ConstructFromXML(XML xml)
         {
@@ -40,12 +58,12 @@ namespace NiceTS
         {
             this.x = 500;
             this.y = 200;
-            this.lastClickIndex = -1;
+            this.LastClickIndex = -1;
             
             gText.text = msg;
             okBtn.onClick.Add(()=> {
                 Logger.Log("button click");
-                this.lastClickIndex = 3;
+                this.LastClickIndex = 3;
                 okClick?.Invoke(); 
             });
             GRoot.inst.AddChild(this);
@@ -56,14 +74,9 @@ namespace NiceTS
             GRoot.inst.RemoveChild(this);
         }
 
-        public IEnumerator WaitForResponse()
+        public async Task WaitForResponse()
         {
-            yield return new WaitUntil(()=> {
-               
-                return lastClickIndex != -1;
-            });
-            yield break;
+            await tcs.Task;
         }
-
     }
 }

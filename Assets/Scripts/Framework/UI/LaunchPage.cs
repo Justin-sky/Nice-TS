@@ -4,6 +4,7 @@ using NiceTS;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine.AddressableAssets;
 using UnityEngine.AddressableAssets.ResourceLocators;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -42,101 +43,86 @@ public class LaunchPage : GComponent
     }
 
 
-    public IEnumerator CheckUpdate()
+    public async Task CheckUpdate()
     {
         var start = DateTime.Now;
 
         gTextField.text = "正在检查资源更新...";
 
-        var initHandle = Addressables.InitializeAsync();
-        yield return initHandle;
+        await Addressables.InitializeAsync().Task;
 
         var a = Addressables.RuntimePath;
-        var checkHandle = Addressables.CheckForCatalogUpdates(false);
-        yield return checkHandle;
+        var catalogs = await Addressables.CheckForCatalogUpdates(false).Task;
+       
         Logger.Log(string.Format("CheckIfNeededUpdate use {0}ms", (DateTime.Now - start).Milliseconds));
-        Logger.Log($"catalog count: {checkHandle.Result.Count} === check status: {checkHandle.Status}");
-        if (checkHandle.Status == AsyncOperationStatus.Succeeded)
+        Logger.Log($"catalog count: {catalogs.Count} === check status: {catalogs}");
+
+        if (catalogs != null && catalogs.Count > 0)
         {
-            List<string> catalogs = checkHandle.Result;
-            if (catalogs != null && catalogs.Count > 0)
+            gTextField.text = "正在更新资源...";
+            gProgress.visible = true;
+            gProgress.value = 0;
+
+            start = DateTime.Now;
+            var locators = await Addressables.UpdateCatalogs(catalogs, false).Task;
+            Logger.Log($"locator count: {locators.Count}");
+
+            foreach (var v in locators)
             {
-                gTextField.text = "正在更新资源...";
-                gProgress.visible = true;
-                gProgress.value = 0;
+                List<object> keys = new List<object>();
+                keys.AddRange(v.Keys);
 
-                start = DateTime.Now;
-                AsyncOperationHandle<List<IResourceLocator>> updateHandle = Addressables.UpdateCatalogs(catalogs, false);
-                yield return updateHandle;
+                var size = await Addressables.GetDownloadSizeAsync(keys).Task;
+                Logger.Log($"download size:{size}");
 
-                var locators = updateHandle.Result;
-                Logger.Log($"locator count: {locators.Count}");
-
-                foreach (var v in locators)
+                if (size > 0)
                 {
-                    List<object> keys = new List<object>();
-                    keys.AddRange(v.Keys);
+                    UINoticeWin notice = UINoticeWin.CreateInstance();
+                    notice.ShowOneButton($"本次更新大小：{size}", () => {
+                        notice.Hide();
+                    });
 
-                    var sizeHandle = Addressables.GetDownloadSizeAsync(keys);
-                    yield return sizeHandle;
+                    //等待确定
+                    await notice.WaitForResponse();
 
-                    long size = sizeHandle.Result;
-                    Logger.Log($"download size:{size}");
-
-                    if (size > 0)
+                    var downloadHandle = Addressables.DownloadDependenciesAsync(keys, Addressables.MergeMode.Union);
+                    while (!downloadHandle.IsDone)
                     {
-                        UINoticeWin notice = UINoticeWin.CreateInstance();
-                        notice.ShowOneButton($"本次更新大小：{size}",()=> {
-                            notice.Hide();
-                        });
-                        yield return notice.WaitForResponse();
+                        float percentage = downloadHandle.PercentComplete;
+                        Logger.Log($"download pregress: {percentage}");
+                        gProgress.value = percentage * 100;
 
-                        var downloadHandle = Addressables.DownloadDependenciesAsync(keys, Addressables.MergeMode.Union);
-                        while (!downloadHandle.IsDone)
-                        {
-                            float percentage = downloadHandle.PercentComplete;
-                            Logger.Log($"download pregress: {percentage}");
-                            gProgress.value = percentage * 100;
-
-                            yield return null;
-                        }
-                        Addressables.Release(downloadHandle);
                     }
+                    Addressables.Release(downloadHandle);
                 }
-
-                Logger.Log(string.Format("UpdateFinish use {0}ms", (DateTime.Now - start).Milliseconds));
-                yield return UpdateFinish();
-
-                Addressables.Release(updateHandle);
             }
 
-            Addressables.Release(checkHandle);
+            Logger.Log(string.Format("UpdateFinish use {0}ms", (DateTime.Now - start).Milliseconds));
+            UpdateFinish();
+
+            Addressables.Release(locators);
         }
 
-        yield return StartGame();
+        Addressables.Release(catalogs);
+
+        StartGame();
 
     }
 
-    IEnumerator StartGame()
+    void StartGame()
     {
         gTextField.text = "正在进入游戏...";
-
         JsManager.Instance.StartGame();
 
-
-        yield break;
     }
 
-    IEnumerator UpdateFinish()
+    void UpdateFinish()
     {
         gProgress.value = 100;
-
         gTextField.text = "正在准备资源...";
-
 
         JsManager.Instance.Restart();
 
-        yield break;
     }
 
  
