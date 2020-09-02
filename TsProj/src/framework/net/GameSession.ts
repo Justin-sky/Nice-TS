@@ -26,9 +26,8 @@ export class GameSession extends Singleton<GameSession>{
         super();
     }
 
-    public get rpcId(){
-        this._rpcId++;
-        return this.rpcId;
+    public get rpcId():number{
+        return ++this._rpcId;
     }
 
     //address-> ip:port
