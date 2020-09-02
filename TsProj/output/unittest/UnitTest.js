@@ -4,7 +4,6 @@ const TimeUtil_1 = require("../framework/util/TimeUtil");
 const SingletonTest_1 = require("./SingletonTest");
 const Logger_1 = require("../framework/logger/Logger");
 const Messenger_1 = require("../framework/common/Messenger");
-const TimeManager_1 = require("../framework/manager/TimeManager");
 const ResManager_1 = require("../framework/manager/ResManager");
 const OuterMessage_1 = require("../data/pb/OuterMessage");
 const SkillConfig_1 = require("../data/excel/SkillConfig");
@@ -42,12 +41,12 @@ class UnitTest {
         messenger.clearup();
         messenger.broadcast(EVENT_CODE, 999, " Hello");
         Logger_1.Logger.log("Timer =============================");
-        let timeFun = function () {
-            Logger_1.Logger.log(this.testVar);
-            Logger_1.Logger.log("timer tick..");
-        };
-        let timer = TimeManager_1.TimeManager.Instance(TimeManager_1.TimeManager).getTImer(5, timeFun, this);
-        //timer.start();
+        let interval = setInterval(() => {
+            Logger_1.Logger.log("inter val..");
+        }, 1000);
+        let timeout = setTimeout(() => {
+            clearInterval(interval);
+        }, 5000);
         Logger_1.Logger.log("ResourceManager =============================");
         let prefab = await ResManager_1.ResManager.Instance(ResManager_1.ResManager).loadPrefab("Models/1001/Character.prefab");
         Logger_1.Logger.log(prefab);

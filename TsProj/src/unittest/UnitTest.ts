@@ -59,12 +59,17 @@ export class UnitTest{
 
 
         Logger.log("Timer =============================");
-        let timeFun = function(){
-            Logger.log(this.testVar);
-            Logger.log("timer tick..");
-        };
-        let timer:Timer = TimeManager.Instance(TimeManager).getTImer(5,timeFun,this);
-        //timer.start();
+
+        let interval = setInterval(()=>{
+            Logger.log("inter val..")
+        },1000);
+        let timeout = setTimeout(()=>{
+            clearInterval(interval);
+        },5000); 
+
+
+
+
 
         Logger.log("ResourceManager =============================");
 
