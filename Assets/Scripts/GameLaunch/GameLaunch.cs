@@ -29,33 +29,14 @@ public class GameLaunch : MonoSingleton<GameLaunch>
         GRoot.inst.SetContentScaleFactor(1280, 720, UIContentScaler.ScreenMatchMode.MatchWidthOrHeight);
         UIPackage.unloadBundleByFGUI = false;
 
-        NTexture.CustomDestroyMethod = (Texture t) =>
-        {
-            Addressables.Release(t);
-            Logger.Log(".... release addressable: " + t.name);
-        };
-
+        
         UIObjectFactory.SetPackageItemExtension(LaunchPage.URL, typeof(LaunchPage));
         UIObjectFactory.SetPackageItemExtension(UINoticeWin.URL, typeof(UINoticeWin));
 
         //加载FairyGUI Package
-        AsyncOperationHandle<TextAsset> handle = Addressables.LoadAssetAsync<TextAsset>(fairy_package);
-        yield return handle;
-        TextAsset pkgAsset = handle.Result;
-        UIPackage.AddPackage(
-            pkgAsset.bytes, 
-            "game",
-            async (string name, string extension, Type type, PackageItem ite) => {
-                Logger.Log($"{name}, {extension}, {type.ToString()}, {ite.ToString()}");
+        ResourceManager.init();
+        yield return  ResourceManager.LoadFairyGUIPackage(fairy_package, "game");
 
-                if (type == typeof(Texture))
-                {
-                    Texture t = await Addressables.LoadAssetAsync<Texture>(name+extension).Task ;
-                    ite.owner.SetItemAsset(ite, t, DestroyMethod.Custom);
- 
-                }      
-            });
-        Addressables.Release(handle);
 
         //加载更新界面
         launchPage = LaunchPage.CreateInstance();
