@@ -2,8 +2,6 @@ import {TimeUtil} from '../framework/util/TimeUtil';
 import {SingletonTest} from './SingletonTest';
 import {Logger} from '../framework/logger/Logger';
 import {Messenger} from '../framework/common/Messenger';
-import { TimeManager } from '../framework/manager/TimeManager';
-import { Timer } from '../framework/timer/Timer';
 import { ResManager } from '../framework/manager/ResManager';
 import { ModuleManager } from '../framework/manager/ModuleManager';
 import { ModuleDef } from '../game/modules/ModuleDef';

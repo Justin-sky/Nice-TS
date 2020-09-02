@@ -15,8 +15,6 @@ public class JsManager:MonoSingleton<JsManager>
     public Action JsOnApplicationQuit;
     public Action JsOnDispose;
 
-    public Action<float, float> JsUpdate;
-    public Action JsLateUpdate;
     public Action<float> JsFixedUpdate;
 
 
@@ -71,50 +69,10 @@ public class JsManager:MonoSingleton<JsManager>
         {
             jsEnv.Tick();
 
-
-            if (gameStarted)
-            {
-#if UNITY_EDITOR
-                var start = sw.ElapsedMilliseconds;
-#endif
-                try
-                {
-                    JsUpdate?.Invoke(Time.deltaTime, Time.unscaledDeltaTime);
-                }
-                catch (Exception ex)
-                {
-                    Logger.LogError("luaUpdate err : " + ex.Message + "\n" + ex.StackTrace);
-                }
-#if UNITY_EDITOR
-                updateElapsedMilliseconds = sw.ElapsedMilliseconds - start;
-#endif
-
-            }
         }
         
     }
 
-    private void LateUpdate()
-    {
-        if (gameStarted)
-        {
-#if UNITY_EDITOR
-            var start = sw.ElapsedMilliseconds;
-#endif
-            try
-            {
-                JsLateUpdate?.Invoke();
-            }
-            catch (Exception ex)
-            {
-                Logger.LogError("luaLateUpdate err : " + ex.Message + "\n" + ex.StackTrace);
-            }
-#if UNITY_EDITOR
-            lateUpdateElapsedMilliseconds = sw.ElapsedMilliseconds - start;
-#endif
-
-        }
-    }
 
     private void FixedUpdate()
     {
