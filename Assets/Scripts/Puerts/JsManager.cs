@@ -8,36 +8,15 @@ using UnityEngine.SceneManagement;
 
 public class JsManager:MonoSingleton<JsManager>
 {
-    private bool gameStarted = false;
-
     JsEnv jsEnv = null;
 
     public Action JsOnApplicationQuit;
     public Action JsOnDispose;
 
-    public Action<float> JsFixedUpdate;
-
-
-#if UNITY_EDITOR
-#pragma warning disable 0414
-    [SerializeField]
-    long updateElapsedMilliseconds = 0;
-    [SerializeField]
-    long lateUpdateElapsedMilliseconds = 0;
-    [SerializeField]
-    long fixedUpdateElapsedMilliseconds = 0;
-#pragma warning restore 0414
-    Stopwatch sw = new Stopwatch();
-#endif
-
-
     protected override void Init()
     {
         base.Init();
-
         InitJsEnv();
-
-        gameStarted = false;
     }
 
     void InitJsEnv()
@@ -68,31 +47,6 @@ public class JsManager:MonoSingleton<JsManager>
         if (jsEnv != null)
         {
             jsEnv.Tick();
-
-        }
-        
-    }
-
-
-    private void FixedUpdate()
-    {
-        if (gameStarted)
-        {
-#if UNITY_EDITOR
-            var start = sw.ElapsedMilliseconds;
-#endif
-            try
-            {
-                JsFixedUpdate?.Invoke(Time.fixedDeltaTime);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogError("luaFixedUpdate err : " + ex.Message + "\n" + ex.StackTrace);
-            }
-#if UNITY_EDITOR
-            fixedUpdateElapsedMilliseconds = sw.ElapsedMilliseconds - start;
-#endif
-
         }
     }
 
@@ -101,17 +55,13 @@ public class JsManager:MonoSingleton<JsManager>
         if(jsEnv != null)
         {
             jsEnv.Eval(@"require('GameMain')");
-
-            gameStarted = true;
         }
     }
 
     public void Restart()
     {
         Dispose();
-
         InitJsEnv();
-
         StartGame();
     }
 
@@ -126,9 +76,6 @@ public class JsManager:MonoSingleton<JsManager>
     public override void Dispose()
     {
         base.Dispose();
-
-        gameStarted = false;
-
         JsOnDispose?.Invoke();
 
         if (jsEnv != null){
@@ -141,9 +88,7 @@ public class JsManager:MonoSingleton<JsManager>
                 string msg = string.Format("js exception : {0}\n {1}", ex.Message, ex.StackTrace);
                 Logger.LogError(msg, null);
             }
-            
         }
-
     }
 }
 

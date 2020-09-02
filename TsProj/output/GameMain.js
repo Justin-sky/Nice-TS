@@ -13,7 +13,6 @@ class GameMain {
     constructor() {
         CS.JsManager.Instance.JsOnApplicationQuit = () => this.onApplicationQuit();
         CS.JsManager.Instance.JsOnDispose = () => this.onDispose();
-        CS.JsManager.Instance.JsFixedUpdate = (fixedDeltaTime) => this.onFixedUpdate(fixedDeltaTime);
     }
     async start() {
         try {
@@ -35,8 +34,6 @@ class GameMain {
         catch (ex) {
             Logger_1.Logger.logError(ex);
         }
-    }
-    onFixedUpdate(fixedDeltaTime) {
     }
     onApplicationQuit() {
         GameObjectPool_1.GameObjectPool.Instance(GameObjectPool_1.GameObjectPool).cleanup(true);

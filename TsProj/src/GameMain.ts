@@ -16,8 +16,6 @@ class GameMain{
     constructor() {
         CS.JsManager.Instance.JsOnApplicationQuit = () => this.onApplicationQuit();
         CS.JsManager.Instance.JsOnDispose = () => this.onDispose();
-
-        CS.JsManager.Instance.JsFixedUpdate = (fixedDeltaTime:number) => this.onFixedUpdate(fixedDeltaTime);
     }
 
     public async start() {
@@ -52,17 +50,10 @@ class GameMain{
 
     }
 
-
-    public onFixedUpdate(fixedDeltaTime:number):void{
-
-    }
-
     public onApplicationQuit():void {
 
- 
         GameObjectPool.Instance(GameObjectPool).cleanup(true);
         ModuleManager.Instance(ModuleManager).cleanup();
-
         Logger.log("Game onApplicationQuit in JS....");
     }
 
