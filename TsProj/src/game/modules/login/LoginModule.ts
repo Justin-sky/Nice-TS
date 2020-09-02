@@ -63,10 +63,10 @@ export class LoginModule extends GeneralModule{
             msg.Account = this.account;
             msg.Password = this.password;
             let buf = NiceET.C2R_Login.encode(msg).finish();
-            // this.sessionReam.send(Opcode.C2R_LOGIN, rpcID, buf, (response:any)=>{
-            //     Logger.log(response);
-            //     this.sessionReam.disconnect();
-            // });
+            this.sessionReam.send(Opcode.C2R_LOGIN, rpcID, buf, (response:any)=>{
+                Logger.log(response);
+                this.sessionReam.disconnect();
+            });
         }
     }
 

@@ -7,6 +7,7 @@ const ModuleDef_1 = require("../ModuleDef");
 const game_1 = require("../../../data/ui/game");
 const GameSession_1 = require("../../../framework/net/GameSession");
 const GameConfig_1 = require("../../../global/GameConfig");
+const Opcode_1 = require("../../../data/pb/Opcode");
 const NetErrorCode_1 = require("../../../framework/net/NetErrorCode");
 const OuterMessage_1 = require("../../../data/pb/OuterMessage");
 const CS = require('csharp');
@@ -40,10 +41,10 @@ class LoginModule extends GeneralModule_1.GeneralModule {
             msg.Account = this.account;
             msg.Password = this.password;
             let buf = OuterMessage_1.NiceET.C2R_Login.encode(msg).finish();
-            // this.sessionReam.send(Opcode.C2R_LOGIN, rpcID, buf, (response:any)=>{
-            //     Logger.log(response);
-            //     this.sessionReam.disconnect();
-            // });
+            this.sessionReam.send(Opcode_1.Opcode.C2R_LOGIN, rpcID, buf, (response) => {
+                Logger_1.Logger.log(response);
+                this.sessionReam.disconnect();
+            });
         }
     }
 }

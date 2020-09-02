@@ -20,8 +20,7 @@ class GameSession extends Singleton_1.Singleton {
         this.requestCallback = new Map();
     }
     get rpcId() {
-        this._rpcId++;
-        return this.rpcId;
+        return ++this._rpcId;
     }
     //address-> ip:port
     connectChannel(address, connCaback) {
