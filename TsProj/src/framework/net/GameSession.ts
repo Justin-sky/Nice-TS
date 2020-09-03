@@ -57,7 +57,7 @@ export class GameSession extends Singleton<GameSession>{
         this._readCallback = (bytes:Uint8Array)=>{
             this.onReceive(bytes);
         };
-        this.channel.add_ReadCallback = this._readCallback;
+        this.channel.add_ReadCallback(this._readCallback);
 
 
         this.channel.Connect(address);
@@ -142,7 +142,7 @@ export class GameSession extends Singleton<GameSession>{
     public disconnect():void{
 
         this.channel.remove_ErrorCallback(this._connCallback);
-        this.channel.remove_ReadCallback = this._readCallback;
+        this.channel.remove_ReadCallback(this._readCallback);
 
         clearInterval(this.timeoutIimer);
 

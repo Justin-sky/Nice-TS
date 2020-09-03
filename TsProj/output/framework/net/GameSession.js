@@ -39,7 +39,7 @@ class GameSession extends Singleton_1.Singleton {
         this._readCallback = (bytes) => {
             this.onReceive(bytes);
         };
-        this.channel.add_ReadCallback = this._readCallback;
+        this.channel.add_ReadCallback(this._readCallback);
         this.channel.Connect(address);
         return this;
     }
@@ -102,7 +102,7 @@ class GameSession extends Singleton_1.Singleton {
     }
     disconnect() {
         this.channel.remove_ErrorCallback(this._connCallback);
-        this.channel.remove_ReadCallback = this._readCallback;
+        this.channel.remove_ReadCallback(this._readCallback);
         clearInterval(this.timeoutIimer);
         this.channel.Dispose();
     }
