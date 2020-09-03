@@ -16,6 +16,7 @@ class GameSession extends Singleton_1.Singleton {
         super();
         this.id = 0; //session ID
         this.reSendInterval = 10; //10秒重发一次
+        this.timeoutInterval = 5; //5秒检查一次是否超时
         this.maxReSendTimes = 5; //最大重发次数
         this._rpcId = 1;
         this.requestCallback = new Map();
@@ -28,9 +29,9 @@ class GameSession extends Singleton_1.Singleton {
         this.channel = CS.NiceTS.TService.Instance.GetChannel();
         this._connCallback = (channel, code) => {
             if (code == NetErrorCode_1.NetErrorCode.ERR_SocketConnSucc) {
-                this.timeoutInterval = setInterval(() => {
+                this.timeoutIimer = setInterval(() => {
                     this.checkTimeoutMsg();
-                }, 5000);
+                }, this.timeoutInterval);
             }
             connCaback(channel, code);
         };
@@ -102,7 +103,7 @@ class GameSession extends Singleton_1.Singleton {
     disconnect() {
         this.channel.remove_ErrorCallback(this._connCallback);
         this.channel.remove_ReadCallback = this._readCallback;
-        clearInterval(this.timeoutInterval);
+        clearInterval(this.timeoutIimer);
         this.channel.Dispose();
     }
 }

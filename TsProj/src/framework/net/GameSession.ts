@@ -17,8 +17,9 @@ export class GameSession extends Singleton<GameSession>{
 
     public id:number = 0;  //session ID
     private reSendInterval:number = 10; //10秒重发一次
+    private timeoutInterval:number = 5; //5秒检查一次是否超时
     private maxReSendTimes:number = 5; //最大重发次数
-    private timeoutInterval:any;
+    private timeoutIimer:any;
 
     private _rpcId:number = 1;
     private channel:any;
@@ -43,9 +44,9 @@ export class GameSession extends Singleton<GameSession>{
         
         this._connCallback = (channel:any, code:number)=>{
             if(code == NetErrorCode.ERR_SocketConnSucc){
-                this.timeoutInterval = setInterval(()=>{
+                this.timeoutIimer = setInterval(()=>{
                     this.checkTimeoutMsg();
-                }, 5000);
+                }, this.timeoutInterval);
             }
 
             connCaback(channel, code);
@@ -143,7 +144,7 @@ export class GameSession extends Singleton<GameSession>{
         this.channel.remove_ErrorCallback(this._connCallback);
         this.channel.remove_ReadCallback = this._readCallback;
 
-        clearInterval(this.timeoutInterval);
+        clearInterval(this.timeoutIimer);
 
         this.channel.Dispose();
     }
