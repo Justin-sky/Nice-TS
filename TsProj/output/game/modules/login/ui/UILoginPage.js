@@ -1,15 +1,20 @@
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const UIPage_1 = require("../../../../framework/ui/UIPage");
 const ModuleManager_1 = require("../../../../framework/manager/ModuleManager");
 const ModuleDef_1 = require("../../ModuleDef");
 const Logger_1 = require("../../../../framework/logger/Logger");
+const NiceDecorator_1 = require("../../../../framework/common/NiceDecorator");
 class UILoginPage extends UIPage_1.UIPage {
     onAwake() {
         super.onAwake();
-        this.m_account = this.fui.GetChild("account");
-        this.m_password = this.fui.GetChild("password");
-        this.m_loginBtn = this.fui.GetChild("loginBtn");
+        this.bindAll(this);
         this.m_loginBtn.onClick.Add(() => {
             this.onLoginClick();
         });
@@ -29,5 +34,14 @@ class UILoginPage extends UIPage_1.UIPage {
         }
     }
 }
+__decorate([
+    NiceDecorator_1.binder("account")
+], UILoginPage.prototype, "m_account", void 0);
+__decorate([
+    NiceDecorator_1.binder("password")
+], UILoginPage.prototype, "m_password", void 0);
+__decorate([
+    NiceDecorator_1.binder("loginBtn")
+], UILoginPage.prototype, "m_loginBtn", void 0);
 exports.UILoginPage = UILoginPage;
 //# sourceMappingURL=UILoginPage.js.map

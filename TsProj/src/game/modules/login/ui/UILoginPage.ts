@@ -3,23 +3,24 @@ import { UIManager } from "../../../../framework/manager/UIManager";
 import { ModuleManager } from "../../../../framework/manager/ModuleManager";
 import { ModuleDef, ModuleMessage } from "../../ModuleDef";
 import { Logger } from "../../../../framework/logger/Logger";
+import { binder } from "../../../../framework/common/NiceDecorator";
+
 
 
 export class UILoginPage extends UIPage{
 
+    @binder("account")
     public m_account:any;
+    @binder("password")
     public m_password:any;
+    @binder("loginBtn")
     public m_loginBtn:any;
 
 
     public onAwake():void{
         super.onAwake();
-
-        this.m_account = this.fui.GetChild("account");
-        this.m_password = this.fui.GetChild("password");
-        this.m_loginBtn = this.fui.GetChild("loginBtn");
-
-
+        this.bindAll(this);
+        
         this.m_loginBtn.onClick.Add(()=>{
             this.onLoginClick();
         });

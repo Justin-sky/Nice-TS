@@ -15,6 +15,13 @@ class UIPage extends UIPanel_1.UIPanel {
             });
         }
     }
+    //绑定FairyGUI元件
+    bindAll(target) {
+        for (let k in target["binders"]) {
+            let fguiName = this["binders"][k];
+            this[k] = this.fui.GetChild(fguiName);
+        }
+    }
     onOpen(arg) {
         super.onOpen(arg);
     }

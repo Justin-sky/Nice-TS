@@ -1,24 +1,26 @@
 import { UIPage } from "../../../../framework/ui/UIPage";
 import { Logger } from "../../../../framework/logger/Logger";
+import { binder } from "../../../../framework/common/NiceDecorator";
 
 
 
 export class UIHomePage extends UIPage{
 
+    @binder("chatBtn")
     public m_chatBtn:any;
+    @binder("bagBtn")
     public m_bagBtn:any;
+    @binder("shopBtn")
     public m_shopBtn:any;
+    @binder("levelBtn")
     public m_levelBtn:any;
 
 
     
     public onAwake():void{
         super.onAwake();
+        this.bindAll(this);
 
-        this.m_chatBtn = this.fui.GetChild("chatBtn");
-        this.m_bagBtn = this.fui.GetChild("bagBtn");
-        this.m_shopBtn = this.fui.GetChild("shopBtn");
-        this.m_levelBtn = this.fui.GetChild("levelBtn");
 
         this.m_chatBtn.onClick.Add(()=>{
             this.onchatBtn();

@@ -1,14 +1,18 @@
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const UIPage_1 = require("../../../../framework/ui/UIPage");
 const Logger_1 = require("../../../../framework/logger/Logger");
+const NiceDecorator_1 = require("../../../../framework/common/NiceDecorator");
 class UIHomePage extends UIPage_1.UIPage {
     onAwake() {
         super.onAwake();
-        this.m_chatBtn = this.fui.GetChild("chatBtn");
-        this.m_bagBtn = this.fui.GetChild("bagBtn");
-        this.m_shopBtn = this.fui.GetChild("shopBtn");
-        this.m_levelBtn = this.fui.GetChild("levelBtn");
+        this.bindAll(this);
         this.m_chatBtn.onClick.Add(() => {
             this.onchatBtn();
         });
@@ -41,5 +45,17 @@ class UIHomePage extends UIPage_1.UIPage {
         Logger_1.Logger.log("on level...");
     }
 }
+__decorate([
+    NiceDecorator_1.binder("chatBtn")
+], UIHomePage.prototype, "m_chatBtn", void 0);
+__decorate([
+    NiceDecorator_1.binder("bagBtn")
+], UIHomePage.prototype, "m_bagBtn", void 0);
+__decorate([
+    NiceDecorator_1.binder("shopBtn")
+], UIHomePage.prototype, "m_shopBtn", void 0);
+__decorate([
+    NiceDecorator_1.binder("levelBtn")
+], UIHomePage.prototype, "m_levelBtn", void 0);
 exports.UIHomePage = UIHomePage;
 //# sourceMappingURL=UIHomePage.js.map

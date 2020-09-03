@@ -101,9 +101,11 @@ public class LaunchPage : GComponent
             UpdateFinish();
 
             Addressables.Release(locators);
+
+            Addressables.Release(catalogs);
         }
 
-        Addressables.Release(catalogs);
+        
 
         StartGame();
 

@@ -24,6 +24,15 @@ export abstract class UIPage extends UIPanel{
         }
     }
 
+    //绑定FairyGUI元件
+    protected bindAll(target:any):void{
+        for(let k in target["binders"]){
+            let fguiName = this["binders"][k];
+            this[k] = this.fui.GetChild(fguiName);
+        }
+    }
+
+
     public onOpen(arg:any):void{
         super.onOpen(arg);
 
