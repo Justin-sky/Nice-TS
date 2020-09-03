@@ -51,7 +51,7 @@ export class LoginModule extends GeneralModule{
 
 
     public onReamSocketErr(channel:any, code:number){
-        Logger.log("socket code: "+code + ",id:"+this.sessionReam.id);
+        Logger.log("socket code: "+code + ",id:"+channel.Id);
 
         if(code == NetErrorCode.ERR_SocketConnSucc){
             this.sessionReam.id = channel.Id;

@@ -31,7 +31,7 @@ class LoginModule extends GeneralModule_1.GeneralModule {
         // UIManager.Instance(UIManager).enterMainPage();
     }
     onReamSocketErr(channel, code) {
-        Logger_1.Logger.log("socket code: " + code + ",id:" + this.sessionReam.id);
+        Logger_1.Logger.log("socket code: " + code + ",id:" + channel.Id);
         if (code == NetErrorCode_1.NetErrorCode.ERR_SocketConnSucc) {
             this.sessionReam.id = channel.Id;
             //发送登录指令

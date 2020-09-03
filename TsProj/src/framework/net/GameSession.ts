@@ -1,6 +1,7 @@
 import { Singleton } from "../common/Singleton";
 import { Logger } from "../logger/Logger";
 import { Opcode } from "../../data/pb/Opcode";
+import { NetErrorCode } from "./NetErrorCode";
 
 const CS = require('csharp');
 
@@ -17,10 +18,15 @@ export class GameSession extends Singleton<GameSession>{
     public id:number = 0;  //session ID
     private reSendInterval:number = 10; //10秒重发一次
     private maxReSendTimes:number = 5; //最大重发次数
+    private timeoutInterval:any;
 
     private _rpcId:number = 1;
     private channel:any;
     private requestCallback:Map<number,MsgPack> = new Map<number,MsgPack>();
+
+
+    private _connCallback:any;
+    private _readCallback:any;
 
     constructor(){
         super();
@@ -35,11 +41,24 @@ export class GameSession extends Singleton<GameSession>{
 
         this.channel = CS.NiceTS.TService.Instance.GetChannel();
         
-        this.channel.add_ErrorCallback(connCaback);
+        this._connCallback = (channel:any, code:number)=>{
+            if(code == NetErrorCode.ERR_SocketConnSucc){
+                this.timeoutInterval = setInterval(()=>{
+                    this.checkTimeoutMsg();
+                }, 5000);
+            }
+
+            connCaback(channel, code);
+        };
+        this.channel.add_ErrorCallback(this._connCallback);
         
-        this.channel.add_ReadCallback = (bytes:Uint8Array)=>{
+        
+        this._readCallback = (bytes:Uint8Array)=>{
             this.onReceive(bytes);
         };
+        this.channel.add_ReadCallback = this._readCallback;
+
+
         this.channel.Connect(address);
 
         return this;
@@ -98,6 +117,7 @@ export class GameSession extends Singleton<GameSession>{
     private checkTimeoutMsg(){
 
         let currTime = new Date().getTime();
+
         this.requestCallback.forEach((value, key) =>{
 
             if(value.retryTimes >= this.maxReSendTimes) {
@@ -119,6 +139,12 @@ export class GameSession extends Singleton<GameSession>{
 
 
     public disconnect():void{
+
+        this.channel.remove_ErrorCallback(this._connCallback);
+        this.channel.remove_ReadCallback = this._readCallback;
+
+        clearInterval(this.timeoutInterval);
+
         this.channel.Dispose();
     }
 }

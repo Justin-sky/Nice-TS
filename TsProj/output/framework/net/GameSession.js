@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Singleton_1 = require("../common/Singleton");
 const Logger_1 = require("../logger/Logger");
 const Opcode_1 = require("../../data/pb/Opcode");
+const NetErrorCode_1 = require("./NetErrorCode");
 const CS = require('csharp');
 class MsgPack {
     constructor() {
@@ -25,10 +26,19 @@ class GameSession extends Singleton_1.Singleton {
     //address-> ip:port
     connectChannel(address, connCaback) {
         this.channel = CS.NiceTS.TService.Instance.GetChannel();
-        this.channel.add_ErrorCallback(connCaback);
-        this.channel.add_ReadCallback = (bytes) => {
+        this._connCallback = (channel, code) => {
+            if (code == NetErrorCode_1.NetErrorCode.ERR_SocketConnSucc) {
+                this.timeoutInterval = setInterval(() => {
+                    this.checkTimeoutMsg();
+                }, 5000);
+            }
+            connCaback(channel, code);
+        };
+        this.channel.add_ErrorCallback(this._connCallback);
+        this._readCallback = (bytes) => {
             this.onReceive(bytes);
         };
+        this.channel.add_ReadCallback = this._readCallback;
         this.channel.Connect(address);
         return this;
     }
@@ -90,6 +100,9 @@ class GameSession extends Singleton_1.Singleton {
         });
     }
     disconnect() {
+        this.channel.remove_ErrorCallback(this._connCallback);
+        this.channel.remove_ReadCallback = this._readCallback;
+        clearInterval(this.timeoutInterval);
         this.channel.Dispose();
     }
 }
