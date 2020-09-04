@@ -31,5 +31,6 @@ Clone[服务器：https://github.com/Justin-sky/Nice-ET ](https://github.com/Jus
 
 [Protobufjs集成文档，64位精度问题解决方案](https://zhuanlan.zhihu.com/p/205342984)
 
+[Excel工具](https://zhuanlan.zhihu.com/p/216183764)
 
 QQ群：346340389
