@@ -57,7 +57,7 @@ class GameSession extends Singleton_1.Singleton {
             msgPack.bytes = sendArray;
             this.requestCallback.set(rpcid, msgPack);
         }
-        Logger_1.Logger.log("send array: " + sendArray);
+        //Logger.log("send array: "+sendArray);
         this.channel.Send(sendArray);
     }
     reSend(bytes) {

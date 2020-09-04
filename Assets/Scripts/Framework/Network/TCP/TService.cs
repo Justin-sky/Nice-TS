@@ -13,6 +13,11 @@ namespace NiceTS
         public RecyclableMemoryStreamManager MemoryStreamManager = new RecyclableMemoryStreamManager();
         public List<long> needStartSendChannel = new List<long>();
 
+        private void Awake()
+        {
+            SynchronizationContext.SetSynchronizationContext(OneThreadSynchronizationContext.Instance);
+        }
+
         public TChannel GetChannel()
         {
             TChannel channel = new TChannel(this);
@@ -44,6 +49,8 @@ namespace NiceTS
 
         public  void Update()
         {
+            OneThreadSynchronizationContext.Instance.Update();
+
             foreach (long id in this.needStartSendChannel)
             {
                 TChannel channel;

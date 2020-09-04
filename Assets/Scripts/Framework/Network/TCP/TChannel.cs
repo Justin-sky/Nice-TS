@@ -76,16 +76,16 @@ namespace NiceTS
 			switch (e.LastOperation)
 			{
 				case SocketAsyncOperation.Connect:
-					this.OnConnectComplete(e);
+					OneThreadSynchronizationContext.Instance.Post(this.OnConnectComplete, e);
 					break;
 				case SocketAsyncOperation.Receive:
-					this.OnRecvComplete(e);
+					OneThreadSynchronizationContext.Instance.Post(this.OnRecvComplete, e);
 					break;
 				case SocketAsyncOperation.Send:
-					this.OnSendComplete(e);
+					OneThreadSynchronizationContext.Instance.Post(this.OnSendComplete, e);
 					break;
 				case SocketAsyncOperation.Disconnect:
-					this.OnDisconnectComplete(e);
+					OneThreadSynchronizationContext.Instance.Post(this.OnDisconnectComplete, e);
 					break;
 				default:
 					throw new Exception($"socket error: {e.LastOperation}");

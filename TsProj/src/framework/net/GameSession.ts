@@ -79,7 +79,7 @@ export class GameSession extends Singleton<GameSession>{
             this.requestCallback.set(rpcid, msgPack);
         }
 
-        Logger.log("send array: "+sendArray);
+        //Logger.log("send array: "+sendArray);
         this.channel.Send(sendArray);
     }
 
