@@ -23,7 +23,7 @@ export class LoginModule extends GeneralModule{
     private password:string;
 
     private gateId:any;
-    private gateKey:any;
+    private gateKey:number|Long;
 
     public create(args:any):void{
         this.messenger.addListener(ModuleMessage.LOGIN_REAMSERVER,this, this.loginReamServer);
@@ -71,8 +71,8 @@ export class LoginModule extends GeneralModule{
                 let msg  =  response as NiceET.R2C_Login;
                 this.gateId = msg.GateId;
                 this.gateKey = msg.Key;
-
-                Logger.log("login ream succ, gate addr:"+msg.Address);
+                
+                Logger.log("login ream succ, gate addr:"+msg.Address + ",key:"+msg.Key);
 
                 //断开认证服
                 this.sessionReam.disconnect();
@@ -111,13 +111,14 @@ export class LoginModule extends GeneralModule{
             msg.GateId = this.gateId;
             msg.Key = this.gateKey;
             
+
             let buf = NiceET.C2G_LoginGate.encode(msg).finish();
 
-            Logger.log("login gate succ");
+            Logger.log("login gate succ ,key: "+msg.Key);
             this.sessionGate.send(Opcode.C2G_LOGINGATE,rpcId,buf,(response:any)=>{
 
                 let msg = response as NiceET.G2C_LoginGate;
-                Logger.log(msg.PlayerId);
+                Logger.log(msg.Error);
                 Logger.log("login gate response..");
 
                 UIManager.Instance(UIManager).enterMainPage();

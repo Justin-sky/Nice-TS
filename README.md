@@ -29,7 +29,7 @@ Clone[服务器：https://github.com/Justin-sky/Nice-ET ](https://github.com/Jus
 
 [Addressable配置说明文档](https://zhuanlan.zhihu.com/p/184846532)
 
-[Protobufjs集成文档](https://zhuanlan.zhihu.com/p/205342984)
+[Protobufjs集成文档，64位精度问题解决方案](https://zhuanlan.zhihu.com/p/205342984)
 
 
 QQ群：346340389

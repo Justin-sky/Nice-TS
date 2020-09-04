@@ -44,7 +44,7 @@ class LoginModule extends GeneralModule_1.GeneralModule {
                 let msg = response;
                 this.gateId = msg.GateId;
                 this.gateKey = msg.Key;
-                Logger_1.Logger.log("login ream succ, gate addr:" + msg.Address);
+                Logger_1.Logger.log("login ream succ, gate addr:" + msg.Address + ",key:" + msg.Key);
                 //断开认证服
                 this.sessionReam.disconnect();
                 this.sessionReam = null;
@@ -73,10 +73,10 @@ class LoginModule extends GeneralModule_1.GeneralModule {
             msg.GateId = this.gateId;
             msg.Key = this.gateKey;
             let buf = OuterMessage_1.NiceET.C2G_LoginGate.encode(msg).finish();
-            Logger_1.Logger.log("login gate succ");
+            Logger_1.Logger.log("login gate succ ,key: " + msg.Key);
             this.sessionGate.send(Opcode_1.Opcode.C2G_LOGINGATE, rpcId, buf, (response) => {
                 let msg = response;
-                Logger_1.Logger.log(msg.PlayerId);
+                Logger_1.Logger.log(msg.Error);
                 Logger_1.Logger.log("login gate response..");
                 UIManager_1.UIManager.Instance(UIManager_1.UIManager).enterMainPage();
             });

@@ -3,6 +3,11 @@
 
 var $protobuf = require("protobuf");
 
+var Long = require("long")
+$protobuf.util.Long = Long;
+$protobuf.configure();
+
+
 // Common aliases
 var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
 
@@ -97,7 +102,7 @@ $root.NiceET = (function() {
             if (message.RpcId != null && message.hasOwnProperty("RpcId"))
                 writer.uint32(/* id 90, wireType 0 =*/720).int32(message.RpcId);
             if (message.ActorId != null && message.hasOwnProperty("ActorId"))
-                writer.uint32(/* id 93, wireType 0 =*/744).int64(message.ActorId);
+                writer.uint32(/* id 93, wireType 0 =*/744).sint64(message.ActorId);
             return writer;
         };
 
@@ -136,7 +141,7 @@ $root.NiceET = (function() {
                     message.RpcId = reader.int32();
                     break;
                 case 93:
-                    message.ActorId = reader.int64();
+                    message.ActorId = reader.sint64();
                     break;
                 case 1:
                     message.request = reader.string();
@@ -597,7 +602,7 @@ $root.NiceET = (function() {
             if (message.RpcId != null && message.hasOwnProperty("RpcId"))
                 writer.uint32(/* id 90, wireType 0 =*/720).int32(message.RpcId);
             if (message.ActorId != null && message.hasOwnProperty("ActorId"))
-                writer.uint32(/* id 93, wireType 0 =*/744).int64(message.ActorId);
+                writer.uint32(/* id 93, wireType 0 =*/744).sint64(message.ActorId);
             return writer;
         };
 
@@ -636,7 +641,7 @@ $root.NiceET = (function() {
                     message.RpcId = reader.int32();
                     break;
                 case 93:
-                    message.ActorId = reader.int64();
+                    message.ActorId = reader.sint64();
                     break;
                 case 1:
                     message.MapIndex = reader.int32();
@@ -1277,7 +1282,7 @@ $root.NiceET = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.UnitId != null && message.hasOwnProperty("UnitId"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.UnitId);
+                writer.uint32(/* id 1, wireType 0 =*/8).sint64(message.UnitId);
             if (message.Units != null && message.Units.length)
                 for (var i = 0; i < message.Units.length; ++i)
                     $root.NiceET.UnitInfo.encode(message.Units[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
@@ -1331,7 +1336,7 @@ $root.NiceET = (function() {
                     message.Message = reader.string();
                     break;
                 case 1:
-                    message.UnitId = reader.int64();
+                    message.UnitId = reader.sint64();
                     break;
                 case 2:
                     if (!(message.Units && message.Units.length))
@@ -1579,7 +1584,7 @@ $root.NiceET = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.UnitId != null && message.hasOwnProperty("UnitId"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.UnitId);
+                writer.uint32(/* id 1, wireType 0 =*/8).sint64(message.UnitId);
             if (message.X != null && message.hasOwnProperty("X"))
                 writer.uint32(/* id 2, wireType 5 =*/21).float(message.X);
             if (message.Y != null && message.hasOwnProperty("Y"))
@@ -1621,7 +1626,7 @@ $root.NiceET = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.UnitId = reader.int64();
+                    message.UnitId = reader.sint64();
                     break;
                 case 2:
                     message.X = reader.float();
@@ -1844,7 +1849,7 @@ $root.NiceET = (function() {
             if (message.RpcId != null && message.hasOwnProperty("RpcId"))
                 writer.uint32(/* id 90, wireType 0 =*/720).int32(message.RpcId);
             if (message.ActorId != null && message.hasOwnProperty("ActorId"))
-                writer.uint32(/* id 93, wireType 0 =*/744).int64(message.ActorId);
+                writer.uint32(/* id 93, wireType 0 =*/744).sint64(message.ActorId);
             return writer;
         };
 
@@ -1883,7 +1888,7 @@ $root.NiceET = (function() {
                     message.RpcId = reader.int32();
                     break;
                 case 93:
-                    message.ActorId = reader.int64();
+                    message.ActorId = reader.sint64();
                     break;
                 case 1:
                     if (!(message.Units && message.Units.length))
@@ -2141,9 +2146,9 @@ $root.NiceET = (function() {
             if (message.RpcId != null && message.hasOwnProperty("RpcId"))
                 writer.uint32(/* id 90, wireType 0 =*/720).int32(message.RpcId);
             if (message.ActorId != null && message.hasOwnProperty("ActorId"))
-                writer.uint32(/* id 93, wireType 0 =*/744).int64(message.ActorId);
+                writer.uint32(/* id 93, wireType 0 =*/744).sint64(message.ActorId);
             if (message.Id != null && message.hasOwnProperty("Id"))
-                writer.uint32(/* id 94, wireType 0 =*/752).int64(message.Id);
+                writer.uint32(/* id 94, wireType 0 =*/752).sint64(message.Id);
             return writer;
         };
 
@@ -2182,10 +2187,10 @@ $root.NiceET = (function() {
                     message.RpcId = reader.int32();
                     break;
                 case 93:
-                    message.ActorId = reader.int64();
+                    message.ActorId = reader.sint64();
                     break;
                 case 94:
-                    message.Id = reader.int64();
+                    message.Id = reader.sint64();
                     break;
                 case 1:
                     message.X = reader.float();
@@ -2480,7 +2485,7 @@ $root.NiceET = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.Id != null && message.hasOwnProperty("Id"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.Id);
+                writer.uint32(/* id 1, wireType 0 =*/8).sint64(message.Id);
             if (message.X != null && message.hasOwnProperty("X"))
                 writer.uint32(/* id 2, wireType 5 =*/21).float(message.X);
             if (message.Y != null && message.hasOwnProperty("Y"))
@@ -2506,7 +2511,7 @@ $root.NiceET = (function() {
                 writer.ldelim();
             }
             if (message.ActorId != null && message.hasOwnProperty("ActorId"))
-                writer.uint32(/* id 93, wireType 0 =*/744).int64(message.ActorId);
+                writer.uint32(/* id 93, wireType 0 =*/744).sint64(message.ActorId);
             return writer;
         };
 
@@ -2542,10 +2547,10 @@ $root.NiceET = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 93:
-                    message.ActorId = reader.int64();
+                    message.ActorId = reader.sint64();
                     break;
                 case 1:
-                    message.Id = reader.int64();
+                    message.Id = reader.sint64();
                     break;
                 case 2:
                     message.X = reader.float();
@@ -4180,9 +4185,9 @@ $root.NiceET = (function() {
             if (message.Address != null && message.hasOwnProperty("Address"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.Address);
             if (message.Key != null && message.hasOwnProperty("Key"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.Key);
+                writer.uint32(/* id 2, wireType 0 =*/16).sint64(message.Key);
             if (message.GateId != null && message.hasOwnProperty("GateId"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.GateId);
+                writer.uint32(/* id 3, wireType 0 =*/24).sint64(message.GateId);
             if (message.RpcId != null && message.hasOwnProperty("RpcId"))
                 writer.uint32(/* id 90, wireType 0 =*/720).int32(message.RpcId);
             if (message.Error != null && message.hasOwnProperty("Error"))
@@ -4236,10 +4241,10 @@ $root.NiceET = (function() {
                     message.Address = reader.string();
                     break;
                 case 2:
-                    message.Key = reader.int64();
+                    message.Key = reader.sint64();
                     break;
                 case 3:
-                    message.GateId = reader.int64();
+                    message.GateId = reader.sint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4477,9 +4482,9 @@ $root.NiceET = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.Key != null && message.hasOwnProperty("Key"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.Key);
+                writer.uint32(/* id 1, wireType 0 =*/8).sint64(message.Key);
             if (message.GateId != null && message.hasOwnProperty("GateId"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.GateId);
+                writer.uint32(/* id 2, wireType 0 =*/16).sint64(message.GateId);
             if (message.RpcId != null && message.hasOwnProperty("RpcId"))
                 writer.uint32(/* id 90, wireType 0 =*/720).int32(message.RpcId);
             return writer;
@@ -4520,10 +4525,10 @@ $root.NiceET = (function() {
                     message.RpcId = reader.int32();
                     break;
                 case 1:
-                    message.Key = reader.int64();
+                    message.Key = reader.sint64();
                     break;
                 case 2:
-                    message.GateId = reader.int64();
+                    message.GateId = reader.sint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4746,7 +4751,7 @@ $root.NiceET = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.PlayerId != null && message.hasOwnProperty("PlayerId"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.PlayerId);
+                writer.uint32(/* id 1, wireType 0 =*/8).sint64(message.PlayerId);
             if (message.RpcId != null && message.hasOwnProperty("RpcId"))
                 writer.uint32(/* id 90, wireType 0 =*/720).int32(message.RpcId);
             if (message.Error != null && message.hasOwnProperty("Error"))
@@ -4797,7 +4802,7 @@ $root.NiceET = (function() {
                     message.Message = reader.string();
                     break;
                 case 1:
-                    message.PlayerId = reader.int64();
+                    message.PlayerId = reader.sint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -5196,7 +5201,7 @@ $root.NiceET = (function() {
             if (message.RpcId != null && message.hasOwnProperty("RpcId"))
                 writer.uint32(/* id 90, wireType 0 =*/720).int32(message.RpcId);
             if (message.ActorId != null && message.hasOwnProperty("ActorId"))
-                writer.uint32(/* id 91, wireType 0 =*/728).int64(message.ActorId);
+                writer.uint32(/* id 91, wireType 0 =*/728).sint64(message.ActorId);
             return writer;
         };
 
@@ -5235,7 +5240,7 @@ $root.NiceET = (function() {
                     message.RpcId = reader.int32();
                     break;
                 case 91:
-                    message.ActorId = reader.int64();
+                    message.ActorId = reader.sint64();
                     break;
                 case 1:
                     message.Info = reader.string();
@@ -6131,7 +6136,7 @@ $root.NiceET = (function() {
             if (message.TestRepeatedInt64 != null && message.TestRepeatedInt64.length) {
                 writer.uint32(/* id 5, wireType 2 =*/42).fork();
                 for (var i = 0; i < message.TestRepeatedInt64.length; ++i)
-                    writer.int64(message.TestRepeatedInt64[i]);
+                    writer.sint64(message.TestRepeatedInt64[i]);
                 writer.ldelim();
             }
             if (message.RpcId != null && message.hasOwnProperty("RpcId"))
@@ -6212,9 +6217,9 @@ $root.NiceET = (function() {
                     if ((tag & 7) === 2) {
                         var end2 = reader.uint32() + reader.pos;
                         while (reader.pos < end2)
-                            message.TestRepeatedInt64.push(reader.int64());
+                            message.TestRepeatedInt64.push(reader.sint64());
                     } else
-                        message.TestRepeatedInt64.push(reader.int64());
+                        message.TestRepeatedInt64.push(reader.sint64());
                     break;
                 default:
                     reader.skipType(tag & 7);

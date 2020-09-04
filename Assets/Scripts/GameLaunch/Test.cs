@@ -32,6 +32,9 @@ public class Test:P
        
     }
 
-
+    public long testLong()
+    {
+        return -5544070116807168770;
+    }
 
 }

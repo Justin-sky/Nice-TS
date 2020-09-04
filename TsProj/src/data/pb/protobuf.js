@@ -4,6 +4,7 @@
  * licensed under the bsd-3-clause license
  * see: https://github.com/dcodeio/protobuf.js for details
  */
+
 (function (undefined) {
     "use strict";
     (function prelude(modules, cache, entries) {

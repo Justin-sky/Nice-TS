@@ -126,7 +126,7 @@ export class GameSession extends Singleton<GameSession>{
                     value.retryTimes++;
                     value.sendTime = currTime;
                     //重发消息
-                    this.reSend(value.bytes);
+                   // this.reSend(value.bytes);
                     Logger.log(`resend message:, opcode:${key}, retry times:${value.retryTimes}`);
                 }
             }
