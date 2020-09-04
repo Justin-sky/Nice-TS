@@ -24,7 +24,7 @@ export class GameSession extends Singleton<GameSession>{
     private _rpcId:number = 1;
     private channel:any;
     private requestCallback:Map<number,MsgPack> = new Map<number,MsgPack>();
-
+    private listeners:Map<number,Function> = new Map<number,Function>();
 
     constructor(){
         super();
@@ -42,7 +42,7 @@ export class GameSession extends Singleton<GameSession>{
         this.channel.errorCallback = (channel:any, code:number)=>{
             if(code == NetErrorCode.ERR_SocketConnSucc){
                 this.timeoutIimer = setInterval(()=>{
-                    this.checkTimeoutMsg();
+                   // this.checkTimeoutMsg();
                 }, this.timeoutInterval);
             }
 
@@ -56,6 +56,11 @@ export class GameSession extends Singleton<GameSession>{
         this.channel.Connect(address);
 
         return this;
+    }
+
+    //接收服务器通知
+    public listen(opcode:number,callback:Function){
+        this.listeners.set(opcode, callback);
     }
 
     //发送protoubf消息
@@ -98,8 +103,13 @@ export class GameSession extends Singleton<GameSession>{
         let rpcId = decodeMsg.rpcId;
 
 
-        if(!this.requestCallback.has(rpcId)){
-            Logger.logError(`not found rpc, response message:${rpcId}`);
+        if(rpcId==undefined || !this.requestCallback.has(rpcId)){
+            //检查是否是服务器下发的消息
+            if(this.listeners.has(opcode)){
+                let listen = this.listeners.get(opcode);
+                listen(decodeMsg.msgObj);
+            }
+
         }else{
             let msgPack:MsgPack = this.requestCallback.get(rpcId);
             msgPack.callback(decodeMsg.msgObj);  
@@ -126,7 +136,7 @@ export class GameSession extends Singleton<GameSession>{
                     value.retryTimes++;
                     value.sendTime = currTime;
                     //重发消息
-                   // this.reSend(value.bytes);
+                    this.reSend(value.bytes);
                     Logger.log(`resend message:, opcode:${key}, retry times:${value.retryTimes}`);
                 }
             }

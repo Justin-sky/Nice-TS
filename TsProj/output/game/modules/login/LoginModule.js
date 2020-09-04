@@ -73,11 +73,11 @@ class LoginModule extends GeneralModule_1.GeneralModule {
             msg.GateId = this.gateId;
             msg.Key = this.gateKey;
             let buf = OuterMessage_1.NiceET.C2G_LoginGate.encode(msg).finish();
-            Logger_1.Logger.log("login gate succ ,key: " + msg.Key);
+            Logger_1.Logger.log("login gate succ ,key: " + msg.Key + ", rpcid:" + rpcId);
             this.sessionGate.send(Opcode_1.Opcode.C2G_LOGINGATE, rpcId, buf, (response) => {
                 let msg = response;
-                Logger_1.Logger.log(msg.Error);
-                Logger_1.Logger.log("login gate response..");
+                this.playerID = msg.PlayerId;
+                Logger_1.Logger.log("login gate response.." + msg.PlayerId);
                 UIManager_1.UIManager.Instance(UIManager_1.UIManager).enterMainPage();
             });
         }

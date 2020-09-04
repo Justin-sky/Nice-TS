@@ -20,6 +20,7 @@ class GameSession extends Singleton_1.Singleton {
         this.maxReSendTimes = 5; //最大重发次数
         this._rpcId = 1;
         this.requestCallback = new Map();
+        this.listeners = new Map();
     }
     get rpcId() {
         return ++this._rpcId;
@@ -30,7 +31,7 @@ class GameSession extends Singleton_1.Singleton {
         this.channel.errorCallback = (channel, code) => {
             if (code == NetErrorCode_1.NetErrorCode.ERR_SocketConnSucc) {
                 this.timeoutIimer = setInterval(() => {
-                    this.checkTimeoutMsg();
+                    // this.checkTimeoutMsg();
                 }, this.timeoutInterval);
             }
             connCaback(channel, code);
@@ -40,6 +41,10 @@ class GameSession extends Singleton_1.Singleton {
         };
         this.channel.Connect(address);
         return this;
+    }
+    //接收服务器通知
+    listen(opcode, callback) {
+        this.listeners.set(opcode, callback);
     }
     //发送protoubf消息
     send(opcode, rpcid, message, callBack) {
@@ -69,8 +74,12 @@ class GameSession extends Singleton_1.Singleton {
         let msgBytes = msgBuf.subarray(2);
         let decodeMsg = Opcode_1.Opcode.decode(opcode, msgBytes);
         let rpcId = decodeMsg.rpcId;
-        if (!this.requestCallback.has(rpcId)) {
-            Logger_1.Logger.logError(`not found rpc, response message:${rpcId}`);
+        if (rpcId == undefined || !this.requestCallback.has(rpcId)) {
+            //检查是否是服务器下发的消息
+            if (this.listeners.has(opcode)) {
+                let listen = this.listeners.get(opcode);
+                listen(decodeMsg.msgObj);
+            }
         }
         else {
             let msgPack = this.requestCallback.get(rpcId);
@@ -91,7 +100,7 @@ class GameSession extends Singleton_1.Singleton {
                     value.retryTimes++;
                     value.sendTime = currTime;
                     //重发消息
-                    // this.reSend(value.bytes);
+                    this.reSend(value.bytes);
                     Logger_1.Logger.log(`resend message:, opcode:${key}, retry times:${value.retryTimes}`);
                 }
             }
