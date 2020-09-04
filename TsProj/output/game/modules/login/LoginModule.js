@@ -12,6 +12,9 @@ const NetErrorCode_1 = require("../../../framework/net/NetErrorCode");
 const OuterMessage_1 = require("../../../data/pb/OuterMessage");
 const CS = require('csharp');
 class LoginModule extends GeneralModule_1.GeneralModule {
+    get playerID() {
+        return this._playerID;
+    }
     create(args) {
         this.messenger.addListener(ModuleDef_1.ModuleMessage.LOGIN_REAMSERVER, this, this.loginReamServer);
     }
@@ -76,7 +79,7 @@ class LoginModule extends GeneralModule_1.GeneralModule {
             Logger_1.Logger.log("login gate succ ,key: " + msg.Key + ", rpcid:" + rpcId);
             this.sessionGate.send(Opcode_1.Opcode.C2G_LOGINGATE, rpcId, buf, (response) => {
                 let msg = response;
-                this.playerID = msg.PlayerId;
+                this._playerID = msg.PlayerId;
                 Logger_1.Logger.log("login gate response.." + msg.PlayerId);
                 UIManager_1.UIManager.Instance(UIManager_1.UIManager).enterMainPage();
             });

@@ -24,7 +24,11 @@ export class LoginModule extends GeneralModule{
 
     private gateId:any;
     private gateKey:number|Long;
-    private playerID:number|Long;
+    private _playerID:number|Long;
+
+    public get playerID(){
+        return this._playerID;
+    }
 
     public create(args:any):void{
         this.messenger.addListener(ModuleMessage.LOGIN_REAMSERVER,this, this.loginReamServer);
@@ -120,7 +124,7 @@ export class LoginModule extends GeneralModule{
 
                 let msg = response as NiceET.G2C_LoginGate;
                
-                this.playerID = msg.PlayerId;
+                this._playerID = msg.PlayerId;
                 Logger.log("login gate response.." + msg.PlayerId);
 
                 UIManager.Instance(UIManager).enterMainPage();
