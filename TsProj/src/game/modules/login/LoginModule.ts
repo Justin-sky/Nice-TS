@@ -55,7 +55,7 @@ export class LoginModule extends GeneralModule{
 
         if(code == NetErrorCode.ERR_SocketConnSucc){
             this.sessionReam.id = channel.Id;
-
+      
             //发送登录指令
             let rpcID = this.sessionReam.rpcId;
             let msg = NiceET.C2R_Login.create();
@@ -64,7 +64,12 @@ export class LoginModule extends GeneralModule{
             msg.Password = this.password;
             let buf = NiceET.C2R_Login.encode(msg).finish();
             this.sessionReam.send(Opcode.C2R_LOGIN, rpcID, buf, (response:any)=>{
-                Logger.log(response);
+                
+                let msg  =  response as NiceET.R2C_Login;
+                Logger.log(msg.Address);
+                Logger.log(msg.GateId);
+                Logger.log(msg.Key);
+
                 this.sessionReam.disconnect();
             });
         }

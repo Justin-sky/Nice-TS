@@ -1,4 +1,8 @@
 import { NiceET } from "./OuterMessage";
+export class DecodeMsg{
+	public rpcId:number;
+	public msgObj:any;
+}
 export class Opcode{
 	public static C2M_TESTREQUEST:number = 101;
 	public static M2C_TESTRESPONSE:number = 102;
@@ -51,5 +55,12 @@ export class Opcode{
 		123 : NiceET.PlayerInfo.decode,
 		124 : NiceET.C2G_PlayerInfo.decode,
 		125 : NiceET.G2C_PlayerInfo.decode,
+	}
+	public static decode(opcode:number, msg:Uint8Array):DecodeMsg {
+		let msgObj = this.map[opcode](msg);
+		let decodeMsg = new DecodeMsg();
+		decodeMsg.rpcId = msgObj.RpcId;
+		decodeMsg.msgObj = msgObj;
+		return decodeMsg;
 	}
 }

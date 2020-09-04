@@ -42,7 +42,10 @@ class LoginModule extends GeneralModule_1.GeneralModule {
             msg.Password = this.password;
             let buf = OuterMessage_1.NiceET.C2R_Login.encode(msg).finish();
             this.sessionReam.send(Opcode_1.Opcode.C2R_LOGIN, rpcID, buf, (response) => {
-                Logger_1.Logger.log(response);
+                let msg = response;
+                Logger_1.Logger.log(msg.Address);
+                Logger_1.Logger.log(msg.GateId);
+                Logger_1.Logger.log(msg.Key);
                 this.sessionReam.disconnect();
             });
         }

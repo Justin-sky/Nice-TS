@@ -1,7 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const OuterMessage_1 = require("./OuterMessage");
+class DecodeMsg {
+}
+exports.DecodeMsg = DecodeMsg;
 class Opcode {
+    static decode(opcode, msg) {
+        let msgObj = this.map[opcode](msg);
+        let decodeMsg = new DecodeMsg();
+        decodeMsg.rpcId = msgObj.RpcId;
+        decodeMsg.msgObj = msgObj;
+        return decodeMsg;
+    }
 }
 Opcode.C2M_TESTREQUEST = 101;
 Opcode.M2C_TESTRESPONSE = 102;

@@ -16,8 +16,8 @@ export class MsgPack{
 export class GameSession extends Singleton<GameSession>{
 
     public id:number = 0;  //session ID
-    private reSendInterval:number = 10; //10秒重发一次
-    private timeoutInterval:number = 5; //5秒检查一次是否超时
+    private reSendInterval:number = 10000; //10秒重发一次
+    private timeoutInterval:number = 5000; //5秒检查一次是否超时
     private maxReSendTimes:number = 5; //最大重发次数
     private timeoutIimer:any;
 
@@ -25,9 +25,6 @@ export class GameSession extends Singleton<GameSession>{
     private channel:any;
     private requestCallback:Map<number,MsgPack> = new Map<number,MsgPack>();
 
-
-    private _connCallback:any;
-    private _readCallback:any;
 
     constructor(){
         super();
@@ -42,7 +39,7 @@ export class GameSession extends Singleton<GameSession>{
 
         this.channel = CS.NiceTS.TService.Instance.GetChannel();
         
-        this._connCallback = (channel:any, code:number)=>{
+        this.channel.errorCallback = (channel:any, code:number)=>{
             if(code == NetErrorCode.ERR_SocketConnSucc){
                 this.timeoutIimer = setInterval(()=>{
                     this.checkTimeoutMsg();
@@ -51,14 +48,10 @@ export class GameSession extends Singleton<GameSession>{
 
             connCaback(channel, code);
         };
-        this.channel.add_ErrorCallback(this._connCallback);
         
-        
-        this._readCallback = (bytes:Uint8Array)=>{
-            this.onReceive(bytes);
+        this.channel.readCallback = (buffer:Uint8Array)=>{
+            this.onReceive(buffer);
         };
-        this.channel.add_ReadCallback(this._readCallback);
-
 
         this.channel.Connect(address);
 
@@ -69,15 +62,13 @@ export class GameSession extends Singleton<GameSession>{
     public send(opcode:number,rpcid:number, message:Uint8Array, callBack:Function){
         
         //封装消息：opcode+msg
-        let lenBuf:Uint8Array = new Uint8Array(4);
-        lenBuf[0] = opcode >>> 24;
-        lenBuf[1] = opcode >>> 16;
-        lenBuf[2] = opcode >>> 8;
-        lenBuf[3] = opcode & 0xff;
+        let lenBuf:Uint8Array = new Uint8Array(2);
+        lenBuf[1] = opcode >>> 8;
+        lenBuf[0] = opcode & 0xff;
 
-        let sendArray:Uint8Array = new Uint8Array(message.length + 4);
+        let sendArray:Uint8Array = new Uint8Array(message.length + 2);
         sendArray.set(lenBuf);
-        sendArray.set(message,4);
+        sendArray.set(message,2);
         
         if(callBack != null){
             let msgPack:MsgPack = new MsgPack();
@@ -87,6 +78,8 @@ export class GameSession extends Singleton<GameSession>{
 
             this.requestCallback.set(rpcid, msgPack);
         }
+
+        Logger.log("send array: "+sendArray);
         this.channel.Send(sendArray);
     }
 
@@ -94,20 +87,22 @@ export class GameSession extends Singleton<GameSession>{
         this.channel.Send(bytes);
     }
 
-    public onReceive(bytes:Uint8Array){
-
-        let  opcode = bytes[0] << 24 | bytes[1] << 16 | bytes[2] << 8 | bytes[3];;
-        let msgBytes:Uint8Array = bytes.subarray(4);
+    public onReceive(buffer:Uint8Array){
         
-        let msg = Opcode.map[opcode](msgBytes);
-        let rpcId = msg.rpcId;
+        let msgBuf = new Uint8Array(buffer);
+
+        let  opcode = msgBuf[1] << 8 | msgBuf[0];
+         let msgBytes:Uint8Array = msgBuf.subarray(2);
+
+        let decodeMsg =  Opcode.decode(opcode, msgBytes);
+        let rpcId = decodeMsg.rpcId;
 
 
         if(!this.requestCallback.has(rpcId)){
             Logger.logError(`not found rpc, response message:${rpcId}`);
         }else{
             let msgPack:MsgPack = this.requestCallback.get(rpcId);
-            msgPack.callback(msg);  
+            msgPack.callback(decodeMsg.msgObj);  
 
             this.requestCallback.delete(rpcId);
 
@@ -140,9 +135,6 @@ export class GameSession extends Singleton<GameSession>{
 
 
     public disconnect():void{
-
-        this.channel.remove_ErrorCallback(this._connCallback);
-        this.channel.remove_ReadCallback(this._readCallback);
 
         clearInterval(this.timeoutIimer);
 

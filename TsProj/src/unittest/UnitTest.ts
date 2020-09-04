@@ -188,6 +188,16 @@ export class UnitTest{
         n = buffer[0] << 24 | buffer[1] << 16 | buffer[2] << 8 | buffer[3];
         Logger.log(n);
 
+
+        n = 300;
+        let buffer1:Uint8Array = new Uint8Array(2);
+        buffer1[0] = n >>> 8;
+        buffer1[1] = n & 0xff;
+
+        Logger.log(buffer1);
+        n = buffer1[0]<<8 | buffer1[1];
+        Logger.log(n);
+
     }
 
     

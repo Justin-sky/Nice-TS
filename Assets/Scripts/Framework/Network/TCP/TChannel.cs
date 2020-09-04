@@ -1,11 +1,16 @@
-﻿using System;
+﻿using Puerts;
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 
 namespace NiceTS
 {
-    public class TChannel
+	public delegate void ErrorCallback(TChannel channel, int code);
+	public delegate void ReadCallback(ArrayBuffer arrayBuffer);
+
+	public class TChannel
     {
         private bool isSending;
 		private bool isConnected;
@@ -23,31 +28,12 @@ namespace NiceTS
         public bool IsSending => this.isSending;
 
 		public int Error { get; set; }
-		private Action<TChannel, int> errorCallback;
-		public event Action<TChannel, int> ErrorCallback
-		{
-			add
-			{
-				this.errorCallback += value;
-			}
-			remove
-			{
-				this.errorCallback -= value;
-			}
-		}
 
-		private Action<byte[]> readCallback;
-		public event Action<byte[]> ReadCallback
-		{
-			add
-			{
-				this.readCallback += value;
-			}
-			remove
-			{
-				this.readCallback -= value;
-			}
-		}
+
+		public ErrorCallback errorCallback;
+
+		public ReadCallback readCallback;
+
 
 		private readonly MemoryStream memoryStream;
 		private readonly byte[] packetSizeCache;
@@ -109,12 +95,14 @@ namespace NiceTS
 		protected void OnError(int e)
 		{
 			this.Error = e;
-			this.errorCallback?.Invoke(this, e);
+            errorCallback(this, e);
 		}
 
 		protected void OnRead(MemoryStream memoryStream)
 		{
-			this.readCallback.Invoke(memoryStream.ToArray());
+			var arrayBuffer = new ArrayBuffer(memoryStream.ToArray());
+
+			this.readCallback.Invoke(arrayBuffer);
 		}
 
 		#region Connect
@@ -150,7 +138,7 @@ namespace NiceTS
 		#endregion
 
 		#region Send
-		private void Send(byte[] bytes)
+		public void Send(ArrayBuffer ab)
 		{
 			if (this.Id == 0)
 			{
@@ -158,14 +146,14 @@ namespace NiceTS
 			}
 
 			MemoryStream stream = this.memoryStream;
-			if (bytes.Length > ushort.MaxValue * 16)
+			if (ab.Bytes.Length > ushort.MaxValue * 16)
 			{
 				throw new Exception($"send packet too large: {stream.Length}");
 			}
-			this.packetSizeCache.WriteTo(0, (int)bytes.Length);
+			this.packetSizeCache.WriteTo(0, ab.Bytes.Length);
 
 			this.sendBuffer.Write(this.packetSizeCache, 0, this.packetSizeCache.Length);
-			this.sendBuffer.Write(bytes, 0, bytes.Length);
+			this.sendBuffer.Write(ab.Bytes, 0, ab.Bytes.Length);
 
 			this.Service.MarkNeedStartSend(this.Id);
 		}

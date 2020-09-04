@@ -15,8 +15,8 @@ class GameSession extends Singleton_1.Singleton {
     constructor() {
         super();
         this.id = 0; //session ID
-        this.reSendInterval = 10; //10秒重发一次
-        this.timeoutInterval = 5; //5秒检查一次是否超时
+        this.reSendInterval = 10000; //10秒重发一次
+        this.timeoutInterval = 5000; //5秒检查一次是否超时
         this.maxReSendTimes = 5; //最大重发次数
         this._rpcId = 1;
         this.requestCallback = new Map();
@@ -27,7 +27,7 @@ class GameSession extends Singleton_1.Singleton {
     //address-> ip:port
     connectChannel(address, connCaback) {
         this.channel = CS.NiceTS.TService.Instance.GetChannel();
-        this._connCallback = (channel, code) => {
+        this.channel.errorCallback = (channel, code) => {
             if (code == NetErrorCode_1.NetErrorCode.ERR_SocketConnSucc) {
                 this.timeoutIimer = setInterval(() => {
                     this.checkTimeoutMsg();
@@ -35,25 +35,21 @@ class GameSession extends Singleton_1.Singleton {
             }
             connCaback(channel, code);
         };
-        this.channel.add_ErrorCallback(this._connCallback);
-        this._readCallback = (bytes) => {
-            this.onReceive(bytes);
+        this.channel.readCallback = (buffer) => {
+            this.onReceive(buffer);
         };
-        this.channel.add_ReadCallback(this._readCallback);
         this.channel.Connect(address);
         return this;
     }
     //发送protoubf消息
     send(opcode, rpcid, message, callBack) {
         //封装消息：opcode+msg
-        let lenBuf = new Uint8Array(4);
-        lenBuf[0] = opcode >>> 24;
-        lenBuf[1] = opcode >>> 16;
-        lenBuf[2] = opcode >>> 8;
-        lenBuf[3] = opcode & 0xff;
-        let sendArray = new Uint8Array(message.length + 4);
+        let lenBuf = new Uint8Array(2);
+        lenBuf[1] = opcode >>> 8;
+        lenBuf[0] = opcode & 0xff;
+        let sendArray = new Uint8Array(message.length + 2);
         sendArray.set(lenBuf);
-        sendArray.set(message, 4);
+        sendArray.set(message, 2);
         if (callBack != null) {
             let msgPack = new MsgPack();
             msgPack.sendTime = new Date().getTime();
@@ -61,23 +57,24 @@ class GameSession extends Singleton_1.Singleton {
             msgPack.bytes = sendArray;
             this.requestCallback.set(rpcid, msgPack);
         }
+        Logger_1.Logger.log("send array: " + sendArray);
         this.channel.Send(sendArray);
     }
     reSend(bytes) {
         this.channel.Send(bytes);
     }
-    onReceive(bytes) {
-        let opcode = bytes[0] << 24 | bytes[1] << 16 | bytes[2] << 8 | bytes[3];
-        ;
-        let msgBytes = bytes.subarray(4);
-        let msg = Opcode_1.Opcode.map[opcode](msgBytes);
-        let rpcId = msg.rpcId;
+    onReceive(buffer) {
+        let msgBuf = new Uint8Array(buffer);
+        let opcode = msgBuf[1] << 8 | msgBuf[0];
+        let msgBytes = msgBuf.subarray(2);
+        let decodeMsg = Opcode_1.Opcode.decode(opcode, msgBytes);
+        let rpcId = decodeMsg.rpcId;
         if (!this.requestCallback.has(rpcId)) {
             Logger_1.Logger.logError(`not found rpc, response message:${rpcId}`);
         }
         else {
             let msgPack = this.requestCallback.get(rpcId);
-            msgPack.callback(msg);
+            msgPack.callback(decodeMsg.msgObj);
             this.requestCallback.delete(rpcId);
         }
     }
@@ -101,8 +98,6 @@ class GameSession extends Singleton_1.Singleton {
         });
     }
     disconnect() {
-        this.channel.remove_ErrorCallback(this._connCallback);
-        this.channel.remove_ReadCallback(this._readCallback);
         clearInterval(this.timeoutIimer);
         this.channel.Dispose();
     }

@@ -1,9 +1,7 @@
 ﻿using NiceTS;
 using Puerts;
 using System;
-using System.Collections;
-using System.Diagnostics;
-using UnityEngine;
+using System.IO;
 using UnityEngine.SceneManagement;
 
 public class JsManager:MonoSingleton<JsManager>
@@ -28,13 +26,14 @@ public class JsManager:MonoSingleton<JsManager>
             Logger.LogError("InitJsEnv null!!!");
         }
 
-        //声明Action
+        //声明Action： 值类型才需要这样添加
         jsEnv.UsingAction<float>();
         jsEnv.UsingAction<float, float>();
         jsEnv.UsingAction<string, byte[]>();
         jsEnv.UsingAction<Scene, LoadSceneMode>();
         jsEnv.UsingAction<TChannel, int>();
-        jsEnv.UsingAction<byte[]>();
+    
+
     }
 
     public JsEnv GetJsEnv()
