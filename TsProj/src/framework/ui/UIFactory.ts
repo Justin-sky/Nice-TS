@@ -1,10 +1,10 @@
 
-import { UILoginPage } from "../../game/modules/login/ui/UILoginPage";
+import { UILoginPage } from "../../modules/login/ui/UILoginPage";
 import { UIPanel } from "./UIPanel";
 import { Singleton } from "../common/Singleton";
 import { UISimpleLoading } from "./UILib/UISimpleLoading";
 import { Logger } from "../logger/Logger";
-import { UIHomePage } from "../../game/modules/home/ui/UIHomePage";
+import { UIHomePage } from "../../modules/home/ui/UIHomePage";
 import { gameUI } from "../../data/ui/game";
 
 

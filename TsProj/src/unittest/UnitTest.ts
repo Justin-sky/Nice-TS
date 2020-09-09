@@ -4,7 +4,7 @@ import {Logger} from '../framework/logger/Logger';
 import {Messenger} from '../framework/common/Messenger';
 import { ResManager } from '../framework/manager/ResManager';
 import { ModuleManager } from '../framework/manager/ModuleManager';
-import { ModuleDef } from '../game/modules/ModuleDef';
+import { ModuleDef } from '../modules/ModuleDef';
 import { NiceET } from '../data/pb/OuterMessage';
 import { SkillConfigTB, SkillConfigTR } from '../data/excel/SkillConfig';
 import { Opcode } from '../data/pb/Opcode';

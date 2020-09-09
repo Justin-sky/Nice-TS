@@ -6,7 +6,7 @@ import { UIWindow } from '../ui/UIWindow';
 import { UIWidge } from '../ui/UIWidge';
 import { UIPanel } from '../ui/UIPanel';
 import { UIFactory } from '../ui/UIFactory';
-import { SceneDef } from '../../game/modules/ModuleDef';
+import { SceneDef } from '../../modules/ModuleDef';
 import { gameUI } from '../../data/ui/game';
 
 const CS = require('csharp');

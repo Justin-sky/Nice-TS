@@ -1,6 +1,6 @@
-import { UIPage } from "../../../../framework/ui/UIPage";
-import { Logger } from "../../../../framework/logger/Logger";
-import { binder } from "../../../../framework/common/NiceDecorator";
+import { UIPage } from "../../../framework/ui/UIPage";
+import { Logger } from "../../../framework/logger/Logger";
+import { binder } from "../../../framework/common/NiceDecorator";
 
 
 

@@ -1,9 +1,9 @@
-import { UIPage } from "../../../../framework/ui/UIPage";
-import { UIManager } from "../../../../framework/manager/UIManager";
-import { ModuleManager } from "../../../../framework/manager/ModuleManager";
+import { UIPage } from "../../../framework/ui/UIPage";
+import { UIManager } from "../../../framework/manager/UIManager";
+import { ModuleManager } from "../../../framework/manager/ModuleManager";
 import { ModuleDef, ModuleMessage } from "../../ModuleDef";
-import { Logger } from "../../../../framework/logger/Logger";
-import { binder } from "../../../../framework/common/NiceDecorator";
+import { Logger } from "../../../framework/logger/Logger";
+import { binder } from "../../../framework/common/NiceDecorator";
 
 
 

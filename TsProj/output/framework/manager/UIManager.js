@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Singleton_1 = require("../common/Singleton");
 const UIFactory_1 = require("../ui/UIFactory");
-const ModuleDef_1 = require("../../game/modules/ModuleDef");
+const ModuleDef_1 = require("../../modules/ModuleDef");
 const game_1 = require("../../data/ui/game");
 const CS = require('csharp');
 class UIPageTrack {

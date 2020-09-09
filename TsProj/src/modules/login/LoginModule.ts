@@ -1,13 +1,13 @@
-import { GeneralModule } from "../../../framework/module/GeneralModule";
-import { Logger } from "../../../framework/logger/Logger";
-import { UIManager } from "../../../framework/manager/UIManager";
+import { GeneralModule } from "../../framework/module/GeneralModule";
+import { Logger } from "../../framework/logger/Logger";
+import { UIManager } from "../../framework/manager/UIManager";
 import { SceneDef, ModuleMessage } from "../ModuleDef";
-import { gameUI } from "../../../data/ui/game";
-import { GameSession } from "../../../framework/net/GameSession";
-import { GameConfig } from "../../../global/GameConfig";
-import { Opcode } from "../../../data/pb/Opcode";
-import { NetErrorCode } from "../../../framework/net/NetErrorCode";
-import { NiceET } from "../../../data/pb/OuterMessage";
+import { gameUI } from "../../data/ui/game";
+import { GameSession } from "../../framework/net/GameSession";
+import { GameConfig } from "../../global/GameConfig";
+import { Opcode } from "../../data/pb/Opcode";
+import { NetErrorCode } from "../../framework/net/NetErrorCode";
+import { NiceET } from "../../data/pb/OuterMessage";
 
 
 const CS = require('csharp');

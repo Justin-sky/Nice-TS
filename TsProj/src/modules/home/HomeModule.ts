@@ -1,5 +1,5 @@
-import { GeneralModule } from "../../../framework/module/GeneralModule";
-import { Logger } from "../../../framework/logger/Logger";
+import { GeneralModule } from "../../framework/module/GeneralModule";
+import { Logger } from "../../framework/logger/Logger";
 
 
 export class HomeModule extends GeneralModule{

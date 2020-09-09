@@ -4,7 +4,7 @@ import {Logger} from './framework/logger/Logger';
 import {UnitTest} from './unittest/UnitTest';
 import { GameObjectPool } from './framework/common/GameObjectPool';
 import { ModuleManager } from './framework/manager/ModuleManager';
-import { ModuleDef } from './game/modules/ModuleDef';
+import { ModuleDef } from './modules/ModuleDef';
 import { UIManager } from './framework/manager/UIManager';
 import { ResManager } from './framework/manager/ResManager';
 import { ExcelManager } from './data/excel/ExcelManager';
