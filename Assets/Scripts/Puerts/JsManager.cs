@@ -53,7 +53,8 @@ public class JsManager:MonoSingleton<JsManager>
     {
         if(jsEnv != null)
         {
-            jsEnv.Eval(@"require('GameMain')");
+            //jsEnv.Eval(@"require('GameMain')");
+            jsEnv.Eval(@"require('bundle')");
         }
     }
 

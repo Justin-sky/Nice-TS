@@ -1,5 +1,4 @@
 import { UIPage } from "../../../framework/ui/UIPage";
-import { UIManager } from "../../../framework/manager/UIManager";
 import { ModuleManager } from "../../../framework/manager/ModuleManager";
 import { ModuleDef, ModuleMessage } from "../../ModuleDef";
 import { Logger } from "../../../framework/logger/Logger";

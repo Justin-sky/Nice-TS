@@ -1,7 +1,7 @@
 /*eslint-disable block-scoped-var, no-redeclare, no-control-regex, no-prototype-builtins*/
 "use strict";
 
-var $protobuf = require("protobuf");
+var $protobuf = require("protobufjs");
 
 var Long = require("long")
 $protobuf.util.Long = Long;
