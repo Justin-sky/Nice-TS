@@ -14,13 +14,13 @@ public class JsManager:MonoSingleton<JsManager>
     protected override void Init()
     {
         base.Init();
-        InitJsEnv();
+        //调试端口：8080
+        jsEnv = new JsEnv(new JsLoader(), 8080);
     }
 
     void InitJsEnv()
     {
-        //调试端口：8080
-        jsEnv = new JsEnv(new JsLoader(),8080);
+        
         if(jsEnv == null)
         {
             Logger.LogError("InitJsEnv null!!!");
@@ -51,10 +51,18 @@ public class JsManager:MonoSingleton<JsManager>
 
     public void StartGame()
     {
-        if(jsEnv != null)
+        InitJsEnv();
+        if (jsEnv != null)
         {
-            //jsEnv.Eval(@"require('GameMain')");
-            jsEnv.Eval(@"require('bundle')");
+            try
+            {
+                jsEnv.Eval(@"require('bundle')");
+
+            }catch(Exception e)
+            {
+                Logger.LogError(e.ToString());
+            }
+            
         }
     }
 

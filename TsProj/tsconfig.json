@@ -1,23 +1,18 @@
 {
-  "compilerOptions": {
-    "experimentalDecorators": true,
-    "target": "esnext",
-    "module": "commonjs",
-    "jsx": "react",
-    "sourceMap": true,
-    "watch": true,
-    "allowJs":true,
-    "typeRoots": [
-      "../Assets/Puerts/Typing",
-      "../Assets/Gen/Typing",
-      "./node_modules/@types"
-    ],
-    "outDir": "output/"
-  },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+	"compilerOptions": {
+		"target": "ES2018",
+		"module": "ESNext",
+		"jsx": "preserve",
+		"lib": [ "ES2018" ],
+		"sourceMap": true,
+		"inlineSources": true,
+		"moduleResolution": "node",
+		"experimentalDecorators": true,
+		"baseUrl": "src",
+		"typeRoots": [
+			"../Assets/Puerts/Typing",
+			"../Assets/Gen/Typing",
+			"./node_modules/@types"
+		]
+	}
 }

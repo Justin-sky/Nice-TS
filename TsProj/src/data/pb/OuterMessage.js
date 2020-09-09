@@ -1,12 +1,7 @@
 /*eslint-disable block-scoped-var, no-redeclare, no-control-regex, no-prototype-builtins*/
 "use strict";
 
-var $protobuf = require("protobufjs");
-
-var Long = require("long")
-$protobuf.util.Long = Long;
-$protobuf.configure();
-
+var $protobuf = require("protobufjs/minimal");
 
 // Common aliases
 var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
