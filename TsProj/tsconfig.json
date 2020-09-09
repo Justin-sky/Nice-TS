@@ -1,18 +1,22 @@
 {
 	"compilerOptions": {
-		"target": "ES2018",
-		"module": "ESNext",
-		"jsx": "preserve",
-		"lib": [ "ES2018" ],
+		"target": "ESNext",
+		"module": "commonjs",
+		"jsx": "react",
 		"sourceMap": true,
-		"inlineSources": true,
-		"moduleResolution": "node",
+    	"outDir": "out",
 		"experimentalDecorators": true,
-		"baseUrl": "src",
+
 		"typeRoots": [
 			"../Assets/Puerts/Typing",
 			"../Assets/Gen/Typing",
 			"./node_modules/@types"
 		]
-	}
+	},
+	"include": [
+		"src/**/*"
+	  ],
+	  "exclude": [
+		"node_modules"
+	  ]
 }
