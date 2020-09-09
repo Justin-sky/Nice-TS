@@ -6,6 +6,11 @@ var $protobuf = require("protobufjs/minimal");
 // Common aliases
 var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
 
+var Long = require("long");
+$protobuf.util.Long = Long;
+$protobuf.configure();
+
+
 // Exported root namespace
 var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
