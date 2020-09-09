@@ -444,7 +444,7 @@ namespace Puerts.Editor
                 Properties = genTypeSet.Contains(type) ? type.GetFields(Flags).Where(m => !isFiltered(m))
                     .Select(f => new TsPropertyGenInfo() { Name = f.Name, TypeName = GetTsTypeName(f.FieldType), IsStatic = f.IsStatic })
                     .Concat(
-                        type.GetProperties(Flags).Where(m => !isFiltered(m))
+                        type.GetProperties(Flags).Where(m => m.Name != "Item").Where(m => !isFiltered(m))
                         .Select(p => new TsPropertyGenInfo() { Name = p.Name, TypeName = GetTsTypeName(p.PropertyType), IsStatic = IsStatic(p)}))
                     .ToArray() : new TsPropertyGenInfo[] { },
                 IsGenericTypeDefinition = type.IsGenericTypeDefinition,
@@ -510,7 +510,7 @@ namespace Puerts.Editor
                 result.IsEnum = true;
                 var KeyValues = type.GetFields(BindingFlags.Static | BindingFlags.Public)
                     .Where(f => f.Name != "value__")
-                    .Select(f => f.Name + " = " + Convert.ToInt32(f.GetValue(null))).ToArray();
+                    .Select(f => f.Name + " = " + Convert.ChangeType(f.GetValue(null), Enum.GetUnderlyingType(type))).ToArray();
                 result.EnumKeyValues = string.Join(", ", KeyValues);
             }
 
@@ -549,6 +549,10 @@ namespace Puerts.Editor
                 return true;
             }
 
+            if (mb is FieldInfo && (mb as FieldInfo).FieldType.IsPointer) return true;
+            if (mb is PropertyInfo && (mb as PropertyInfo).PropertyType.IsPointer) return true;
+            if (mb is MethodInfo && (mb as MethodInfo).ReturnType.IsPointer) return true;
+
             if (filters != null && filters.Count > 0)
             {
                 foreach (var filter in filters)
@@ -560,12 +564,19 @@ namespace Puerts.Editor
                 }
             }
 
+            if (mb is MethodBase && (mb as MethodBase).GetParameters().Any(pInfo => pInfo.ParameterType.IsPointer)) return true;
+
             return false;
         }
 
         static void AddRefType(HashSet<Type> refTypes, Type type)
         {
-            if (refTypes.Contains(type)) return;
+            var rawType = GetRawType(type);
+            if (refTypes.Contains(rawType) || type.IsPointer || rawType.IsPointer) return;
+            if (!rawType.IsGenericParameter)
+            {
+                refTypes.Add(rawType);
+            }
             if (type.IsGenericType)
             {
                 foreach (var gt in type.GetGenericArguments())
@@ -590,9 +601,7 @@ namespace Puerts.Editor
                 AddRefType(refTypes, baseType);
                 baseType = baseType.BaseType;
             }
-            type = GetRawType(type);
-            if (type.IsGenericParameter) return;
-            refTypes.Add(type);
+            
         }
 
         public class TypingGenInfo

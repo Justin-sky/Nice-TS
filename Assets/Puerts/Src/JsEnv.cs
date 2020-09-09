@@ -37,7 +37,7 @@ namespace Puerts
 
         public JsEnv(ILoader loader, int debugPort = -1)
         {
-            const int libVersionExpect = 1;
+            const int libVersionExpect = 2;
             int libVersion = PuertsDLL.GetLibVersion();
             if (libVersion != libVersionExpect)
             {
@@ -77,9 +77,19 @@ namespace Puerts
 
             PuertsDLL.SetGlobalFunction(isolate, "__tgjsRegisterTickHandler", StaticCallbacks.JsEnvCallbackWrap, AddCallback(RegisterTickHandler));
             PuertsDLL.SetGlobalFunction(isolate, "__tgjsLoadType", StaticCallbacks.JsEnvCallbackWrap, AddCallback(LoadType));
+            PuertsDLL.SetGlobalFunction(isolate, "__tgjsGetNestedTypes", StaticCallbacks.JsEnvCallbackWrap, AddCallback(GetNestedTypes));
             PuertsDLL.SetGlobalFunction(isolate, "__tgjsGetLoader", StaticCallbacks.JsEnvCallbackWrap, AddCallback(GetLoader));
 
-            var autoRegister = Type.GetType("PuertsStaticWrap.AutoStaticCodeRegister", false);
+            const string AutoStaticCodeRegisterClassName = "PuertsStaticWrap.AutoStaticCodeRegister";
+            var autoRegister = Type.GetType(AutoStaticCodeRegisterClassName, false);
+            if (autoRegister == null)
+            {
+                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    autoRegister = assembly.GetType(AutoStaticCodeRegisterClassName, false);
+                    if (autoRegister != null) break;
+                }
+            }
             if (autoRegister != null)
             {
                 var methodInfoOfRegister = autoRegister.GetMethod("Register");
@@ -97,6 +107,7 @@ namespace Puerts
             ExecuteFile("puerts/modular.js");
             ExecuteFile("puerts/csharp.js");
             ExecuteFile("puerts/timer.js");
+            ExecuteFile("puerts/polyfill.js");
         }
 
         void ExecuteFile(string filename)
@@ -234,48 +245,74 @@ namespace Puerts
             }
             
         }
-        
+
+        Type GetTypeFromJs(IntPtr isolate, IntPtr info, IntPtr self, int paramLen)
+        {
+            Type type = null;
+            var value = PuertsDLL.GetArgumentValue(info, 0);
+            if (PuertsDLL.GetJsValueType(isolate, value, false) == JsValueType.String)
+            {
+                string classFullName = PuertsDLL.GetStringFromValue(isolate, value, false);
+                var maybeType = TypeRegister.GetType(classFullName);
+                if (paramLen == 1)
+                {
+                    type = maybeType;
+                }
+                else if (maybeType != null
+                    && maybeType.IsGenericTypeDefinition
+                    && maybeType.GetGenericArguments().Length == (paramLen - 1)) //泛型
+                {
+                    var genericArguments = new Type[paramLen - 1];
+                    for (int i = 1; i < paramLen; i++)
+                    {
+                        value = PuertsDLL.GetArgumentValue(info, i);
+                        if (PuertsDLL.GetJsValueType(isolate, value, false) != JsValueType.Function) return null;
+                        var argTypeId = PuertsDLL.GetTypeIdFromValue(isolate, value, false);
+                        if (argTypeId == -1) return null;
+                        genericArguments[i - 1] = TypeRegister.GetType(argTypeId);
+                    }
+                    type = maybeType.MakeGenericType(genericArguments);
+                }
+            }
+            else if (PuertsDLL.GetJsValueType(isolate, value, false) == JsValueType.NativeObject)
+            {
+                type = StaticTranslate<Type>.Get(Index, isolate, NativeValueApi.GetValueFromArgument, value, false);
+            }
+
+            return type;
+        }
+
         void LoadType(IntPtr isolate, IntPtr info, IntPtr self, int paramLen)
         {
             try
             {
-                Type type = null;
-                var value = PuertsDLL.GetArgumentValue(info, 0);
-                if (PuertsDLL.GetJsValueType(isolate, value, false) == JsValueType.String)
+                Type type = GetTypeFromJs(isolate, info, self, paramLen);
+                
+                if (type != null)
                 {
-                    string classFullName = PuertsDLL.GetStringFromValue(isolate, value, false);
-                    var maybeType = TypeRegister.GetType(classFullName);
-                    if (paramLen == 1)
-                    {
-                        type = maybeType;
-                    }
-                    else if (maybeType != null 
-                        && maybeType.IsGenericTypeDefinition
-                        && maybeType.GetGenericArguments().Length == (paramLen - 1)) //泛型
-                    {
-                        var genericArguments = new Type[paramLen - 1];
-                        for (int i = 1; i < paramLen; i++)
-                        {
-                            value = PuertsDLL.GetArgumentValue(info, i);
-                            if (PuertsDLL.GetJsValueType(isolate, value, false) != JsValueType.Function) return;
-                            var argTypeId = PuertsDLL.GetTypeIdFromValue(isolate, value, false);
-                            if (argTypeId == -1) return;
-                            genericArguments[i - 1] = TypeRegister.GetType(argTypeId);
-                        }
-                        type = maybeType.MakeGenericType(genericArguments);
-                        //UnityEngine.Debug.Log(type);
-                    }
+                    int typeId = TypeRegister.GetTypeId(isolate, type);
+                    PuertsDLL.ReturnClass(isolate, info, typeId);
                 }
-                if (type == null)
-                {
-                    return;
-                }
-                int typeId = TypeRegister.GetTypeId(isolate, type);
-                PuertsDLL.ReturnClass(isolate, info, typeId);
             }
             catch(Exception e)
             {
                 PuertsDLL.ThrowException(isolate, "loadClass throw c# exception:" + e.Message + ",stack:" + e.StackTrace);
+            }
+        }
+
+        void GetNestedTypes(IntPtr isolate, IntPtr info, IntPtr self, int paramLen)
+        {
+            try
+            {
+                Type type = GetTypeFromJs(isolate, info, self, paramLen);
+                if (type != null)
+                {
+                    StaticTranslate<Type[]>.Set(Index, isolate, NativeValueApi.SetValueToResult, info, type.GetNestedTypes());
+                }
+            }
+            catch (Exception e)
+            {
+                PuertsDLL.ThrowException(isolate, "GetNestedType throw c# exception:" + e.Message + ",stack:" + e.StackTrace);
             }
         }
 
@@ -388,6 +425,14 @@ namespace Puerts
                 PuertsDLL.DestroyJSEngine(isolate);
                 isolate = IntPtr.Zero;
                 disposed = true;
+            }
+        }
+
+        public void CheckLiveness()
+        {
+            if (disposed)
+            {
+                throw new InvalidOperationException("JsEnv had disposed!");
             }
         }
     }

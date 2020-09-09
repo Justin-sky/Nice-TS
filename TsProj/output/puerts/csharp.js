@@ -8,6 +8,40 @@
 var global = global || (function () { return this; }());
 (function (global) {
     "use strict";
+    
+    function csTypeToClass(csType) {
+        let cls = puerts.loadType(csType);
+        if (cls) {
+            let parentPrototype = Object.getPrototypeOf(cls.prototype);
+            if (parentPrototype) {
+                Object.setPrototypeOf(cls, parentPrototype.constructor);//v8 api的inherit并不能把静态属性也继承，通过这种方式修复下
+            }
+
+            for(var key in cls) {
+                let desc = Object.getOwnPropertyDescriptor(cls, key);
+                if (desc && desc.configurable && (typeof desc.get) == 'function' && (typeof desc.value) == 'undefined') {
+                    let val = cls[key];
+                    Object.defineProperty(cls, key, {
+                        value: val,
+                        writable: false,
+                        configurable: false
+                    });
+                    if (cls.__p_isEnum && (typeof val) == 'number') {
+                        cls[val] = key;
+                    }
+                }
+            }
+
+            let nestedTypes = puerts.getNestedTypes(csType);
+            if (nestedTypes) {
+                for(var i = 0; i < nestedTypes.Length; i++) {
+                    let ntype = nestedTypes[i];
+                    cls[ntype.Name] = csTypeToClass(ntype);
+                }
+            }
+        }
+        return cls;
+    }
 
     function createTypeProxy(namespace) {
         return new Proxy(Object.create(null), {
@@ -19,14 +53,9 @@ var global = global || (function () { return this; }());
                         genericTypeInfo.set('$name', fullName.replace('$', '`'));
                         cache[name] = genericTypeInfo;
                     } else {
-                        let cls = puerts.loadType(fullName);
+                        let cls = csTypeToClass(fullName);
                         if (cls) {
-                            cache[name] = cls
-                            let parentPrototype = Object.getPrototypeOf(cls.prototype);
-                            if (parentPrototype) {
-                                Object.setPrototypeOf(cls, parentPrototype.constructor);//v8 api的inherit并不能把静态属性也继承，通过这种方式修复下
-                            }
-                            //console.log(fullName + ' is a class');
+                            cache[name] = cls;
                         } else {
                             cache[name] = createTypeProxy(fullName);
                             //console.log(fullName + ' is a namespace');
