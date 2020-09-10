@@ -74,10 +74,27 @@ namespace Addressable
                 Logger.LogError("加载Flatbuffer失败......");
                 return false;
             }
-
-            
         }
 
+
+        public static async Task<bool> PreloadJS(string jsLabel)
+        {
+            var list = await Addressables.LoadAssetsAsync<TextAsset>(jsLabel, null).Task;
+            if(list != null)
+            {
+                JsManager.Instance.jscache.Clear();
+                foreach (var txt in list)
+                {
+                    JsManager.Instance.jscache.Add(txt.name, txt.text);
+                }
+                return true;
+            }
+            else
+            {
+                Logger.LogError("加载JS失败......");
+                return false;
+            }
+        }
 
         public static async Task<GameObject> LoadPrefab(string address)
         {

@@ -1,7 +1,7 @@
 import { UIPage } from "../../../framework/ui/UIPage";
 import { ModuleManager } from "../../../framework/manager/ModuleManager";
 import { ModuleDef, ModuleMessage } from "../../ModuleDef";
-import { Logger } from "../../../framework/logger/Logger";
+import { LoggerJS } from "../../../framework/logger/Logger";
 import { binder } from "../../../framework/common/NiceDecorator";
 
 
@@ -42,7 +42,7 @@ export class UILoginPage extends UIPage{
         let account = this.m_account.text;
         let password = this.m_password.text;
 
-        Logger.log(`account:${account} - password: ${password}`);
+        LoggerJS.log(`account:${account} - password: ${password}`);
 
         if(account != "" && password != ""){
             ModuleManager.Instance(ModuleManager).sendMessage(

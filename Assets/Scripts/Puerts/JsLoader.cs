@@ -1,6 +1,8 @@
-﻿using Puerts;
+﻿using Addressable;
+using Puerts;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class JsLoader : ILoader
@@ -23,19 +25,19 @@ public class JsLoader : ILoader
     public string ReadFile(string filepath, out string debugpath)
     {
         StringBuilder scriptPath = new StringBuilder();
-        scriptPath.Append(filepath);
+        scriptPath.Append(filepath).Append(".txt");
 
 #if UNITY_EDITOR
-        var scriptDir = Path.Combine(Application.dataPath, "../TsProj/output");
+        var scriptDir = Path.Combine(Application.dataPath, "AssetsPackage/Js");
         var jsPath = Path.Combine(scriptDir, scriptPath.ToString());
-
         debugpath = jsPath.Replace("/", "\\");
-
-        return GameUtility.SafeReadAllText(jsPath);
-
 #endif
-        //手机上使用Addressables
-        debugpath = "";
-        return "";
+        var jscache = JsManager.Instance.jscache;
+        string jsName = filepath.Replace("puerts/", "");
+
+        string txt;
+        jscache.TryGetValue(jsName, out txt);
+
+        return txt;
     }
 }

@@ -1,6 +1,6 @@
 import {TimeUtil} from '../framework/util/TimeUtil';
 import {SingletonTest} from './SingletonTest';
-import {Logger} from '../framework/logger/Logger';
+import {LoggerJS} from '../framework/logger/Logger';
 import {Messenger} from '../framework/common/Messenger';
 import { ResManager } from '../framework/manager/ResManager';
 import { NiceET } from '../data/pb/OuterMessage';
@@ -16,30 +16,30 @@ export class UnitTest{
 
     public static async doTest(){
 
-        Logger.log("TimeUtil =============================");
+        LoggerJS.log("TimeUtil =============================");
         TimeUtil.test();
 
-        Logger.log("Singleton =============================");
+        LoggerJS.log("Singleton =============================");
         SingletonTest.Instance(SingletonTest);
-        Logger.log("===");
+        LoggerJS.log("===");
         let t1: SingletonTest = SingletonTest.Instance(SingletonTest);
         let t2: SingletonTest = SingletonTest.Instance(SingletonTest);
 
-        Logger.log(t1.test() + " : " + t2.test());
+        LoggerJS.log(t1.test() + " : " + t2.test());
         t1.add();
-        Logger.log(t1.test() + " : " + t2.test());
+        LoggerJS.log(t1.test() + " : " + t2.test());
         t2.add();
-        Logger.log(t1.test() + " : " + t2.test());
+        LoggerJS.log(t1.test() + " : " + t2.test());
 
 
-        Logger.log("Messager =============================");
+        LoggerJS.log("Messager =============================");
 
         let messenger:Messenger = new Messenger();
         let listen:Function = function(a:number, b:string){
-            Logger.log(`listen call: ${a} , ${b}`)
+            LoggerJS.log(`listen call: ${a} , ${b}`)
         }
         let listen2:Function = function(a:number, b:string){
-            Logger.log(`listen call2: ${a} , ${b}`)
+            LoggerJS.log(`listen call2: ${a} , ${b}`)
         }
 
         let  EVENT_CODE:number = 100;
@@ -54,10 +54,10 @@ export class UnitTest{
         messenger.broadcast(EVENT_CODE, 999," Hello");
 
 
-        Logger.log("Timer =============================");
+        LoggerJS.log("Timer =============================");
 
         let interval = setInterval(()=>{
-            Logger.log("inter val..")
+            LoggerJS.log("inter val..")
         },1000);
         let timeout = setTimeout(()=>{
             clearInterval(interval);
@@ -67,17 +67,17 @@ export class UnitTest{
 
 
 
-        Logger.log("ResourceManager =============================");
+        LoggerJS.log("ResourceManager =============================");
 
         let prefab = await ResManager.Instance(ResManager).loadPrefab("Models/1001/Character.prefab") ;
         
-        Logger.log(prefab);
+        LoggerJS.log(prefab);
 
         //let inst = CS.UnityEngine.GameObject.Instantiate(prefab);
         //inst.name = "Test Ch";
 
 
-        Logger.log("引用类型 =============================");
+        LoggerJS.log("引用类型 =============================");
         let testMap:Map<string,Array<number>> = new Map();
         testMap.set("key1" ,new Array());
 
@@ -86,7 +86,7 @@ export class UnitTest{
         arr1.push(333);
 
         let arr2:Array<number> = testMap.get("key1");
-        Logger.log(arr2);
+        LoggerJS.log(arr2);
 
 
         // Logger.log("FariyGUI =============================");
@@ -104,20 +104,20 @@ export class UnitTest{
         // ModuleManager.Instance(ModuleManager).createModule(ModuleDef.HomeModule,"create login");
     
         
-        Logger.log("UIManager =============================");
+        LoggerJS.log("UIManager =============================");
 
 
 
-        Logger.log("excel data =============================");
+        LoggerJS.log("excel data =============================");
         let skillMap = SkillConfigTB.Instance(SkillConfigTB).trs;
         let skilltr:SkillConfigTR = skillMap.get(1003);
-        Logger.log(`${skilltr._Name} : ${skilltr._AttackType}`)
+        LoggerJS.log(`${skilltr._Name} : ${skilltr._AttackType}`)
         let impacttype = skilltr._ImpactType;
-        Logger.log(impacttype);
+        LoggerJS.log(impacttype);
 
 
 
-        Logger.log("Protobuf =============================");
+        LoggerJS.log("Protobuf =============================");
 
         try{
             let c2m_req = {
@@ -129,39 +129,39 @@ export class UnitTest{
 
             //验证
            let v1 = NiceET.C2M_TestRequest.verify(c2m_req);
-            Logger.log("verify pb: "+ v1);
+           LoggerJS.log("verify pb: "+ v1);
             
             let msg = NiceET.C2M_TestRequest.create(c2m_req);
             msg.RpcId = 100000;
             msg.request = "good bye";
             msg.ActorId = 88888;
 
-            Logger.log(msg);
+            LoggerJS.log(msg);
 
             let buf = NiceET.C2M_TestRequest.encode(msg).finish();
-            Logger.log(buf);
+            LoggerJS.log(buf);
 
             let de_buf = NiceET.C2M_TestRequest.decode(buf);
-            Logger.log(de_buf.RpcId);
-            Logger.log(de_buf.request);
+            LoggerJS.log(de_buf.RpcId);
+            LoggerJS.log(de_buf.request);
 
             let de_m = NiceET.C2M_TestRequest.decode;
             let de_m_t = de_m(buf);
-            Logger.log("========:"+de_m_t.request);
+            LoggerJS.log("========:"+de_m_t.request);
 
-            Logger.log("protobuf opcode:");
+            LoggerJS.log("protobuf opcode:");
             let op_test = Opcode.map[Opcode.C2M_TESTREQUEST](buf);
-            Logger.log("test opcode: "+ op_test.request);
+            LoggerJS.log("test opcode: "+ op_test.request);
 
         }catch(ex){
-            Logger.log(ex);
+            LoggerJS.log(ex);
         }
 
-        Logger.log("UintArray =============================");
+        LoggerJS.log("UintArray =============================");
 
         let  opcode_arr = new Uint8Array([257,25]);
-        Logger.log(opcode_arr.subarray(0,1));
-        Logger.log(opcode_arr.length);
+        LoggerJS.log(opcode_arr.subarray(0,1));
+        LoggerJS.log(opcode_arr.length);
 
         let opcode_arr2 = new Uint8Array([33]);
 
@@ -169,7 +169,7 @@ export class UnitTest{
         let merge_arr = new Uint8Array(opcode_arr.length + opcode_arr2.length);
         merge_arr.set(opcode_arr2);
         merge_arr.set(opcode_arr, opcode_arr2.length);
-        Logger.log(merge_arr.length);
+        LoggerJS.log(merge_arr.length);
      
         let n:number = 5678;
         let buffer:Uint8Array = new Uint8Array(4);
@@ -184,7 +184,7 @@ export class UnitTest{
 
         //unit8Array转n
         n = buffer[0] << 24 | buffer[1] << 16 | buffer[2] << 8 | buffer[3];
-        Logger.log(n);
+        LoggerJS.log(n);
 
 
         n = 300;
@@ -192,9 +192,9 @@ export class UnitTest{
         buffer1[0] = n >>> 8;
         buffer1[1] = n & 0xff;
 
-        Logger.log(buffer1);
+        LoggerJS.log(buffer1);
         n = buffer1[0]<<8 | buffer1[1];
-        Logger.log(n);
+        LoggerJS.log(n);
 
         
 

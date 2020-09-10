@@ -1,4 +1,4 @@
-import {Logger} from '../logger/Logger';
+import {LoggerJS} from '../logger/Logger';
 
 export class TimeUtil{
 
@@ -116,25 +116,25 @@ export class TimeUtil{
     public static test():void{
 
         let t1:string = this.getTimeString1(5000);
-        Logger.log(t1);
+        LoggerJS.log(t1);
         
 
         let t2:string = this.getTimeString(5000);
-        Logger.log(t2);
+        LoggerJS.log(t2);
 
         let t3:string = this.getTimeMinuteString(5000);
-        Logger.log(t3);
+        LoggerJS.log(t3);
 
         let t4:string = this.getTimeSecondString(5000);
-        Logger.log(t4);
+        LoggerJS.log(t4);
 
         let time:number = new Date().getTime();
 
         let t5:number = this.getWeekOfMonthFirstDay(time);
-        Logger.log("getWeekOfMonthFirstDay: "+t5 + " ,time:"+time);
+        LoggerJS.log("getWeekOfMonthFirstDay: "+t5 + " ,time:"+time);
 
         let t6:number = this.getMonthDays(time);
-        Logger.log("getMonthDays: "+t6);
+        LoggerJS.log("getMonthDays: "+t6);
 
     }
 

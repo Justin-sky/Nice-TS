@@ -1,6 +1,6 @@
 import { Singleton } from "../common/Singleton";
 import { GeneralModule } from "../module/GeneralModule";
-import { Logger } from "../logger/Logger";
+import { LoggerJS } from "../logger/Logger";
 import { ModuleFactory } from "../module/ModuleFactory";
 
 
@@ -37,17 +37,17 @@ export class ModuleManager extends Singleton<ModuleManager>{
 
     private createModule(name:string, args?:any):GeneralModule{
 
-        Logger.log(`name = ${name}, args = ${args}`);
+        LoggerJS.log(`name = ${name}, args = ${args}`);
 
         if(this.hasModule(name)){
-            Logger.logError(`The Module<${name}> Has Existed!`);
+            LoggerJS.logError(`The Module<${name}> Has Existed!`);
             return this.getModule(name);
         }
 
         let module : GeneralModule = ModuleFactory.createModule(name);
 
         if(module == null ){
-            Logger.logError(`模块实例化失败：<${name}> `);
+            LoggerJS.logError(`模块实例化失败：<${name}> `);
             return null;
         }
 

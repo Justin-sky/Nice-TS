@@ -1,6 +1,6 @@
 
 const CS = require('csharp');
-import {Logger} from './framework/logger/Logger';
+import {LoggerJS} from './framework/logger/Logger';
 import {UnitTest} from './unittest/UnitTest';
 import { GameObjectPool } from './framework/common/GameObjectPool';
 import { ModuleManager } from './framework/manager/ModuleManager';
@@ -21,7 +21,7 @@ class GameMain{
     public async start() {
         
         try{
-            Logger.log("Game start in JS....");
+            LoggerJS.log("Game start in JS....");
 
             //启动单例
             GameObjectPool.Instance(GameObjectPool);
@@ -45,7 +45,7 @@ class GameMain{
             CS.GameLaunch.Instance.JsLuanchFinish();
 
         }catch(ex){
-            Logger.logError(ex);
+            LoggerJS.logError(ex);
         }
 
     }
@@ -54,12 +54,12 @@ class GameMain{
 
         GameObjectPool.Instance(GameObjectPool).cleanup(true);
         ModuleManager.Instance(ModuleManager).cleanup();
-        Logger.log("Game onApplicationQuit in JS....");
+        LoggerJS.log("Game onApplicationQuit in JS....");
     }
 
     public onDispose():void {
         
-        Logger.log("Game onDispose in JS....");
+        LoggerJS.log("Game onDispose in JS....");
     }
     
 }

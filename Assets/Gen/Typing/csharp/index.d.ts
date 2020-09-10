@@ -402,7 +402,7 @@ declare module 'csharp' {
             public remove_afterUpdate(value: System.Action):void;
             public static Instantiate():void;
             public Dispose():void;
-            public SetFous(newFocus: FairyGUI.DisplayObject, byKey: boolean):void;
+            public SetFous(newFocus: FairyGUI.DisplayObject, byKey?: boolean):void;
             public DoKeyNavigate(backward: boolean):void;
             public GetTouchPosition(touchId: number):UnityEngine.Vector2;
             public GetTouchTarget(touchId: number):FairyGUI.DisplayObject;
@@ -574,7 +574,7 @@ declare module 'csharp' {
             public mainGridMinSize: number;
             public mainGridIndex: number;
             public constructor();
-            public SetBoundsChangedFlag(positionChangedOnly: boolean):void;
+            public SetBoundsChangedFlag(positionChangedOnly?: boolean):void;
             public EnsureBoundsCorrect():void;
             public Setup_BeforeAdd(buffer: FairyGUI.Utils.ByteBuffer, beginPos: number):void;
             public Setup_AfterAdd(buffer: FairyGUI.Utils.ByteBuffer, beginPos: number):void;
@@ -670,7 +670,7 @@ declare module 'csharp' {
             public relatedController: FairyGUI.Controller;
             public relatedPageId: string;
             public constructor();
-            public FireClick(downEffect: boolean, clickCall: boolean):void;
+            public FireClick(downEffect: boolean, clickCall?: boolean):void;
             public GetTextField():FairyGUI.GTextField;
             public HandleControllerChanged(c: FairyGUI.Controller):void;
             public Setup_AfterAdd(buffer: FairyGUI.Utils.ByteBuffer, beginPos: number):void;
@@ -958,7 +958,7 @@ declare module 'csharp' {
             public SetEase(value: FairyGUI.EaseType, customEase: FairyGUI.CustomEase):FairyGUI.GTweener;
             public SetEasePeriod(value: number):FairyGUI.GTweener;
             public SetEaseOvershootOrAmplitude(value: number):FairyGUI.GTweener;
-            public SetRepeat(times: number, yoyo: boolean):FairyGUI.GTweener;
+            public SetRepeat(times: number, yoyo?: boolean):FairyGUI.GTweener;
             public SetTimeScale(value: number):FairyGUI.GTweener;
             public SetIgnoreEngineTimeScale(value: boolean):FairyGUI.GTweener;
             public SetSnapping(value: boolean):FairyGUI.GTweener;
@@ -975,7 +975,7 @@ declare module 'csharp' {
             public SetListener(value: FairyGUI.ITweenListener):FairyGUI.GTweener;
             public SetPaused(paused: boolean):FairyGUI.GTweener;
             public Seek(time: number):void;
-            public Kill(complete: boolean):void;
+            public Kill(complete?: boolean):void;
             
         }
         class Shape extends FairyGUI.DisplayObject {
@@ -1354,7 +1354,7 @@ declare module 'csharp' {
             public static SetLoaderExtension(type: System.Type):void;
             public static SetLoaderExtension(creator: FairyGUI.UIObjectFactory.GLoaderCreator):void;
             public static Clear():void;
-            public static NewObject(pi: FairyGUI.PackageItem, userClass: System.Type):FairyGUI.GObject;
+            public static NewObject(pi: FairyGUI.PackageItem, userClass?: System.Type):FairyGUI.GObject;
             public static NewObject(type: FairyGUI.ObjectType):FairyGUI.GObject;
             
         }
@@ -1455,6 +1455,9 @@ declare module 'csharp' {
         type AsyncCallback = (ar: System.IAsyncResult) => void;
         var AsyncCallback: {new (func: (ar: System.IAsyncResult) => void): AsyncCallback;}
         class IntPtr extends System.ValueType {
+            
+        }
+        class Int64 extends System.ValueType {
             
         }
         
@@ -1977,5 +1980,30 @@ declare module 'csharp' {
         }
         
     }
+    
+        class Logger extends System.Object {
+            public static clientVerstion: string;
+            public static loginUid: string;
+            public static localIP: string;
+            public static platName: string;
+            public static sceneName: string;
+            public static DEBUG_BUILD_VER: string;
+            public static platChannel: string;
+            public static useTime: bigint;
+            public static useMemory: string;
+            public constructor();
+            public static Log(s: string, ...p: any[]):void;
+            public static Log(o: any):void;
+            public static LogToMainThread(s: string, ...p: any[]):void;
+            public static Assert(condition: boolean, s: string, ...p: any[]):void;
+            public static LogError(s: string, ...p: any[]):void;
+            public static LogErrorToMainThread(s: string, ...p: any[]):void;
+            public static LogStackTrace(str: string):void;
+            public static CheckReportError():void;
+            public static Watch():void;
+            
+        }
+        
+    
     
 }

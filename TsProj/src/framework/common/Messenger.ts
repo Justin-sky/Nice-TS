@@ -1,5 +1,3 @@
-import {Logger} from '../logger/Logger';
-
 
 
 export class MesObj{

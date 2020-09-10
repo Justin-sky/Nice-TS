@@ -1,20 +1,20 @@
-const CS = require('csharp');
+import {Logger} from 'csharp'
 
 import {GameConfig} from '../../global/GameConfig';
 
-export class Logger{
+export class LoggerJS{
 
     public static log(msg:any):void{
         
         if(GameConfig.debug)
-            CS.Logger.Log(`${msg}`);
+            Logger.Log(`${msg}`);
     }
 
 
     public static logError(msg:any):void{
 
         if(GameConfig.debug)
-            CS.Logger.LogError(`${msg}`);
+            Logger.LogError(`${msg}`);
 
     }
 }

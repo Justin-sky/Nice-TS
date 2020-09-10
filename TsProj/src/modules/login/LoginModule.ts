@@ -1,5 +1,5 @@
 import { GeneralModule } from "../../framework/module/GeneralModule";
-import { Logger } from "../../framework/logger/Logger";
+import { LoggerJS } from "../../framework/logger/Logger";
 import { UIManager } from "../../framework/manager/UIManager";
 import { SceneDef, ModuleMessage } from "../ModuleDef";
 import { gameUI } from "../../data/ui/game";
@@ -77,7 +77,7 @@ export class LoginModule extends GeneralModule{
                 this.gateId = msg.GateId;
                 this.gateKey = msg.Key;
                 
-                Logger.log("login ream succ, gate addr:"+msg.Address + ",key:"+msg.Key);
+                LoggerJS.log("login ream succ, gate addr:"+msg.Address + ",key:"+msg.Key);
 
                 //断开认证服
                 this.sessionReam.disconnect();
@@ -87,7 +87,7 @@ export class LoginModule extends GeneralModule{
 
             });
         }else{
-            Logger.logError("login reamserver err, code: "+code + ",id:"+channel.Id);
+            LoggerJS.logError("login reamserver err, code: "+code + ",id:"+channel.Id);
 
         }
     }
@@ -98,7 +98,7 @@ export class LoginModule extends GeneralModule{
         this.sessionGate = GameSession.Instance(GameSession).connectChannel(
             address,
             (channel:any,code:number)=>{
-                Logger.log("login Gate Server: "+code);
+                LoggerJS.log("login Gate Server: "+code);
 
                 this.onGateSocketErr(channel, code);
             }
@@ -119,19 +119,19 @@ export class LoginModule extends GeneralModule{
 
             let buf = NiceET.C2G_LoginGate.encode(msg).finish();
 
-            Logger.log("login gate succ ,key: "+msg.Key + ", rpcid:"+rpcId);
+            LoggerJS.log("login gate succ ,key: "+msg.Key + ", rpcid:"+rpcId);
             this.sessionGate.send(Opcode.C2G_LOGINGATE,rpcId,buf,(response:any)=>{
 
                 let msg = response as NiceET.G2C_LoginGate;
                
                 this._playerID = msg.PlayerId;
-                Logger.log("login gate response.." + msg.PlayerId);
+                LoggerJS.log("login gate response.." + msg.PlayerId);
 
                 UIManager.Instance(UIManager).enterMainPage();
             });
 
         }else{
-            Logger.logError("gate server err, code: "+code + ",id:"+channel.Id);
+            LoggerJS.logError("gate server err, code: "+code + ",id:"+channel.Id);
         }
 
     }

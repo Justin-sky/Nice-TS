@@ -1,12 +1,16 @@
-﻿using NiceTS;
+﻿using Addressable;
+using NiceTS;
 using Puerts;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
 public class JsManager:MonoSingleton<JsManager>
 {
     JsEnv jsEnv = null;
+    public Dictionary<string, string> jscache = new Dictionary<string, string>();
 
     public Action JsOnApplicationQuit;
     public Action JsOnDispose;
@@ -14,26 +18,7 @@ public class JsManager:MonoSingleton<JsManager>
     protected override void Init()
     {
         base.Init();
-        //调试端口：8080
-        jsEnv = new JsEnv(new JsLoader(), 8080);
-    }
-
-    void InitJsEnv()
-    {
-        
-        if(jsEnv == null)
-        {
-            Logger.LogError("InitJsEnv null!!!");
-        }
-
-        //声明Action： 值类型才需要这样添加
-        jsEnv.UsingAction<float>();
-        jsEnv.UsingAction<float, float>();
-        jsEnv.UsingAction<string, byte[]>();
-        jsEnv.UsingAction<Scene, LoadSceneMode>();
-        jsEnv.UsingAction<TChannel, int>();
-    
-
+       
     }
 
     public JsEnv GetJsEnv()
@@ -49,9 +34,32 @@ public class JsManager:MonoSingleton<JsManager>
         }
     }
 
-    public void StartGame()
+    async Task InitJsEnv()
     {
-        InitJsEnv();
+        //预加载JS ，在JSEnv初始化前调用
+        await ResourceManager.PreloadJS(AddressableConfig.JSLable);
+
+        //调试端口：8080
+        jsEnv = new JsEnv(new JsLoader(), 8080);
+
+        if (jsEnv == null)
+        {
+            Logger.LogError("InitJsEnv null!!!");
+        }
+
+        //声明Action： 值类型才需要这样添加
+        jsEnv.UsingAction<float>();
+        jsEnv.UsingAction<float, float>();
+        jsEnv.UsingAction<string, byte[]>();
+        jsEnv.UsingAction<Scene, LoadSceneMode>();
+        jsEnv.UsingAction<TChannel, int>();
+
+    }
+
+    public async void StartGame()
+    {
+        await InitJsEnv();
+
         if (jsEnv != null)
         {
             try
@@ -66,10 +74,11 @@ public class JsManager:MonoSingleton<JsManager>
         }
     }
 
-    public void Restart()
+    public async void Restart()
     {
         Dispose();
-        InitJsEnv();
+
+        await InitJsEnv();
         StartGame();
     }
 

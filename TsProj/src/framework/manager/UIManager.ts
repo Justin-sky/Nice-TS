@@ -1,6 +1,5 @@
 
 import { Singleton } from '../common/Singleton';
-import { Logger } from '../logger/Logger';
 import { UILoading } from '../ui/UILoading';
 import { UIWindow } from '../ui/UIWindow';
 import { UIWidge } from '../ui/UIWidge';

@@ -28,8 +28,8 @@ module.exports = (env) => {
 			historyApiFallback: true
 		},
 		output: {
-			path: path.join(workSpaceDir, './output/'),
-			filename: `${entries[env.entry].output}.js`
+			path: path.join(workSpaceDir, '../Assets/AssetsPackage/Js'),
+			filename: `${entries[env.entry].output}.js.txt`
 		},
 		module: {
 			rules: [

@@ -1,5 +1,5 @@
 import { UIPage } from "../../../framework/ui/UIPage";
-import { Logger } from "../../../framework/logger/Logger";
+import { LoggerJS } from "../../../framework/logger/Logger";
 import { binder } from "../../../framework/common/NiceDecorator";
 
 
@@ -49,16 +49,16 @@ export class UIHomePage extends UIPage{
 
 
     public onchatBtn(){
-        Logger.log("on chat...");
+        LoggerJS.log("on chat...");
     }
     public onbagBtn(){
-        Logger.log("on bag ..");
+        LoggerJS.log("on bag ..");
     }
     public onshopBtn(){
-        Logger.log("on shop...");
+        LoggerJS.log("on shop...");
     }
     public onlevelBtn(){
-        Logger.log("on level...");
+        LoggerJS.log("on level...");
     }
 
 }

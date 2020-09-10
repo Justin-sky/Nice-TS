@@ -19,6 +19,7 @@ namespace Addressable
         public const string CommonMapPattren = ",";
 
         public const string FlatBufferLable = "FB";
+        public const string JSLable = "JS";
 
     }
 }

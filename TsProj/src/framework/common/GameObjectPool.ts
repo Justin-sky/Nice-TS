@@ -1,5 +1,4 @@
 
-import { Logger } from '../logger/Logger';
 import { Singleton } from './Singleton';
 import { ResManager } from '../manager/ResManager';
 

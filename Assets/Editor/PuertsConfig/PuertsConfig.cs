@@ -71,6 +71,10 @@ public class PuertsConfig
                 typeof(Delegate),
                 typeof(Action<float,float>),
                 typeof(Action<float>),
+
+                typeof(Logger),
+
+
             };
         }
     }

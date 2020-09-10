@@ -2,7 +2,7 @@ const CS = require('csharp');
 const csResMgr = CS.Addressable.ResourceManager;
 
 import { Singleton } from '../common/Singleton';
-import { Logger } from '../logger/Logger';
+import { LoggerJS } from '../logger/Logger';
 import { $promise } from 'puerts';
 
 
@@ -27,7 +27,7 @@ export class ResManager extends Singleton<ResManager>{
             let task = csResMgr.PreadloadFB(this.fblabel);
             return  await $promise(task);
         }catch(ex){
-            Logger.logError(`Load fb error: : ${ex}`)
+            LoggerJS.logError(`Load fb error: : ${ex}`)
             return 0;
         }
     }
@@ -44,7 +44,7 @@ export class ResManager extends Singleton<ResManager>{
             return go;
         }catch(ex){
 
-            Logger.logError(`Load prefab :${address} : ${ex}`)
+            LoggerJS.logError(`Load prefab :${address} : ${ex}`)
 
             return null;
         }
@@ -58,7 +58,7 @@ export class ResManager extends Singleton<ResManager>{
             let go = await $promise(task);
             return go;
         }catch(ex){
-            Logger.logError(`Load textasset :${address} : ${ex}`)
+            LoggerJS.logError(`Load textasset :${address} : ${ex}`)
 
             return null;
         }
@@ -72,7 +72,7 @@ export class ResManager extends Singleton<ResManager>{
             return go;
 
         }catch(ex){
-            Logger.logError(`Load sprite :${address} : ${ex}`)
+            LoggerJS.logError(`Load sprite :${address} : ${ex}`)
 
             return null;
         }
