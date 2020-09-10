@@ -10,10 +10,6 @@ import { NetErrorCode } from "../../framework/net/NetErrorCode";
 import { NiceET } from "../../data/pb/OuterMessage";
 
 
-const CS = require('csharp');
-
-
-
 export class LoginModule extends GeneralModule{
 
     private sessionReam:GameSession;

@@ -1,9 +1,9 @@
 
 import { Singleton } from './Singleton';
 import { ResManager } from '../manager/ResManager';
+import { UnityEngine } from 'csharp';
 
 
-const CS = require('csharp');
 
 // -- GameObject缓存池
 // -- 注意：
@@ -19,11 +19,11 @@ export class GameObjectPool extends Singleton<GameObjectPool>{
     constructor(){
         super();
 
-        let go = CS.UnityEngine.GameObject.Find("GameObjectCacheRoot");
+        let go = UnityEngine.GameObject.Find("GameObjectCacheRoot");
 
         if(go == undefined){
-            go = new CS.UnityEngine.GameObject("GameObjectCacheRoot");
-            CS.UnityEngine.Object.DontDestroyOnLoad(go);
+            go = new UnityEngine.GameObject("GameObjectCacheRoot");
+            UnityEngine.Object.DontDestroyOnLoad(go);
         }
 
         this.__cacheTransRoot = go.transform;
@@ -51,7 +51,7 @@ export class GameObjectPool extends Singleton<GameObjectPool>{
             let cachedInst:Array<any> = this.__instCache.get(path);
             for(let i:number =0; i < inst_count; i++){
 
-                let inst = CS.UnityEngine.GameObject.Instantiate(go);
+                let inst = UnityEngine.GameObject.Instantiate(go) as UnityEngine.GameObject;
                 inst.transform.SetParent(this.__cacheTransRoot);
                 inst.SetActive(false);
 
@@ -76,7 +76,7 @@ export class GameObjectPool extends Singleton<GameObjectPool>{
 
         let pooledGo = this.__goPool.get(path);
         if(pooledGo != undefined){
-            let inst = CS.UnityEngine.GameObject.Instantiate(pooledGo);
+            let inst = UnityEngine.GameObject.Instantiate(pooledGo);
             return inst;
         }
         return null;
@@ -140,7 +140,7 @@ export class GameObjectPool extends Singleton<GameObjectPool>{
 
             for(let inst of values){
                 if(inst != null){
-                    CS.UnityEngine.GameObject.Destroy(inst);
+                    UnityEngine.GameObject.Destroy(inst);
                 }
             }
         });

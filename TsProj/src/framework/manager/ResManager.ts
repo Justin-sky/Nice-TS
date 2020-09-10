@@ -1,10 +1,8 @@
-const CS = require('csharp');
-const csResMgr = CS.Addressable.ResourceManager;
 
 import { Singleton } from '../common/Singleton';
 import { LoggerJS } from '../logger/Logger';
 import { $promise } from 'puerts';
-
+import {Addressable} from 'csharp';
 
 export class ResManager extends Singleton<ResManager>{
 
@@ -14,7 +12,7 @@ export class ResManager extends Singleton<ResManager>{
     constructor(){
         super();
 
-        CS.Addressable.ResourceManager.OnFBLoadedHandle = this.onFBLoadedHandle;
+        Addressable.ResourceManager.OnFBLoadedHandle = this.onFBLoadedHandle;
     }
 
     private onFBLoadedHandle(name, data){
@@ -24,7 +22,7 @@ export class ResManager extends Singleton<ResManager>{
     async preloadPBs(){
 
         try{
-            let task = csResMgr.PreadloadFB(this.fblabel);
+            let task = Addressable.ResourceManager.PreadloadFB(this.fblabel);
             return  await $promise(task);
         }catch(ex){
             LoggerJS.logError(`Load fb error: : ${ex}`)
@@ -39,7 +37,7 @@ export class ResManager extends Singleton<ResManager>{
     async loadPrefab(address:string){
 
         try{
-            let task= csResMgr.LoadPrefab(address);
+            let task= Addressable.ResourceManager.LoadPrefab(address);
             let go = await $promise(task);
             return go;
         }catch(ex){
@@ -54,7 +52,7 @@ export class ResManager extends Singleton<ResManager>{
     async loadTextAsset(address:string){
 
         try{
-            let task = csResMgr.LoadTextAsset(address);
+            let task = Addressable.ResourceManager.LoadTextAsset(address);
             let go = await $promise(task);
             return go;
         }catch(ex){
@@ -67,7 +65,7 @@ export class ResManager extends Singleton<ResManager>{
     async loadSprite(address:string){
 
         try{
-            let task = csResMgr.LoadSprite(address);
+            let task = Addressable.ResourceManager.LoadSprite(address);
             let go = await $promise(task);
             return go;
 
@@ -81,6 +79,6 @@ export class ResManager extends Singleton<ResManager>{
 
     public releaseAddressGO(go:any){
 
-        csResMgr.ReleaseAddressGO(go);
+        Addressable.ResourceManager.ReleaseAddressGO(go);
     }
 }

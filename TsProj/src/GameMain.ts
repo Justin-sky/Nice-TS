@@ -1,5 +1,4 @@
 
-const CS = require('csharp');
 import {LoggerJS} from './framework/logger/Logger';
 import {UnitTest} from './unittest/UnitTest';
 import { GameObjectPool } from './framework/common/GameObjectPool';
@@ -9,13 +8,14 @@ import { UIManager } from './framework/manager/UIManager';
 import { ResManager } from './framework/manager/ResManager';
 import { ExcelManager } from './data/excel/ExcelManager';
 
+import { JsManager ,GameLaunch } from 'csharp';
 
 
 class GameMain{
 
     constructor() {
-        CS.JsManager.Instance.JsOnApplicationQuit = () => this.onApplicationQuit();
-        CS.JsManager.Instance.JsOnDispose = () => this.onDispose();
+        JsManager.Instance.JsOnApplicationQuit = () => this.onApplicationQuit();
+        JsManager.Instance.JsOnDispose = () => this.onDispose();
     }
 
     public async start() {
@@ -42,7 +42,7 @@ class GameMain{
             ModuleManager.Instance(ModuleManager).show(ModuleDef.LoginModule);
 
             //JS启动完成，通知C#层
-            CS.GameLaunch.Instance.JsLuanchFinish();
+            GameLaunch.Instance.JsLuanchFinish();
 
         }catch(ex){
             LoggerJS.logError(ex);

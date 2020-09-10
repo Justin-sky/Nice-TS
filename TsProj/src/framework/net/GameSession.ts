@@ -2,8 +2,7 @@ import { Singleton } from "../common/Singleton";
 import { LoggerJS } from "../logger/Logger";
 import { Opcode } from "../../data/pb/Opcode";
 import { NetErrorCode } from "./NetErrorCode";
-
-const CS = require('csharp');
+import { NiceTS } from "csharp";
 
 
 export class MsgPack{
@@ -37,12 +36,12 @@ export class GameSession extends Singleton<GameSession>{
     //address-> ip:port
     public connectChannel(address:string, connCaback:any){
 
-        this.channel = CS.NiceTS.TService.Instance.GetChannel();
+        this.channel = NiceTS.TService.Instance.GetChannel();
         
         this.channel.errorCallback = (channel:any, code:number)=>{
             if(code == NetErrorCode.ERR_SocketConnSucc){
                 this.timeoutIimer = setInterval(()=>{
-                   // this.checkTimeoutMsg();
+                    this.checkTimeoutMsg();
                 }, this.timeoutInterval);
             }
 

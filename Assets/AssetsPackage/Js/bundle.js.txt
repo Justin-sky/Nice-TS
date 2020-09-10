@@ -4294,7 +4294,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _framework_manager_UIManager__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./framework/manager/UIManager */ "./src/framework/manager/UIManager.ts");
 /* harmony import */ var _framework_manager_ResManager__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./framework/manager/ResManager */ "./src/framework/manager/ResManager.ts");
 /* harmony import */ var _data_excel_ExcelManager__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./data/excel/ExcelManager */ "./src/data/excel/ExcelManager.ts");
-const CS = __webpack_require__(/*! csharp */ "csharp");
+/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! csharp */ "csharp");
+/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(csharp__WEBPACK_IMPORTED_MODULE_8__);
+
 
 
 
@@ -4305,8 +4307,8 @@ const CS = __webpack_require__(/*! csharp */ "csharp");
 
 class GameMain {
     constructor() {
-        CS.JsManager.Instance.JsOnApplicationQuit = () => this.onApplicationQuit();
-        CS.JsManager.Instance.JsOnDispose = () => this.onDispose();
+        csharp__WEBPACK_IMPORTED_MODULE_8__["JsManager"].Instance.JsOnApplicationQuit = () => this.onApplicationQuit();
+        csharp__WEBPACK_IMPORTED_MODULE_8__["JsManager"].Instance.JsOnDispose = () => this.onDispose();
     }
     async start() {
         try {
@@ -4323,7 +4325,7 @@ class GameMain {
             //进入登录模块
             _framework_manager_ModuleManager__WEBPACK_IMPORTED_MODULE_3__["ModuleManager"].Instance(_framework_manager_ModuleManager__WEBPACK_IMPORTED_MODULE_3__["ModuleManager"]).show(_modules_ModuleDef__WEBPACK_IMPORTED_MODULE_4__["ModuleDef"].LoginModule);
             //JS启动完成，通知C#层
-            CS.GameLaunch.Instance.JsLuanchFinish();
+            csharp__WEBPACK_IMPORTED_MODULE_8__["GameLaunch"].Instance.JsLuanchFinish();
         }
         catch (ex) {
             _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_0__["LoggerJS"].logError(ex);
@@ -11072,9 +11074,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GameObjectPool", function() { return GameObjectPool; });
 /* harmony import */ var _Singleton__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Singleton */ "./src/framework/common/Singleton.ts");
 /* harmony import */ var _manager_ResManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../manager/ResManager */ "./src/framework/manager/ResManager.ts");
+/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! csharp */ "csharp");
+/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(csharp__WEBPACK_IMPORTED_MODULE_2__);
 
 
-const CS = __webpack_require__(/*! csharp */ "csharp");
+
 // -- GameObject缓存池
 // -- 注意：
 // -- 1、所有需要预设都从这里加载，不要直接到ResourcesManager去加载，由这里统一做缓存管理
@@ -11085,10 +11089,10 @@ class GameObjectPool extends _Singleton__WEBPACK_IMPORTED_MODULE_0__["Singleton"
         this.__cacheTransRoot = null;
         this.__goPool = new Map();
         this.__instCache = new Map();
-        let go = CS.UnityEngine.GameObject.Find("GameObjectCacheRoot");
+        let go = csharp__WEBPACK_IMPORTED_MODULE_2__["UnityEngine"].GameObject.Find("GameObjectCacheRoot");
         if (go == undefined) {
-            go = new CS.UnityEngine.GameObject("GameObjectCacheRoot");
-            CS.UnityEngine.Object.DontDestroyOnLoad(go);
+            go = new csharp__WEBPACK_IMPORTED_MODULE_2__["UnityEngine"].GameObject("GameObjectCacheRoot");
+            csharp__WEBPACK_IMPORTED_MODULE_2__["UnityEngine"].Object.DontDestroyOnLoad(go);
         }
         this.__cacheTransRoot = go.transform;
     }
@@ -11107,7 +11111,7 @@ class GameObjectPool extends _Singleton__WEBPACK_IMPORTED_MODULE_0__["Singleton"
         if (inst_count > 0) {
             let cachedInst = this.__instCache.get(path);
             for (let i = 0; i < inst_count; i++) {
-                let inst = CS.UnityEngine.GameObject.Instantiate(go);
+                let inst = csharp__WEBPACK_IMPORTED_MODULE_2__["UnityEngine"].GameObject.Instantiate(go);
                 inst.transform.SetParent(this.__cacheTransRoot);
                 inst.SetActive(false);
                 cachedInst.push(inst);
@@ -11126,7 +11130,7 @@ class GameObjectPool extends _Singleton__WEBPACK_IMPORTED_MODULE_0__["Singleton"
         }
         let pooledGo = this.__goPool.get(path);
         if (pooledGo != undefined) {
-            let inst = CS.UnityEngine.GameObject.Instantiate(pooledGo);
+            let inst = csharp__WEBPACK_IMPORTED_MODULE_2__["UnityEngine"].GameObject.Instantiate(pooledGo);
             return inst;
         }
         return null;
@@ -11169,7 +11173,7 @@ class GameObjectPool extends _Singleton__WEBPACK_IMPORTED_MODULE_0__["Singleton"
         this.__instCache.forEach((values, key) => {
             for (let inst of values) {
                 if (inst != null) {
-                    CS.UnityEngine.GameObject.Destroy(inst);
+                    csharp__WEBPACK_IMPORTED_MODULE_2__["UnityEngine"].GameObject.Destroy(inst);
                 }
             }
         });
@@ -11434,8 +11438,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _logger_Logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../logger/Logger */ "./src/framework/logger/Logger.ts");
 /* harmony import */ var puerts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! puerts */ "puerts");
 /* harmony import */ var puerts__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(puerts__WEBPACK_IMPORTED_MODULE_2__);
-const CS = __webpack_require__(/*! csharp */ "csharp");
-const csResMgr = CS.Addressable.ResourceManager;
+/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! csharp */ "csharp");
+/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(csharp__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -11443,7 +11448,7 @@ class ResManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singlet
     constructor() {
         super();
         this.fblabel = "FB";
-        CS.Addressable.ResourceManager.OnFBLoadedHandle = this.onFBLoadedHandle;
+        csharp__WEBPACK_IMPORTED_MODULE_3__["Addressable"].ResourceManager.OnFBLoadedHandle = this.onFBLoadedHandle;
     }
     ;
     onFBLoadedHandle(name, data) {
@@ -11451,7 +11456,7 @@ class ResManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singlet
     }
     async preloadPBs() {
         try {
-            let task = csResMgr.PreadloadFB(this.fblabel);
+            let task = csharp__WEBPACK_IMPORTED_MODULE_3__["Addressable"].ResourceManager.PreadloadFB(this.fblabel);
             return await Object(puerts__WEBPACK_IMPORTED_MODULE_2__["$promise"])(task);
         }
         catch (ex) {
@@ -11464,7 +11469,7 @@ class ResManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singlet
     }
     async loadPrefab(address) {
         try {
-            let task = csResMgr.LoadPrefab(address);
+            let task = csharp__WEBPACK_IMPORTED_MODULE_3__["Addressable"].ResourceManager.LoadPrefab(address);
             let go = await Object(puerts__WEBPACK_IMPORTED_MODULE_2__["$promise"])(task);
             return go;
         }
@@ -11475,7 +11480,7 @@ class ResManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singlet
     }
     async loadTextAsset(address) {
         try {
-            let task = csResMgr.LoadTextAsset(address);
+            let task = csharp__WEBPACK_IMPORTED_MODULE_3__["Addressable"].ResourceManager.LoadTextAsset(address);
             let go = await Object(puerts__WEBPACK_IMPORTED_MODULE_2__["$promise"])(task);
             return go;
         }
@@ -11486,7 +11491,7 @@ class ResManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singlet
     }
     async loadSprite(address) {
         try {
-            let task = csResMgr.LoadSprite(address);
+            let task = csharp__WEBPACK_IMPORTED_MODULE_3__["Addressable"].ResourceManager.LoadSprite(address);
             let go = await Object(puerts__WEBPACK_IMPORTED_MODULE_2__["$promise"])(task);
             return go;
         }
@@ -11496,7 +11501,7 @@ class ResManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singlet
         }
     }
     releaseAddressGO(go) {
-        csResMgr.ReleaseAddressGO(go);
+        csharp__WEBPACK_IMPORTED_MODULE_3__["Addressable"].ResourceManager.ReleaseAddressGO(go);
     }
 }
 ResManager.fbcaches = new Map();
@@ -11519,11 +11524,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ui_UIFactory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ui/UIFactory */ "./src/framework/ui/UIFactory.ts");
 /* harmony import */ var _modules_ModuleDef__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../modules/ModuleDef */ "./src/modules/ModuleDef.ts");
 /* harmony import */ var _data_ui_game__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../data/ui/game */ "./src/data/ui/game.ts");
+/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! csharp */ "csharp");
+/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(csharp__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
 
-const CS = __webpack_require__(/*! csharp */ "csharp");
+
 class UIPageTrack {
 }
 class UIManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singleton"] {
@@ -11531,7 +11538,7 @@ class UIManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singleto
         super();
         this.m_pageTrackStack = new Array();
         this.m_listLoadedPanel = new Array();
-        CS.UnityEngine.SceneManagement.SceneManager.add_sceneLoaded((scene, mode) => {
+        csharp__WEBPACK_IMPORTED_MODULE_4__["UnityEngine"].SceneManagement.SceneManager.add_sceneLoaded((scene, mode) => {
             if (this.onSceneLoadedOnly != null)
                 this.onSceneLoadedOnly(scene.name);
         });
@@ -11595,7 +11602,7 @@ class UIManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singleto
             }
         };
         this.openLoading(_data_ui_game__WEBPACK_IMPORTED_MODULE_3__["gameUI"].PackageName, _data_ui_game__WEBPACK_IMPORTED_MODULE_3__["gameUI"].UILoadingPage);
-        CS.UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
+        csharp__WEBPACK_IMPORTED_MODULE_4__["UnityEngine"].SceneManagement.SceneManager.LoadScene(scene);
     }
     //==========================================================Page
     openPageWorker(pkg, page, arg) {
@@ -11625,7 +11632,7 @@ class UIManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singleto
     }
     //打开场景页面,此页面不计入页面栈,无返回上一面按钮
     openPageInScene(scene, pkg, page, arg) {
-        let oldScene = CS.UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        let oldScene = csharp__WEBPACK_IMPORTED_MODULE_4__["UnityEngine"].SceneManagement.SceneManager.GetActiveScene().name;
         if (oldScene == scene) {
             this.openPageWorker(pkg, page, arg);
         }
@@ -11755,11 +11762,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _logger_Logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../logger/Logger */ "./src/framework/logger/Logger.ts");
 /* harmony import */ var _data_pb_Opcode__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../data/pb/Opcode */ "./src/data/pb/Opcode.ts");
 /* harmony import */ var _NetErrorCode__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./NetErrorCode */ "./src/framework/net/NetErrorCode.ts");
+/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! csharp */ "csharp");
+/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(csharp__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
 
-const CS = __webpack_require__(/*! csharp */ "csharp");
+
 class MsgPack {
     constructor() {
         this.retryTimes = 0;
@@ -11781,11 +11790,11 @@ class GameSession extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Single
     }
     //address-> ip:port
     connectChannel(address, connCaback) {
-        this.channel = CS.NiceTS.TService.Instance.GetChannel();
+        this.channel = csharp__WEBPACK_IMPORTED_MODULE_4__["NiceTS"].TService.Instance.GetChannel();
         this.channel.errorCallback = (channel, code) => {
             if (code == _NetErrorCode__WEBPACK_IMPORTED_MODULE_3__["NetErrorCode"].ERR_SocketConnSucc) {
                 this.timeoutIimer = setInterval(() => {
-                    // this.checkTimeoutMsg();
+                    this.checkTimeoutMsg();
                 }, this.timeoutInterval);
             }
             connCaback(channel, code);
@@ -12488,7 +12497,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const CS = __webpack_require__(/*! csharp */ "csharp");
 class LoginModule extends _framework_module_GeneralModule__WEBPACK_IMPORTED_MODULE_0__["GeneralModule"] {
     get playerID() {
         return this._playerID;
@@ -12691,7 +12699,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const CS = __webpack_require__(/*! csharp */ "csharp");
 class UnitTest {
     static async doTest() {
         _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_2__["LoggerJS"].log("TimeUtil =============================");

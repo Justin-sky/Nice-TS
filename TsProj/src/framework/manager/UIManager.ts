@@ -7,8 +7,8 @@ import { UIPanel } from '../ui/UIPanel';
 import { UIFactory } from '../ui/UIFactory';
 import { SceneDef } from '../../modules/ModuleDef';
 import { gameUI } from '../../data/ui/game';
+import { UnityEngine } from 'csharp';
 
-const CS = require('csharp');
 
 export class UIPageTrack{
     public pkg:string;
@@ -32,7 +32,7 @@ export class UIManager extends Singleton<UIManager>{
         this.m_pageTrackStack = new Array<UIPageTrack>();
         this.m_listLoadedPanel = new Array<UIPanel>();
 
-        CS.UnityEngine.SceneManagement.SceneManager.add_sceneLoaded((scene, mode) =>
+        UnityEngine.SceneManagement.SceneManager.add_sceneLoaded((scene, mode) =>
         {
             if (this.onSceneLoadedOnly != null) this.onSceneLoadedOnly(scene.name);
         }); 
@@ -122,7 +122,7 @@ export class UIManager extends Singleton<UIManager>{
         };
 
         this.openLoading(gameUI.PackageName, gameUI.UILoadingPage);
-        CS.UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
 
     }
 
@@ -162,7 +162,7 @@ export class UIManager extends Singleton<UIManager>{
 
     //打开场景页面,此页面不计入页面栈,无返回上一面按钮
     public openPageInScene(scene:string, pkg:string, page:string, arg:any){
-        let oldScene:string = CS.UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        let oldScene:string = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         if(oldScene == scene){
             this.openPageWorker(pkg, page, arg);
         }else{

@@ -7,7 +7,6 @@ import { NiceET } from '../data/pb/OuterMessage';
 import { SkillConfigTB, SkillConfigTR } from '../data/excel/SkillConfig';
 import { Opcode } from '../data/pb/Opcode';
 
-const CS = require('csharp');
 
 
 export class UnitTest{

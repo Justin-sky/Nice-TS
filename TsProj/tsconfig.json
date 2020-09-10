@@ -1,4 +1,8 @@
 {
+	"include": [
+		"./src",
+		"../Assets/Gen/Typing/csharp/index.d.ts"
+	],
 	"compilerOptions": {
 		"target": "ES2018",
 		"module": "ESNext",
@@ -13,6 +17,8 @@
 			"../Assets/Puerts/Typing",
 			"../Assets/Gen/Typing",
 			"./node_modules/@types"
-		]
-	}
+		],
+		
+	},
+	
 }

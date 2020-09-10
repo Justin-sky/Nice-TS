@@ -119,7 +119,7 @@ namespace Addressable
             return res;
         }
 
-        public void ReleaseAddressGO(UnityEngine.Object go)
+        public static void ReleaseAddressGO(UnityEngine.Object go)
         {
             Addressables.Release(go);
         }

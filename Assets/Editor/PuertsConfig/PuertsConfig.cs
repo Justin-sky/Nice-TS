@@ -69,11 +69,34 @@ public class PuertsConfig
                 typeof(GameObject),
                 typeof(UnityEngine.Object),
                 typeof(Delegate),
-                typeof(Action<float,float>),
-                typeof(Action<float>),
+                typeof(System.Object),
+                typeof(Type),
+                typeof(ParticleSystem),
+                typeof(Canvas),
+                typeof(RenderMode),
+                typeof(Behaviour),
+                typeof(MonoBehaviour),
 
+                typeof(UnityEngine.EventSystems.UIBehaviour),
+                typeof(UnityEngine.UI.Selectable),
+                typeof(UnityEngine.UI.Button),
+                typeof(UnityEngine.UI.Button.ButtonClickedEvent),
+                typeof(UnityEngine.Events.UnityEvent),
+                typeof(UnityEngine.UI.InputField),
+                typeof(UnityEngine.UI.Toggle),
+                typeof(UnityEngine.UI.Toggle.ToggleEvent),
+                typeof(UnityEngine.Events.UnityEvent<bool>),
+
+
+                typeof(MonoSingleton<NiceTS.TService>),
                 typeof(Logger),
-
+                typeof(Addressable.ResourceManager),
+                typeof(UnityEngine.SceneManagement.SceneManager),
+                typeof(UnityEngine.SceneManagement.Scene),
+                typeof(NiceTS.TService),
+                typeof(NiceTS.TChannel),
+                typeof(JsManager),
+                typeof(GameLaunch),
 
             };
         }
