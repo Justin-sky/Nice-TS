@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.IO;
-using Addressable;
+using NiceTS;
 
 [InitializeOnLoad]
 public static class FlatbufferTools

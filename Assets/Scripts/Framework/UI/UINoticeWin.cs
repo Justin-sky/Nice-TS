@@ -1,9 +1,7 @@
 ﻿using FairyGUI;
 using FairyGUI.Utils;
 using System;
-using System.Collections;
 using System.Threading.Tasks;
-using UnityEngine;
 
 namespace NiceTS
 {

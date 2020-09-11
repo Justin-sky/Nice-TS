@@ -11450,7 +11450,7 @@ class ResManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singlet
     }
     async loadPrefab(address) {
         try {
-            let task = csharp__WEBPACK_IMPORTED_MODULE_3__["Addressable"].ResourceManager.LoadPrefab(address);
+            let task = csharp__WEBPACK_IMPORTED_MODULE_3__["NiceTS"].ResourceManager.LoadPrefab(address);
             let go = await Object(puerts__WEBPACK_IMPORTED_MODULE_2__["$promise"])(task);
             return go;
         }
@@ -11461,7 +11461,7 @@ class ResManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singlet
     }
     async loadTextAsset(address) {
         try {
-            let task = csharp__WEBPACK_IMPORTED_MODULE_3__["Addressable"].ResourceManager.LoadTextAsset(address);
+            let task = csharp__WEBPACK_IMPORTED_MODULE_3__["NiceTS"].ResourceManager.LoadTextAsset(address);
             let go = await Object(puerts__WEBPACK_IMPORTED_MODULE_2__["$promise"])(task);
             return go;
         }
@@ -11472,7 +11472,7 @@ class ResManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singlet
     }
     async loadSprite(address) {
         try {
-            let task = csharp__WEBPACK_IMPORTED_MODULE_3__["Addressable"].ResourceManager.LoadSprite(address);
+            let task = csharp__WEBPACK_IMPORTED_MODULE_3__["NiceTS"].ResourceManager.LoadSprite(address);
             let go = await Object(puerts__WEBPACK_IMPORTED_MODULE_2__["$promise"])(task);
             return go;
         }
@@ -11482,7 +11482,7 @@ class ResManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singlet
         }
     }
     releaseAddressGO(go) {
-        csharp__WEBPACK_IMPORTED_MODULE_3__["Addressable"].ResourceManager.ReleaseAddressGO(go);
+        csharp__WEBPACK_IMPORTED_MODULE_3__["NiceTS"].ResourceManager.ReleaseAddressGO(go);
     }
 }
 

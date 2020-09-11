@@ -1,6 +1,6 @@
 ﻿
 
-namespace Addressable
+namespace NiceTS
 {
     public class AddressableConfig
     {

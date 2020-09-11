@@ -1,4 +1,4 @@
-﻿using Addressable;
+﻿using NiceTS;
 using System.Collections.Generic;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEditor.AddressableAssets.Settings.GroupSchemas;

@@ -1,8 +1,6 @@
-﻿using Addressable;
-using Puerts;
+﻿using Puerts;
 using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class JsLoader : ILoader

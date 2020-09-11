@@ -2867,6 +2867,20 @@ declare module 'csharp' {
             public Update():void;
             
         }
+        class ResourceManager extends System.Object {
+            public static OnFBLoadedHandle: System.Action$2<string, number[]>;
+            public constructor();
+            public static init():void;
+            public static ReleaseFGUIPackage(packageName: string):void;
+            public static LoadFairyGUIPackage(address: string, packageName: string):System.Threading.Tasks.Task;
+            public static PreadloadFB(fbLabel: string):System.Threading.Tasks.Task$1<boolean>;
+            public static PreloadJS(jsLabel: string):System.Threading.Tasks.Task$1<boolean>;
+            public static LoadPrefab(address: string):System.Threading.Tasks.Task$1<UnityEngine.GameObject>;
+            public static LoadTextAsset(address: string):System.Threading.Tasks.Task$1<UnityEngine.TextAsset>;
+            public static LoadSprite(address: string):System.Threading.Tasks.Task$1<UnityEngine.Sprite>;
+            public static ReleaseAddressGO(go: UnityEngine.Object):void;
+            
+        }
         class TChannel extends System.Object {
             public errorCallback: NiceTS.ErrorCallback;
             public readCallback: NiceTS.ReadCallback;
@@ -2889,23 +2903,6 @@ declare module 'csharp' {
         var ErrorCallback: {new (func: (channel: NiceTS.TChannel, code: number) => void): ErrorCallback;}
         type ReadCallback = (arrayBuffer: ArrayBuffer) => void;
         var ReadCallback: {new (func: (arrayBuffer: ArrayBuffer) => void): ReadCallback;}
-        
-    }
-    namespace Addressable {
-        class ResourceManager extends System.Object {
-            public static OnFBLoadedHandle: System.Action$2<string, number[]>;
-            public constructor();
-            public static init():void;
-            public static ReleaseFGUIPackage(packageName: string):void;
-            public static LoadFairyGUIPackage(address: string, packageName: string):System.Threading.Tasks.Task;
-            public static PreadloadFB(fbLabel: string):System.Threading.Tasks.Task$1<boolean>;
-            public static PreloadJS(jsLabel: string):System.Threading.Tasks.Task$1<boolean>;
-            public static LoadPrefab(address: string):System.Threading.Tasks.Task$1<UnityEngine.GameObject>;
-            public static LoadTextAsset(address: string):System.Threading.Tasks.Task$1<UnityEngine.TextAsset>;
-            public static LoadSprite(address: string):System.Threading.Tasks.Task$1<UnityEngine.Sprite>;
-            public static ReleaseAddressGO(go: UnityEngine.Object):void;
-            
-        }
         
     }
     namespace System.Threading.Tasks {

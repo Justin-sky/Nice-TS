@@ -90,13 +90,14 @@ public class PuertsConfig
 
                 typeof(MonoSingleton<NiceTS.TService>),
                 typeof(Logger),
-                typeof(Addressable.ResourceManager),
+                typeof(NiceTS.ResourceManager),
                 typeof(UnityEngine.SceneManagement.SceneManager),
                 typeof(UnityEngine.SceneManagement.Scene),
                 typeof(NiceTS.TService),
                 typeof(NiceTS.TChannel),
                 typeof(JsManager),
                 typeof(GameLaunch),
+
 
             };
         }

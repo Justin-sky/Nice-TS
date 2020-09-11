@@ -2,12 +2,9 @@
 using FairyGUI.Utils;
 using NiceTS;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine.AddressableAssets;
-using UnityEngine.AddressableAssets.ResourceLocators;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class LaunchPage : GComponent
 {
