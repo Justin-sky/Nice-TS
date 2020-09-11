@@ -5,10 +5,10 @@ import { UIWindow } from './UIWindow';
 import { UIWidge } from './UIWidge';
 import { UIPanel } from './UIPanel';
 import { UIFactory } from './UIFactory';
-import { gameUI } from '../../data/ui/game';
 import { SceneDef } from 'framework/scene/SceneDef';
 import { UnityEngine } from 'csharp';
 import { SceneManager } from 'framework/scene/SceneManager';
+import { homeUI } from 'data/ui/home';
 
 
 export class UIPageTrack{
@@ -154,7 +154,7 @@ export class UIManager extends Singleton<UIManager>{
     public enterMainPage():void{
 
         this.m_pageTrackStack.length = 0;
-        this.openPageInScene(SceneDef.HomeScene, gameUI.PackageName ,gameUI.UIHomePage,null)
+        this.openPageInScene(SceneDef.HomeScene, homeUI.PackageName ,homeUI.UIHomePage,null)
     }
 
     //==========================================================UIWindow

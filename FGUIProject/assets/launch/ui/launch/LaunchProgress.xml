@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="50,29" extention="ProgressBar">
+  <ProgressBar/>
+  <displayList>
+    <image id="n0_pyg6" src="pyg62z" name="n0" xy="0,0" size="50,29" pkg="y4b7yuun">
+      <relation target="" sidePair="width,height"/>
+    </image>
+    <image id="n1_pyg6" src="pyg625" name="bar" xy="0,0" size="50,29" pkg="y4b7yuun"/>
+  </displayList>
+</component>

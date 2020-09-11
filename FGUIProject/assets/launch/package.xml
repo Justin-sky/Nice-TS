@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="ynb47g4j">
+  <resources>
+    <component id="pyg64t" name="LaunchPage.xml" path="/ui/launch/" exported="true"/>
+    <component id="pyg64u" name="LaunchProgress.xml" path="/ui/launch/"/>
+  </resources>
+  <publish name="" genCode="true"/>
+</packageDescription>

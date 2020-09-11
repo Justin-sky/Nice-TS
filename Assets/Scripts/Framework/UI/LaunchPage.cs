@@ -8,7 +8,7 @@ using UnityEngine.AddressableAssets;
 
 public class LaunchPage : GComponent
 {
-    public const string URL = "ui://l64dumk9pyg64t";
+    public const string URL = "ui://ynb47g4jpyg64t";
 
     private GTextField gTextField;
     private GProgressBar gProgress;

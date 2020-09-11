@@ -7,7 +7,7 @@ namespace NiceTS
 {
     public class UINoticeWin: GComponent
     {
-        public const string URL = "ui://l64dumk9pyg64q";
+        public const string URL = "ui://y4b7yuunpyg64q";
 
         private GTextField gText;
         private GButton bakBtn;

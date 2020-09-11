@@ -1,5 +1,5 @@
 import { UnityEngine } from "csharp";
-import { gameUI } from "data/ui/game";
+import { commonUI } from "data/ui/common";
 import { GameObjectPool } from "framework/common/GameObjectPool";
 import { Singleton } from "framework/common/Singleton";
 import { UILoading } from "framework/ui/UILib/UILoading";
@@ -50,20 +50,18 @@ export class SceneManager extends Singleton<SceneManager>{
                 //加载完成
                 this.currentScene.onComplete();
                 if(onLoadComplete != null) onLoadComplete();
-                UIManager.Instance(UIManager).closeLoading(gameUI.UILoadingPage);
+                UIManager.Instance(UIManager).closeLoading(commonUI.UILoadingPage);
             }
         };
 
-        this.loadingUI = UIManager.Instance(UIManager).openLoading(gameUI.PackageName, gameUI.UILoadingPage);
+        this.loadingUI = UIManager.Instance(UIManager).openLoading(commonUI.PackageName, commonUI.UILoadingPage);
 
         //清理旧场景
         if(this.currentScene){
            this.currentScene.onLeave();
            this.currentScene.onDestroy();
         }
-        //清理资源缓存
-        GameObjectPool.Instance(GameObjectPool).cleanup(true);
-
+        
         UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
     }
 

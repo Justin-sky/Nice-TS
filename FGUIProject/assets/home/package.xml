@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="yt4d8ma4">
+  <resources>
+    <component id="pyg650" name="HomePage.xml" path="/ui/home/" exported="true"/>
+  </resources>
+  <publish name="" genCode="true"/>
+</packageDescription>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="l64dumk9">
+  <resources>
+    <component id="pyg64v" name="LoginPage.xml" path="/ui/login/" exported="true"/>
+    <component id="pyg64w" name="SelServerWin.xml" path="/ui/login/" exported="true"/>
+    <component id="pyg64x" name="AreaBtn.xml" path="/ui/login/"/>
+    <component id="pyg64y" name="serverItem.xml" path="/ui/login/" exported="true"/>
+    <component id="pyg651" name="LevelPage.xml" path="/ui/level/" exported="true"/>
+    <component id="pyg652" name="ShopPage.xml" path="/ui/shop/" exported="true"/>
+  </resources>
+  <publish name="" genCode="true"/>
+</packageDescription>

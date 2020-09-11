@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720">
+  <displayList>
+    <image id="n0_pyg6" name="n0" src="pyg62a" fileName="atlas/images/Login_01.png" xy="-69,2" pkg="y4b7yuun"/>
+    <image id="n4_pyg6" name="n4" src="pyg610" fileName="atlas/hyper/ui_hyper_career_01.png" xy="-30,19" group="n12_pyg6" pkg="y4b7yuun"/>
+    <image id="n5_pyg6" name="n5" src="pyg6y" fileName="atlas/hyper/ui_hyper_career_02.png" xy="192,18" group="n12_pyg6" pkg="y4b7yuun"/>
+    <image id="n6_pyg6" name="n6" src="pyg6z" fileName="atlas/hyper/ui_hyper_career_03.png" xy="425,19" group="n12_pyg6" pkg="y4b7yuun"/>
+    <image id="n7_pyg6" name="n7" src="pyg6x" fileName="atlas/hyper/ui_hyper_career_04.png" xy="638,20" group="n12_pyg6" pkg="y4b7yuun"/>
+    <text id="n8_pyg6" name="hpTxt" xy="9,22" size="134,29" group="n12_pyg6" fontSize="20" autoSize="none" text="10000"/>
+    <text id="n9_pyg6" name="mpTxt" xy="238,17" size="70,29" group="n12_pyg6" fontSize="20" text="100000"/>
+    <text id="n10_pyg6" name="goldTxt" xy="478,20" size="70,29" group="n12_pyg6" fontSize="20" text="200122"/>
+    <text id="n11_pyg6" name="moneyTxt" xy="675,19" size="59,29" group="n12_pyg6" fontSize="20" text="43333"/>
+    <group id="n12_pyg6" name="n12" xy="-30,17" size="764,34"/>
+    <component id="n13_pyg6" name="bagBtn" src="pyg64s" fileName="ui/common/CommonBtn.xml" xy="480,636" pkg="y4b7yuun">
+      <Button title="背包"/>
+    </component>
+    <component id="n14_pyg6" name="shopBtn" src="pyg64s" fileName="ui/common/CommonBtn.xml" xy="656,638" pkg="y4b7yuun">
+      <Button title="商城"/>
+    </component>
+    <component id="n15_pyg6" name="levelBtn" src="pyg64s" fileName="ui/common/CommonBtn.xml" xy="1051,631" pkg="y4b7yuun">
+      <Button title="关卡"/>
+    </component>
+    <component id="n16_pyg6" name="chatBtn" src="pyg64s" fileName="ui/common/CommonBtn.xml" xy="-4,631" pkg="y4b7yuun">
+      <Button title="聊天"/>
+    </component>
+  </displayList>
+</component>

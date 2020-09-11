@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 public class GameLaunch : MonoSingleton<GameLaunch>
 {
 
-    const string fairy_package = "game_fui.bytes";
     public LaunchPage launchPage;
 
     async Task Start()
@@ -24,7 +23,8 @@ public class GameLaunch : MonoSingleton<GameLaunch>
 
         //加载FairyGUI Package
         ResourceManager.init();
-        await ResourceManager.LoadFairyGUIPackage(fairy_package, "game");
+        await ResourceManager.LoadFairyGUIPackage("common_fui.bytes", "common");
+        await ResourceManager.LoadFairyGUIPackage("launch_fui.bytes", "launch");
 
 
         //加载更新界面

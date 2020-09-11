@@ -2,7 +2,6 @@ import { GeneralModule } from "../../framework/module/GeneralModule";
 import { LoggerJS } from "../../framework/logger/Logger";
 import { UIManager } from "../../framework/ui/UIManager";
 import { ModuleMessage } from "../ModuleDef";
-import { gameUI } from "../../data/ui/game";
 import { GameSession } from "../../framework/net/GameSession";
 import { GameConfig } from "../../global/GameConfig";
 import { Opcode } from "../../data/pb/Opcode";

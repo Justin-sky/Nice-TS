@@ -11035,29 +11035,64 @@ module.exports = $root;
 
 /***/ }),
 
-/***/ "./src/data/ui/game.ts":
-/*!*****************************!*\
-  !*** ./src/data/ui/game.ts ***!
-  \*****************************/
-/*! exports provided: gameUI */
+/***/ "./src/data/ui/common.ts":
+/*!*******************************!*\
+  !*** ./src/data/ui/common.ts ***!
+  \*******************************/
+/*! exports provided: commonUI */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gameUI", function() { return gameUI; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "commonUI", function() { return commonUI; });
 /** This is an automatically generated class by FairyGUI. Please do not modify it. **/
-class gameUI {
+class commonUI {
 }
-gameUI.PackageName = "game";
-gameUI.UILoadingPage = "LoadingPage";
-gameUI.UIUINoticeWin = "UINoticeWin";
-gameUI.UILaunchPage = "LaunchPage";
-gameUI.UILoginPage = "LoginPage";
-gameUI.UISelServerWin = "SelServerWin";
-gameUI.UIserverItem = "serverItem";
-gameUI.UIHomePage = "HomePage";
-gameUI.UILevelPage = "LevelPage";
-gameUI.UIShopPage = "ShopPage";
+commonUI.PackageName = "common";
+commonUI.UILoadingPage = "LoadingPage";
+commonUI.UIUINoticeWin = "UINoticeWin";
+
+
+/***/ }),
+
+/***/ "./src/data/ui/home.ts":
+/*!*****************************!*\
+  !*** ./src/data/ui/home.ts ***!
+  \*****************************/
+/*! exports provided: homeUI */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "homeUI", function() { return homeUI; });
+/** This is an automatically generated class by FairyGUI. Please do not modify it. **/
+class homeUI {
+}
+homeUI.PackageName = "home";
+homeUI.UIHomePage = "HomePage";
+
+
+/***/ }),
+
+/***/ "./src/data/ui/login.ts":
+/*!******************************!*\
+  !*** ./src/data/ui/login.ts ***!
+  \******************************/
+/*! exports provided: loginUI */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loginUI", function() { return loginUI; });
+/** This is an automatically generated class by FairyGUI. Please do not modify it. **/
+class loginUI {
+}
+loginUI.PackageName = "login";
+loginUI.UILoginPage = "LoginPage";
+loginUI.UISelServerWin = "SelServerWin";
+loginUI.UIserverItem = "serverItem";
+loginUI.UILevelPage = "LevelPage";
+loginUI.UIShopPage = "ShopPage";
 
 
 /***/ }),
@@ -11736,6 +11771,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BaseScene", function() { return BaseScene; });
 /* harmony import */ var framework_common_GameObjectPool__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! framework/common/GameObjectPool */ "./src/framework/common/GameObjectPool.ts");
 /* harmony import */ var framework_common_ResManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! framework/common/ResManager */ "./src/framework/common/ResManager.ts");
+/* harmony import */ var framework_logger_Logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! framework/logger/Logger */ "./src/framework/logger/Logger.ts");
+
 
 
 class BaseScene {
@@ -11772,6 +11809,12 @@ class BaseScene {
         await Promise.all(premises);
     }
     onDestroy() {
+        this.preloadFairyGUIPackage.forEach((value, key) => {
+            framework_logger_Logger__WEBPACK_IMPORTED_MODULE_2__["LoggerJS"].log("destroy scene: " + key);
+            framework_common_ResManager__WEBPACK_IMPORTED_MODULE_1__["ResManager"].Instance(framework_common_ResManager__WEBPACK_IMPORTED_MODULE_1__["ResManager"]).releaseFairyGUIPackage(value);
+        });
+        //清理资源缓存
+        framework_common_GameObjectPool__WEBPACK_IMPORTED_MODULE_0__["GameObjectPool"].Instance(framework_common_GameObjectPool__WEBPACK_IMPORTED_MODULE_0__["GameObjectPool"]).cleanup(true);
         this.preloadFairyGUIPackage.clear();
         this.preloadPrefab.clear();
     }
@@ -11852,18 +11895,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SceneManager", function() { return SceneManager; });
 /* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! csharp */ "csharp");
 /* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(csharp__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var data_ui_game__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! data/ui/game */ "./src/data/ui/game.ts");
-/* harmony import */ var framework_common_GameObjectPool__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! framework/common/GameObjectPool */ "./src/framework/common/GameObjectPool.ts");
-/* harmony import */ var framework_common_Singleton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! framework/common/Singleton */ "./src/framework/common/Singleton.ts");
-/* harmony import */ var framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! framework/ui/UIManager */ "./src/framework/ui/UIManager.ts");
-/* harmony import */ var _SceneFactory__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SceneFactory */ "./src/framework/scene/SceneFactory.ts");
+/* harmony import */ var data_ui_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! data/ui/common */ "./src/data/ui/common.ts");
+/* harmony import */ var framework_common_Singleton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! framework/common/Singleton */ "./src/framework/common/Singleton.ts");
+/* harmony import */ var framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! framework/ui/UIManager */ "./src/framework/ui/UIManager.ts");
+/* harmony import */ var _SceneFactory__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SceneFactory */ "./src/framework/scene/SceneFactory.ts");
 
 
 
 
 
-
-class SceneManager extends framework_common_Singleton__WEBPACK_IMPORTED_MODULE_3__["Singleton"] {
+class SceneManager extends framework_common_Singleton__WEBPACK_IMPORTED_MODULE_2__["Singleton"] {
     constructor() {
         super();
         csharp__WEBPACK_IMPORTED_MODULE_0__["UnityEngine"].SceneManagement.SceneManager.add_sceneLoaded((scene, mode) => {
@@ -11879,7 +11920,7 @@ class SceneManager extends framework_common_Singleton__WEBPACK_IMPORTED_MODULE_3
         this.onSceneLoadedOnly = async (sceneName) => {
             if (sceneName == scene) {
                 this.onSceneLoadedOnly = null;
-                this.currentScene = _SceneFactory__WEBPACK_IMPORTED_MODULE_5__["SceneFactory"].createScene(scene);
+                this.currentScene = _SceneFactory__WEBPACK_IMPORTED_MODULE_4__["SceneFactory"].createScene(scene);
                 this.currentScene.onEnter();
                 let progressInterval = setInterval(() => {
                     this.updateProgress(this.currentScene.finishCount / this.currentScene.totalCount);
@@ -11890,17 +11931,15 @@ class SceneManager extends framework_common_Singleton__WEBPACK_IMPORTED_MODULE_3
                 this.currentScene.onComplete();
                 if (onLoadComplete != null)
                     onLoadComplete();
-                framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_4__["UIManager"].Instance(framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_4__["UIManager"]).closeLoading(data_ui_game__WEBPACK_IMPORTED_MODULE_1__["gameUI"].UILoadingPage);
+                framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_3__["UIManager"].Instance(framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_3__["UIManager"]).closeLoading(data_ui_common__WEBPACK_IMPORTED_MODULE_1__["commonUI"].UILoadingPage);
             }
         };
-        this.loadingUI = framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_4__["UIManager"].Instance(framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_4__["UIManager"]).openLoading(data_ui_game__WEBPACK_IMPORTED_MODULE_1__["gameUI"].PackageName, data_ui_game__WEBPACK_IMPORTED_MODULE_1__["gameUI"].UILoadingPage);
+        this.loadingUI = framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_3__["UIManager"].Instance(framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_3__["UIManager"]).openLoading(data_ui_common__WEBPACK_IMPORTED_MODULE_1__["commonUI"].PackageName, data_ui_common__WEBPACK_IMPORTED_MODULE_1__["commonUI"].UILoadingPage);
         //清理旧场景
         if (this.currentScene) {
             this.currentScene.onLeave();
             this.currentScene.onDestroy();
         }
-        //清理资源缓存
-        framework_common_GameObjectPool__WEBPACK_IMPORTED_MODULE_2__["GameObjectPool"].Instance(framework_common_GameObjectPool__WEBPACK_IMPORTED_MODULE_2__["GameObjectPool"]).cleanup(true);
         csharp__WEBPACK_IMPORTED_MODULE_0__["UnityEngine"].SceneManagement.SceneManager.LoadScene(scene);
     }
 }
@@ -11968,8 +12007,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_login_ui_UILoginPage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../modules/login/ui/UILoginPage */ "./src/modules/login/ui/UILoginPage.ts");
 /* harmony import */ var _logger_Logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../logger/Logger */ "./src/framework/logger/Logger.ts");
 /* harmony import */ var _modules_home_ui_UIHomePage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../modules/home/ui/UIHomePage */ "./src/modules/home/ui/UIHomePage.ts");
-/* harmony import */ var _data_ui_game__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../data/ui/game */ "./src/data/ui/game.ts");
-/* harmony import */ var _UILib_UILoading__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./UILib/UILoading */ "./src/framework/ui/UILib/UILoading.ts");
+/* harmony import */ var _UILib_UILoading__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UILib/UILoading */ "./src/framework/ui/UILib/UILoading.ts");
+/* harmony import */ var data_ui_login__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! data/ui/login */ "./src/data/ui/login.ts");
+/* harmony import */ var data_ui_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! data/ui/common */ "./src/data/ui/common.ts");
+/* harmony import */ var data_ui_home__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! data/ui/home */ "./src/data/ui/home.ts");
+
+
 
 
 
@@ -11982,13 +12025,13 @@ class UIFactory {
         let comp = CS.FairyGUI.UIPackage.CreateObject(pkg, name).asCom;
         let ui = null;
         switch (name) {
-            case _data_ui_game__WEBPACK_IMPORTED_MODULE_3__["gameUI"].UILoginPage:
+            case data_ui_login__WEBPACK_IMPORTED_MODULE_4__["loginUI"].UILoginPage:
                 ui = new _modules_login_ui_UILoginPage__WEBPACK_IMPORTED_MODULE_0__["UILoginPage"]();
                 break;
-            case _data_ui_game__WEBPACK_IMPORTED_MODULE_3__["gameUI"].UILoadingPage:
-                ui = new _UILib_UILoading__WEBPACK_IMPORTED_MODULE_4__["UILoading"]();
+            case data_ui_common__WEBPACK_IMPORTED_MODULE_5__["commonUI"].UILoadingPage:
+                ui = new _UILib_UILoading__WEBPACK_IMPORTED_MODULE_3__["UILoading"]();
                 break;
-            case _data_ui_game__WEBPACK_IMPORTED_MODULE_3__["gameUI"].UIHomePage:
+            case data_ui_home__WEBPACK_IMPORTED_MODULE_6__["homeUI"].UIHomePage:
                 ui = new _modules_home_ui_UIHomePage__WEBPACK_IMPORTED_MODULE_2__["UIHomePage"]();
                 break;
         }
@@ -12078,11 +12121,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UIManager", function() { return UIManager; });
 /* harmony import */ var _common_Singleton__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/Singleton */ "./src/framework/common/Singleton.ts");
 /* harmony import */ var _UIFactory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UIFactory */ "./src/framework/ui/UIFactory.ts");
-/* harmony import */ var _data_ui_game__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../data/ui/game */ "./src/data/ui/game.ts");
-/* harmony import */ var framework_scene_SceneDef__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! framework/scene/SceneDef */ "./src/framework/scene/SceneDef.ts");
-/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! csharp */ "csharp");
-/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(csharp__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var framework_scene_SceneManager__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! framework/scene/SceneManager */ "./src/framework/scene/SceneManager.ts");
+/* harmony import */ var framework_scene_SceneDef__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! framework/scene/SceneDef */ "./src/framework/scene/SceneDef.ts");
+/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! csharp */ "csharp");
+/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(csharp__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var framework_scene_SceneManager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! framework/scene/SceneManager */ "./src/framework/scene/SceneManager.ts");
+/* harmony import */ var data_ui_home__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! data/ui/home */ "./src/data/ui/home.ts");
 
 
 
@@ -12133,12 +12176,12 @@ class UIManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singleto
     }
     //打开场景页面,此页面不计入页面栈,无返回上一面按钮
     openPageInScene(scene, pkg, page, arg) {
-        let oldScene = csharp__WEBPACK_IMPORTED_MODULE_4__["UnityEngine"].SceneManagement.SceneManager.GetActiveScene().name;
+        let oldScene = csharp__WEBPACK_IMPORTED_MODULE_3__["UnityEngine"].SceneManagement.SceneManager.GetActiveScene().name;
         if (oldScene == scene) {
             this.openPageWorker(pkg, page, arg);
         }
         else {
-            framework_scene_SceneManager__WEBPACK_IMPORTED_MODULE_5__["SceneManager"].Instance(framework_scene_SceneManager__WEBPACK_IMPORTED_MODULE_5__["SceneManager"]).loadScene(scene, () => {
+            framework_scene_SceneManager__WEBPACK_IMPORTED_MODULE_4__["SceneManager"].Instance(framework_scene_SceneManager__WEBPACK_IMPORTED_MODULE_4__["SceneManager"]).loadScene(scene, () => {
                 //场景加载完成
                 this.openPageWorker(pkg, page, arg);
             });
@@ -12186,7 +12229,7 @@ class UIManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singleto
     //回到主城
     enterMainPage() {
         this.m_pageTrackStack.length = 0;
-        this.openPageInScene(framework_scene_SceneDef__WEBPACK_IMPORTED_MODULE_3__["SceneDef"].HomeScene, _data_ui_game__WEBPACK_IMPORTED_MODULE_2__["gameUI"].PackageName, _data_ui_game__WEBPACK_IMPORTED_MODULE_2__["gameUI"].UIHomePage, null);
+        this.openPageInScene(framework_scene_SceneDef__WEBPACK_IMPORTED_MODULE_2__["SceneDef"].HomeScene, data_ui_home__WEBPACK_IMPORTED_MODULE_5__["homeUI"].PackageName, data_ui_home__WEBPACK_IMPORTED_MODULE_5__["homeUI"].UIHomePage, null);
     }
     //==========================================================UIWindow
     //打开窗口
@@ -12538,6 +12581,7 @@ class HomeScene extends _framework_scene_BaseScene__WEBPACK_IMPORTED_MODULE_0__[
         super();
     }
     onEnter() {
+        this.addPreloadFairyGUIPackage("home_fui.bytes", "home");
     }
     onComplete() {
     }
@@ -12747,7 +12791,7 @@ class LoginModule extends _framework_module_GeneralModule__WEBPACK_IMPORTED_MODU
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginScene", function() { return LoginScene; });
-/* harmony import */ var data_ui_game__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! data/ui/game */ "./src/data/ui/game.ts");
+/* harmony import */ var data_ui_login__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! data/ui/login */ "./src/data/ui/login.ts");
 /* harmony import */ var framework_scene_SceneDef__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! framework/scene/SceneDef */ "./src/framework/scene/SceneDef.ts");
 /* harmony import */ var framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! framework/ui/UIManager */ "./src/framework/ui/UIManager.ts");
 /* harmony import */ var _framework_scene_BaseScene__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../framework/scene/BaseScene */ "./src/framework/scene/BaseScene.ts");
@@ -12758,11 +12802,11 @@ __webpack_require__.r(__webpack_exports__);
 class LoginScene extends _framework_scene_BaseScene__WEBPACK_IMPORTED_MODULE_3__["BaseScene"] {
     onEnter() {
         //添加预加载资源
-        // this.addPreloadFairyGUIPackage("","");
+        this.addPreloadFairyGUIPackage("login_fui.bytes", "login");
     }
     onComplete() {
         //打开界面：
-        framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"].Instance(framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"]).openPageInScene(framework_scene_SceneDef__WEBPACK_IMPORTED_MODULE_1__["SceneDef"].LoginScene, data_ui_game__WEBPACK_IMPORTED_MODULE_0__["gameUI"].PackageName, data_ui_game__WEBPACK_IMPORTED_MODULE_0__["gameUI"].UILoginPage, null);
+        framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"].Instance(framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"]).openPageInScene(framework_scene_SceneDef__WEBPACK_IMPORTED_MODULE_1__["SceneDef"].LoginScene, data_ui_login__WEBPACK_IMPORTED_MODULE_0__["loginUI"].PackageName, data_ui_login__WEBPACK_IMPORTED_MODULE_0__["loginUI"].UILoginPage, null);
     }
     onLeave() {
     }

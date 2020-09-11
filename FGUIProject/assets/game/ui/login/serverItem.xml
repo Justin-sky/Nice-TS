@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<component size="370,60">
-  <displayList>
-    <image id="n0_pyg6" name="n0" src="pyg6g" fileName="atlas/group/ui_group_01.png" xy="0,0" size="370,60"/>
-    <text id="n1_pyg6" name="serverName" xy="65,14" size="254,35" fontSize="25" text="测试服务器：天山雪莲"/>
-    <image id="n2_pyg6" name="serverStatus" src="pyg614" fileName="atlas/login/login2_10.png" xy="21,15" size="34,31"/>
-  </displayList>
-</component>

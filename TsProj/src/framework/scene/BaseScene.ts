@@ -1,5 +1,6 @@
 import { GameObjectPool } from "framework/common/GameObjectPool";
 import { ResManager } from "framework/common/ResManager";
+import { LoggerJS } from "framework/logger/Logger";
 import { $promise } from 'puerts';
 
 export abstract class BaseScene{
@@ -23,6 +24,7 @@ export abstract class BaseScene{
     public addPreloadPrefab(address:string, instCount){
         this.preloadPrefab.set(address, instCount);
     }
+
 
     public abstract onEnter();
     public abstract onComplete();
@@ -56,6 +58,17 @@ export abstract class BaseScene{
     }
 
     public onDestroy(){
+        this.preloadFairyGUIPackage.forEach((value, key)=>{
+
+            LoggerJS.log("destroy scene: "+key);
+
+            ResManager.Instance(ResManager).releaseFairyGUIPackage(value);
+        });
+
+        //清理资源缓存
+        GameObjectPool.Instance(GameObjectPool).cleanup(true);
+
+        
         this.preloadFairyGUIPackage.clear();
         this.preloadPrefab.clear();
     }

@@ -3,8 +3,10 @@ import { UILoginPage } from "../../modules/login/ui/UILoginPage";
 import { UIPanel } from "./UIPanel";
 import { LoggerJS } from "../logger/Logger";
 import { UIHomePage } from "../../modules/home/ui/UIHomePage";
-import { gameUI } from "../../data/ui/game";
 import { UILoading } from "./UILib/UILoading";
+import { loginUI } from "data/ui/login";
+import { commonUI } from "data/ui/common";
+import { homeUI } from "data/ui/home";
 
 
 const CS = require('csharp');
@@ -18,15 +20,14 @@ export class UIFactory{
         
         let ui:UIPanel = null;
 
-
         switch (name){
-            case gameUI.UILoginPage:
+            case loginUI.UILoginPage:
                 ui = new UILoginPage();
                 break;
-            case gameUI.UILoadingPage:
+            case commonUI.UILoadingPage:
                 ui = new UILoading();
                 break;
-            case gameUI.UIHomePage:
+            case homeUI.UIHomePage:
                 ui = new UIHomePage();
                 break;
         }
