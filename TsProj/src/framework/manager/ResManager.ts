@@ -6,32 +6,8 @@ import {Addressable} from 'csharp';
 
 export class ResManager extends Singleton<ResManager>{
 
-    private fblabel :string = "FB";
-    private static fbcaches : Map<string,any> = new Map<string,any>();;
-
     constructor(){
         super();
-
-        Addressable.ResourceManager.OnFBLoadedHandle = this.onFBLoadedHandle;
-    }
-
-    private onFBLoadedHandle(name, data){
-        ResManager.fbcaches.set(name, data);
-    }
-
-    async preloadPBs(){
-
-        try{
-            let task = Addressable.ResourceManager.PreadloadFB(this.fblabel);
-            return  await $promise(task);
-        }catch(ex){
-            LoggerJS.logError(`Load fb error: : ${ex}`)
-            return 0;
-        }
-    }
-
-    public static getFB(name:string){
-        return this.fbcaches.get(name);
     }
 
     async loadPrefab(address:string){

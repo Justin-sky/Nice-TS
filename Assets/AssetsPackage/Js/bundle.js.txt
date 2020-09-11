@@ -11447,25 +11447,6 @@ __webpack_require__.r(__webpack_exports__);
 class ResManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singleton"] {
     constructor() {
         super();
-        this.fblabel = "FB";
-        csharp__WEBPACK_IMPORTED_MODULE_3__["Addressable"].ResourceManager.OnFBLoadedHandle = this.onFBLoadedHandle;
-    }
-    ;
-    onFBLoadedHandle(name, data) {
-        ResManager.fbcaches.set(name, data);
-    }
-    async preloadPBs() {
-        try {
-            let task = csharp__WEBPACK_IMPORTED_MODULE_3__["Addressable"].ResourceManager.PreadloadFB(this.fblabel);
-            return await Object(puerts__WEBPACK_IMPORTED_MODULE_2__["$promise"])(task);
-        }
-        catch (ex) {
-            _logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].logError(`Load fb error: : ${ex}`);
-            return 0;
-        }
-    }
-    static getFB(name) {
-        return this.fbcaches.get(name);
     }
     async loadPrefab(address) {
         try {
@@ -11504,7 +11485,6 @@ class ResManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singlet
         csharp__WEBPACK_IMPORTED_MODULE_3__["Addressable"].ResourceManager.ReleaseAddressGO(go);
     }
 }
-ResManager.fbcaches = new Map();
 
 
 /***/ }),
