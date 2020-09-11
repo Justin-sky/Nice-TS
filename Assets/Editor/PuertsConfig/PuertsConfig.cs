@@ -1,9 +1,9 @@
 ﻿
-using System.Collections.Generic;
 using Puerts;
 using System;
-using UnityEngine;
+using System.Collections.Generic;
 using System.Reflection;
+using UnityEngine;
 
 //1、配置类必须打[Configure]标签
 //2、必须放Editor目录
@@ -86,7 +86,7 @@ public class PuertsConfig
                 typeof(UnityEngine.UI.Toggle),
                 typeof(UnityEngine.UI.Toggle.ToggleEvent),
                 typeof(UnityEngine.Events.UnityEvent<bool>),
-
+                typeof(UnityEngine.Application),
 
                 typeof(MonoSingleton<NiceTS.TService>),
                 typeof(Logger),

@@ -12,7 +12,6 @@ const CS = require('csharp');
 
 export class UIFactory{
 
-
     public static createUI(pkg:string, name:string){
         LoggerJS.log(`create UI: ${pkg}:${name}`)
         let comp = CS.FairyGUI.UIPackage.CreateObject(pkg, name).asCom

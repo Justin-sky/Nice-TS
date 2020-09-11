@@ -12126,8 +12126,10 @@ class UIPage extends _UIPanel__WEBPACK_IMPORTED_MODULE_0__["UIPanel"] {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UIPanel", function() { return UIPanel; });
 /* harmony import */ var _UIDefine__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UIDefine */ "./src/framework/ui/UIDefine.ts");
+/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! csharp */ "csharp");
+/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(csharp__WEBPACK_IMPORTED_MODULE_1__);
 
-const CS = __webpack_require__(/*! csharp */ "csharp");
+
 class UIPanel {
     constructor() {
         this.m_layer = _UIDefine__WEBPACK_IMPORTED_MODULE_0__["UILayerDef"].Unkown;
@@ -12163,11 +12165,11 @@ class UIPanel {
     }
     open(arg) {
         this.onOpen(arg);
-        CS.FairyGUI.GRoot.inst.AddChild(this.fui);
+        csharp__WEBPACK_IMPORTED_MODULE_1__["FairyGUI"].GRoot.inst.AddChild(this.fui);
     }
     close(arg = null) {
         this.onClose(arg);
-        CS.FairyGUI.GRoot.inst.RemoveChild(this.fui);
+        csharp__WEBPACK_IMPORTED_MODULE_1__["FairyGUI"].GRoot.inst.RemoveChild(this.fui);
     }
     dispose() {
         this.fui.Dispose();

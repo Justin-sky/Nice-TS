@@ -1628,6 +1628,7 @@ declare module 'csharp' {
         class RuntimeTypeHandle extends System.ValueType {
             
         }
+        type Func$1<TResult> = () => TResult;
         class Int64 extends System.ValueType {
             
         }
@@ -2139,9 +2140,82 @@ declare module 'csharp' {
         class Event extends System.Object {
             
         }
+        class Application extends System.Object {
+            public static isPlaying: boolean;
+            public static isFocused: boolean;
+            public static buildGUID: string;
+            public static runInBackground: boolean;
+            public static isBatchMode: boolean;
+            public static dataPath: string;
+            public static streamingAssetsPath: string;
+            public static persistentDataPath: string;
+            public static temporaryCachePath: string;
+            public static absoluteURL: string;
+            public static unityVersion: string;
+            public static version: string;
+            public static installerName: string;
+            public static identifier: string;
+            public static installMode: UnityEngine.ApplicationInstallMode;
+            public static sandboxType: UnityEngine.ApplicationSandboxType;
+            public static productName: string;
+            public static companyName: string;
+            public static cloudProjectId: string;
+            public static targetFrameRate: number;
+            public static consoleLogPath: string;
+            public static backgroundLoadingPriority: UnityEngine.ThreadPriority;
+            public static genuine: boolean;
+            public static genuineCheckAvailable: boolean;
+            public static platform: UnityEngine.RuntimePlatform;
+            public static isMobilePlatform: boolean;
+            public static isConsolePlatform: boolean;
+            public static systemLanguage: UnityEngine.SystemLanguage;
+            public static internetReachability: UnityEngine.NetworkReachability;
+            public static isEditor: boolean;
+            public constructor();
+            public static Quit(exitCode: number):void;
+            public static Quit():void;
+            public static Unload():void;
+            public static CanStreamedLevelBeLoaded(levelIndex: number):boolean;
+            public static CanStreamedLevelBeLoaded(levelName: string):boolean;
+            public static IsPlaying(obj: UnityEngine.Object):boolean;
+            public static GetBuildTags():string[];
+            public static SetBuildTags(buildTags: string[]):void;
+            public static HasProLicense():boolean;
+            public static RequestAdvertisingIdentifierAsync(delegateMethod: UnityEngine.Application.AdvertisingIdentifierCallback):boolean;
+            public static OpenURL(url: string):void;
+            public static GetStackTraceLogType(logType: UnityEngine.LogType):UnityEngine.StackTraceLogType;
+            public static SetStackTraceLogType(logType: UnityEngine.LogType, stackTraceType: UnityEngine.StackTraceLogType):void;
+            public static RequestUserAuthorization(mode: UnityEngine.UserAuthorization):UnityEngine.AsyncOperation;
+            public static HasUserAuthorization(mode: UnityEngine.UserAuthorization):boolean;
+            public static add_lowMemory(value: UnityEngine.Application.LowMemoryCallback):void;
+            public static remove_lowMemory(value: UnityEngine.Application.LowMemoryCallback):void;
+            public static add_logMessageReceived(value: UnityEngine.Application.LogCallback):void;
+            public static remove_logMessageReceived(value: UnityEngine.Application.LogCallback):void;
+            public static add_logMessageReceivedThreaded(value: UnityEngine.Application.LogCallback):void;
+            public static remove_logMessageReceivedThreaded(value: UnityEngine.Application.LogCallback):void;
+            public static add_onBeforeRender(value: UnityEngine.Events.UnityAction):void;
+            public static remove_onBeforeRender(value: UnityEngine.Events.UnityAction):void;
+            public static add_focusChanged(value: System.Action$1<boolean>):void;
+            public static remove_focusChanged(value: System.Action$1<boolean>):void;
+            public static add_deepLinkActivated(value: System.Action$1<string>):void;
+            public static remove_deepLinkActivated(value: System.Action$1<string>):void;
+            public static add_wantsToQuit(value: System.Func$1<boolean>):void;
+            public static remove_wantsToQuit(value: System.Func$1<boolean>):void;
+            public static add_quitting(value: System.Action):void;
+            public static remove_quitting(value: System.Action):void;
+            
+        }
+        enum ApplicationInstallMode { Unknown = 0, Store = 1, DeveloperBuild = 2, Adhoc = 3, Enterprise = 4, Editor = 5 }
+        enum ApplicationSandboxType { Unknown = 0, NotSandboxed = 1, Sandboxed = 2, SandboxBroken = 3 }
+        enum StackTraceLogType { None = 0, ScriptOnly = 1, Full = 2 }
+        enum ThreadPriority { Low = 0, BelowNormal = 1, Normal = 2, High = 4 }
         class AsyncOperation extends UnityEngine.YieldInstruction {
             
         }
+        enum UserAuthorization { WebCam = 1, Microphone = 2 }
+        enum RuntimePlatform { OSXEditor = 0, OSXPlayer = 1, WindowsPlayer = 2, OSXWebPlayer = 3, OSXDashboardPlayer = 4, WindowsWebPlayer = 5, WindowsEditor = 7, IPhonePlayer = 8, XBOX360 = 10, PS3 = 9, Android = 11, NaCl = 12, FlashPlayer = 15, LinuxPlayer = 13, LinuxEditor = 16, WebGLPlayer = 17, MetroPlayerX86 = 18, WSAPlayerX86 = 18, MetroPlayerX64 = 19, WSAPlayerX64 = 19, MetroPlayerARM = 20, WSAPlayerARM = 20, WP8Player = 21, BB10Player = 22, BlackBerryPlayer = 22, TizenPlayer = 23, PSP2 = 24, PS4 = 25, PSM = 26, XboxOne = 27, SamsungTVPlayer = 28, WiiU = 30, tvOS = 31, Switch = 32, Lumin = 33, Stadia = 34 }
+        enum SystemLanguage { Afrikaans = 0, Arabic = 1, Basque = 2, Belarusian = 3, Bulgarian = 4, Catalan = 5, Chinese = 6, Czech = 7, Danish = 8, Dutch = 9, English = 10, Estonian = 11, Faroese = 12, Finnish = 13, French = 14, German = 15, Greek = 16, Hebrew = 17, Hugarian = 18, Icelandic = 19, Indonesian = 20, Italian = 21, Japanese = 22, Korean = 23, Latvian = 24, Lithuanian = 25, Norwegian = 26, Polish = 27, Portuguese = 28, Romanian = 29, Russian = 30, SerboCroatian = 31, Slovak = 32, Slovenian = 33, Spanish = 34, Swedish = 35, Thai = 36, Turkish = 37, Ukrainian = 38, Vietnamese = 39, ChineseSimplified = 40, ChineseTraditional = 41, Unknown = 42, Hungarian = 18 }
+        enum NetworkReachability { NotReachable = 0, ReachableViaCarrierDataNetwork = 1, ReachableViaLocalAreaNetwork = 2 }
         
     }
     namespace System.Collections.Generic {
@@ -2719,6 +2793,15 @@ declare module 'csharp' {
             public constructor();
             
         }
+        
+    }
+    namespace UnityEngine.Application {
+        type AdvertisingIdentifierCallback = (advertisingId: string, trackingEnabled: boolean, errorMsg: string) => void;
+        var AdvertisingIdentifierCallback: {new (func: (advertisingId: string, trackingEnabled: boolean, errorMsg: string) => void): AdvertisingIdentifierCallback;}
+        type LowMemoryCallback = () => void;
+        var LowMemoryCallback: {new (func: () => void): LowMemoryCallback;}
+        type LogCallback = (condition: string, stackTrace: string, type: UnityEngine.LogType) => void;
+        var LogCallback: {new (func: (condition: string, stackTrace: string, type: UnityEngine.LogType) => void): LogCallback;}
         
     }
     

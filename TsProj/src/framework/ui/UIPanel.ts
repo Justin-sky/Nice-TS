@@ -1,6 +1,5 @@
 import { UITypeDef, UILayerDef } from "./UIDefine";
-
-const CS = require('csharp');
+import { FairyGUI } from "csharp";
 
 export abstract class UIPanel {
 
@@ -54,7 +53,7 @@ export abstract class UIPanel {
         
         this.onOpen(arg);
 
-        CS.FairyGUI.GRoot.inst.AddChild(this.fui);
+        FairyGUI.GRoot.inst.AddChild(this.fui);
 
 
     }
@@ -64,7 +63,7 @@ export abstract class UIPanel {
 
         this.onClose(arg);
 
-        CS.FairyGUI.GRoot.inst.RemoveChild(this.fui);
+        FairyGUI.GRoot.inst.RemoveChild(this.fui);
 
     }
 
