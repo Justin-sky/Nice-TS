@@ -11958,10 +11958,10 @@ UIComDefs.WindowCloseBtn = "win_close_btn";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UIFactory", function() { return UIFactory; });
 /* harmony import */ var _modules_login_ui_UILoginPage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../modules/login/ui/UILoginPage */ "./src/modules/login/ui/UILoginPage.ts");
-/* harmony import */ var _UILib_UISimpleLoading__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UILib/UISimpleLoading */ "./src/framework/ui/UILib/UISimpleLoading.ts");
-/* harmony import */ var _logger_Logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../logger/Logger */ "./src/framework/logger/Logger.ts");
-/* harmony import */ var _modules_home_ui_UIHomePage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../modules/home/ui/UIHomePage */ "./src/modules/home/ui/UIHomePage.ts");
-/* harmony import */ var _data_ui_game__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../data/ui/game */ "./src/data/ui/game.ts");
+/* harmony import */ var _logger_Logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../logger/Logger */ "./src/framework/logger/Logger.ts");
+/* harmony import */ var _modules_home_ui_UIHomePage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../modules/home/ui/UIHomePage */ "./src/modules/home/ui/UIHomePage.ts");
+/* harmony import */ var _data_ui_game__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../data/ui/game */ "./src/data/ui/game.ts");
+/* harmony import */ var _UILib_UILoading__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./UILib/UILoading */ "./src/framework/ui/UILib/UILoading.ts");
 
 
 
@@ -11970,18 +11970,18 @@ __webpack_require__.r(__webpack_exports__);
 const CS = __webpack_require__(/*! csharp */ "csharp");
 class UIFactory {
     static createUI(pkg, name) {
-        _logger_Logger__WEBPACK_IMPORTED_MODULE_2__["LoggerJS"].log(`create UI: ${pkg}:${name}`);
+        _logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].log(`create UI: ${pkg}:${name}`);
         let comp = CS.FairyGUI.UIPackage.CreateObject(pkg, name).asCom;
         let ui = null;
         switch (name) {
-            case _data_ui_game__WEBPACK_IMPORTED_MODULE_4__["gameUI"].UILoginPage:
+            case _data_ui_game__WEBPACK_IMPORTED_MODULE_3__["gameUI"].UILoginPage:
                 ui = new _modules_login_ui_UILoginPage__WEBPACK_IMPORTED_MODULE_0__["UILoginPage"]();
                 break;
-            case _data_ui_game__WEBPACK_IMPORTED_MODULE_4__["gameUI"].UILoadingPage:
-                ui = new _UILib_UISimpleLoading__WEBPACK_IMPORTED_MODULE_1__["UISimpleLoading"]();
+            case _data_ui_game__WEBPACK_IMPORTED_MODULE_3__["gameUI"].UILoadingPage:
+                ui = new _UILib_UILoading__WEBPACK_IMPORTED_MODULE_4__["UILoading"]();
                 break;
-            case _data_ui_game__WEBPACK_IMPORTED_MODULE_4__["gameUI"].UIHomePage:
-                ui = new _modules_home_ui_UIHomePage__WEBPACK_IMPORTED_MODULE_3__["UIHomePage"]();
+            case _data_ui_game__WEBPACK_IMPORTED_MODULE_3__["gameUI"].UIHomePage:
+                ui = new _modules_home_ui_UIHomePage__WEBPACK_IMPORTED_MODULE_2__["UIHomePage"]();
                 break;
         }
         if (ui != null) {
@@ -11996,32 +11996,10 @@ class UIFactory {
 
 /***/ }),
 
-/***/ "./src/framework/ui/UILib/UISimpleLoading.ts":
-/*!***************************************************!*\
-  !*** ./src/framework/ui/UILib/UISimpleLoading.ts ***!
-  \***************************************************/
-/*! exports provided: UISimpleLoading */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UISimpleLoading", function() { return UISimpleLoading; });
-/* harmony import */ var _UILoading__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../UILoading */ "./src/framework/ui/UILoading.ts");
-
-class UISimpleLoading extends _UILoading__WEBPACK_IMPORTED_MODULE_0__["UILoading"] {
-    onAwake() {
-    }
-    UpdateProgress() {
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/framework/ui/UILoading.ts":
-/*!***************************************!*\
-  !*** ./src/framework/ui/UILoading.ts ***!
-  \***************************************/
+/***/ "./src/framework/ui/UILib/UILoading.ts":
+/*!*********************************************!*\
+  !*** ./src/framework/ui/UILib/UILoading.ts ***!
+  \*********************************************/
 /*! exports provided: UILoadingArg, UILoading */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12029,8 +12007,8 @@ class UISimpleLoading extends _UILoading__WEBPACK_IMPORTED_MODULE_0__["UILoading
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UILoadingArg", function() { return UILoadingArg; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UILoading", function() { return UILoading; });
-/* harmony import */ var _UIPanel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UIPanel */ "./src/framework/ui/UIPanel.ts");
-/* harmony import */ var _UIDefine__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UIDefine */ "./src/framework/ui/UIDefine.ts");
+/* harmony import */ var _UIPanel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../UIPanel */ "./src/framework/ui/UIPanel.ts");
+/* harmony import */ var _UIDefine__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../UIDefine */ "./src/framework/ui/UIDefine.ts");
 
 
 class UILoadingArg {
@@ -12041,26 +12019,19 @@ class UILoadingArg {
     }
 }
 class UILoading extends _UIPanel__WEBPACK_IMPORTED_MODULE_0__["UIPanel"] {
-    get uiType() {
-        return _UIDefine__WEBPACK_IMPORTED_MODULE_1__["UITypeDef"].Loading;
-    }
     get arg() {
         return this.m_arg;
     }
-    updateText() {
-        // if (txtTitle != null)
-        // {
-        //     txtTitle.text = m_arg.title + "(" + (int)(m_arg.progress * 100) + "%)";
-        // }
-        // if (txtTips != null)
-        // {
-        //     txtTips.text = m_arg.tips;
-        // }
+    onAwake() {
+        throw new Error("Method not implemented.");
+    }
+    get uiType() {
+        return _UIDefine__WEBPACK_IMPORTED_MODULE_1__["UITypeDef"].Loading;
     }
     onOpen(arg) {
         super.onOpen(arg);
         this.m_arg = arg;
-        if (this.m_arg == undefined) {
+        if (!this.m_arg) {
             this.m_arg = new UILoadingArg();
         }
         this.updateText();
@@ -12078,6 +12049,18 @@ class UILoading extends _UIPanel__WEBPACK_IMPORTED_MODULE_0__["UIPanel"] {
             this.updateText();
             this.UpdateProgress();
         }
+    }
+    UpdateProgress() {
+    }
+    updateText() {
+        // if (txtTitle != null)
+        // {
+        //     txtTitle.text = m_arg.title + "(" + (int)(m_arg.progress * 100) + "%)";
+        // }
+        // if (txtTips != null)
+        // {
+        //     txtTips.text = m_arg.tips;
+        // }
     }
 }
 
