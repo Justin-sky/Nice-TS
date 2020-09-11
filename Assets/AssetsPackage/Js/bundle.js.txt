@@ -12023,7 +12023,6 @@ class UILoading extends _UIPanel__WEBPACK_IMPORTED_MODULE_0__["UIPanel"] {
         return this.m_arg;
     }
     onAwake() {
-        throw new Error("Method not implemented.");
     }
     get uiType() {
         return _UIDefine__WEBPACK_IMPORTED_MODULE_1__["UITypeDef"].Loading;

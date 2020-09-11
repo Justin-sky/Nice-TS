@@ -23,7 +23,7 @@ export class  UILoading extends UIPanel{
     }
 
     public onAwake(): void {
-        throw new Error("Method not implemented.");
+       
     }
     
     public get uiType(): UITypeDef {    
