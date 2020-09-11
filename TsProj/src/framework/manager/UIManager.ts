@@ -1,6 +1,6 @@
 
 import { Singleton } from '../common/Singleton';
-import { UILoading } from '../ui/UILoading';
+import { UILoading } from '../ui/UILib/UILoading';
 import { UIWindow } from '../ui/UIWindow';
 import { UIWidge } from '../ui/UIWidge';
 import { UIPanel } from '../ui/UIPanel';

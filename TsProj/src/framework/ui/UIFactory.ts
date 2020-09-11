@@ -1,11 +1,10 @@
 
 import { UILoginPage } from "../../modules/login/ui/UILoginPage";
 import { UIPanel } from "./UIPanel";
-import { Singleton } from "../common/Singleton";
-import { UISimpleLoading } from "./UILib/UISimpleLoading";
 import { LoggerJS } from "../logger/Logger";
 import { UIHomePage } from "../../modules/home/ui/UIHomePage";
 import { gameUI } from "../../data/ui/game";
+import { UILoading } from "./UILib/UILoading";
 
 
 const CS = require('csharp');
@@ -26,7 +25,7 @@ export class UIFactory{
                 ui = new UILoginPage();
                 break;
             case gameUI.UILoadingPage:
-                ui = new UISimpleLoading();
+                ui = new UILoading();
                 break;
             case gameUI.UIHomePage:
                 ui = new UIHomePage();
