@@ -9,6 +9,7 @@ import { Opcode } from "../../data/pb/Opcode";
 import { NetErrorCode } from "../../framework/net/NetErrorCode";
 import { NiceET } from "../../data/pb/OuterMessage";
 import { SceneDef } from "framework/scene/SceneDef";
+import { SceneManager } from "framework/scene/SceneManager";
 
 
 export class LoginModule extends GeneralModule{
@@ -32,8 +33,9 @@ export class LoginModule extends GeneralModule{
    }
 
    public show(args:any):void{
-        UIManager.Instance(UIManager).openPageInScene(SceneDef.LoginScene, gameUI.PackageName, gameUI.UILoginPage, args);
-   }
+       
+        SceneManager.Instance(SceneManager).loadScene(SceneDef.LoginScene, null);
+    }
    
     public  release(): void{
         this.messenger.removeListener(ModuleMessage.LOGIN_REAMSERVER,this.loginReamServer);

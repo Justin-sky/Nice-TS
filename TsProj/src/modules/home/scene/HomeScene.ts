@@ -1,23 +1,23 @@
-import { BaseScene } from "./BaseScene";
+import { BaseScene } from "../../../framework/scene/BaseScene";
 
 
-export class LoginScene extends BaseScene{
+export class HomeScene extends BaseScene{
 
     constructor(){
         super();
 
-       //添加预加载资源
-      // this.addPreloadFairyGUIPackage("","");
+        
     }
 
     public onEnter() {
+
         
     }
+
     public onComplete() {
         
-
-
     }
+
     public onLeave() {
         
     }

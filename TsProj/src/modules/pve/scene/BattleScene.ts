@@ -1,17 +1,13 @@
-import { BaseScene } from "./BaseScene";
+import { BaseScene } from "../../../framework/scene/BaseScene";
 
 
-export class HomeScene extends BaseScene{
+export class BattleScene extends BaseScene{
 
     constructor(){
         super();
-
-        
     }
 
-
     public onEnter() {
-
         
     }
     public onComplete() {
