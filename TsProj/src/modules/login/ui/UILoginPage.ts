@@ -1,5 +1,5 @@
 import { UIPage } from "../../../framework/ui/UIPage";
-import { ModuleManager } from "../../../framework/manager/ModuleManager";
+import { ModuleManager } from "../../../framework/module/ModuleManager";
 import { ModuleDef, ModuleMessage } from "../../ModuleDef";
 import { LoggerJS } from "../../../framework/logger/Logger";
 import { binder } from "../../../framework/common/NiceDecorator";

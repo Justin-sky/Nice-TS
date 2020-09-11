@@ -2,7 +2,7 @@ import {TimeUtil} from '../framework/util/TimeUtil';
 import {SingletonTest} from './SingletonTest';
 import {LoggerJS} from '../framework/logger/Logger';
 import {Messenger} from '../framework/common/Messenger';
-import { ResManager } from '../framework/manager/ResManager';
+import { ResManager } from '../framework/common/ResManager';
 import { NiceET } from '../data/pb/OuterMessage';
 import { SkillConfigTB, SkillConfigTR } from '../data/excel/SkillConfig';
 import { Opcode } from '../data/pb/Opcode';

@@ -4289,10 +4289,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./framework/logger/Logger */ "./src/framework/logger/Logger.ts");
 /* harmony import */ var _unittest_UnitTest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./unittest/UnitTest */ "./src/unittest/UnitTest.ts");
 /* harmony import */ var _framework_common_GameObjectPool__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./framework/common/GameObjectPool */ "./src/framework/common/GameObjectPool.ts");
-/* harmony import */ var _framework_manager_ModuleManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./framework/manager/ModuleManager */ "./src/framework/manager/ModuleManager.ts");
+/* harmony import */ var _framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./framework/module/ModuleManager */ "./src/framework/module/ModuleManager.ts");
 /* harmony import */ var _modules_ModuleDef__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/ModuleDef */ "./src/modules/ModuleDef.ts");
-/* harmony import */ var _framework_manager_UIManager__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./framework/manager/UIManager */ "./src/framework/manager/UIManager.ts");
-/* harmony import */ var _framework_manager_ResManager__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./framework/manager/ResManager */ "./src/framework/manager/ResManager.ts");
+/* harmony import */ var _framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./framework/ui/UIManager */ "./src/framework/ui/UIManager.ts");
+/* harmony import */ var _framework_common_ResManager__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./framework/common/ResManager */ "./src/framework/common/ResManager.ts");
 /* harmony import */ var _data_excel_ExcelManager__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./data/excel/ExcelManager */ "./src/data/excel/ExcelManager.ts");
 /* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! csharp */ "csharp");
 /* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(csharp__WEBPACK_IMPORTED_MODULE_8__);
@@ -4315,15 +4315,15 @@ class GameMain {
             _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_0__["LoggerJS"].log("Game start in JS....");
             //启动单例
             _framework_common_GameObjectPool__WEBPACK_IMPORTED_MODULE_2__["GameObjectPool"].Instance(_framework_common_GameObjectPool__WEBPACK_IMPORTED_MODULE_2__["GameObjectPool"]);
-            _framework_manager_ModuleManager__WEBPACK_IMPORTED_MODULE_3__["ModuleManager"].Instance(_framework_manager_ModuleManager__WEBPACK_IMPORTED_MODULE_3__["ModuleManager"]);
-            _framework_manager_UIManager__WEBPACK_IMPORTED_MODULE_5__["UIManager"].Instance(_framework_manager_UIManager__WEBPACK_IMPORTED_MODULE_5__["UIManager"]);
-            _framework_manager_ResManager__WEBPACK_IMPORTED_MODULE_6__["ResManager"].Instance(_framework_manager_ResManager__WEBPACK_IMPORTED_MODULE_6__["ResManager"]);
+            _framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_3__["ModuleManager"].Instance(_framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_3__["ModuleManager"]);
+            _framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_5__["UIManager"].Instance(_framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_5__["UIManager"]);
+            _framework_common_ResManager__WEBPACK_IMPORTED_MODULE_6__["ResManager"].Instance(_framework_common_ResManager__WEBPACK_IMPORTED_MODULE_6__["ResManager"]);
             //预加载excel数据
             _data_excel_ExcelManager__WEBPACK_IMPORTED_MODULE_7__["ExcelManager"].Instance(_data_excel_ExcelManager__WEBPACK_IMPORTED_MODULE_7__["ExcelManager"]);
             //do Unit Test
             _unittest_UnitTest__WEBPACK_IMPORTED_MODULE_1__["UnitTest"].doTest();
             //进入登录模块
-            _framework_manager_ModuleManager__WEBPACK_IMPORTED_MODULE_3__["ModuleManager"].Instance(_framework_manager_ModuleManager__WEBPACK_IMPORTED_MODULE_3__["ModuleManager"]).show(_modules_ModuleDef__WEBPACK_IMPORTED_MODULE_4__["ModuleDef"].LoginModule);
+            _framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_3__["ModuleManager"].Instance(_framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_3__["ModuleManager"]).show(_modules_ModuleDef__WEBPACK_IMPORTED_MODULE_4__["ModuleDef"].LoginModule);
             //JS启动完成，通知C#层
             csharp__WEBPACK_IMPORTED_MODULE_8__["GameLaunch"].Instance.JsLuanchFinish();
         }
@@ -4333,7 +4333,7 @@ class GameMain {
     }
     onApplicationQuit() {
         _framework_common_GameObjectPool__WEBPACK_IMPORTED_MODULE_2__["GameObjectPool"].Instance(_framework_common_GameObjectPool__WEBPACK_IMPORTED_MODULE_2__["GameObjectPool"]).cleanup(true);
-        _framework_manager_ModuleManager__WEBPACK_IMPORTED_MODULE_3__["ModuleManager"].Instance(_framework_manager_ModuleManager__WEBPACK_IMPORTED_MODULE_3__["ModuleManager"]).cleanup();
+        _framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_3__["ModuleManager"].Instance(_framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_3__["ModuleManager"]).cleanup();
         _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_0__["LoggerJS"].log("Game onApplicationQuit in JS....");
     }
     onDispose() {
@@ -11073,7 +11073,7 @@ gameUI.UIShopPage = "ShopPage";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GameObjectPool", function() { return GameObjectPool; });
 /* harmony import */ var _Singleton__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Singleton */ "./src/framework/common/Singleton.ts");
-/* harmony import */ var _manager_ResManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../manager/ResManager */ "./src/framework/manager/ResManager.ts");
+/* harmony import */ var _ResManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ResManager */ "./src/framework/common/ResManager.ts");
 /* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! csharp */ "csharp");
 /* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(csharp__WEBPACK_IMPORTED_MODULE_2__);
 
@@ -11143,7 +11143,7 @@ class GameObjectPool extends _Singleton__WEBPACK_IMPORTED_MODULE_0__["Singleton"
             }
             return;
         }
-        let go = await _manager_ResManager__WEBPACK_IMPORTED_MODULE_1__["ResManager"].Instance(_manager_ResManager__WEBPACK_IMPORTED_MODULE_1__["ResManager"]).loadPrefab(path);
+        let go = await _ResManager__WEBPACK_IMPORTED_MODULE_1__["ResManager"].Instance(_ResManager__WEBPACK_IMPORTED_MODULE_1__["ResManager"]).loadPrefab(path);
         if (go != undefined) {
             this.cacheAndInstGameObject(path, go, inst_count);
         }
@@ -11181,7 +11181,7 @@ class GameObjectPool extends _Singleton__WEBPACK_IMPORTED_MODULE_0__["Singleton"
         if (includePooledGo) {
             this.__goPool.forEach((go, key) => {
                 if (go != null) {
-                    _manager_ResManager__WEBPACK_IMPORTED_MODULE_1__["ResManager"].Instance(_manager_ResManager__WEBPACK_IMPORTED_MODULE_1__["ResManager"]).releaseAddressGO(go);
+                    _ResManager__WEBPACK_IMPORTED_MODULE_1__["ResManager"].Instance(_ResManager__WEBPACK_IMPORTED_MODULE_1__["ResManager"]).releaseAddressGO(go);
                 }
             });
             this.__goPool.clear();
@@ -11272,6 +11272,85 @@ function binder(name) {
 
 /***/ }),
 
+/***/ "./src/framework/common/ResManager.ts":
+/*!********************************************!*\
+  !*** ./src/framework/common/ResManager.ts ***!
+  \********************************************/
+/*! exports provided: ResManager */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResManager", function() { return ResManager; });
+/* harmony import */ var _Singleton__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Singleton */ "./src/framework/common/Singleton.ts");
+/* harmony import */ var _logger_Logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../logger/Logger */ "./src/framework/logger/Logger.ts");
+/* harmony import */ var puerts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! puerts */ "puerts");
+/* harmony import */ var puerts__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(puerts__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! csharp */ "csharp");
+/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(csharp__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+class ResManager extends _Singleton__WEBPACK_IMPORTED_MODULE_0__["Singleton"] {
+    constructor() {
+        super();
+    }
+    async loadPrefab(address) {
+        try {
+            let task = csharp__WEBPACK_IMPORTED_MODULE_3__["NiceTS"].ResourceManager.LoadPrefab(address);
+            let go = await Object(puerts__WEBPACK_IMPORTED_MODULE_2__["$promise"])(task);
+            return go;
+        }
+        catch (ex) {
+            _logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].logError(`Load prefab :${address} : ${ex}`);
+            return null;
+        }
+    }
+    async loadTextAsset(address) {
+        try {
+            let task = csharp__WEBPACK_IMPORTED_MODULE_3__["NiceTS"].ResourceManager.LoadTextAsset(address);
+            let go = await Object(puerts__WEBPACK_IMPORTED_MODULE_2__["$promise"])(task);
+            return go;
+        }
+        catch (ex) {
+            _logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].logError(`Load textasset :${address} : ${ex}`);
+            return null;
+        }
+    }
+    async loadSprite(address) {
+        try {
+            let task = csharp__WEBPACK_IMPORTED_MODULE_3__["NiceTS"].ResourceManager.LoadSprite(address);
+            let go = await Object(puerts__WEBPACK_IMPORTED_MODULE_2__["$promise"])(task);
+            return go;
+        }
+        catch (ex) {
+            _logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].logError(`Load sprite :${address} : ${ex}`);
+            return null;
+        }
+    }
+    async loadFairyGUIPackage(address, packageName, callback) {
+        try {
+            let task = csharp__WEBPACK_IMPORTED_MODULE_3__["NiceTS"].ResourceManager.LoadFairyGUIPackage(address, packageName);
+            await Object(puerts__WEBPACK_IMPORTED_MODULE_2__["$promise"])(task);
+            if (callback)
+                callback();
+        }
+        catch (ex) {
+            _logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].logError(`Load fairyGUI :${address} : ${ex}`);
+        }
+    }
+    releaseAddressGO(go) {
+        csharp__WEBPACK_IMPORTED_MODULE_3__["NiceTS"].ResourceManager.ReleaseAddressGO(go);
+    }
+    releaseFairyGUIPackage(packageName) {
+        csharp__WEBPACK_IMPORTED_MODULE_3__["NiceTS"].ResourceManager.ReleaseFGUIPackage(packageName);
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/framework/common/Singleton.ts":
 /*!*******************************************!*\
   !*** ./src/framework/common/Singleton.ts ***!
@@ -11318,341 +11397,6 @@ class LoggerJS {
     static logError(msg) {
         if (_global_GameConfig__WEBPACK_IMPORTED_MODULE_1__["GameConfig"].debug)
             csharp__WEBPACK_IMPORTED_MODULE_0__["Logger"].LogError(`${msg}`);
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/framework/manager/ModuleManager.ts":
-/*!************************************************!*\
-  !*** ./src/framework/manager/ModuleManager.ts ***!
-  \************************************************/
-/*! exports provided: MessageObject, ModuleManager */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MessageObject", function() { return MessageObject; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModuleManager", function() { return ModuleManager; });
-/* harmony import */ var _common_Singleton__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/Singleton */ "./src/framework/common/Singleton.ts");
-/* harmony import */ var _logger_Logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../logger/Logger */ "./src/framework/logger/Logger.ts");
-/* harmony import */ var _module_ModuleFactory__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../module/ModuleFactory */ "./src/framework/module/ModuleFactory.ts");
-
-
-
-class MessageObject {
-}
-class ModuleManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singleton"] {
-    constructor() {
-        super();
-        this.m_mapModules = new Map();
-        this.m_mapCacheMessage = new Map();
-    }
-    cleanup() {
-        this.m_mapCacheMessage.clear();
-        for (const module of this.m_mapModules.values()) {
-            module.release();
-        }
-        this.m_mapModules.clear();
-    }
-    createModule(name, args) {
-        _logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].log(`name = ${name}, args = ${args}`);
-        if (this.hasModule(name)) {
-            _logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].logError(`The Module<${name}> Has Existed!`);
-            return this.getModule(name);
-        }
-        let module = _module_ModuleFactory__WEBPACK_IMPORTED_MODULE_2__["ModuleFactory"].createModule(name);
-        if (module == null) {
-            _logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].logError(`模块实例化失败：<${name}> `);
-            return null;
-        }
-        this.m_mapModules.set(name, module);
-        module.create(args);
-        //处理缓存的消息
-        if (this.m_mapCacheMessage.has(name)) {
-            let list = this.m_mapCacheMessage.get(name);
-            for (const msgobj of list) {
-                module.handleMessage(msgobj.msg, msgobj.args);
-            }
-            this.m_mapCacheMessage.delete(name);
-        }
-        return module;
-    }
-    hasModule(name) {
-        return this.m_mapModules.has(name);
-    }
-    getModule(name) {
-        return this.m_mapModules.get(name);
-    }
-    removeModule(name) {
-        let module = this.getModule(name);
-        if (module != undefined)
-            module.release();
-        this.m_mapModules.delete(name);
-    }
-    getCacheMessageList(target) {
-        let list = this.m_mapCacheMessage.get(target);
-        if (list == undefined) {
-            list = new Array();
-            this.m_mapCacheMessage.set(target, list);
-        }
-        return list;
-    }
-    sendMessage(target, msg, ...args) {
-        let module = this.getModule(target);
-        if (module != undefined) {
-            module.handleMessage(msg, args);
-        }
-        else {
-            let list = this.getCacheMessageList(target);
-            let obj = new MessageObject();
-            obj.msg = msg;
-            obj.args = args;
-            list.push(obj);
-        }
-    }
-    show(target, ...args) {
-        let model = this.getModule(target);
-        if (!model) {
-            model = this.createModule(target);
-        }
-        model.show(args);
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/framework/manager/ResManager.ts":
-/*!*********************************************!*\
-  !*** ./src/framework/manager/ResManager.ts ***!
-  \*********************************************/
-/*! exports provided: ResManager */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResManager", function() { return ResManager; });
-/* harmony import */ var _common_Singleton__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/Singleton */ "./src/framework/common/Singleton.ts");
-/* harmony import */ var _logger_Logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../logger/Logger */ "./src/framework/logger/Logger.ts");
-/* harmony import */ var puerts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! puerts */ "puerts");
-/* harmony import */ var puerts__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(puerts__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! csharp */ "csharp");
-/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(csharp__WEBPACK_IMPORTED_MODULE_3__);
-
-
-
-
-class ResManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singleton"] {
-    constructor() {
-        super();
-    }
-    async loadPrefab(address) {
-        try {
-            let task = csharp__WEBPACK_IMPORTED_MODULE_3__["NiceTS"].ResourceManager.LoadPrefab(address);
-            let go = await Object(puerts__WEBPACK_IMPORTED_MODULE_2__["$promise"])(task);
-            return go;
-        }
-        catch (ex) {
-            _logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].logError(`Load prefab :${address} : ${ex}`);
-            return null;
-        }
-    }
-    async loadTextAsset(address) {
-        try {
-            let task = csharp__WEBPACK_IMPORTED_MODULE_3__["NiceTS"].ResourceManager.LoadTextAsset(address);
-            let go = await Object(puerts__WEBPACK_IMPORTED_MODULE_2__["$promise"])(task);
-            return go;
-        }
-        catch (ex) {
-            _logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].logError(`Load textasset :${address} : ${ex}`);
-            return null;
-        }
-    }
-    async loadSprite(address) {
-        try {
-            let task = csharp__WEBPACK_IMPORTED_MODULE_3__["NiceTS"].ResourceManager.LoadSprite(address);
-            let go = await Object(puerts__WEBPACK_IMPORTED_MODULE_2__["$promise"])(task);
-            return go;
-        }
-        catch (ex) {
-            _logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].logError(`Load sprite :${address} : ${ex}`);
-            return null;
-        }
-    }
-    releaseAddressGO(go) {
-        csharp__WEBPACK_IMPORTED_MODULE_3__["NiceTS"].ResourceManager.ReleaseAddressGO(go);
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/framework/manager/UIManager.ts":
-/*!********************************************!*\
-  !*** ./src/framework/manager/UIManager.ts ***!
-  \********************************************/
-/*! exports provided: UIPageTrack, UIManager */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UIPageTrack", function() { return UIPageTrack; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UIManager", function() { return UIManager; });
-/* harmony import */ var _common_Singleton__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/Singleton */ "./src/framework/common/Singleton.ts");
-/* harmony import */ var _ui_UIFactory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ui/UIFactory */ "./src/framework/ui/UIFactory.ts");
-/* harmony import */ var _modules_ModuleDef__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../modules/ModuleDef */ "./src/modules/ModuleDef.ts");
-/* harmony import */ var _data_ui_game__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../data/ui/game */ "./src/data/ui/game.ts");
-/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! csharp */ "csharp");
-/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(csharp__WEBPACK_IMPORTED_MODULE_4__);
-
-
-
-
-
-class UIPageTrack {
-}
-class UIManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singleton"] {
-    constructor() {
-        super();
-        this.m_pageTrackStack = new Array();
-        this.m_listLoadedPanel = new Array();
-        csharp__WEBPACK_IMPORTED_MODULE_4__["UnityEngine"].SceneManagement.SceneManager.add_sceneLoaded((scene, mode) => {
-            if (this.onSceneLoadedOnly != null)
-                this.onSceneLoadedOnly(scene.name);
-        });
-    }
-    closeAllLoadedPanel() {
-        for (let i = this.m_listLoadedPanel.length - 1; i >= 0; i--) {
-            let panel = this.m_listLoadedPanel[i];
-            if (panel.isOpen) {
-                panel.close();
-            }
-            this.m_listLoadedPanel.slice(i, 1);
-            panel.dispose();
-        }
-    }
-    clean() {
-        this.closeAllLoadedPanel();
-        this.m_pageTrackStack.length = 0;
-        this.m_listLoadedPanel.length = 0;
-    }
-    open(pkg, name, arg) {
-        let ui = this.getUI(name);
-        if (ui == null) {
-            ui = _ui_UIFactory__WEBPACK_IMPORTED_MODULE_1__["UIFactory"].createUI(pkg, name);
-            this.m_listLoadedPanel.push(ui);
-        }
-        if (ui != null) {
-            ui.open(arg);
-        }
-        return ui;
-    }
-    getUI(name) {
-        for (const panel of this.m_listLoadedPanel) {
-            if (panel.name == name) {
-                panel;
-            }
-        }
-        return null;
-    }
-    //==========================================================UILoading
-    //打开Loading界面
-    openLoading(pkg, name, arg) {
-        let ui = this.open(pkg, name, arg);
-        return ui;
-    }
-    //关闭Loading界面
-    closeLoading(name, arg) {
-        let ui = this.getUI(name);
-        if (ui != null) {
-            ui.close(arg);
-        }
-    }
-    //==========================================================Scene
-    //加载场景 
-    loadScene(scene, onLoadComplete) {
-        this.onSceneLoadedOnly = (sceneName) => {
-            if (sceneName == scene) {
-                this.onSceneLoadedOnly = null;
-                if (onLoadComplete != null)
-                    onLoadComplete();
-                this.closeLoading(_data_ui_game__WEBPACK_IMPORTED_MODULE_3__["gameUI"].UILoadingPage);
-            }
-        };
-        this.openLoading(_data_ui_game__WEBPACK_IMPORTED_MODULE_3__["gameUI"].PackageName, _data_ui_game__WEBPACK_IMPORTED_MODULE_3__["gameUI"].UILoadingPage);
-        csharp__WEBPACK_IMPORTED_MODULE_4__["UnityEngine"].SceneManagement.SceneManager.LoadScene(scene);
-    }
-    //==========================================================Page
-    openPageWorker(pkg, page, arg) {
-        this.m_currentPage = new UIPageTrack();
-        this.m_currentPage.pkg = pkg;
-        this.m_currentPage.name = page;
-        this.m_currentPage.arg = arg;
-        this.closeAllLoadedPanel();
-        this.open(pkg, page, arg);
-    }
-    //打开页面, 会关闭上一个页面上的所有窗口,Widiget等
-    openPage(pkg, name, arg) {
-        if (this.m_currentPage != undefined && this.m_currentPage.name != name) {
-            this.m_pageTrackStack.push(this.m_currentPage);
-        }
-        this.openPageWorker(pkg, name, arg);
-    }
-    //返回上一个页面
-    goBackPage() {
-        if (this.m_pageTrackStack.length > 0) {
-            let track = this.m_pageTrackStack.pop();
-            this.openPageWorker(track.pkg, track.name, track.arg);
-        }
-        else {
-            this.enterMainPage();
-        }
-    }
-    //打开场景页面,此页面不计入页面栈,无返回上一面按钮
-    openPageInScene(scene, pkg, page, arg) {
-        let oldScene = csharp__WEBPACK_IMPORTED_MODULE_4__["UnityEngine"].SceneManagement.SceneManager.GetActiveScene().name;
-        if (oldScene == scene) {
-            this.openPageWorker(pkg, page, arg);
-        }
-        else {
-            this.loadScene(scene, () => {
-                //场景加载完成
-                this.openPageWorker(pkg, page, arg);
-            });
-        }
-    }
-    //回到主城
-    enterMainPage() {
-        this.m_pageTrackStack.length = 0;
-        this.openPageInScene(_modules_ModuleDef__WEBPACK_IMPORTED_MODULE_2__["SceneDef"].HomeScene, _data_ui_game__WEBPACK_IMPORTED_MODULE_3__["gameUI"].PackageName, _data_ui_game__WEBPACK_IMPORTED_MODULE_3__["gameUI"].UIHomePage, null);
-    }
-    //==========================================================UIWindow
-    //打开窗口
-    openWindow(pkg, name, arg) {
-        let ui = this.open(pkg, name, arg);
-        return ui;
-    }
-    //关闭窗口
-    closeWindow(name, arg) {
-        let ui = this.getUI(name);
-        if (ui != null) {
-            ui.close(arg);
-        }
-    }
-    //==========================================================UIWidget
-    //打开Widiget
-    openWidget(pkg, name, arg) {
-        let ui = this.open(pkg, name, arg);
-        return ui;
-    }
-    //u关闭Widiget
-    closeWidget(name, arg) {
-        let ui = this.getUI(name);
-        if (ui != null) {
-            ui.close(arg);
-        }
     }
 }
 
@@ -11721,6 +11465,106 @@ class ModuleFactory {
         }
         _logger_Logger__WEBPACK_IMPORTED_MODULE_3__["LoggerJS"].logError(`创建Module失败： ${name}`);
         return null;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/framework/module/ModuleManager.ts":
+/*!***********************************************!*\
+  !*** ./src/framework/module/ModuleManager.ts ***!
+  \***********************************************/
+/*! exports provided: MessageObject, ModuleManager */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MessageObject", function() { return MessageObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModuleManager", function() { return ModuleManager; });
+/* harmony import */ var _common_Singleton__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/Singleton */ "./src/framework/common/Singleton.ts");
+/* harmony import */ var _logger_Logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../logger/Logger */ "./src/framework/logger/Logger.ts");
+/* harmony import */ var _ModuleFactory__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ModuleFactory */ "./src/framework/module/ModuleFactory.ts");
+
+
+
+class MessageObject {
+}
+class ModuleManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singleton"] {
+    constructor() {
+        super();
+        this.m_mapModules = new Map();
+        this.m_mapCacheMessage = new Map();
+    }
+    cleanup() {
+        this.m_mapCacheMessage.clear();
+        for (const module of this.m_mapModules.values()) {
+            module.release();
+        }
+        this.m_mapModules.clear();
+    }
+    createModule(name, args) {
+        _logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].log(`name = ${name}, args = ${args}`);
+        if (this.hasModule(name)) {
+            _logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].logError(`The Module<${name}> Has Existed!`);
+            return this.getModule(name);
+        }
+        let module = _ModuleFactory__WEBPACK_IMPORTED_MODULE_2__["ModuleFactory"].createModule(name);
+        if (module == null) {
+            _logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].logError(`模块实例化失败：<${name}> `);
+            return null;
+        }
+        this.m_mapModules.set(name, module);
+        module.create(args);
+        //处理缓存的消息
+        if (this.m_mapCacheMessage.has(name)) {
+            let list = this.m_mapCacheMessage.get(name);
+            for (const msgobj of list) {
+                module.handleMessage(msgobj.msg, msgobj.args);
+            }
+            this.m_mapCacheMessage.delete(name);
+        }
+        return module;
+    }
+    hasModule(name) {
+        return this.m_mapModules.has(name);
+    }
+    getModule(name) {
+        return this.m_mapModules.get(name);
+    }
+    removeModule(name) {
+        let module = this.getModule(name);
+        if (module != undefined)
+            module.release();
+        this.m_mapModules.delete(name);
+    }
+    getCacheMessageList(target) {
+        let list = this.m_mapCacheMessage.get(target);
+        if (list == undefined) {
+            list = new Array();
+            this.m_mapCacheMessage.set(target, list);
+        }
+        return list;
+    }
+    sendMessage(target, msg, ...args) {
+        let module = this.getModule(target);
+        if (module != undefined) {
+            module.handleMessage(msg, args);
+        }
+        else {
+            let list = this.getCacheMessageList(target);
+            let obj = new MessageObject();
+            obj.msg = msg;
+            obj.args = args;
+            list.push(obj);
+        }
+    }
+    show(target, ...args) {
+        let model = this.getModule(target);
+        if (!model) {
+            model = this.createModule(target);
+        }
+        model.show(args);
     }
 }
 
@@ -11880,6 +11724,273 @@ NetErrorCode.ERR_SocketConnError = 102011;
 
 /***/ }),
 
+/***/ "./src/framework/scene/BaseScene.ts":
+/*!******************************************!*\
+  !*** ./src/framework/scene/BaseScene.ts ***!
+  \******************************************/
+/*! exports provided: BaseScene */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BaseScene", function() { return BaseScene; });
+/* harmony import */ var framework_common_GameObjectPool__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! framework/common/GameObjectPool */ "./src/framework/common/GameObjectPool.ts");
+/* harmony import */ var framework_common_ResManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! framework/common/ResManager */ "./src/framework/common/ResManager.ts");
+
+
+class BaseScene {
+    constructor() {
+        this.finishCount = 0;
+        this.totalCount = 0;
+        this.preloadFairyGUIPackage = new Map();
+        this.preloadPrefab = new Map();
+        this.finishCount = 0;
+    }
+    addPreloadFairyGUIPackage(address, packageName) {
+        this.preloadFairyGUIPackage.set(address, packageName);
+    }
+    addPreloadPrefab(address, instCount) {
+        this.preloadPrefab.set(address, instCount);
+    }
+    async onPrepare() {
+        let fguiPkgCount = this.preloadFairyGUIPackage.size;
+        let prefabCount = this.preloadPrefab.size;
+        this.totalCount = fguiPkgCount + prefabCount;
+        let premises = [];
+        this.preloadFairyGUIPackage.forEach((value, key) => {
+            let premise = framework_common_ResManager__WEBPACK_IMPORTED_MODULE_1__["ResManager"].Instance(framework_common_ResManager__WEBPACK_IMPORTED_MODULE_1__["ResManager"]).loadFairyGUIPackage(key, value, () => {
+                this.finishCount++;
+            });
+            premises.push(premise);
+        });
+        this.preloadPrefab.forEach((value, key) => {
+            let premise = framework_common_GameObjectPool__WEBPACK_IMPORTED_MODULE_0__["GameObjectPool"].Instance(framework_common_GameObjectPool__WEBPACK_IMPORTED_MODULE_0__["GameObjectPool"]).preLoadGameObjectAsync(key, value, () => {
+                this.finishCount++;
+            });
+            premises.push(premise);
+        });
+        await Promise.all(premises);
+    }
+    onDestroy() {
+        this.preloadFairyGUIPackage.clear();
+        this.preloadPrefab.clear();
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/framework/scene/BattleScene.ts":
+/*!********************************************!*\
+  !*** ./src/framework/scene/BattleScene.ts ***!
+  \********************************************/
+/*! exports provided: BattleScene */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BattleScene", function() { return BattleScene; });
+/* harmony import */ var _BaseScene__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BaseScene */ "./src/framework/scene/BaseScene.ts");
+
+class BattleScene extends _BaseScene__WEBPACK_IMPORTED_MODULE_0__["BaseScene"] {
+    constructor() {
+        super();
+    }
+    onEnter() {
+    }
+    onComplete() {
+    }
+    onLeave() {
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/framework/scene/HomeScene.ts":
+/*!******************************************!*\
+  !*** ./src/framework/scene/HomeScene.ts ***!
+  \******************************************/
+/*! exports provided: HomeScene */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeScene", function() { return HomeScene; });
+/* harmony import */ var _BaseScene__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BaseScene */ "./src/framework/scene/BaseScene.ts");
+
+class HomeScene extends _BaseScene__WEBPACK_IMPORTED_MODULE_0__["BaseScene"] {
+    constructor() {
+        super();
+    }
+    onEnter() {
+    }
+    onComplete() {
+    }
+    onLeave() {
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/framework/scene/LoginScene.ts":
+/*!*******************************************!*\
+  !*** ./src/framework/scene/LoginScene.ts ***!
+  \*******************************************/
+/*! exports provided: LoginScene */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginScene", function() { return LoginScene; });
+/* harmony import */ var _BaseScene__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BaseScene */ "./src/framework/scene/BaseScene.ts");
+
+class LoginScene extends _BaseScene__WEBPACK_IMPORTED_MODULE_0__["BaseScene"] {
+    constructor() {
+        super();
+        //添加预加载资源
+        // this.addPreloadFairyGUIPackage("","");
+    }
+    onEnter() {
+    }
+    onComplete() {
+    }
+    onLeave() {
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/framework/scene/SceneDef.ts":
+/*!*****************************************!*\
+  !*** ./src/framework/scene/SceneDef.ts ***!
+  \*****************************************/
+/*! exports provided: SceneDef */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SceneDef", function() { return SceneDef; });
+class SceneDef {
+}
+SceneDef.LoadingScene = "LoadingScene";
+SceneDef.LaunchScene = "LaunchScene";
+SceneDef.HomeScene = "HomeScene";
+SceneDef.LoginScene = "LoginScene";
+SceneDef.BattleScene = "BattleScene";
+
+
+/***/ }),
+
+/***/ "./src/framework/scene/SceneFactory.ts":
+/*!*********************************************!*\
+  !*** ./src/framework/scene/SceneFactory.ts ***!
+  \*********************************************/
+/*! exports provided: SceneFactory */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SceneFactory", function() { return SceneFactory; });
+/* harmony import */ var _BattleScene__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BattleScene */ "./src/framework/scene/BattleScene.ts");
+/* harmony import */ var _HomeScene__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HomeScene */ "./src/framework/scene/HomeScene.ts");
+/* harmony import */ var _LoginScene__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LoginScene */ "./src/framework/scene/LoginScene.ts");
+/* harmony import */ var _SceneDef__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SceneDef */ "./src/framework/scene/SceneDef.ts");
+
+
+
+
+class SceneFactory {
+    static createScene(sceneName) {
+        let scene = null;
+        switch (sceneName) {
+            case _SceneDef__WEBPACK_IMPORTED_MODULE_3__["SceneDef"].LoginScene:
+                scene = new _LoginScene__WEBPACK_IMPORTED_MODULE_2__["LoginScene"]();
+                break;
+            case _SceneDef__WEBPACK_IMPORTED_MODULE_3__["SceneDef"].HomeScene:
+                scene = new _HomeScene__WEBPACK_IMPORTED_MODULE_1__["HomeScene"]();
+                break;
+            case _SceneDef__WEBPACK_IMPORTED_MODULE_3__["SceneDef"].BattleScene:
+                scene = new _BattleScene__WEBPACK_IMPORTED_MODULE_0__["BattleScene"]();
+                break;
+        }
+        return scene;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/framework/scene/SceneManager.ts":
+/*!*********************************************!*\
+  !*** ./src/framework/scene/SceneManager.ts ***!
+  \*********************************************/
+/*! exports provided: SceneManager */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SceneManager", function() { return SceneManager; });
+/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! csharp */ "csharp");
+/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(csharp__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var data_ui_game__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! data/ui/game */ "./src/data/ui/game.ts");
+/* harmony import */ var framework_common_GameObjectPool__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! framework/common/GameObjectPool */ "./src/framework/common/GameObjectPool.ts");
+/* harmony import */ var framework_common_Singleton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! framework/common/Singleton */ "./src/framework/common/Singleton.ts");
+/* harmony import */ var framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! framework/ui/UIManager */ "./src/framework/ui/UIManager.ts");
+/* harmony import */ var _SceneFactory__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SceneFactory */ "./src/framework/scene/SceneFactory.ts");
+
+
+
+
+
+
+class SceneManager extends framework_common_Singleton__WEBPACK_IMPORTED_MODULE_3__["Singleton"] {
+    constructor() {
+        super();
+        csharp__WEBPACK_IMPORTED_MODULE_0__["UnityEngine"].SceneManagement.SceneManager.add_sceneLoaded((scene, mode) => {
+            if (this.onSceneLoadedOnly != null)
+                this.onSceneLoadedOnly(scene.name);
+        });
+    }
+    //更新进度条
+    updateProgress(progress) {
+        this.loadingUI.showProgress(progress);
+    }
+    async loadScene(scene, onLoadComplete) {
+        this.onSceneLoadedOnly = async (sceneName) => {
+            if (sceneName == scene) {
+                this.onSceneLoadedOnly = null;
+                this.currentScene = _SceneFactory__WEBPACK_IMPORTED_MODULE_5__["SceneFactory"].createScene(scene);
+                this.currentScene.onEnter();
+                let progressInterval = setInterval(() => {
+                    this.updateProgress(this.currentScene.finishCount / this.currentScene.totalCount);
+                }, 500);
+                await this.currentScene.onPrepare();
+                clearInterval(progressInterval);
+                //加载完成
+                this.currentScene.onComplete();
+                if (onLoadComplete != null)
+                    onLoadComplete();
+                framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_4__["UIManager"].Instance(framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_4__["UIManager"]).closeLoading(data_ui_game__WEBPACK_IMPORTED_MODULE_1__["gameUI"].UILoadingPage);
+            }
+        };
+        this.loadingUI = framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_4__["UIManager"].Instance(framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_4__["UIManager"]).openLoading(data_ui_game__WEBPACK_IMPORTED_MODULE_1__["gameUI"].PackageName, data_ui_game__WEBPACK_IMPORTED_MODULE_1__["gameUI"].UILoadingPage);
+        //清理旧场景
+        if (this.currentScene) {
+            this.currentScene.onLeave();
+            this.currentScene.onDestroy();
+        }
+        //清理资源缓存
+        framework_common_GameObjectPool__WEBPACK_IMPORTED_MODULE_2__["GameObjectPool"].Instance(framework_common_GameObjectPool__WEBPACK_IMPORTED_MODULE_2__["GameObjectPool"]).cleanup(true);
+        csharp__WEBPACK_IMPORTED_MODULE_0__["UnityEngine"].SceneManagement.SceneManager.LoadScene(scene);
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/framework/ui/UIDefine.ts":
 /*!**************************************!*\
   !*** ./src/framework/ui/UIDefine.ts ***!
@@ -11989,6 +12100,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UILoading", function() { return UILoading; });
 /* harmony import */ var _UIPanel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../UIPanel */ "./src/framework/ui/UIPanel.ts");
 /* harmony import */ var _UIDefine__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../UIDefine */ "./src/framework/ui/UIDefine.ts");
+/* harmony import */ var framework_logger_Logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! framework/logger/Logger */ "./src/framework/logger/Logger.ts");
+
 
 
 class UILoadingArg {
@@ -12017,21 +12130,10 @@ class UILoading extends _UIPanel__WEBPACK_IMPORTED_MODULE_0__["UIPanel"] {
     }
     showProgress(progress) {
         this.m_arg.progress = progress;
-    }
-    showProgress2(tips, progress) {
-        this.m_arg.tips = tips;
-        this.m_arg.progress = progress;
-    }
-    onUpdate() {
-        super.onUpdate();
-        if (this.m_arg != undefined) {
-            this.updateText();
-            this.UpdateProgress();
-        }
-    }
-    UpdateProgress() {
+        this.updateText();
     }
     updateText() {
+        framework_logger_Logger__WEBPACK_IMPORTED_MODULE_2__["LoggerJS"].log("loading progress:" + this.m_arg.progress);
         // if (txtTitle != null)
         // {
         //     txtTitle.text = m_arg.title + "(" + (int)(m_arg.progress * 100) + "%)";
@@ -12040,6 +12142,160 @@ class UILoading extends _UIPanel__WEBPACK_IMPORTED_MODULE_0__["UIPanel"] {
         // {
         //     txtTips.text = m_arg.tips;
         // }
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/framework/ui/UIManager.ts":
+/*!***************************************!*\
+  !*** ./src/framework/ui/UIManager.ts ***!
+  \***************************************/
+/*! exports provided: UIPageTrack, UIManager */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UIPageTrack", function() { return UIPageTrack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UIManager", function() { return UIManager; });
+/* harmony import */ var _common_Singleton__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/Singleton */ "./src/framework/common/Singleton.ts");
+/* harmony import */ var _UIFactory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UIFactory */ "./src/framework/ui/UIFactory.ts");
+/* harmony import */ var _data_ui_game__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../data/ui/game */ "./src/data/ui/game.ts");
+/* harmony import */ var framework_scene_SceneDef__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! framework/scene/SceneDef */ "./src/framework/scene/SceneDef.ts");
+/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! csharp */ "csharp");
+/* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(csharp__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var framework_scene_SceneManager__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! framework/scene/SceneManager */ "./src/framework/scene/SceneManager.ts");
+
+
+
+
+
+
+class UIPageTrack {
+}
+class UIManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Singleton"] {
+    constructor() {
+        super();
+        this.m_pageTrackStack = new Array();
+        this.m_listLoadedPanel = new Array();
+    }
+    closeAllLoadedPanel() {
+        for (let i = this.m_listLoadedPanel.length - 1; i >= 0; i--) {
+            let panel = this.m_listLoadedPanel[i];
+            if (panel.isOpen) {
+                panel.close();
+            }
+            this.m_listLoadedPanel.slice(i, 1);
+            panel.dispose();
+        }
+    }
+    clean() {
+        this.closeAllLoadedPanel();
+        this.m_pageTrackStack.length = 0;
+        this.m_listLoadedPanel.length = 0;
+    }
+    open(pkg, name, arg) {
+        let ui = this.getUI(name);
+        if (ui == null) {
+            ui = _UIFactory__WEBPACK_IMPORTED_MODULE_1__["UIFactory"].createUI(pkg, name);
+            this.m_listLoadedPanel.push(ui);
+        }
+        if (ui != null) {
+            ui.open(arg);
+        }
+        return ui;
+    }
+    getUI(name) {
+        for (const panel of this.m_listLoadedPanel) {
+            if (panel.name == name) {
+                panel;
+            }
+        }
+        return null;
+    }
+    //打开场景页面,此页面不计入页面栈,无返回上一面按钮
+    openPageInScene(scene, pkg, page, arg) {
+        let oldScene = csharp__WEBPACK_IMPORTED_MODULE_4__["UnityEngine"].SceneManagement.SceneManager.GetActiveScene().name;
+        if (oldScene == scene) {
+            this.openPageWorker(pkg, page, arg);
+        }
+        else {
+            framework_scene_SceneManager__WEBPACK_IMPORTED_MODULE_5__["SceneManager"].Instance(framework_scene_SceneManager__WEBPACK_IMPORTED_MODULE_5__["SceneManager"]).loadScene(scene, () => {
+                //场景加载完成
+                this.openPageWorker(pkg, page, arg);
+            });
+        }
+    }
+    //==========================================================UILoading
+    //打开Loading界面
+    openLoading(pkg, name, arg) {
+        let ui = this.open(pkg, name, arg);
+        return ui;
+    }
+    //关闭Loading界面
+    closeLoading(name, arg) {
+        let ui = this.getUI(name);
+        if (ui != null) {
+            ui.close(arg);
+        }
+    }
+    //==========================================================Page
+    openPageWorker(pkg, page, arg) {
+        this.m_currentPage = new UIPageTrack();
+        this.m_currentPage.pkg = pkg;
+        this.m_currentPage.name = page;
+        this.m_currentPage.arg = arg;
+        this.closeAllLoadedPanel();
+        this.open(pkg, page, arg);
+    }
+    //打开页面, 会关闭上一个页面上的所有窗口,Widiget等
+    openPage(pkg, name, arg) {
+        if (this.m_currentPage != undefined && this.m_currentPage.name != name) {
+            this.m_pageTrackStack.push(this.m_currentPage);
+        }
+        this.openPageWorker(pkg, name, arg);
+    }
+    //返回上一个页面
+    goBackPage() {
+        if (this.m_pageTrackStack.length > 0) {
+            let track = this.m_pageTrackStack.pop();
+            this.openPageWorker(track.pkg, track.name, track.arg);
+        }
+        else {
+            this.enterMainPage();
+        }
+    }
+    //回到主城
+    enterMainPage() {
+        this.m_pageTrackStack.length = 0;
+        this.openPageInScene(framework_scene_SceneDef__WEBPACK_IMPORTED_MODULE_3__["SceneDef"].HomeScene, _data_ui_game__WEBPACK_IMPORTED_MODULE_2__["gameUI"].PackageName, _data_ui_game__WEBPACK_IMPORTED_MODULE_2__["gameUI"].UIHomePage, null);
+    }
+    //==========================================================UIWindow
+    //打开窗口
+    openWindow(pkg, name, arg) {
+        let ui = this.open(pkg, name, arg);
+        return ui;
+    }
+    //关闭窗口
+    closeWindow(name, arg) {
+        let ui = this.getUI(name);
+        if (ui != null) {
+            ui.close(arg);
+        }
+    }
+    //==========================================================UIWidget
+    //打开Widiget
+    openWidget(pkg, name, arg) {
+        let ui = this.open(pkg, name, arg);
+        return ui;
+    }
+    //u关闭Widiget
+    closeWidget(name, arg) {
+        let ui = this.getUI(name);
+        if (ui != null) {
+            ui.close(arg);
+        }
     }
 }
 
@@ -12058,7 +12314,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UIPage", function() { return UIPage; });
 /* harmony import */ var _UIPanel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UIPanel */ "./src/framework/ui/UIPanel.ts");
 /* harmony import */ var _UIDefine__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UIDefine */ "./src/framework/ui/UIDefine.ts");
-/* harmony import */ var _manager_UIManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../manager/UIManager */ "./src/framework/manager/UIManager.ts");
+/* harmony import */ var _UIManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UIManager */ "./src/framework/ui/UIManager.ts");
 
 
 
@@ -12088,7 +12344,7 @@ class UIPage extends _UIPanel__WEBPACK_IMPORTED_MODULE_0__["UIPanel"] {
         super.onClose(arg);
     }
     onBtnGoBack() {
-        _manager_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"].Instance(_manager_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"]).goBackPage();
+        _UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"].Instance(_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"]).goBackPage();
     }
 }
 
@@ -12299,21 +12555,13 @@ GameConfig.realmServerPort = 10002;
 /*!**********************************!*\
   !*** ./src/modules/ModuleDef.ts ***!
   \**********************************/
-/*! exports provided: SceneDef, ModuleDef, ModuleMessage */
+/*! exports provided: ModuleDef, ModuleMessage */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SceneDef", function() { return SceneDef; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModuleDef", function() { return ModuleDef; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModuleMessage", function() { return ModuleMessage; });
-class SceneDef {
-}
-SceneDef.LoadingScene = "LoadingScene";
-SceneDef.LaunchScene = "LaunchScene";
-SceneDef.HomeScene = "HomeScene";
-SceneDef.LoginScene = "LoginScene";
-SceneDef.BattleScene = "BattleScene";
 class ModuleDef {
 }
 ModuleDef.LoginModule = "LoginModule";
@@ -12442,7 +12690,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginModule", function() { return LoginModule; });
 /* harmony import */ var _framework_module_GeneralModule__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../framework/module/GeneralModule */ "./src/framework/module/GeneralModule.ts");
 /* harmony import */ var _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../framework/logger/Logger */ "./src/framework/logger/Logger.ts");
-/* harmony import */ var _framework_manager_UIManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../framework/manager/UIManager */ "./src/framework/manager/UIManager.ts");
+/* harmony import */ var _framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../framework/ui/UIManager */ "./src/framework/ui/UIManager.ts");
 /* harmony import */ var _ModuleDef__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../ModuleDef */ "./src/modules/ModuleDef.ts");
 /* harmony import */ var _data_ui_game__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../data/ui/game */ "./src/data/ui/game.ts");
 /* harmony import */ var _framework_net_GameSession__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../framework/net/GameSession */ "./src/framework/net/GameSession.ts");
@@ -12451,6 +12699,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _framework_net_NetErrorCode__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../framework/net/NetErrorCode */ "./src/framework/net/NetErrorCode.ts");
 /* harmony import */ var _data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../data/pb/OuterMessage */ "./src/data/pb/OuterMessage.js");
 /* harmony import */ var _data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var framework_scene_SceneDef__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! framework/scene/SceneDef */ "./src/framework/scene/SceneDef.ts");
+
 
 
 
@@ -12469,7 +12719,7 @@ class LoginModule extends _framework_module_GeneralModule__WEBPACK_IMPORTED_MODU
         this.messenger.addListener(_ModuleDef__WEBPACK_IMPORTED_MODULE_3__["ModuleMessage"].LOGIN_REAMSERVER, this, this.loginReamServer);
     }
     show(args) {
-        _framework_manager_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"].Instance(_framework_manager_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"]).openPageInScene(_ModuleDef__WEBPACK_IMPORTED_MODULE_3__["SceneDef"].LoginScene, _data_ui_game__WEBPACK_IMPORTED_MODULE_4__["gameUI"].PackageName, _data_ui_game__WEBPACK_IMPORTED_MODULE_4__["gameUI"].UILoginPage, args);
+        _framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"].Instance(_framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"]).openPageInScene(framework_scene_SceneDef__WEBPACK_IMPORTED_MODULE_10__["SceneDef"].LoginScene, _data_ui_game__WEBPACK_IMPORTED_MODULE_4__["gameUI"].PackageName, _data_ui_game__WEBPACK_IMPORTED_MODULE_4__["gameUI"].UILoginPage, args);
     }
     release() {
         this.messenger.removeListener(_ModuleDef__WEBPACK_IMPORTED_MODULE_3__["ModuleMessage"].LOGIN_REAMSERVER, this.loginReamServer);
@@ -12531,7 +12781,7 @@ class LoginModule extends _framework_module_GeneralModule__WEBPACK_IMPORTED_MODU
                 let msg = response;
                 this._playerID = msg.PlayerId;
                 _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].log("login gate response.." + msg.PlayerId);
-                _framework_manager_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"].Instance(_framework_manager_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"]).enterMainPage();
+                _framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"].Instance(_framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"]).enterMainPage();
             });
         }
         else {
@@ -12554,7 +12804,7 @@ class LoginModule extends _framework_module_GeneralModule__WEBPACK_IMPORTED_MODU
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UILoginPage", function() { return UILoginPage; });
 /* harmony import */ var _framework_ui_UIPage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../framework/ui/UIPage */ "./src/framework/ui/UIPage.ts");
-/* harmony import */ var _framework_manager_ModuleManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../framework/manager/ModuleManager */ "./src/framework/manager/ModuleManager.ts");
+/* harmony import */ var _framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../framework/module/ModuleManager */ "./src/framework/module/ModuleManager.ts");
 /* harmony import */ var _ModuleDef__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ModuleDef */ "./src/modules/ModuleDef.ts");
 /* harmony import */ var _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../framework/logger/Logger */ "./src/framework/logger/Logger.ts");
 /* harmony import */ var _framework_common_NiceDecorator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../framework/common/NiceDecorator */ "./src/framework/common/NiceDecorator.ts");
@@ -12588,7 +12838,7 @@ class UILoginPage extends _framework_ui_UIPage__WEBPACK_IMPORTED_MODULE_0__["UIP
         let password = this.m_password.text;
         _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_3__["LoggerJS"].log(`account:${account} - password: ${password}`);
         if (account != "" && password != "") {
-            _framework_manager_ModuleManager__WEBPACK_IMPORTED_MODULE_1__["ModuleManager"].Instance(_framework_manager_ModuleManager__WEBPACK_IMPORTED_MODULE_1__["ModuleManager"]).sendMessage(_ModuleDef__WEBPACK_IMPORTED_MODULE_2__["ModuleDef"].LoginModule, _ModuleDef__WEBPACK_IMPORTED_MODULE_2__["ModuleMessage"].LOGIN_REAMSERVER, account, password);
+            _framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_1__["ModuleManager"].Instance(_framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_1__["ModuleManager"]).sendMessage(_ModuleDef__WEBPACK_IMPORTED_MODULE_2__["ModuleDef"].LoginModule, _ModuleDef__WEBPACK_IMPORTED_MODULE_2__["ModuleMessage"].LOGIN_REAMSERVER, account, password);
         }
     }
 }
@@ -12650,7 +12900,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SingletonTest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SingletonTest */ "./src/unittest/SingletonTest.ts");
 /* harmony import */ var _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../framework/logger/Logger */ "./src/framework/logger/Logger.ts");
 /* harmony import */ var _framework_common_Messenger__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../framework/common/Messenger */ "./src/framework/common/Messenger.ts");
-/* harmony import */ var _framework_manager_ResManager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../framework/manager/ResManager */ "./src/framework/manager/ResManager.ts");
+/* harmony import */ var _framework_common_ResManager__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../framework/common/ResManager */ "./src/framework/common/ResManager.ts");
 /* harmony import */ var _data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../data/pb/OuterMessage */ "./src/data/pb/OuterMessage.js");
 /* harmony import */ var _data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _data_excel_SkillConfig__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../data/excel/SkillConfig */ "./src/data/excel/SkillConfig.ts");
@@ -12701,7 +12951,7 @@ class UnitTest {
             clearInterval(interval);
         }, 5000);
         _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_2__["LoggerJS"].log("ResourceManager =============================");
-        let prefab = await _framework_manager_ResManager__WEBPACK_IMPORTED_MODULE_4__["ResManager"].Instance(_framework_manager_ResManager__WEBPACK_IMPORTED_MODULE_4__["ResManager"]).loadPrefab("Models/1001/Character.prefab");
+        let prefab = await _framework_common_ResManager__WEBPACK_IMPORTED_MODULE_4__["ResManager"].Instance(_framework_common_ResManager__WEBPACK_IMPORTED_MODULE_4__["ResManager"]).loadPrefab("Models/1001/Character.prefab");
         _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_2__["LoggerJS"].log(prefab);
         //let inst = CS.UnityEngine.GameObject.Instantiate(prefab);
         //inst.name = "Test Ch";

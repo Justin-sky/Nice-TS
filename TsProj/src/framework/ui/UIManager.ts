@@ -1,13 +1,14 @@
 
 import { Singleton } from '../common/Singleton';
-import { UILoading } from '../ui/UILib/UILoading';
-import { UIWindow } from '../ui/UIWindow';
-import { UIWidge } from '../ui/UIWidge';
-import { UIPanel } from '../ui/UIPanel';
-import { UIFactory } from '../ui/UIFactory';
-import { SceneDef } from '../../modules/ModuleDef';
+import { UILoading } from './UILib/UILoading';
+import { UIWindow } from './UIWindow';
+import { UIWidge } from './UIWidge';
+import { UIPanel } from './UIPanel';
+import { UIFactory } from './UIFactory';
 import { gameUI } from '../../data/ui/game';
+import { SceneDef } from 'framework/scene/SceneDef';
 import { UnityEngine } from 'csharp';
+import { SceneManager } from 'framework/scene/SceneManager';
 
 
 export class UIPageTrack{
@@ -23,7 +24,6 @@ export class UIManager extends Singleton<UIManager>{
     private m_currentPage:UIPageTrack;
 
     private m_listLoadedPanel:Array<UIPanel>;
-    private onSceneLoadedOnly:Function;
 
 
     constructor(){
@@ -31,12 +31,6 @@ export class UIManager extends Singleton<UIManager>{
 
         this.m_pageTrackStack = new Array<UIPageTrack>();
         this.m_listLoadedPanel = new Array<UIPanel>();
-
-        UnityEngine.SceneManagement.SceneManager.add_sceneLoaded((scene, mode) =>
-        {
-            if (this.onSceneLoadedOnly != null) this.onSceneLoadedOnly(scene.name);
-        }); 
-        
 
     }
 
@@ -90,6 +84,19 @@ export class UIManager extends Singleton<UIManager>{
         return null;
     }
 
+    //打开场景页面,此页面不计入页面栈,无返回上一面按钮
+    public openPageInScene(scene:string, pkg:string, page:string, arg:any){
+        let oldScene:string = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        if(oldScene == scene){
+            this.openPageWorker(pkg, page, arg);
+        }else{
+            SceneManager.Instance(SceneManager).loadScene(scene, ()=>{
+                //场景加载完成
+                this.openPageWorker(pkg, page, arg);
+            });
+        }
+
+    }
 
     //==========================================================UILoading
     //打开Loading界面
@@ -105,25 +112,6 @@ export class UIManager extends Singleton<UIManager>{
         if(ui != null){
             ui.close(arg);
         }
-    }
-
-
-    //==========================================================Scene
-    //加载场景 
-    public loadScene(scene:string, onLoadComplete:Function):void{
-
-        this.onSceneLoadedOnly = (sceneName)=>{
-            if(sceneName == scene){
-                this.onSceneLoadedOnly = null;
-                if(onLoadComplete != null) onLoadComplete();
-
-                this.closeLoading(gameUI.UILoadingPage);
-            }
-        };
-
-        this.openLoading(gameUI.PackageName, gameUI.UILoadingPage);
-        UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
-
     }
 
 
@@ -160,19 +148,7 @@ export class UIManager extends Singleton<UIManager>{
         }
     }
 
-    //打开场景页面,此页面不计入页面栈,无返回上一面按钮
-    public openPageInScene(scene:string, pkg:string, page:string, arg:any){
-        let oldScene:string = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        if(oldScene == scene){
-            this.openPageWorker(pkg, page, arg);
-        }else{
-            this.loadScene(scene, ()=>{
-                 //场景加载完成
-                this.openPageWorker(pkg, page, arg);
-            });
-        }
 
-    }
 
     //回到主城
     public enterMainPage():void{

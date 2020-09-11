@@ -1,6 +1,6 @@
 
 import { Singleton } from './Singleton';
-import { ResManager } from '../manager/ResManager';
+import { ResManager } from './ResManager';
 import { UnityEngine } from 'csharp';
 
 

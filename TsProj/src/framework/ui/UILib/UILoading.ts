@@ -1,5 +1,6 @@
 import { UIPanel } from "../UIPanel";
 import { UITypeDef } from "../UIDefine";
+import { LoggerJS } from "framework/logger/Logger";
 
 
 
@@ -42,26 +43,14 @@ export class  UILoading extends UIPanel{
 
     public showProgress(progress:number):void{
         this.m_arg.progress = progress;
+
+        this.updateText();
     }
 
-    public showProgress2(tips:string, progress:number):void{
-        this.m_arg.tips = tips;
-        this.m_arg.progress = progress;
-    }
-
-    public onUpdate():void{
-        super.onUpdate();
-        if(this.m_arg != undefined){
-            this.updateText();
-            this.UpdateProgress();
-        }
-    }
-
-    public UpdateProgress():void{
-
-    }
 
     private updateText(){
+        LoggerJS.log("loading progress:"+this.m_arg.progress);
+
         // if (txtTitle != null)
         // {
         //     txtTitle.text = m_arg.title + "(" + (int)(m_arg.progress * 100) + "%)";

@@ -1,7 +1,7 @@
 import { Singleton } from "../common/Singleton";
-import { GeneralModule } from "../module/GeneralModule";
+import { GeneralModule } from "./GeneralModule";
 import { LoggerJS } from "../logger/Logger";
-import { ModuleFactory } from "../module/ModuleFactory";
+import { ModuleFactory } from "./ModuleFactory";
 
 
 export class MessageObject{

@@ -2,10 +2,10 @@
 import {LoggerJS} from './framework/logger/Logger';
 import {UnitTest} from './unittest/UnitTest';
 import { GameObjectPool } from './framework/common/GameObjectPool';
-import { ModuleManager } from './framework/manager/ModuleManager';
+import { ModuleManager } from './framework/module/ModuleManager';
 import { ModuleDef } from './modules/ModuleDef';
-import { UIManager } from './framework/manager/UIManager';
-import { ResManager } from './framework/manager/ResManager';
+import { UIManager } from './framework/ui/UIManager';
+import { ResManager } from './framework/common/ResManager';
 import { ExcelManager } from './data/excel/ExcelManager';
 
 import { JsManager ,GameLaunch } from 'csharp';

@@ -1,5 +1,5 @@
 
-import { Singleton } from '../common/Singleton';
+import { Singleton } from './Singleton';
 import { LoggerJS } from '../logger/Logger';
 import { $promise } from 'puerts';
 import {NiceTS} from 'csharp';
@@ -52,9 +52,24 @@ export class ResManager extends Singleton<ResManager>{
         }
     }
 
+    async loadFairyGUIPackage(address:string, packageName:string, callback?:Function){
+
+        try{
+            let task = NiceTS.ResourceManager.LoadFairyGUIPackage(address,packageName);
+            await $promise(task);
+            
+            if(callback) callback();
+        }catch(ex){
+            LoggerJS.logError(`Load fairyGUI :${address} : ${ex}`)
+        }
+    }
 
     public releaseAddressGO(go:any){
 
         NiceTS.ResourceManager.ReleaseAddressGO(go);
+    }
+
+    public releaseFairyGUIPackage(packageName){
+        NiceTS.ResourceManager.ReleaseFGUIPackage(packageName);
     }
 }
