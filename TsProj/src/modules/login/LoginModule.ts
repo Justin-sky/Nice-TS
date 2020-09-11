@@ -1,15 +1,13 @@
 import { GeneralModule } from "../../framework/module/GeneralModule";
 import { LoggerJS } from "../../framework/logger/Logger";
 import { UIManager } from "../../framework/ui/UIManager";
-import { ModuleDef, ModuleMessage } from "../ModuleDef";
 import { GameSession } from "../../framework/net/GameSession";
 import { GameConfig } from "../../global/GameConfig";
 import { Opcode } from "../../data/pb/Opcode";
 import { NetErrorCode } from "../../framework/net/NetErrorCode";
 import { NiceET } from "../../data/pb/OuterMessage";
-import { SceneDef } from "framework/scene/SceneDef";
-import { loginUI } from "data/ui/login";
-import { ModuleManager } from "framework/module/ModuleManager";
+import { ModuleMessage } from "modules/ModuleDef";
+
 
 
 export class LoginModule extends GeneralModule{
@@ -32,10 +30,6 @@ export class LoginModule extends GeneralModule{
         this.messenger.addListener(ModuleMessage.LOGIN_REAMSERVER,this, this.loginReamServer);
    }
 
-   public show(args:any):void{
-       
-        UIManager.Instance(UIManager).openPageInScene(SceneDef.LoginScene,loginUI.PackageName,loginUI.UILoginPage,args);
-    }
    
     public  release(): void{
         this.messenger.removeListener(ModuleMessage.LOGIN_REAMSERVER,this.loginReamServer);
@@ -126,7 +120,7 @@ export class LoginModule extends GeneralModule{
                 this._playerID = msg.PlayerId;
                 LoggerJS.log("login gate response.." + msg.PlayerId);
 
-                ModuleManager.Instance(ModuleManager).show(ModuleDef.HomeModule);
+                UIManager.Instance(UIManager).enterMainPage();
 
             });
 

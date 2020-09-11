@@ -35,7 +35,7 @@ export class ModuleManager extends Singleton<ModuleManager>{
 
     }
 
-    private createModule(name:string, args?:any):GeneralModule{
+    public createModule(name:string, args?:any):GeneralModule{
 
         LoggerJS.log(`name = ${name}, args = ${args}`);
 
@@ -77,7 +77,7 @@ export class ModuleManager extends Singleton<ModuleManager>{
         return this.m_mapModules.get(name);
     }
 
-    private removeModule(name: string):void{
+    public removeModule(name: string):void{
         
         let module = this.getModule(name);
         if(module != undefined)
@@ -112,14 +112,4 @@ export class ModuleManager extends Singleton<ModuleManager>{
     }
 
 
-    public show(target:string, ...args:any){
-
-        let model = this.getModule(target);
-
-        if(!model){
-            model = this.createModule(target);
-        }
-        model.show(args);
-        
-    }
 }

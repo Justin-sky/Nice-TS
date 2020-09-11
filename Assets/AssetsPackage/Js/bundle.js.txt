@@ -4296,6 +4296,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _data_excel_ExcelManager__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./data/excel/ExcelManager */ "./src/data/excel/ExcelManager.ts");
 /* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! csharp */ "csharp");
 /* harmony import */ var csharp__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(csharp__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var framework_scene_SceneDef__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! framework/scene/SceneDef */ "./src/framework/scene/SceneDef.ts");
+/* harmony import */ var data_ui_login__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! data/ui/login */ "./src/data/ui/login.ts");
+
+
 
 
 
@@ -4322,8 +4326,10 @@ class GameMain {
             _data_excel_ExcelManager__WEBPACK_IMPORTED_MODULE_7__["ExcelManager"].Instance(_data_excel_ExcelManager__WEBPACK_IMPORTED_MODULE_7__["ExcelManager"]);
             //do Unit Test
             _unittest_UnitTest__WEBPACK_IMPORTED_MODULE_1__["UnitTest"].doTest();
+            _framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_3__["ModuleManager"].Instance(_framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_3__["ModuleManager"]).createModule(_modules_ModuleDef__WEBPACK_IMPORTED_MODULE_4__["ModuleDef"].LoginModule);
+            _framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_3__["ModuleManager"].Instance(_framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_3__["ModuleManager"]).createModule(_modules_ModuleDef__WEBPACK_IMPORTED_MODULE_4__["ModuleDef"].HomeModule);
             //进入登录模块
-            _framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_3__["ModuleManager"].Instance(_framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_3__["ModuleManager"]).show(_modules_ModuleDef__WEBPACK_IMPORTED_MODULE_4__["ModuleDef"].LoginModule);
+            _framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_5__["UIManager"].Instance(_framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_5__["UIManager"]).openPageInScene(framework_scene_SceneDef__WEBPACK_IMPORTED_MODULE_9__["SceneDef"].LoginScene, data_ui_login__WEBPACK_IMPORTED_MODULE_10__["loginUI"].PackageName, data_ui_login__WEBPACK_IMPORTED_MODULE_10__["loginUI"].UILoginPage, null);
             //JS启动完成，通知C#层
             csharp__WEBPACK_IMPORTED_MODULE_8__["GameLaunch"].Instance.JsLuanchFinish();
         }
@@ -11594,13 +11600,6 @@ class ModuleManager extends _common_Singleton__WEBPACK_IMPORTED_MODULE_0__["Sing
             list.push(obj);
         }
     }
-    show(target, ...args) {
-        let model = this.getModule(target);
-        if (!model) {
-            model = this.createModule(target);
-        }
-        model.show(args);
-    }
 }
 
 
@@ -12547,17 +12546,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeModule", function() { return HomeModule; });
 /* harmony import */ var _framework_module_GeneralModule__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../framework/module/GeneralModule */ "./src/framework/module/GeneralModule.ts");
 /* harmony import */ var _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../framework/logger/Logger */ "./src/framework/logger/Logger.ts");
-/* harmony import */ var framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! framework/ui/UIManager */ "./src/framework/ui/UIManager.ts");
-
 
 
 class HomeModule extends _framework_module_GeneralModule__WEBPACK_IMPORTED_MODULE_0__["GeneralModule"] {
     create(args) {
         _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].log(" Home creeate,args: " + args);
-    }
-    show(args) {
-        _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].log(" Show,args: " + args);
-        framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"].Instance(framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"]).enterMainPage();
     }
     release() {
         _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].log("Home Release ");
@@ -12682,19 +12675,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _framework_module_GeneralModule__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../framework/module/GeneralModule */ "./src/framework/module/GeneralModule.ts");
 /* harmony import */ var _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../framework/logger/Logger */ "./src/framework/logger/Logger.ts");
 /* harmony import */ var _framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../framework/ui/UIManager */ "./src/framework/ui/UIManager.ts");
-/* harmony import */ var _ModuleDef__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../ModuleDef */ "./src/modules/ModuleDef.ts");
-/* harmony import */ var _framework_net_GameSession__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../framework/net/GameSession */ "./src/framework/net/GameSession.ts");
-/* harmony import */ var _global_GameConfig__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../global/GameConfig */ "./src/global/GameConfig.ts");
-/* harmony import */ var _data_pb_Opcode__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../data/pb/Opcode */ "./src/data/pb/Opcode.ts");
-/* harmony import */ var _framework_net_NetErrorCode__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../framework/net/NetErrorCode */ "./src/framework/net/NetErrorCode.ts");
-/* harmony import */ var _data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../data/pb/OuterMessage */ "./src/data/pb/OuterMessage.js");
-/* harmony import */ var _data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var framework_scene_SceneDef__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! framework/scene/SceneDef */ "./src/framework/scene/SceneDef.ts");
-/* harmony import */ var data_ui_login__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! data/ui/login */ "./src/data/ui/login.ts");
-/* harmony import */ var framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! framework/module/ModuleManager */ "./src/framework/module/ModuleManager.ts");
-
-
-
+/* harmony import */ var _framework_net_GameSession__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../framework/net/GameSession */ "./src/framework/net/GameSession.ts");
+/* harmony import */ var _global_GameConfig__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../global/GameConfig */ "./src/global/GameConfig.ts");
+/* harmony import */ var _data_pb_Opcode__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../data/pb/Opcode */ "./src/data/pb/Opcode.ts");
+/* harmony import */ var _framework_net_NetErrorCode__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../framework/net/NetErrorCode */ "./src/framework/net/NetErrorCode.ts");
+/* harmony import */ var _data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../data/pb/OuterMessage */ "./src/data/pb/OuterMessage.js");
+/* harmony import */ var _data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var modules_ModuleDef__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! modules/ModuleDef */ "./src/modules/ModuleDef.ts");
 
 
 
@@ -12709,33 +12696,30 @@ class LoginModule extends _framework_module_GeneralModule__WEBPACK_IMPORTED_MODU
         return this._playerID;
     }
     create(args) {
-        this.messenger.addListener(_ModuleDef__WEBPACK_IMPORTED_MODULE_3__["ModuleMessage"].LOGIN_REAMSERVER, this, this.loginReamServer);
-    }
-    show(args) {
-        _framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"].Instance(_framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"]).openPageInScene(framework_scene_SceneDef__WEBPACK_IMPORTED_MODULE_9__["SceneDef"].LoginScene, data_ui_login__WEBPACK_IMPORTED_MODULE_10__["loginUI"].PackageName, data_ui_login__WEBPACK_IMPORTED_MODULE_10__["loginUI"].UILoginPage, args);
+        this.messenger.addListener(modules_ModuleDef__WEBPACK_IMPORTED_MODULE_8__["ModuleMessage"].LOGIN_REAMSERVER, this, this.loginReamServer);
     }
     release() {
-        this.messenger.removeListener(_ModuleDef__WEBPACK_IMPORTED_MODULE_3__["ModuleMessage"].LOGIN_REAMSERVER, this.loginReamServer);
+        this.messenger.removeListener(modules_ModuleDef__WEBPACK_IMPORTED_MODULE_8__["ModuleMessage"].LOGIN_REAMSERVER, this.loginReamServer);
     }
     loginReamServer(account, password) {
         this.account = account;
         this.password = password;
         //登录验证服
-        this.sessionReam = _framework_net_GameSession__WEBPACK_IMPORTED_MODULE_4__["GameSession"].Instance(_framework_net_GameSession__WEBPACK_IMPORTED_MODULE_4__["GameSession"]).connectChannel(_global_GameConfig__WEBPACK_IMPORTED_MODULE_5__["GameConfig"].realmServerIP + ":" + _global_GameConfig__WEBPACK_IMPORTED_MODULE_5__["GameConfig"].realmServerPort, (channel, code) => {
+        this.sessionReam = _framework_net_GameSession__WEBPACK_IMPORTED_MODULE_3__["GameSession"].Instance(_framework_net_GameSession__WEBPACK_IMPORTED_MODULE_3__["GameSession"]).connectChannel(_global_GameConfig__WEBPACK_IMPORTED_MODULE_4__["GameConfig"].realmServerIP + ":" + _global_GameConfig__WEBPACK_IMPORTED_MODULE_4__["GameConfig"].realmServerPort, (channel, code) => {
             this.onReamSocketErr(channel, code);
         });
     }
     onReamSocketErr(channel, code) {
-        if (code == _framework_net_NetErrorCode__WEBPACK_IMPORTED_MODULE_7__["NetErrorCode"].ERR_SocketConnSucc) {
+        if (code == _framework_net_NetErrorCode__WEBPACK_IMPORTED_MODULE_6__["NetErrorCode"].ERR_SocketConnSucc) {
             this.sessionReam.id = channel.Id;
             //发送登录指令
             let rpcID = this.sessionReam.rpcId;
-            let msg = _data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_8__["NiceET"].C2R_Login.create();
+            let msg = _data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_7__["NiceET"].C2R_Login.create();
             msg.RpcId = rpcID;
             msg.Account = this.account;
             msg.Password = this.password;
-            let buf = _data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_8__["NiceET"].C2R_Login.encode(msg).finish();
-            this.sessionReam.send(_data_pb_Opcode__WEBPACK_IMPORTED_MODULE_6__["Opcode"].C2R_LOGIN, rpcID, buf, (response) => {
+            let buf = _data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_7__["NiceET"].C2R_Login.encode(msg).finish();
+            this.sessionReam.send(_data_pb_Opcode__WEBPACK_IMPORTED_MODULE_5__["Opcode"].C2R_LOGIN, rpcID, buf, (response) => {
                 //登录成功
                 let msg = response;
                 this.gateId = msg.GateId;
@@ -12754,27 +12738,27 @@ class LoginModule extends _framework_module_GeneralModule__WEBPACK_IMPORTED_MODU
     }
     //登录游戏服
     loginGateServer(address) {
-        this.sessionGate = _framework_net_GameSession__WEBPACK_IMPORTED_MODULE_4__["GameSession"].Instance(_framework_net_GameSession__WEBPACK_IMPORTED_MODULE_4__["GameSession"]).connectChannel(address, (channel, code) => {
+        this.sessionGate = _framework_net_GameSession__WEBPACK_IMPORTED_MODULE_3__["GameSession"].Instance(_framework_net_GameSession__WEBPACK_IMPORTED_MODULE_3__["GameSession"]).connectChannel(address, (channel, code) => {
             _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].log("login Gate Server: " + code);
             this.onGateSocketErr(channel, code);
         });
     }
     onGateSocketErr(channel, code) {
-        if (code == _framework_net_NetErrorCode__WEBPACK_IMPORTED_MODULE_7__["NetErrorCode"].ERR_SocketConnSucc) {
+        if (code == _framework_net_NetErrorCode__WEBPACK_IMPORTED_MODULE_6__["NetErrorCode"].ERR_SocketConnSucc) {
             this.sessionGate.id = channel.Id;
             //发送登录请求
             let rpcId = this.sessionGate.rpcId;
-            let msg = _data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_8__["NiceET"].C2G_LoginGate.create();
+            let msg = _data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_7__["NiceET"].C2G_LoginGate.create();
             msg.RpcId = rpcId;
             msg.GateId = this.gateId;
             msg.Key = this.gateKey;
-            let buf = _data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_8__["NiceET"].C2G_LoginGate.encode(msg).finish();
+            let buf = _data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_7__["NiceET"].C2G_LoginGate.encode(msg).finish();
             _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].log("login gate succ ,key: " + msg.Key + ", rpcid:" + rpcId);
-            this.sessionGate.send(_data_pb_Opcode__WEBPACK_IMPORTED_MODULE_6__["Opcode"].C2G_LOGINGATE, rpcId, buf, (response) => {
+            this.sessionGate.send(_data_pb_Opcode__WEBPACK_IMPORTED_MODULE_5__["Opcode"].C2G_LOGINGATE, rpcId, buf, (response) => {
                 let msg = response;
                 this._playerID = msg.PlayerId;
                 _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].log("login gate response.." + msg.PlayerId);
-                framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_11__["ModuleManager"].Instance(framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_11__["ModuleManager"]).show(_ModuleDef__WEBPACK_IMPORTED_MODULE_3__["ModuleDef"].HomeModule);
+                _framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"].Instance(_framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"]).enterMainPage();
             });
         }
         else {

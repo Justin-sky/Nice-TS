@@ -9,6 +9,8 @@ import { ResManager } from './framework/common/ResManager';
 import { ExcelManager } from './data/excel/ExcelManager';
 
 import { JsManager ,GameLaunch } from 'csharp';
+import { SceneDef } from 'framework/scene/SceneDef';
+import { loginUI } from 'data/ui/login';
 
 
 class GameMain{
@@ -30,16 +32,16 @@ class GameMain{
             UIManager.Instance(UIManager);
             ResManager.Instance(ResManager);
     
-    
             //预加载excel数据
             ExcelManager.Instance(ExcelManager);
-
       
             //do Unit Test
             UnitTest.doTest();
 
+            ModuleManager.Instance(ModuleManager).createModule(ModuleDef.LoginModule);
+            ModuleManager.Instance(ModuleManager).createModule(ModuleDef.HomeModule);
             //进入登录模块
-            ModuleManager.Instance(ModuleManager).show(ModuleDef.LoginModule);
+            UIManager.Instance(UIManager).openPageInScene(SceneDef.LoginScene,loginUI.PackageName,loginUI.UILoginPage,null);
 
             //JS启动完成，通知C#层
             GameLaunch.Instance.JsLuanchFinish();

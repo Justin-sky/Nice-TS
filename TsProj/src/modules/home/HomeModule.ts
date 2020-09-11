@@ -10,12 +10,6 @@ export class HomeModule extends GeneralModule{
         LoggerJS.log(" Home creeate,args: "+args);
    }
 
-   public show(args:any):void{
-       
-        LoggerJS.log(" Show,args: "+args);
-        UIManager.Instance(UIManager).enterMainPage();
-   }
-
 
     public  release(): void{
 

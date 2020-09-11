@@ -1,7 +1,6 @@
 {
 	"include": [
 		"./src",
-		"../Assets/Gen/Typing/csharp/index.d.ts"
 	],
 	"compilerOptions": {
 		"target": "ES2018",
@@ -9,7 +8,7 @@
 		"jsx": "preserve",
 		"lib": [ "ES2018" ],
 		"sourceMap": true,
-		"inlineSources": true,
+		"inlineSources": false,
 		"moduleResolution": "node",
 		"experimentalDecorators": true,
 		"baseUrl": "src",

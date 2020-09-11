@@ -14,9 +14,6 @@ export abstract class GeneralModule{
         return this.m_name
     }
 
-   constructor(){
-
-   }
 
      //当模块收到消息后，对消息进行一些处理
     public handleMessage(msg:number, args:any[]){
@@ -33,8 +30,6 @@ export abstract class GeneralModule{
    //创建模块
    public abstract create(args?:any):void;
 
-   //Show
-   public abstract show(args?:any):void;
 
    //释放模块
     public abstract  release(): void;
