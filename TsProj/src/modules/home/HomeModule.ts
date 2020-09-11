@@ -1,5 +1,6 @@
 import { GeneralModule } from "../../framework/module/GeneralModule";
 import { LoggerJS } from "../../framework/logger/Logger";
+import { UIManager } from "framework/ui/UIManager";
 
 
 export class HomeModule extends GeneralModule{
@@ -10,7 +11,9 @@ export class HomeModule extends GeneralModule{
    }
 
    public show(args:any):void{
-    LoggerJS.log(" Show,args: "+args);
+       
+        LoggerJS.log(" Show,args: "+args);
+        UIManager.Instance(UIManager).enterMainPage();
    }
 
 

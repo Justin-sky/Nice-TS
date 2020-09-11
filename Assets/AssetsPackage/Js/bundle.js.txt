@@ -12547,6 +12547,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeModule", function() { return HomeModule; });
 /* harmony import */ var _framework_module_GeneralModule__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../framework/module/GeneralModule */ "./src/framework/module/GeneralModule.ts");
 /* harmony import */ var _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../framework/logger/Logger */ "./src/framework/logger/Logger.ts");
+/* harmony import */ var framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! framework/ui/UIManager */ "./src/framework/ui/UIManager.ts");
+
 
 
 class HomeModule extends _framework_module_GeneralModule__WEBPACK_IMPORTED_MODULE_0__["GeneralModule"] {
@@ -12555,6 +12557,7 @@ class HomeModule extends _framework_module_GeneralModule__WEBPACK_IMPORTED_MODUL
     }
     show(args) {
         _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].log(" Show,args: " + args);
+        framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"].Instance(framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"]).enterMainPage();
     }
     release() {
         _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].log("Home Release ");
@@ -12687,7 +12690,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../data/pb/OuterMessage */ "./src/data/pb/OuterMessage.js");
 /* harmony import */ var _data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_data_pb_OuterMessage__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var framework_scene_SceneDef__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! framework/scene/SceneDef */ "./src/framework/scene/SceneDef.ts");
-/* harmony import */ var framework_scene_SceneManager__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! framework/scene/SceneManager */ "./src/framework/scene/SceneManager.ts");
+/* harmony import */ var data_ui_login__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! data/ui/login */ "./src/data/ui/login.ts");
+/* harmony import */ var framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! framework/module/ModuleManager */ "./src/framework/module/ModuleManager.ts");
+
 
 
 
@@ -12707,7 +12712,7 @@ class LoginModule extends _framework_module_GeneralModule__WEBPACK_IMPORTED_MODU
         this.messenger.addListener(_ModuleDef__WEBPACK_IMPORTED_MODULE_3__["ModuleMessage"].LOGIN_REAMSERVER, this, this.loginReamServer);
     }
     show(args) {
-        framework_scene_SceneManager__WEBPACK_IMPORTED_MODULE_10__["SceneManager"].Instance(framework_scene_SceneManager__WEBPACK_IMPORTED_MODULE_10__["SceneManager"]).loadScene(framework_scene_SceneDef__WEBPACK_IMPORTED_MODULE_9__["SceneDef"].LoginScene, null);
+        _framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"].Instance(_framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"]).openPageInScene(framework_scene_SceneDef__WEBPACK_IMPORTED_MODULE_9__["SceneDef"].LoginScene, data_ui_login__WEBPACK_IMPORTED_MODULE_10__["loginUI"].PackageName, data_ui_login__WEBPACK_IMPORTED_MODULE_10__["loginUI"].UILoginPage, args);
     }
     release() {
         this.messenger.removeListener(_ModuleDef__WEBPACK_IMPORTED_MODULE_3__["ModuleMessage"].LOGIN_REAMSERVER, this.loginReamServer);
@@ -12769,7 +12774,7 @@ class LoginModule extends _framework_module_GeneralModule__WEBPACK_IMPORTED_MODU
                 let msg = response;
                 this._playerID = msg.PlayerId;
                 _framework_logger_Logger__WEBPACK_IMPORTED_MODULE_1__["LoggerJS"].log("login gate response.." + msg.PlayerId);
-                _framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"].Instance(_framework_ui_UIManager__WEBPACK_IMPORTED_MODULE_2__["UIManager"]).enterMainPage();
+                framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_11__["ModuleManager"].Instance(framework_module_ModuleManager__WEBPACK_IMPORTED_MODULE_11__["ModuleManager"]).show(_ModuleDef__WEBPACK_IMPORTED_MODULE_3__["ModuleDef"].HomeModule);
             });
         }
         else {
