@@ -1,7 +1,7 @@
 {
 	"scripts": {
-		"bundle:dev": "webpack --config webpack.config.js --watch",
-		"bundle:publish": "webpack --config webpack.config.js --env.production"
+		"bundle:dev": "webpack --config webpack.config.debug.js --watch",
+		"bundle:publish": "webpack --config webpack.config.release.js"
 	},
 	"devDependencies": {
 		"raw-loader": "^4.0.1",

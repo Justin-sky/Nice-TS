@@ -1,6 +1,6 @@
 import { UIPanel } from "../UIPanel";
 import { UITypeDef } from "../UIDefine";
-import { LoggerJS } from "framework/logger/Logger";
+import { LoggerJS } from "../../logger/Logger";
 
 
 

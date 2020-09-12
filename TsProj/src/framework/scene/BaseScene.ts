@@ -1,7 +1,7 @@
-import { GameObjectPool } from "framework/common/GameObjectPool";
-import { ResManager } from "framework/common/ResManager";
-import { LoggerJS } from "framework/logger/Logger";
-import { $promise } from 'puerts';
+import { GameObjectPool } from "../common/GameObjectPool";
+import { ResManager } from "../common/ResManager";
+import { LoggerJS } from "../logger/Logger";
+
 
 export abstract class BaseScene{
 

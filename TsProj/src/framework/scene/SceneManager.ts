@@ -1,9 +1,8 @@
 import { UnityEngine } from "csharp";
-import { commonUI } from "data/ui/common";
-import { GameObjectPool } from "framework/common/GameObjectPool";
-import { Singleton } from "framework/common/Singleton";
-import { UILoading } from "framework/ui/UILib/UILoading";
-import { UIManager } from "framework/ui/UIManager";
+import { commonUI } from "../../data/ui/common";
+import { Singleton } from "../common/Singleton";
+import { UILoading } from "../ui/UILib/UILoading";
+import { UIManager } from "../ui/UIManager";
 import { BaseScene } from "./BaseScene";
 import { SceneFactory } from "./SceneFactory";
 
@@ -34,7 +33,7 @@ export class SceneManager extends Singleton<SceneManager>{
 
     public async loadScene(scene:string, onLoadComplete:Function){
 
-        this.onSceneLoadedOnly = async (sceneName)=>{
+        this.onSceneLoadedOnly = async (sceneName:string)=>{
             if(sceneName == scene){
                 this.onSceneLoadedOnly = null;
                 this.currentScene =  SceneFactory.createScene(scene);

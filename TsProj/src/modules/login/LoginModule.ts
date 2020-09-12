@@ -6,7 +6,7 @@ import { GameConfig } from "../../global/GameConfig";
 import { Opcode } from "../../data/pb/Opcode";
 import { NetErrorCode } from "../../framework/net/NetErrorCode";
 import { NiceET } from "../../data/pb/OuterMessage";
-import { ModuleMessage } from "modules/ModuleDef";
+import { ModuleMessage } from "../ModuleDef";
 
 
 

@@ -5,10 +5,10 @@ import { UIWindow } from './UIWindow';
 import { UIWidge } from './UIWidge';
 import { UIPanel } from './UIPanel';
 import { UIFactory } from './UIFactory';
-import { SceneDef } from 'framework/scene/SceneDef';
 import { UnityEngine } from 'csharp';
-import { SceneManager } from 'framework/scene/SceneManager';
-import { homeUI } from 'data/ui/home';
+import { SceneManager } from '../scene/SceneManager';
+import { SceneDef } from '../scene/SceneDef';
+import { homeUI } from '../../data/ui/home';
 
 
 export class UIPageTrack{

@@ -9,8 +9,9 @@ import { ResManager } from './framework/common/ResManager';
 import { ExcelManager } from './data/excel/ExcelManager';
 
 import { JsManager ,GameLaunch } from 'csharp';
-import { SceneDef } from 'framework/scene/SceneDef';
-import { loginUI } from 'data/ui/login';
+import { SceneDef } from './framework/scene/SceneDef';
+import { loginUI } from './data/ui/login';
+
 
 
 class GameMain{

@@ -22,12 +22,10 @@ public class JsLoader : ILoader
 
     public string ReadFile(string filepath, out string debugpath)
     {
-        StringBuilder scriptPath = new StringBuilder();
-        scriptPath.Append(filepath).Append(".txt");
 
 #if UNITY_EDITOR
         var scriptDir = Path.Combine(Application.dataPath, "AssetsPackage/Js");
-        var jsPath = Path.Combine(scriptDir, scriptPath.ToString());
+        var jsPath = Path.Combine(scriptDir, filepath);
         debugpath = jsPath.Replace("/", "\\");
 #endif
         var jscache = JsManager.Instance.jscache;
@@ -36,6 +34,7 @@ public class JsLoader : ILoader
         string txt;
         jscache.TryGetValue(jsName, out txt);
 
+        if (txt == null) txt = "";
         return txt;
     }
 }

@@ -4,9 +4,10 @@ import { UIPanel } from "./UIPanel";
 import { LoggerJS } from "../logger/Logger";
 import { UIHomePage } from "../../modules/home/ui/UIHomePage";
 import { UILoading } from "./UILib/UILoading";
-import { loginUI } from "data/ui/login";
-import { commonUI } from "data/ui/common";
-import { homeUI } from "data/ui/home";
+import { loginUI } from "../../data/ui/login";
+import { commonUI } from "../../data/ui/common";
+import { homeUI } from "../../data/ui/home";
+
 
 
 const CS = require('csharp');

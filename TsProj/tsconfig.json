@@ -8,7 +8,7 @@
 		"jsx": "preserve",
 		"lib": [ "ES2018" ],
 		"sourceMap": true,
-		"inlineSources": false,
+		"inlineSources": true,
 		"moduleResolution": "node",
 		"experimentalDecorators": true,
 		"baseUrl": "src",
