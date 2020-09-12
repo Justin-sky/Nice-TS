@@ -112,6 +112,14 @@ export class TimeUtil{
     }
 
 
+    public static async sleep(ms:number){
+        return new Promise((resolve) =>{
+            setTimeout(()=>{
+                resolve('');
+            }, ms);
+        });
+    }
+
 
     public static test():void{
 

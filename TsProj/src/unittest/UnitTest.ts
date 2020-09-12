@@ -156,6 +156,7 @@ export class UnitTest{
             LoggerJS.log(ex);
         }
 
+
         LoggerJS.log("UintArray =============================");
 
         let  opcode_arr = new Uint8Array([257,25]);
@@ -196,9 +197,13 @@ export class UnitTest{
         LoggerJS.log(n);
 
         
+        LoggerJS.log("sleep =============================");
+        await TimeUtil.sleep(5000);
+        LoggerJS.log("sleep ..end");
 
     }
 
     
 
 }
+
