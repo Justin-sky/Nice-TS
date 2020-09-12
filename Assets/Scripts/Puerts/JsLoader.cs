@@ -28,6 +28,7 @@ public class JsLoader : ILoader
         var jsPath = Path.Combine(scriptDir, filepath);
         debugpath = jsPath.Replace("/", "\\");
 #endif
+        debugpath = "";
         var jscache = JsManager.Instance.jscache;
         string jsName = filepath.Replace("puerts/", "");
 

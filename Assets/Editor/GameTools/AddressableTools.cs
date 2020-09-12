@@ -22,28 +22,10 @@ public class AddressableTools
          "static_models",
          "static_shaders",
          "static_fb",
-         "static_jsmap",
          "static_fairygui"
         };
 
-
         var start = DateTime.Now;
-       
-
-        //更新assetmap
-        List<AddressableAssetEntry> assets = new List<AddressableAssetEntry>();
-        AASUtility.GetSettings().GetAllAssets(assets, false,
-            (g) => { return g.name.Equals("static_js"); });
-
-        string[] address = assets.Select(e => e.address).ToArray();
-
-        string assetFolder = Path.Combine(Application.dataPath, AddressableConfig.AssetsFolderName);
-        
-        var assetPathMap = Path.Combine(assetFolder, AddressableConfig.AssetsPathMapFileName);
-
-        GameUtility.SafeWriteAllLines(assetPathMap, address);
-        AssetDatabase.Refresh();
-
         //初始化Groups
         foreach(var g in initGroups)
         {
