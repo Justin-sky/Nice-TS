@@ -1,6 +1,7 @@
 import { UIPanel } from "../UIPanel";
 import { UITypeDef } from "../UIDefine";
 import { LoggerJS } from "../../logger/Logger";
+import { FairyGUI } from "csharp";
 
 
 
@@ -14,8 +15,8 @@ export class UILoadingArg{
 
 export class  UILoading extends UIPanel{
 
-    public txtTitle : any;
-    public txtTips : any;
+    public txtTitle : FairyGUI.GTextField;
+    public txtTips : FairyGUI.GTextField;
 
     private m_arg:UILoadingArg; 
 

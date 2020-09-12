@@ -1,5 +1,6 @@
 import { UIPanel } from "./UIPanel";
 import { UITypeDef, UIComDefs } from "./UIDefine";
+import { FairyGUI } from "csharp";
 
 
 
@@ -10,7 +11,7 @@ export abstract class  UIWindow extends UIPanel{
         return UITypeDef.Window;
     }
 
-    private m_btnClose:any;
+    private m_btnClose:FairyGUI.GButton;
 
     public onAwake():void{
         
@@ -22,7 +23,7 @@ export abstract class  UIWindow extends UIPanel{
         super.onOpen(arg);
 
         if(this.m_btnClose!=undefined){
-            this.m_btnClose.Add(this.onBtnClose);
+            this.m_btnClose.onClick.Add(this.onBtnClose);
         }
     
     }
@@ -30,7 +31,7 @@ export abstract class  UIWindow extends UIPanel{
         super.onClose(arg);
 
         if(this.m_btnClose!=undefined){
-            this.m_btnClose.Remove(this.onBtnClose);
+            this.m_btnClose.onClick.Remove(this.onBtnClose);
         }
     }
 

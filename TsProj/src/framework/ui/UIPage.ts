@@ -1,6 +1,7 @@
 import { UIPanel } from "./UIPanel";
 import { UITypeDef, UIComDefs } from "./UIDefine";
 import { UIManager } from "./UIManager";
+import { FairyGUI } from "csharp";
 
 
 export abstract class UIPage extends UIPanel{
@@ -10,7 +11,7 @@ export abstract class UIPage extends UIPanel{
     }
 
 
-    private m_btnGoBack:any;
+    private m_btnGoBack:FairyGUI.GButton;
 
 
     public onAwake():void{

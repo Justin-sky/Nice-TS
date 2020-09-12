@@ -1,3 +1,4 @@
+import { FairyGUI } from "csharp";
 import { UIWindow } from "../UIWindow";
 
 // 通用弹窗
@@ -12,9 +13,10 @@ export class UIMsgBoxArg{
 export class UIMsgBox extends UIWindow{
 
     private m_arg:UIMsgBoxArg;
-    private m_txt:any;
-    private m_okBtn:any;
-    private m_cancelBtn:any;
+
+    private m_txt:FairyGUI.GLabel;
+    private m_okBtn:FairyGUI.GButton;
+    private m_cancelBtn:FairyGUI.GButton;
 
     
 

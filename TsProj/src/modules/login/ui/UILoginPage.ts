@@ -3,17 +3,18 @@ import { ModuleManager } from "../../../framework/module/ModuleManager";
 import { ModuleDef, ModuleMessage } from "../../ModuleDef";
 import { LoggerJS } from "../../../framework/logger/Logger";
 import { binder } from "../../../framework/common/NiceDecorator";
+import { FairyGUI } from "csharp";
 
 
 
 export class UILoginPage extends UIPage{
 
     @binder("account")
-    public m_account:any;
+    public m_account:FairyGUI.GTextField;
     @binder("password")
-    public m_password:any;
+    public m_password:FairyGUI.GTextField;
     @binder("loginBtn")
-    public m_loginBtn:any;
+    public m_loginBtn:FairyGUI.GButton;
 
 
     public onAwake():void{

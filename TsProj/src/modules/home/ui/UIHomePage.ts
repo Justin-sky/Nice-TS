@@ -1,19 +1,20 @@
 import { UIPage } from "../../../framework/ui/UIPage";
 import { LoggerJS } from "../../../framework/logger/Logger";
 import { binder } from "../../../framework/common/NiceDecorator";
+import { FairyGUI } from "csharp";
 
 
 
 export class UIHomePage extends UIPage{
 
     @binder("chatBtn")
-    public m_chatBtn:any;
+    public m_chatBtn:FairyGUI.GButton;
     @binder("bagBtn")
-    public m_bagBtn:any;
+    public m_bagBtn:FairyGUI.GButton;
     @binder("shopBtn")
-    public m_shopBtn:any;
+    public m_shopBtn:FairyGUI.GButton;
     @binder("levelBtn")
-    public m_levelBtn:any;
+    public m_levelBtn:FairyGUI.GButton;
 
 
     

@@ -28,7 +28,7 @@ export abstract class UIPanel {
     
     public  get isOpen() : boolean{
 
-        return this.fui.visiable;
+        return this.fui.visible;
     }
 
 
