@@ -26,6 +26,7 @@ export class  UILoading extends UIPanel{
 
     public onAwake(): void {
        
+        this.bindAll(this);
     }
     
     public get uiType(): UITypeDef {    
