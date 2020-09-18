@@ -8,7 +8,7 @@
 		"inlineSources": true,
 		"moduleResolution": "node",
 		"experimentalDecorators": true,
-		"baseUrl": "./src",
+		"baseUrl": "./",
 		"typeRoots": [
 			"../Assets/Puerts/Typing",
 			"../Assets/Gen/Typing",
@@ -16,5 +16,7 @@
 		],
 		
 	},
+	"include": ["src"],
+	"exclude": ["node_modules", "dist"]
 	
 }

@@ -1,5 +1,5 @@
 import { FairyGUI } from "csharp";
-import { binder } from "framework/common/NiceDecorator";
+import { binder } from "../../common/NiceDecorator";
 import { UIWidge } from "../UIWidge";
 
 

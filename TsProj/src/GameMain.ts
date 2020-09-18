@@ -2,8 +2,6 @@
 import {LoggerJS} from './framework/logger/Logger';
 import {UnitTest} from './unittest/UnitTest';
 import { GameObjectPool } from './framework/common/GameObjectPool';
-import { ModuleManager } from './framework/module/ModuleManager';
-import { ModuleDef } from './modules/ModuleDef';
 import { UIManager } from './framework/ui/UIManager';
 import { ResManager } from './framework/common/ResManager';
 import { ExcelManager } from './data/excel/ExcelManager';
@@ -28,7 +26,6 @@ class GameMain{
 
             //启动单例
             GameObjectPool.Instance(GameObjectPool);
-            ModuleManager.Instance(ModuleManager);
     
             UIManager.Instance(UIManager);
             ResManager.Instance(ResManager);
@@ -39,8 +36,6 @@ class GameMain{
             //do Unit Test
             UnitTest.doTest();
 
-            ModuleManager.Instance(ModuleManager).createModule(ModuleDef.LoginModule);
-            ModuleManager.Instance(ModuleManager).createModule(ModuleDef.HomeModule);
             //进入登录模块
             UIManager.Instance(UIManager).openPageInScene(SceneDef.LoginScene,loginUI.PackageName,loginUI.UILoginPage,null);
 
@@ -56,7 +51,6 @@ class GameMain{
     public onApplicationQuit():void {
 
         GameObjectPool.Instance(GameObjectPool).cleanup(true);
-        ModuleManager.Instance(ModuleManager).cleanup();
         LoggerJS.log("Game onApplicationQuit in JS....");
     }
 
