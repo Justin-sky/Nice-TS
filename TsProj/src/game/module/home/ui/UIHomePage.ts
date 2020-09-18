@@ -1,7 +1,7 @@
-import { UIPage } from "../../../framework/ui/UIPage";
-import { binder } from "../../../framework/common/NiceDecorator";
+import { UIPage } from "../../../../framework/ui/UIPage";
+import { binder } from "../../../../framework/common/NiceDecorator";
 import { FairyGUI } from "csharp";
-import { UIManager } from "../../../framework/ui/UIManager";
+import { UIManager } from "../../../../framework/ui/UIManager";
 
 
 

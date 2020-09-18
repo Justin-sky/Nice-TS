@@ -1,8 +1,8 @@
 
-import { loginUI } from "../../../data/ui/login";
-import { BaseScene } from "../../../framework/scene/BaseScene";
-import { SceneDef } from "../../../framework/scene/SceneDef";
-import { UIManager } from "../../../framework/ui/UIManager";
+import { loginUI } from "../../../../data/ui/login";
+import { BaseScene } from "../../../../framework/scene/BaseScene";
+import { SceneDef } from "../../../../framework/scene/SceneDef";
+import { UIManager } from "../../../../framework/ui/UIManager";
 
 
 

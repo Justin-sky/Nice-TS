@@ -1,13 +1,13 @@
 
-import { UILoginPage } from "../../modules/login/ui/UILoginPage";
+import { UILoginPage } from "../../game/module/login/ui/UILoginPage";
 import { UIPanel } from "./UIPanel";
-import { UIHomePage } from "../../modules/home/ui/UIHomePage";
+import { UIHomePage } from "../../game/module/home/ui/UIHomePage";
 import { UILoading } from "./UILib/UILoading";
 import { loginUI } from "../../data/ui/login";
 import { commonUI } from "../../data/ui/common";
 import { homeUI } from "../../data/ui/home";
 import { UIMsgBox } from "./UILib/UIMsgBox";
-import { UISelServerWin } from "../../modules/login/ui/UISelServerWin";
+import { UISelServerWin } from "../../game/module/login/ui/UISelServerWin";
 
 
 

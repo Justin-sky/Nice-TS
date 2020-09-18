@@ -1,11 +1,11 @@
-import { UIPage } from "../../../framework/ui/UIPage";
-import { binder } from "../../../framework/common/NiceDecorator";
+import { UIPage } from "../../../../framework/ui/UIPage";
+import { binder } from "../../../../framework/common/NiceDecorator";
 import { FairyGUI } from "csharp";
-import { SessionManager } from "../../../framework/net/SessionManager";
-import { NiceET } from "../../../data/pb/OuterMessage";
-import { LoginAPI } from "../api/LoginAPI";
-import { UIManager } from "../../../framework/ui/UIManager";
-import { loginUI } from "../../../data/ui/login";
+import { SessionManager } from "../../../../framework/net/SessionManager";
+import { NiceET } from "../../../../data/pb/OuterMessage";
+import { LoginAPI } from "../../../api/LoginAPI";
+import { UIManager } from "../../../../framework/ui/UIManager";
+import { loginUI } from "../../../../data/ui/login";
 
 
 

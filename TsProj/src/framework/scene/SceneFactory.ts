@@ -1,7 +1,7 @@
 import { BaseScene } from "./BaseScene";
-import { BattleScene } from "../../modules/pve/scene/BattleScene";
-import { HomeScene } from "../../modules/home/scene/HomeScene";
-import { LoginScene } from "../../modules/login/scene/LoginScene";
+import { BattleScene } from "../../game/module/pve/scene/BattleScene";
+import { HomeScene } from "../../game/module/home/scene/HomeScene";
+import { LoginScene } from "../../game/module/login/scene/LoginScene";
 import { SceneDef } from "./SceneDef";
 
 

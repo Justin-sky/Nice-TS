@@ -1,4 +1,4 @@
-import { BaseScene } from "../../../framework/scene/BaseScene";
+import { BaseScene } from "../../../../framework/scene/BaseScene";
 
 
 export class HomeScene extends BaseScene{
