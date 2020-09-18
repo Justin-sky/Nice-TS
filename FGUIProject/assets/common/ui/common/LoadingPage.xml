@@ -4,6 +4,6 @@
     <component id="n0_10wwi" name="loading_pregress" src="10wwi54" fileName="ui/common/LoadingProgress.xml" xy="137,623">
       <ProgressBar value="1" max="100"/>
     </component>
-    <text id="n1_10wwi" name="loadTxt" xy="326,344" size="342,107" fontSize="40" autoSize="none" text="正在切换场景..."/>
+    <text id="n1_10wwi" name="loadTxt" xy="326,344" size="377,74" fontSize="40" autoSize="none" text="正在切换场景..."/>
   </displayList>
 </component>

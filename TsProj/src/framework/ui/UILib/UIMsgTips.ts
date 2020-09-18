@@ -1,3 +1,5 @@
+import { FairyGUI } from "csharp";
+import { binder } from "framework/common/NiceDecorator";
 import { UIWidge } from "../UIWidge";
 
 
@@ -6,13 +8,15 @@ export class UIMsgTips extends UIWidge{
 
     private m_alpha = 1;
     private m_yOffset = 20;
-    private m_tip:any;
+
+    @binder("top")
+    private m_tip:FairyGUI.GLabel;
 
     private m_intervel;
 
     public onAwake(): void {
         
-        this.m_tip = this.fui.GetChild("top");
+        this.bindAll(this)
     }
 
 

@@ -1,7 +1,4 @@
 {
-	"include": [
-		"./src",
-	],
 	"compilerOptions": {
 		"target": "ES2018",
 		"module": "ESNext",
@@ -11,7 +8,7 @@
 		"inlineSources": true,
 		"moduleResolution": "node",
 		"experimentalDecorators": true,
-		"baseUrl": "src",
+		"baseUrl": "./src",
 		"typeRoots": [
 			"../Assets/Puerts/Typing",
 			"../Assets/Gen/Typing",

@@ -31,7 +31,6 @@ export abstract class UIPanel {
         return this.fui.visible;
     }
 
-
     public abstract onAwake():void;
     public onUpdate():void{}
 
@@ -43,6 +42,14 @@ export abstract class UIPanel {
     public awake():void{
         this.onAwake();
 
+    }
+
+    //绑定FairyGUI元件
+    protected bindAll(target:any):void{
+        for(let k in target["binders"]){
+            let fguiName = this["binders"][k];
+            this[k] = this.fui.GetChild(fguiName);
+        }
     }
 
     public update():void{

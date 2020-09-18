@@ -2,6 +2,7 @@ import { UIPanel } from "./UIPanel";
 import { UITypeDef, UIComDefs } from "./UIDefine";
 import { UIManager } from "./UIManager";
 import { FairyGUI } from "csharp";
+import { binder } from "../common/NiceDecorator";
 
 
 export abstract class UIPage extends UIPanel{
@@ -9,7 +10,6 @@ export abstract class UIPage extends UIPanel{
     public get uiType(): UITypeDef {    
         return UITypeDef.Page;
     }
-
 
     private m_btnGoBack:FairyGUI.GButton;
 
@@ -22,14 +22,6 @@ export abstract class UIPage extends UIPanel{
             this.m_btnGoBack.onClick.Add(()=>{
                 this.onBtnGoBack();
             });
-        }
-    }
-
-    //绑定FairyGUI元件
-    protected bindAll(target:any):void{
-        for(let k in target["binders"]){
-            let fguiName = this["binders"][k];
-            this[k] = this.fui.GetChild(fguiName);
         }
     }
 

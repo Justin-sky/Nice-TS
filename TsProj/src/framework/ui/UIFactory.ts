@@ -7,6 +7,7 @@ import { UILoading } from "./UILib/UILoading";
 import { loginUI } from "../../data/ui/login";
 import { commonUI } from "../../data/ui/common";
 import { homeUI } from "../../data/ui/home";
+import { UIMsgBox } from "./UILib/UIMsgBox";
 
 
 
@@ -22,11 +23,14 @@ export class UIFactory{
         let ui:UIPanel = null;
 
         switch (name){
-            case loginUI.UILoginPage:
-                ui = new UILoginPage();
+            case commonUI.UIUINoticeWin:
+                ui = new UIMsgBox();
                 break;
             case commonUI.UILoadingPage:
                 ui = new UILoading();
+                break;
+            case loginUI.UILoginPage:
+                ui = new UILoginPage();
                 break;
             case homeUI.UIHomePage:
                 ui = new UIHomePage();
