@@ -1,9 +1,6 @@
 import { UIPanel } from "./UIPanel";
 import { UITypeDef, UIComDefs } from "./UIDefine";
 import { FairyGUI } from "csharp";
-import { LoggerJS } from "../logger/Logger";
-
-
 
 
 export abstract class  UIWindow extends UIPanel{

@@ -1,8 +1,9 @@
 
 import { loginUI } from "../../../data/ui/login";
+import { BaseScene } from "../../../framework/scene/BaseScene";
 import { SceneDef } from "../../../framework/scene/SceneDef";
 import { UIManager } from "../../../framework/ui/UIManager";
-import { BaseScene } from "../../../framework/scene/BaseScene";
+
 
 
 export class LoginScene extends BaseScene{
@@ -23,7 +24,7 @@ export class LoginScene extends BaseScene{
 
     public onLeave() {
         
-        
+  
 
     }
 

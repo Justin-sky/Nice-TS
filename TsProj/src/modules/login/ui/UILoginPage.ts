@@ -1,5 +1,4 @@
 import { UIPage } from "../../../framework/ui/UIPage";
-import { LoggerJS } from "../../../framework/logger/Logger";
 import { binder } from "../../../framework/common/NiceDecorator";
 import { FairyGUI } from "csharp";
 import { SessionManager } from "../../../framework/net/SessionManager";
@@ -63,7 +62,7 @@ export class UILoginPage extends UIPage{
 
     private onSelServer(){
 
-        LoggerJS.log("sele server..............");
+        console.log("sele server..............");
 
         UIManager.Instance(UIManager).openWindow(loginUI.PackageName, loginUI.UISelServerWin,null);
     }
@@ -73,7 +72,7 @@ export class UILoginPage extends UIPage{
         let account = this.m_account.text;
         let password = this.m_password.text;
 
-        LoggerJS.log(`account:${account} - password: ${password}`);
+        console.log(`account:${account} - password: ${password}`);
 
         if(account != "" && password != ""){
             
@@ -81,7 +80,7 @@ export class UILoginPage extends UIPage{
 
                 this.gateId = msg.GateId;
                 this.gateKey = msg.Key;
-                LoggerJS.log("login ream succ, gate addr:"+msg.Address + ",key:"+msg.Key);
+                console.log("login ream succ, gate addr:"+msg.Address + ",key:"+msg.Key);
 
                 SessionManager.Instance(SessionManager).disconnectRealmServer();
                 
@@ -99,17 +98,17 @@ export class UILoginPage extends UIPage{
     }
 
     private onConnGateSucc(code:number){
-        LoggerJS.log("connect gate succ: "+code)
+        console.log("connect gate succ: "+code)
 
         LoginAPI.loginGateServer(this.gateId,this.gateKey,(msg:NiceET.G2C_LoginGate)=>{
             let playerID = msg.PlayerId;
-            LoggerJS.log("login gate response.." +playerID);
+            console.log("login gate response.." +playerID);
 
             UIManager.Instance(UIManager).enterMainPage();
         });
     }
 
     private onConnGateErr(code:number){
-        LoggerJS.log("connect gate err: "+code)
+        console.log("connect gate err: "+code)
     }
 }

@@ -1,6 +1,5 @@
 import { UIPanel } from "../UIPanel";
 import { UITypeDef } from "../UIDefine";
-import { LoggerJS } from "../../logger/Logger";
 import { FairyGUI } from "csharp";
 
 
@@ -51,7 +50,7 @@ export class  UILoading extends UIPanel{
 
 
     private updateText(){
-        LoggerJS.log("loading progress:"+this.m_arg.progress);
+        console.log("loading progress:"+this.m_arg.progress);
 
         // if (txtTitle != null)
         // {

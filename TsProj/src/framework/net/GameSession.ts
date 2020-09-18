@@ -1,5 +1,4 @@
 import { Singleton } from "../common/Singleton";
-import { LoggerJS } from "../logger/Logger";
 import { Opcode } from "../../data/pb/Opcode";
 import { NetErrorCode } from "./NetErrorCode";
 import { NiceTS } from "csharp";
@@ -127,7 +126,7 @@ export class GameSession extends Singleton<GameSession>{
 
             if(value.retryTimes >= this.maxReSendTimes) {
                 //超过最大重发次数，丢弃
-                LoggerJS.log(`Message resend too more, opcode:${key}, lastsend:${value.sendTime}`);
+                console.log(`Message resend too more, opcode:${key}, lastsend:${value.sendTime}`);
                 this.requestCallback.delete(key); 
             }else{
 
@@ -136,7 +135,7 @@ export class GameSession extends Singleton<GameSession>{
                     value.sendTime = currTime;
                     //重发消息
                     this.reSend(value.bytes);
-                    LoggerJS.log(`resend message:, opcode:${key}, retry times:${value.retryTimes}`);
+                    console.log(`resend message:, opcode:${key}, retry times:${value.retryTimes}`);
                 }
             }
         });

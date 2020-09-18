@@ -1,5 +1,4 @@
 import { UIPage } from "../../../framework/ui/UIPage";
-import { LoggerJS } from "../../../framework/logger/Logger";
 import { binder } from "../../../framework/common/NiceDecorator";
 import { FairyGUI } from "csharp";
 import { UIManager } from "../../../framework/ui/UIManager";
@@ -51,16 +50,16 @@ export class UIHomePage extends UIPage{
     public onchatBtn(){
 
         UIManager.Instance(UIManager).openWindow("common","UINoticeWin",null);
-        LoggerJS.log("on chat...");
+        console.log("on chat...");
     }
     public onbagBtn(){
-        LoggerJS.log("on bag ..");
+        console.log("on bag ..");
     }
     public onshopBtn(){
-        LoggerJS.log("on shop...");
+        console.log("on shop...");
     }
     public onlevelBtn(){
-        LoggerJS.log("on level...");
+        console.log("on level...");
     }
 
 }

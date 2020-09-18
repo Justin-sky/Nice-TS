@@ -1,5 +1,4 @@
 
-import {LoggerJS} from './framework/logger/Logger';
 import {UnitTest} from './unittest/UnitTest';
 import { GameObjectPool } from './framework/common/GameObjectPool';
 import { UIManager } from './framework/ui/UIManager';
@@ -22,7 +21,7 @@ class GameMain{
     public async start() {
         
         try{
-            LoggerJS.log("Game start in JS....");
+            console.log("Game start in JS....");
 
             //启动单例
             GameObjectPool.Instance(GameObjectPool);
@@ -43,7 +42,7 @@ class GameMain{
             GameLaunch.Instance.JsLuanchFinish();
 
         }catch(ex){
-            LoggerJS.logError(ex);
+            console.error(ex);
         }
 
     }
@@ -51,12 +50,12 @@ class GameMain{
     public onApplicationQuit():void {
 
         GameObjectPool.Instance(GameObjectPool).cleanup(true);
-        LoggerJS.log("Game onApplicationQuit in JS....");
+        console.log("Game onApplicationQuit in JS....");
     }
 
     public onDispose():void {
         
-        LoggerJS.log("Game onDispose in JS....");
+        console.log("Game onDispose in JS....");
     }
     
 }

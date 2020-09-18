@@ -1,5 +1,4 @@
-import { NiceET } from "../../data/pb/OuterMessage";
-import { LoggerJS } from "../../framework/logger/Logger";
+
 import { GameConfig } from "../../global/GameConfig";
 import { Singleton } from "../common/Singleton";
 import { GameSession } from "./GameSession";
@@ -41,7 +40,7 @@ export class SessionManager extends Singleton<SessionManager>{
 
             onError(code);
 
-            LoggerJS.logError("login reamserver err, code: "+code + ",id:"+channel.Id);
+            console.error("login reamserver err, code: "+code + ",id:"+channel.Id);
 
         }
     }
@@ -65,7 +64,7 @@ export class SessionManager extends Singleton<SessionManager>{
         this.sessionGate = GameSession.Instance(GameSession).connectChannel(
             address,
             (channel:any,code:number)=>{
-                LoggerJS.log("login Gate Server: "+code);
+                console.log("login Gate Server: "+code);
 
                 this.onGateSocketErr(channel, code, onSucc, onError);
             }
@@ -82,7 +81,7 @@ export class SessionManager extends Singleton<SessionManager>{
 
             onError(code);
 
-            LoggerJS.logError("gate server err, code: "+code + ",id:"+channel.Id);
+            console.error("gate server err, code: "+code + ",id:"+channel.Id);
         }
 
     }

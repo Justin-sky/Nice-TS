@@ -1,6 +1,5 @@
 import { GameObjectPool } from "../common/GameObjectPool";
 import { ResManager } from "../common/ResManager";
-import { LoggerJS } from "../logger/Logger";
 
 
 export abstract class BaseScene{
@@ -60,7 +59,7 @@ export abstract class BaseScene{
     public onDestroy(){
         this.preloadFairyGUIPackage.forEach((value, key)=>{
 
-            LoggerJS.log("destroy scene: "+key);
+            console.log("destroy scene: "+key);
 
             ResManager.Instance(ResManager).releaseFairyGUIPackage(value);
         });

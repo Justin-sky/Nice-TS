@@ -1,6 +1,5 @@
 
 import { Singleton } from './Singleton';
-import { LoggerJS } from '../logger/Logger';
 import { $promise } from 'puerts';
 import {NiceTS} from 'csharp';
 
@@ -18,7 +17,7 @@ export class ResManager extends Singleton<ResManager>{
             return go;
         }catch(ex){
 
-            LoggerJS.logError(`Load prefab :${address} : ${ex}`)
+            console.error(`Load prefab :${address} : ${ex}`)
 
             return null;
         }
@@ -32,7 +31,7 @@ export class ResManager extends Singleton<ResManager>{
             let go = await $promise(task);
             return go;
         }catch(ex){
-            LoggerJS.logError(`Load textasset :${address} : ${ex}`)
+            console.error(`Load textasset :${address} : ${ex}`)
 
             return null;
         }
@@ -46,7 +45,7 @@ export class ResManager extends Singleton<ResManager>{
             return go;
 
         }catch(ex){
-            LoggerJS.logError(`Load sprite :${address} : ${ex}`)
+            console.error(`Load sprite :${address} : ${ex}`)
 
             return null;
         }
@@ -60,7 +59,7 @@ export class ResManager extends Singleton<ResManager>{
             
             if(callback) callback();
         }catch(ex){
-            LoggerJS.logError(`Load fairyGUI :${address} : ${ex}`)
+            console.error(`Load fairyGUI :${address} : ${ex}`)
         }
     }
 
