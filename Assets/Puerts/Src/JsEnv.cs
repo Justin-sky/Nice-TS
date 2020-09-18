@@ -37,7 +37,7 @@ namespace Puerts
 
         public JsEnv(ILoader loader, int debugPort = -1)
         {
-            const int libVersionExpect = 3;
+            const int libVersionExpect = 5;
             int libVersion = PuertsDLL.GetLibVersion();
             if (libVersion != libVersionExpect)
             {
@@ -119,6 +119,10 @@ namespace Puerts
             {
                 string debugPath;
                 var context = loader.ReadFile(filename, out debugPath);
+                if (context == null)
+                {
+                    throw new InvalidProgramException("can not find " + filename);
+                }
                 Eval(context, debugPath);
             }
             else
@@ -129,18 +133,27 @@ namespace Puerts
 
         public void Eval(string chunk, string chunkName = "chunk")
         {
-            IntPtr resultInfo = PuertsDLL.Eval(isolate, chunk, chunkName);
+#if THREAD_SAFE
+            lock(this) {
+#endif
+            IntPtr resultInfo = PuertsDLL.EvalChecked(isolate, chunk, chunkName);
             if (resultInfo == IntPtr.Zero)
             {
                 string exceptionInfo = PuertsDLL.GetLastExceptionInfo(isolate);
                 throw new Exception(exceptionInfo);
             }
             PuertsDLL.ResetResult(resultInfo);
+#if THREAD_SAFE
+            }
+#endif
         }
 
         public TResult Eval<TResult>(string chunk, string chunkName = "chunk")
         {
-            IntPtr resultInfo = PuertsDLL.Eval(isolate, chunk, chunkName);
+#if THREAD_SAFE
+            lock(this) {
+#endif
+            IntPtr resultInfo = PuertsDLL.EvalChecked(isolate, chunk, chunkName);
             if (resultInfo == IntPtr.Zero)
             {
                 string exceptionInfo = PuertsDLL.GetLastExceptionInfo(isolate);
@@ -149,11 +162,21 @@ namespace Puerts
             TResult result = StaticTranslate<TResult>.Get(Idx, isolate, NativeValueApi.GetValueFromResult, resultInfo, false);
             PuertsDLL.ResetResult(resultInfo);
             return result;
+#if THREAD_SAFE
+            }
+#endif
         }
 
         public void AddLazyStaticWrapLoader(Type type, Func<TypeRegisterInfo> lazyStaticWrapLoader)
         {
+#if THREAD_SAFE
+            lock (this)
+            {
+#endif
             TypeRegister.AddLazyStaticWrapLoader(type, lazyStaticWrapLoader);
+#if THREAD_SAFE
+            }
+#endif
         }
 
         private readonly List<FunctionCallback> callbacks = new List<FunctionCallback>();
@@ -202,11 +225,6 @@ namespace Puerts
         {
             GeneralGetterManager.RegisterGetter(type, getter);
             GeneralSetterManager.RegisterSetter(type, setter);
-        }
-
-        public int GetTypeId(Type type)
-        {
-            return TypeRegister.GetTypeId(isolate, type);
         }
 
         public int Index
@@ -321,56 +339,119 @@ namespace Puerts
 
         public void UsingAction<T1>()
         {
+#if THREAD_SAFE
+            lock(this) {
+#endif
             GeneralGetterManager.genericDelegateFactory.RegisterAction<T1>();
+#if THREAD_SAFE
+            }
+#endif
         }
 
         public void UsingAction<T1, T2>()
         {
+#if THREAD_SAFE
+            lock(this) {
+#endif
             GeneralGetterManager.genericDelegateFactory.RegisterAction<T1, T2>();
+#if THREAD_SAFE
+            }
+#endif
         }
 
         public void UsingAction<T1, T2, T3>()
         {
+#if THREAD_SAFE
+            lock(this) {
+#endif
             GeneralGetterManager.genericDelegateFactory.RegisterAction<T1, T2, T3>();
+#if THREAD_SAFE
+            }
+#endif
         }
 
         public void UsingAction<T1, T2, T3, T4>()
         {
+#if THREAD_SAFE
+            lock(this) {
+#endif
             GeneralGetterManager.genericDelegateFactory.RegisterAction<T1, T2, T3, T4>();
+#if THREAD_SAFE
+            }
+#endif
         }
 
         public void UsingFunc<TResult>()
         {
+#if THREAD_SAFE
+            lock(this) {
+#endif
             GeneralGetterManager.genericDelegateFactory.RegisterFunc<TResult>();
+#if THREAD_SAFE
+            }
+#endif
         }
 
         public void UsingFunc<T1, TResult>()
         {
+#if THREAD_SAFE
+            lock(this) {
+#endif
             GeneralGetterManager.genericDelegateFactory.RegisterFunc<T1, TResult>();
+#if THREAD_SAFE
+            }
+#endif
         }
 
         public void UsingFunc<T1, T2, TResult>()
         {
+#if THREAD_SAFE
+            lock(this) {
+#endif
             GeneralGetterManager.genericDelegateFactory.RegisterFunc<T1, T2, TResult>();
+#if THREAD_SAFE
+            }
+#endif
         }
 
         public void UsingFunc<T1, T2, T3, TResult>()
         {
+#if THREAD_SAFE
+            lock(this) {
+#endif
             GeneralGetterManager.genericDelegateFactory.RegisterFunc<T1, T2, T3, TResult>();
+#if THREAD_SAFE
+            }
+#endif
         }
 
         public void UsingFunc<T1, T2, T3, T4, TResult>()
         {
+#if THREAD_SAFE
+            lock(this) {
+#endif
             GeneralGetterManager.genericDelegateFactory.RegisterFunc<T1, T2, T3, T4, TResult>();
+#if THREAD_SAFE
+            }
+#endif
         }
 
         public void LowMemoryNotification()
         {
+#if THREAD_SAFE
+            lock(this) {
+#endif
             PuertsDLL.LowMemoryNotification(isolate);
+#if THREAD_SAFE
+            }
+#endif
         }
 
         public void Tick()
         {
+#if THREAD_SAFE
+            lock(this) {
+#endif
             PuertsDLL.InspectorTick(isolate);
             tickHandler.ForEach(fn =>
             {
@@ -382,11 +463,20 @@ namespace Puerts
                 }
 
             });
+#if THREAD_SAFE
+            }
+#endif
         }
 
         public void WaitDebugger()
         {
+#if THREAD_SAFE
+            lock(this) {
+#endif
             while (!PuertsDLL.InspectorTick(isolate)) { }
+#if THREAD_SAFE
+            }
+#endif
         }
 
         /*[MonoPInvokeCallback(typeof(LogCallback))]
@@ -409,12 +499,24 @@ namespace Puerts
 
         ~JsEnv()
         {
+#if THREAD_SAFE
+            lock(this) {
+#endif
             Dispose(true);
+#if THREAD_SAFE
+            }
+#endif
         }
 
         public void Dispose()
         {
+#if THREAD_SAFE
+            lock(this) {
+#endif
             Dispose(true);
+#if THREAD_SAFE
+            }
+#endif
         }
 
         private bool disposed = false;
@@ -431,7 +533,7 @@ namespace Puerts
             }
         }
 
-        public void CheckLiveness()
+        internal void CheckLiveness()
         {
             if (disposed)
             {
