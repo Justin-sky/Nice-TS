@@ -4,7 +4,7 @@ import { binder } from "../../../framework/common/NiceDecorator";
 import { FairyGUI } from "csharp";
 import { SessionManager } from "../../../framework/net/SessionManager";
 import { NiceET } from "../../../data/pb/OuterMessage";
-import { LoginAPI } from "../../../framework/api/LoginAPI";
+import { LoginAPI } from "../api/LoginAPI";
 import { UIManager } from "../../../framework/ui/UIManager";
 
 

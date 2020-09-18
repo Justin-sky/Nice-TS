@@ -1,6 +1,6 @@
-import { Opcode } from "../../data/pb/Opcode";
-import { NiceET } from "../../data/pb/OuterMessage";
-import { SessionManager } from "../net/SessionManager";
+import { Opcode } from "../../../data/pb/Opcode";
+import { NiceET } from "../../../data/pb/OuterMessage";
+import { SessionManager } from "../../../framework/net/SessionManager";
 
 
 export class LoginAPI{
