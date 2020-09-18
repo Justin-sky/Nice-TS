@@ -7,6 +7,7 @@
     <component id="pyg64y" name="serverItem.xml" path="/ui/login/" exported="true"/>
     <component id="pyg651" name="LevelPage.xml" path="/ui/level/" exported="true"/>
     <component id="pyg652" name="ShopPage.xml" path="/ui/shop/" exported="true"/>
+    <component id="feeg53" name="SelServerBtn.xml" path="/ui/login/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

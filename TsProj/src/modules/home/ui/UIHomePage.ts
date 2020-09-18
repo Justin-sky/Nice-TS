@@ -21,8 +21,6 @@ export class UIHomePage extends UIPage{
     
     public onAwake():void{
         super.onAwake();
-        this.bindAll(this);
-
 
         this.m_chatBtn.onClick.Add(()=>{
             this.onchatBtn();
@@ -39,8 +37,8 @@ export class UIHomePage extends UIPage{
     }
 
     
-    public onOpen(arg:any):void{
-        super.onOpen(arg);
+    public onOpen(vo:any):void{
+        super.onOpen(vo);
 
         
     }

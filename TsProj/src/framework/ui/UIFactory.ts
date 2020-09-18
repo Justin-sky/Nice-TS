@@ -8,6 +8,7 @@ import { loginUI } from "../../data/ui/login";
 import { commonUI } from "../../data/ui/common";
 import { homeUI } from "../../data/ui/home";
 import { UIMsgBox } from "./UILib/UIMsgBox";
+import { UISelServerWin } from "../../modules/login/ui/UISelServerWin";
 
 
 
@@ -23,15 +24,24 @@ export class UIFactory{
         let ui:UIPanel = null;
 
         switch (name){
+
+            //common
             case commonUI.UIUINoticeWin:
                 ui = new UIMsgBox();
                 break;
             case commonUI.UILoadingPage:
                 ui = new UILoading();
                 break;
+
+                //login
             case loginUI.UILoginPage:
                 ui = new UILoginPage();
                 break;
+            case loginUI.UISelServerWin:
+                ui = new UISelServerWin();
+                break;
+                
+                //home
             case homeUI.UIHomePage:
                 ui = new UIHomePage();
                 break;
@@ -40,8 +50,14 @@ export class UIFactory{
         if(ui!=null){
             ui.fui = comp;
             ui.name = name;
+            
+            //绑定FairyGUI控件
+            ui.bindAll(ui);
             ui.awake();
-        } 
+        
+        }else{
+            LoggerJS.logError(`not create ui: ${pkg}-${name}`);
+        }
 
         return ui;
     }

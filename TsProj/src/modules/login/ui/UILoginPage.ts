@@ -6,6 +6,7 @@ import { SessionManager } from "../../../framework/net/SessionManager";
 import { NiceET } from "../../../data/pb/OuterMessage";
 import { LoginAPI } from "../api/LoginAPI";
 import { UIManager } from "../../../framework/ui/UIManager";
+import { loginUI } from "../../../data/ui/login";
 
 
 
@@ -16,6 +17,10 @@ export class UILoginPage extends UIPage{
     public m_account:FairyGUI.GTextField;
     @binder("password")
     public m_password:FairyGUI.GTextField;
+
+    @binder("selserverBtn")
+    public m_selserverBtn:FairyGUI.GButton;
+
     @binder("loginBtn")
     public m_loginBtn:FairyGUI.GButton;
 
@@ -25,10 +30,13 @@ export class UILoginPage extends UIPage{
 
     public onAwake():void{
         super.onAwake();
-        this.bindAll(this);
         
         this.m_loginBtn.onClick.Add(()=>{
             this.onLoginClick();
+        });
+
+        this.m_selserverBtn.onClick.Add(()=>{
+            this.onSelServer();
         });
 
         this.m_loginBtn.enabled = false;
@@ -43,8 +51,8 @@ export class UILoginPage extends UIPage{
     }
     
 
-    public onOpen(arg:any):void{
-        super.onOpen(arg);
+    public onOpen(vo:any):void{
+        super.onOpen(vo);
 
         
     }
@@ -53,8 +61,14 @@ export class UILoginPage extends UIPage{
 
     }
 
+    private onSelServer(){
 
-    public onLoginClick(){
+        LoggerJS.log("sele server..............");
+
+        UIManager.Instance(UIManager).openWindow(loginUI.PackageName, loginUI.UISelServerWin,null);
+    }
+
+    private onLoginClick(){
 
         let account = this.m_account.text;
         let password = this.m_password.text;
@@ -84,7 +98,7 @@ export class UILoginPage extends UIPage{
 
     }
 
-    public onConnGateSucc(code:number){
+    private onConnGateSucc(code:number){
         LoggerJS.log("connect gate succ: "+code)
 
         LoginAPI.loginGateServer(this.gateId,this.gateKey,(msg:NiceET.G2C_LoginGate)=>{
@@ -95,7 +109,7 @@ export class UILoginPage extends UIPage{
         });
     }
 
-    public onConnGateErr(code:number){
+    private onConnGateErr(code:number){
         LoggerJS.log("connect gate err: "+code)
     }
 }

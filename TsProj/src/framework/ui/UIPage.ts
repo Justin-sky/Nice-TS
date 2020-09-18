@@ -26,8 +26,8 @@ export abstract class UIPage extends UIPanel{
     }
 
 
-    public onOpen(arg:any):void{
-        super.onOpen(arg);
+    public onOpen(vo:any):void{
+        super.onOpen(vo);
 
         
     

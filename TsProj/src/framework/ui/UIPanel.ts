@@ -34,7 +34,7 @@ export abstract class UIPanel {
     public abstract onAwake():void;
     public onUpdate():void{}
 
-    public onOpen(arg:any):void{
+    public onOpen(vo:any):void{
         this.layer = UILayerDef.getDefaultLayer(this.uiType);
     }
     public onClose(arg:any):void{}
@@ -45,7 +45,7 @@ export abstract class UIPanel {
     }
 
     //绑定FairyGUI元件
-    protected bindAll(target:any):void{
+    public bindAll(target:any):void{
         for(let k in target["binders"]){
             let fguiName = this["binders"][k];
             this[k] = this.fui.GetChild(fguiName);

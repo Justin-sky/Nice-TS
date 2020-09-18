@@ -1,6 +1,7 @@
 import { UIPanel } from "./UIPanel";
 import { UITypeDef, UIComDefs } from "./UIDefine";
 import { FairyGUI } from "csharp";
+import { LoggerJS } from "../logger/Logger";
 
 
 
@@ -21,6 +22,9 @@ export abstract class  UIWindow extends UIPanel{
 
     public onOpen(arg:any):void{
         super.onOpen(arg);
+
+        this.fui.x = FairyGUI.GRoot.inst.width/2 - this.fui.width/2;
+        this.fui.y = FairyGUI.GRoot.inst.height/2 - this.fui.height/2;
 
         if(this.m_btnClose!=undefined){
             this.m_btnClose.onClick.Add(this.onBtnClose);
