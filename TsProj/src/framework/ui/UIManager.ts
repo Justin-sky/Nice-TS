@@ -5,8 +5,6 @@ import { UIWindow } from './UIWindow';
 import { UIWidge } from './UIWidge';
 import { UIPanel } from './UIPanel';
 import { UIFactory } from './UIFactory';
-import { UnityEngine } from 'csharp';
-import { SceneManager } from '../scene/SceneManager';
 import { SceneDef } from '../scene/SceneDef';
 import { homeUI } from '../../data/ui/home';
 
@@ -86,17 +84,8 @@ export class UIManager extends Singleton<UIManager>{
     }
 
     //打开场景页面,此页面不计入页面栈,无返回上一面按钮
-    public openPageInScene(scene:string, pkg:string, page:string, arg:any){
-        let oldScene:string = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        if(oldScene == scene){
-            this.openPageWorker(pkg, page, arg);
-        }else{
-            SceneManager.Instance(SceneManager).loadScene(scene, ()=>{
-                //场景加载完成
-                this.openPageWorker(pkg, page, arg);
-            });
-        }
-
+    public openPageInScene(pkg:string, page:string, arg:any){
+        this.openPageWorker(pkg, page, arg);
     }
 
     //==========================================================UILoading
@@ -155,7 +144,7 @@ export class UIManager extends Singleton<UIManager>{
     public enterMainPage():void{
 
         this.m_pageTrackStack.length = 0;
-        this.openPageInScene(SceneDef.HomeScene, homeUI.PackageName ,homeUI.UIHomePage,null)
+        this.openPageInScene(homeUI.PackageName ,homeUI.UIHomePage,null)
     }
 
     //==========================================================UIWindow

@@ -9,6 +9,8 @@ import { loginUI } from "../../../../data/ui/login";
 import { VoServer, VoServerItem } from "../vo/VoServer";
 import { UIMessageManger } from "../../../event/UIMessageManager";
 import { UIMessage } from "../../../event/UIMessage";
+import { SceneManager } from "../../../../framework/scene/SceneManager";
+import { SceneDef } from "../../../../framework/scene/SceneDef";
 
 
 
@@ -140,7 +142,7 @@ export class UILoginPage extends UIPage{
             let playerID = msg.PlayerId;
             console.log("login gate response.." +playerID);
 
-            UIManager.Instance(UIManager).enterMainPage();
+            SceneManager.Instance(SceneManager).loadScene(SceneDef.HomeScene,()=>{});
         });
     }
 

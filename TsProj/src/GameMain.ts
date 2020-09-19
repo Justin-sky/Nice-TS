@@ -8,6 +8,7 @@ import { ExcelManager } from './data/excel/ExcelManager';
 import { JsManager ,GameLaunch } from 'csharp';
 import { SceneDef } from './framework/scene/SceneDef';
 import { loginUI } from './data/ui/login';
+import { SceneManager } from './framework/scene/SceneManager';
 
 
 
@@ -36,8 +37,9 @@ class GameMain{
             UnitTest.doTest();
 
             //进入登录模块
-            UIManager.Instance(UIManager).openPageInScene(SceneDef.LoginScene,loginUI.PackageName,loginUI.UILoginPage,null);
+            SceneManager.Instance(SceneManager).loadScene(SceneDef.LoginScene,()=>{});
 
+            
             //JS启动完成，通知C#层
             GameLaunch.Instance.JsLuanchFinish();
 
