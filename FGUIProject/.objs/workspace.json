@@ -1,21 +1,28 @@
 {
+  "libview.firstColumnWidth": 364,
+  "snapToGrid": true,
+  "libview.iconScale": 0,
   "doc.openedDocs": [
     "ui://y4b7yuun10wwi53",
     "ui://yt4d8ma4pyg650",
     "ui://ynb47g4jpyg64t",
     "ui://l64dumk9pyg651",
     "ui://l64dumk9pyg64v",
+    "ui://l64dumk9pyg64w",
+    "ui://l64dumk9feeg54",
     "ui://l64dumk9pyg652"
   ],
-  "libview.iconScale": 0,
   "auxline1": true,
-  "doc.activeDoc": "ui://l64dumk9pyg651",
-  "backgroundColor": 6710886,
-  "libview.twoColumn": false,
-  "libview.currentGroup": "",
+  "canvasColor": 10066329,
   "libview.expandedNodes": [
     "y4b7yuun",
     "/",
+    "y4b7yuun",
+    "/atlas/",
+    "y4b7yuun",
+    "/ui/",
+    "y4b7yuun",
+    "/ui/common/",
     "yt4d8ma4",
     "/",
     "yt4d8ma4",
@@ -39,7 +46,11 @@
     "l64dumk9",
     "/ui/shop/"
   ],
+  "doc.activeDoc": "ui://l64dumk9pyg64w",
+  "libview.twoColumn": false,
   "auxline2": true,
-  "canvasColor": 10066329,
-  "libview.firstColumnWidth": 364
+  "gridSize": 30,
+  "backgroundColor": 6710886,
+  "libview.currentGroup": "",
+  "gridColor": 80
 }

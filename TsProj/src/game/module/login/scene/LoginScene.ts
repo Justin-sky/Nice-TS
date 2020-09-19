@@ -13,13 +13,11 @@ export class LoginScene extends BaseScene{
     public onEnter() {
 
         //添加预加载资源
-       this.addPreloadFairyGUIPackage("login_fui.bytes","login");
+       this.addPreloadFairyGUIPackage("login_fui.bytes",loginUI.PackageName);
     }
 
     public onComplete() {
-        
-        //打开界面：
-        UIManager.Instance(UIManager).openPageInScene(SceneDef.LoginScene,loginUI.PackageName, loginUI.UILoginPage,null);
+    
     }
 
     public onLeave() {

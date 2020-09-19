@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="86,55" extention="Button">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <displayList>
+    <image id="n0_u93s" name="areaItem" src="pyg62x" fileName="atlas/common/ui_role_23.png" pkg="y4b7yuun" xy="0,0">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <text id="n1_u93s" name="title" xy="16,15" size="44,29" fontSize="20" text="一区"/>
+  </displayList>
+  <Button/>
+</component>

@@ -1606,6 +1606,14 @@ declare module 'csharp' {
         class Byte extends System.ValueType {
             
         }
+        interface IAsyncResult {
+            
+        }
+        type AsyncCallback = (ar: System.IAsyncResult) => void;
+        var AsyncCallback: {new (func: (ar: System.IAsyncResult) => void): AsyncCallback;}
+        class IntPtr extends System.ValueType {
+            
+        }
         class Exception extends System.Object {
             
         }

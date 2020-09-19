@@ -6,6 +6,9 @@ import { NiceET } from "../../../../data/pb/OuterMessage";
 import { LoginAPI } from "../../../api/LoginAPI";
 import { UIManager } from "../../../../framework/ui/UIManager";
 import { loginUI } from "../../../../data/ui/login";
+import { VoServer, VoServerItem } from "../vo/VoServer";
+import { UIMessageManger } from "../../../event/UIMessageManager";
+import { UIMessage } from "../../../event/UIMessage";
 
 
 
@@ -35,36 +38,69 @@ export class UILoginPage extends UIPage{
         });
 
         this.m_selserverBtn.onClick.Add(()=>{
-            this.onSelServer();
+            this.openSelServerWin();
         });
 
         this.m_loginBtn.enabled = false;
 
-        SessionManager.Instance(SessionManager).connectRealmServer((code:number)=>{
-            this.m_loginBtn.enabled = true;
+        SessionManager.Instance(SessionManager).connectRealmServer(
+            (code:number)=>{
+                    this.m_loginBtn.enabled = true;
 
-        } ,(code:number)=>{
-
-
-        });
+             } ,(code:number)=>{
+             });
     }
     
+
+    private onSelectServer(serverItem:VoServerItem){
+
+        console.log(" server selected: "+serverItem.serverName)
+        this.m_selserverBtn.text = serverItem.serverName;
+    }
+
 
     public onOpen(vo:any):void{
         super.onOpen(vo);
 
-        
+         //监听选服消息
+         UIMessageManger.Instance(UIMessageManger).addListener(
+            UIMessage.MSG_SELECT_SERVER,
+            this,
+            this.onSelectServer
+        );
     }
     public onClose(arg:any):void{
         super.onClose(arg);
 
+        UIMessageManger.Instance(UIMessageManger).removeListener(
+            UIMessage.MSG_SELECT_SERVER,
+            this.onSelectServer
+        );
     }
 
-    private onSelServer(){
+    private openSelServerWin(){
 
-        console.log("sele server..............");
+        // 测试数据
+        let voServer:VoServer = new VoServer();
+        for(let i=1; i<10; i++){
+            voServer.areaMap.set(i,"分区"+i);
+            voServer.serverMap.set(i, new Array<VoServerItem>());
 
-        UIManager.Instance(UIManager).openWindow(loginUI.PackageName, loginUI.UISelServerWin,null);
+            for(let j=1; j<20; j++){
+
+                let voServerItem:VoServerItem = new VoServerItem();
+                voServerItem.areaId = i;
+                voServerItem.serverId = j;
+
+                voServerItem.serverName = "测试服务器"+i+":"+j;
+                voServerItem.serverStatus = Math.floor(Math.random()*3+1);
+
+                
+                voServer.serverMap.get(i).push(voServerItem);
+            }
+        }
+
+        UIManager.Instance(UIManager).openWindow(loginUI.PackageName, loginUI.UISelServerWin,voServer);
     }
 
     private onLoginClick(){

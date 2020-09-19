@@ -5,6 +5,8 @@ import { ResManager } from '../framework/common/ResManager';
 import { NiceET } from '../data/pb/OuterMessage';
 import { SkillConfigTB, SkillConfigTR } from '../data/excel/SkillConfig';
 import { Opcode } from '../data/pb/Opcode';
+import { Player } from '../game/entity/Player';
+import { Entity, World } from 'ecsy';
 
 
 
@@ -199,6 +201,7 @@ export class UnitTest{
         console.log("sleep =============================");
         await TimeUtil.sleep(5000);
         console.log("sleep ..end");
+
 
     }
 

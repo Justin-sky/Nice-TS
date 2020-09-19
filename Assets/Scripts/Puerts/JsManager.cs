@@ -1,4 +1,5 @@
-﻿using NiceTS;
+﻿using FairyGUI;
+using NiceTS;
 using Puerts;
 using System;
 using System.Collections.Generic;
@@ -45,13 +46,14 @@ public class JsManager:MonoSingleton<JsManager>
         {
             Logger.LogError("InitJsEnv null!!!");
         }
-
+       
         //声明Action： 值类型才需要这样添加
         jsEnv.UsingAction<float>();
         jsEnv.UsingAction<float, float>();
         jsEnv.UsingAction<string, byte[]>();
         jsEnv.UsingAction<Scene, LoadSceneMode>();
         jsEnv.UsingAction<TChannel, int>();
+        jsEnv.UsingAction<int, GObject>();
 
     }
 

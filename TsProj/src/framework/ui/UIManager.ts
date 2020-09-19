@@ -78,7 +78,8 @@ export class UIManager extends Singleton<UIManager>{
 
         for (const panel of this.m_listLoadedPanel) {
             if(panel.name == name){
-                panel;
+                console.log("find panel in cache: "+name);
+                return panel;
             }
         }
         return null;

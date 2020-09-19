@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="700,500">
+<component size="827,553">
   <displayList>
-    <image id="n1_pyg6" name="n1" src="pyg62n" fileName="atlas/common/ui_comm_bg_underlay_d.png" xy="0,0" size="700,500" pkg="y4b7yuun"/>
-    <text id="n2_pyg6" name="n2" xy="180,19" size="104,29" fontSize="20" color="#0066cc" text="选择服务器"/>
-    <component id="n3_pyg6" name="n3" src="pyg64x" fileName="ui/login/AreaBtn.xml" xy="43,74">
-      <Button title="推荐"/>
-    </component>
-    <component id="n4_pyg6" name="n4" src="pyg64x" fileName="ui/login/AreaBtn.xml" xy="145,75">
-      <Button title="一区"/>
-    </component>
-    <component id="n5_pyg6" name="n5" src="pyg64x" fileName="ui/login/AreaBtn.xml" xy="248,75">
-      <Button title="二区"/>
-    </component>
-    <component id="n6_pyg6" name="n6" src="pyg64x" fileName="ui/login/AreaBtn.xml" xy="349,74">
-      <Button title="三区"/>
-    </component>
-    <component id="n7_pyg6" name="backBtn" src="pyg64s" fileName="ui/common/CommonBtn.xml" xy="75,418" pkg="y4b7yuun">
+    <image id="n1_pyg6" name="BG" src="pyg62n" fileName="atlas/common/ui_comm_bg_underlay_d.png" pkg="y4b7yuun" xy="0,0" size="827,553"/>
+    <text id="n2_pyg6" name="title" xy="180,19" size="104,29" fontSize="20" color="#0066cc" text="选择服务器"/>
+    <list id="n10_feeg" name="areaList" xy="44,56" size="745,52" layout="flow_hz" overflow="scroll" scroll="horizontal" colGap="2" defaultItem="ui://l64dumk9u93s56">
+      <item/>
+      <item/>
+    </list>
+    <list id="n9_pyg6" name="serverList" xy="43,114" size="750,355" layout="flow_hz" overflow="scroll" colGap="8" lineItemCount="2" defaultItem="ui://l64dumk9feeg54">
+      <item/>
+      <item/>
+    </list>
+    <component id="n7_pyg6" name="backBtn" src="pyg64s" fileName="ui/common/CommonBtn.xml" pkg="y4b7yuun" xy="162,475">
       <Button title="返回"/>
     </component>
-    <component id="n8_pyg6" name="okBtn" src="pyg64s" fileName="ui/common/CommonBtn.xml" xy="489,414" pkg="y4b7yuun">
+    <component id="n8_pyg6" name="okBtn" src="pyg64s" fileName="ui/common/CommonBtn.xml" pkg="y4b7yuun" xy="541,476">
       <Button title="确定"/>
     </component>
-    <list id="n9_pyg6" name="n9" xy="52,150" size="611,253" layout="row" overflow="scroll"/>
   </displayList>
 </component>

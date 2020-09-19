@@ -57,7 +57,9 @@ public class PuertsConfig
                 typeof(FairyGUI.EaseType),
                 typeof(FairyGUI.TweenValue),
                 typeof(FairyGUI.UIObjectFactory),
-
+                typeof(FairyGUI.ListItemRenderer),
+                typeof(FairyGUI.EventListener),
+             
 
                 typeof(Debug),
                 typeof(Vector3),
@@ -97,7 +99,6 @@ public class PuertsConfig
                 typeof(NiceTS.TChannel),
                 typeof(JsManager),
                 typeof(GameLaunch),
-
 
             };
         }

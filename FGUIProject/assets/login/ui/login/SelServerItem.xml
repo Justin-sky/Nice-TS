@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="370,60" extention="Button">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <displayList>
+    <image id="n0_feeg" name="n0" src="pyg6g" fileName="atlas/group/ui_group_01.png" pkg="y4b7yuun" xy="0,0" size="370,60">
+      <gearDisplay controller="button" pages="0,2"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <image id="n1_feeg" name="n1" src="pyg6g" fileName="atlas/group/ui_group_01.png" pkg="y4b7yuun" xy="0,0" size="370,60">
+      <gearDisplay controller="button" pages="1,3"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <loader id="n3_feeg" name="icon" xy="17,4" size="50,50"/>
+    <text id="n4_feeg" name="title" xy="77,9" size="267,38" fontSize="25" autoSize="none" text="测试服务器"/>
+  </displayList>
+  <Button/>
+</component>
