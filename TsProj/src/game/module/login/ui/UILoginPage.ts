@@ -102,7 +102,10 @@ export class UILoginPage extends UIPage{
             }
         }
 
-        UIManager.Instance(UIManager).openWindow(loginUI.PackageName, loginUI.UISelServerWin,voServer);
+        UIManager.Instance(UIManager).openWindow(
+            loginUI.PackageName, 
+            loginUI.UISelServerWin,
+            voServer);
     }
 
     private onLoginClick(){
@@ -114,22 +117,25 @@ export class UILoginPage extends UIPage{
 
         if(account != "" && password != ""){
             
-            LoginAPI.loginRealmServer(account, password,(msg:NiceET.R2C_Login)=>{
+            LoginAPI.loginRealmServer(
+                account, 
+                password,
+                (msg:NiceET.R2C_Login)=>{
 
-                this.gateId = msg.GateId;
-                this.gateKey = msg.Key;
-                console.log("login ream succ, gate addr:"+msg.Address + ",key:"+msg.Key);
+                    this.gateId = msg.GateId;
+                    this.gateKey = msg.Key;
+                    console.log("login ream succ, gate addr:"+msg.Address + ",key:"+msg.Key);
 
-                SessionManager.Instance(SessionManager).disconnectRealmServer();
+                    SessionManager.Instance(SessionManager).disconnectRealmServer();
+                    
+                    //登录网关服
+                    SessionManager.Instance(SessionManager).connectGateServer(
+                        msg.Address,
+                        (code:number)=>{this.onConnGateSucc(code); },
+                        (code:number)=>{this.onConnGateErr(code); }
+                    );
                 
-                //登录网关服
-                SessionManager.Instance(SessionManager).connectGateServer(
-                    msg.Address,
-                    (code:number)=>{this.onConnGateSucc(code); },
-                    (code:number)=>{this.onConnGateErr(code); }
-                );
-               
-            });
+                });
 
         }
 
@@ -138,12 +144,16 @@ export class UILoginPage extends UIPage{
     private onConnGateSucc(code:number){
         console.log("connect gate succ: "+code)
 
-        LoginAPI.loginGateServer(this.gateId,this.gateKey,(msg:NiceET.G2C_LoginGate)=>{
-            let playerID = msg.PlayerId;
-            console.log("login gate response.." +playerID);
+        LoginAPI.loginGateServer(
+            this.gateId,
+            this.gateKey,
+            (msg:NiceET.G2C_LoginGate)=>{
 
-            SceneManager.Instance(SceneManager).loadScene(SceneDef.HomeScene,()=>{});
-        });
+                let playerID = msg.PlayerId;
+                console.log("login gate response.." +playerID);
+
+                SceneManager.Instance(SceneManager).loadScene(SceneDef.HomeScene,()=>{});
+            });
     }
 
     private onConnGateErr(code:number){

@@ -52,7 +52,10 @@ export class UIHomePage extends UIPage{
 
     public onchatBtn(){
 
-        UIManager.Instance(UIManager).openWindow(commonUI.PackageName,commonUI.UIUINoticeWin,null);
+        UIManager.Instance(UIManager).openWindow(
+            commonUI.PackageName,
+            commonUI.UIUINoticeWin,
+            null);
         console.log("on chat...");
     }
     public onbagBtn(){
@@ -60,7 +63,9 @@ export class UIHomePage extends UIPage{
     }
     public onshopBtn(){
         
-        UIManager.Instance(UIManager).openPage(homeUI.PackageName,homeUI.UIShopPage);
+        UIManager.Instance(UIManager).openPage(
+            homeUI.PackageName,
+            homeUI.UIShopPage);
     }
     public onlevelBtn(){
         console.log("on level...");
