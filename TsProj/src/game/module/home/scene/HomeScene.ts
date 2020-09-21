@@ -13,7 +13,7 @@ export class HomeScene extends BaseScene{
 
     public onEnter() {
 
-        this.addPreloadFairyGUIPackage("home_fui.bytes","home");
+        this.addPreloadFairyGUIPackage(homeUI.PackageBytes,homeUI.PackageName);
     }
 
     public onComplete() {

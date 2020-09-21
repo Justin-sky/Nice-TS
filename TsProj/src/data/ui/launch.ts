@@ -3,5 +3,6 @@
 export class launchUI
 {
     public static PackageName:string = "launch";
+    public static PackageBytes:string = "launch_fui.bytes";
     public static UILaunchPage:string = "LaunchPage";
 }
