@@ -7,7 +7,6 @@ import { ExcelManager } from './data/excel/ExcelManager';
 
 import { JsManager ,GameLaunch } from 'csharp';
 import { SceneDef } from './framework/scene/SceneDef';
-import { loginUI } from './data/ui/login';
 import { SceneManager } from './framework/scene/SceneManager';
 
 
