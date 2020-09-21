@@ -2,6 +2,8 @@
 <packageDescription id="yt4d8ma4">
   <resources>
     <component id="pyg650" name="HomePage.xml" path="/ui/home/" exported="true"/>
+    <component id="pyg651" name="LevelPage.xml" path="/ui/level/" exported="true"/>
+    <component id="pyg652" name="ShopPage.xml" path="/ui/shop/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

@@ -2,6 +2,9 @@ import { UIPage } from "../../../../framework/ui/UIPage";
 import { binder } from "../../../../framework/common/NiceDecorator";
 import { FairyGUI } from "csharp";
 import { UIManager } from "../../../../framework/ui/UIManager";
+import { common } from "protobufjs";
+import { commonUI } from "../../../../data/ui/common";
+import { homeUI } from "../../../../data/ui/home";
 
 
 
@@ -49,14 +52,15 @@ export class UIHomePage extends UIPage{
 
     public onchatBtn(){
 
-        UIManager.Instance(UIManager).openWindow("common","UINoticeWin",null);
+        UIManager.Instance(UIManager).openWindow(commonUI.PackageName,commonUI.UIUINoticeWin,null);
         console.log("on chat...");
     }
     public onbagBtn(){
         console.log("on bag ..");
     }
     public onshopBtn(){
-        console.log("on shop...");
+        
+        UIManager.Instance(UIManager).openPage(homeUI.PackageName,homeUI.UIShopPage);
     }
     public onlevelBtn(){
         console.log("on level...");

@@ -8,6 +8,7 @@ import { commonUI } from "../../data/ui/common";
 import { homeUI } from "../../data/ui/home";
 import { UIMsgBox } from "./UILib/UIMsgBox";
 import { UISelServerWin } from "../../game/module/login/ui/UISelServerWin";
+import { UIShopPage } from "../../game/module/home/ui/UIShopPage";
 
 
 
@@ -43,6 +44,9 @@ export class UIFactory{
                 //home
             case homeUI.UIHomePage:
                 ui = new UIHomePage();
+                break;
+            case homeUI.UIShopPage:
+                ui = new UIShopPage();
                 break;
         }
 
