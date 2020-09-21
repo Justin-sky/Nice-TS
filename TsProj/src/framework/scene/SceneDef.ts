@@ -4,5 +4,5 @@ export  class SceneDef{
     public static LaunchScene:string = "LaunchScene";
     public static HomeScene:string = "HomeScene";
     public static LoginScene:string = "LoginScene";
-    public static BattleScene:string = "BattleScene";
+    public static PveScene:string = "PveScene";
 }

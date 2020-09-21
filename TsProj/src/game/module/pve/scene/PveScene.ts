@@ -1,7 +1,7 @@
 import { BaseScene } from "../../../../framework/scene/BaseScene";
 
 
-export class BattleScene extends BaseScene{
+export class PveScene extends BaseScene{
 
     constructor(){
         super();

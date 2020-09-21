@@ -1,5 +1,5 @@
 import { BaseScene } from "./BaseScene";
-import { BattleScene } from "../../game/module/pve/scene/BattleScene";
+import { PveScene } from "../../game/module/pve/scene/PveScene";
 import { HomeScene } from "../../game/module/home/scene/HomeScene";
 import { LoginScene } from "../../game/module/login/scene/LoginScene";
 import { SceneDef } from "./SceneDef";
@@ -20,8 +20,8 @@ export class SceneFactory{
             case SceneDef.HomeScene:
                 scene = new HomeScene();
                 break;
-            case SceneDef.BattleScene:
-                scene = new BattleScene();
+            case SceneDef.PveScene:
+                scene = new PveScene();
                 break;
         }
 
