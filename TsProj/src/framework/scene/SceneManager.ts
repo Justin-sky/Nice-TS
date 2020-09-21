@@ -1,7 +1,8 @@
 import { UnityEngine } from "csharp";
 import { commonUI } from "../../data/ui/common";
+import { UIMessage } from "../../game/event/UIMessage";
+import { UIMessageManger } from "../../game/event/UIMessageManager";
 import { Singleton } from "../common/Singleton";
-import { UILoading } from "../ui/UILib/UILoading";
 import { UIManager } from "../ui/UIManager";
 import { BaseScene } from "./BaseScene";
 import { SceneFactory } from "./SceneFactory";
@@ -13,55 +14,67 @@ export class SceneManager extends Singleton<SceneManager>{
 
     private onSceneLoadedOnly:Function;
     private currentScene:BaseScene;
-    private loadingUI:UILoading;
+
 
     constructor(){
         super();
 
-        UnityEngine.SceneManagement.SceneManager.add_sceneLoaded((scene, mode) =>
+        UnityEngine.SceneManagement.SceneManager.add_sceneLoaded((scene, _mode) =>
         {
             if (this.onSceneLoadedOnly != null) this.onSceneLoadedOnly(scene.name);
         }); 
     }
 
 
-    //更新进度条
-    private updateProgress(progress:number){
-
-        this.loadingUI.showProgress(progress);
-    }
 
     public async loadScene(scene:string, onLoadComplete:Function){
+        
+        try{
+            this.onSceneLoadedOnly = async (sceneName:string)=>{
+                    
+                if(sceneName == scene){
+                    this.onSceneLoadedOnly = null;
+                    this.currentScene =  SceneFactory.createScene(scene);
+                    this.currentScene.onEnter();
 
-        this.onSceneLoadedOnly = async (sceneName:string)=>{
-            if(sceneName == scene){
-                this.onSceneLoadedOnly = null;
-                this.currentScene =  SceneFactory.createScene(scene);
-                this.currentScene.onEnter();
+                    let progressInterval = setInterval(()=>{
 
-                let progressInterval = setInterval(()=>{
-                    this.updateProgress(this.currentScene.finishCount/this.currentScene.totalCount);
-                }, 500);
-                await this.currentScene.onPrepare();
+                        let progress = this.currentScene.finishCount/this.currentScene.totalCount;
+                        console.log("progress:"+progress + " = "+this.currentScene.finishCount + " = "+this.currentScene.totalCount);
+                    
+                        UIMessageManger.Instance(UIMessageManger).broadcast(
+                            UIMessage.MSG_SCENE_PROGRESS,
+                            progress*100);
 
-                clearInterval(progressInterval);
+                        if(this.currentScene.finishCount == this.currentScene.totalCount){
+                            clearInterval(progressInterval);
 
-                //加载完成
-                this.currentScene.onComplete();
-                if(onLoadComplete != null) onLoadComplete();
-                UIManager.Instance(UIManager).closeLoading(commonUI.UILoadingPage);
+                            //加载完成
+                            this.currentScene.onComplete();
+                            if(onLoadComplete != null) onLoadComplete();
+                            UIManager.Instance(UIManager).closeLoading(commonUI.UILoadingPage);
+                        }
+
+                    }, 100);
+                    this.currentScene.onPrepare(); 
+                
+                }
+            };
+            
+            UIManager.Instance(UIManager).openLoading(commonUI.PackageName, commonUI.UILoadingPage);
+       
+            //清理旧场景
+            if(this.currentScene){
+                this.currentScene.onLeave();
+                this.currentScene.onDestroy();
             }
-        };
+            
+            await UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
 
-        this.loadingUI = UIManager.Instance(UIManager).openLoading(commonUI.PackageName, commonUI.UILoadingPage);
-
-        //清理旧场景
-        if(this.currentScene){
-           this.currentScene.onLeave();
-           this.currentScene.onDestroy();
+        }catch(ex){
+            console.log("load scene excep:"+ex);
         }
         
-        UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
     }
 
 

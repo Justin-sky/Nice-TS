@@ -1,65 +1,50 @@
 import { UIPanel } from "../UIPanel";
 import { UITypeDef } from "../UIDefine";
 import { FairyGUI } from "csharp";
+import { binder } from "../../common/NiceDecorator";
+import { UIMessageManger } from "../../../game/event/UIMessageManager";
+import { UIMessage } from "../../../game/event/UIMessage";
 
-
-
-export class UILoadingArg{
-
-    public title:string = "";
-    public tips:string = "";
-    public progress:number = 0;
-}
 
 
 export class  UILoading extends UIPanel{
 
-    public txtTitle : FairyGUI.GTextField;
-    public txtTips : FairyGUI.GTextField;
 
-    private m_arg:UILoadingArg; 
+    @binder("loading_pregress")
+    public progressLoading: FairyGUI.GProgressBar;
 
-    public get arg() : UILoadingArg {
-        return this.m_arg; 
-    }
+
 
     public onAwake(): void {
        
-        this.bindAll(this);
     }
     
     public get uiType(): UITypeDef {    
         return UITypeDef.Loading;
     }
 
-    public onOpen(arg:UILoadingArg):void{
+    public onOpen(arg:any):void{
         super.onOpen(arg);
 
-        this.m_arg = arg as UILoadingArg;
-        if(!this.m_arg){
-            this.m_arg = new UILoadingArg();
-        }
-        this.updateText();
+        this.progressLoading.value = 0;
+        this.progressLoading.visible = true;
+
+        UIMessageManger.Instance(UIMessageManger).addListener(
+            UIMessage.MSG_SCENE_PROGRESS,
+            this,
+            (progress:number)=>{
+                this.progressLoading.TweenValue(progress, 0.1);
+            });
     }
 
-    public showProgress(progress:number):void{
-        this.m_arg.progress = progress;
+    public onClose(arg:any):void{
+        super.onClose(arg);
 
-        this.updateText();
+        this.progressLoading.visible = false;
+        UIMessageManger.Instance(UIMessageManger).removeListenerByCode(
+            UIMessage.MSG_SCENE_PROGRESS
+        );
     }
 
-
-    private updateText(){
-        console.log("loading progress:"+this.m_arg.progress);
-
-        // if (txtTitle != null)
-        // {
-        //     txtTitle.text = m_arg.title + "(" + (int)(m_arg.progress * 100) + "%)";
-        // }
-        // if (txtTips != null)
-        // {
-        //     txtTips.text = m_arg.tips;
-        // }
-    }
 
 }

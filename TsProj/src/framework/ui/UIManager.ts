@@ -41,10 +41,9 @@ export class UIManager extends Singleton<UIManager>{
                 panel.close();
             }
 
-            this.m_listLoadedPanel.slice(i,1);
             panel.dispose();  
         }
-
+        this.m_listLoadedPanel.length = 0;
     }
 
     public clean():void{
@@ -76,7 +75,9 @@ export class UIManager extends Singleton<UIManager>{
 
         for (const panel of this.m_listLoadedPanel) {
             if(panel.name == name){
+
                 console.log("find panel in cache: "+name);
+
                 return panel;
             }
         }
@@ -90,11 +91,10 @@ export class UIManager extends Singleton<UIManager>{
 
     //==========================================================UILoading
     //打开Loading界面
-    public openLoading(pkg:string, name:string, arg?:any):UILoading{
+    public openLoading(pkg:string, name:string, arg?:any){
 
-        let ui:UILoading = this.open(pkg, name, arg);
+        this.openPageInScene(pkg, name, arg);
 
-        return ui;
     }
     //关闭Loading界面
     public closeLoading(name:string, arg?:any):void{

@@ -2218,6 +2218,13 @@ declare module 'csharp' {
         enum StackTraceLogType { None = 0, ScriptOnly = 1, Full = 2 }
         enum ThreadPriority { Low = 0, BelowNormal = 1, Normal = 2, High = 4 }
         class AsyncOperation extends UnityEngine.YieldInstruction {
+            public isDone: boolean;
+            public progress: number;
+            public priority: number;
+            public allowSceneActivation: boolean;
+            public constructor();
+            public add_completed(value: System.Action$1<UnityEngine.AsyncOperation>):void;
+            public remove_completed(value: System.Action$1<UnityEngine.AsyncOperation>):void;
             
         }
         enum UserAuthorization { WebCam = 1, Microphone = 2 }
