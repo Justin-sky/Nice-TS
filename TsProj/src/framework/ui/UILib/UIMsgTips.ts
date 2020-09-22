@@ -16,7 +16,7 @@ export class UIMsgTips extends UIWidge{
 
     public onAwake(): void {
         
-        this.bindAll(this)
+
     }
 
 
