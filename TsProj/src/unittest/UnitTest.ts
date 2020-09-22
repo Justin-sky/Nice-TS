@@ -5,9 +5,8 @@ import { ResManager } from '../framework/common/ResManager';
 import { NiceET } from '../data/pb/OuterMessage';
 import { SkillConfigTB, SkillConfigTR } from '../data/excel/SkillConfig';
 import { Opcode } from '../data/pb/Opcode';
-import { Player } from '../game/entity/Player';
-import { Entity, World } from 'ecsy';
-
+import { fb } from '../data/fb/unitconfig_generated';
+import { UnitConfigTB } from '../data/excel/UnitConfig';
 
 
 export class UnitTest{
@@ -203,6 +202,24 @@ export class UnitTest{
         console.log("sleep ..end");
 
 
+        console.log("flatbuffer =============================");
+        try{
+            let bytes:ArrayBuffer = await ResManager.Instance(ResManager).loadTextBytes("Config/fb/unitconfig.bytes")
+            let unitByte = new flatbuffers.ByteBuffer(new Uint8Array(bytes));
+            console.log(unitByte);
+            let unitconfig:fb.unitconfigTB = fb.unitconfigTB.getRootAsunitconfigTB(unitByte)
+            console.log(unitconfig.unitconfigTRSLength());
+            
+    
+            for(let i=0; i<unitconfig.unitconfigTRSLength(); i++){
+                let a =  unitconfig.unitconfigTRS(i);
+                console.log(a.Name());
+            }
+
+        }catch(ex){
+            console.error(ex);
+        }
+        
     }
 
     

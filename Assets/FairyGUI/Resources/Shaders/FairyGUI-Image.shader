@@ -78,9 +78,7 @@ Shader "FairyGUI/Image"
                     float2 clipPos : TEXCOORD1;
                     #endif
                 };
-                
-
-                CBUFFER_START(UnityPerMaterial)
+    
                 sampler2D _MainTex;
                 
                 #ifdef COMBINED
@@ -101,7 +99,6 @@ Shader "FairyGUI/Image"
                 float4 _ColorOffset;
                 float _ColorOption = 0;
                 #endif
-                CBUFFER_END
 
                 v2f vert (appdata_t v)
                 {

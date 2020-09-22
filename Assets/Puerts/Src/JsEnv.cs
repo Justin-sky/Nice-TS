@@ -113,7 +113,7 @@ namespace Puerts
             ExecuteFile("puerts/polyfill.js");
         }
 
-        void ExecuteFile(string filename)
+        public void ExecuteFile(string filename)
         {
             if (loader.FileExists(filename))
             {

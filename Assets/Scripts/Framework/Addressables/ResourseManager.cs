@@ -13,7 +13,7 @@ namespace NiceTS
 
         public static void init()
         {
-            NTexture.CustomDestroyMethod = (Texture t) =>
+            NTexture.CustomDestroyMethod += (Texture t) =>
             {
                 Addressables.Release(t);
                 Logger.Log(".... release addressable: " + t.name);
@@ -105,6 +105,12 @@ namespace NiceTS
             return res;
         }
 
+        public static async Task<Puerts.ArrayBuffer> LoadTextBytes(string address)
+        {
+            var res = await Addressables.LoadAssetAsync<TextAsset>(address).Task;
+
+            return new Puerts.ArrayBuffer(res.bytes);
+        }
 
         public static async Task<Sprite> LoadSprite(string address)
         {

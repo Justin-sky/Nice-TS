@@ -1230,6 +1230,8 @@ declare module 'csharp' {
             public resBundle: UnityEngine.AssetBundle;
             public dependencies: System.Collections.Generic.Dictionary$2<string, string>[];
             public constructor();
+            public static add_onReleaseResource(value: System.Action$1<FairyGUI.PackageItem>):void;
+            public static remove_onReleaseResource(value: System.Action$1<FairyGUI.PackageItem>):void;
             public static GetVar(key: string):string;
             public static SetVar(key: string, value: string):void;
             public static GetById(id: string):FairyGUI.UIPackage;
@@ -1439,6 +1441,7 @@ declare module 'csharp' {
         class Double extends System.ValueType {
             
         }
+        type Action$1<T> = (obj: T) => void;
         class Type extends System.Reflection.MemberInfo {
             public static FilterAttribute: System.Reflection.MemberFilter;
             public static FilterName: System.Reflection.MemberFilter;
@@ -1619,7 +1622,6 @@ declare module 'csharp' {
         }
         type Converter$2<TInput,TOutput> = (input: TInput) => TOutput;
         type Predicate$1<T> = (obj: T) => boolean;
-        type Action$1<T> = (obj: T) => void;
         type Comparison$1<T> = (x: T, y: T) => number;
         class UInt64 extends System.ValueType {
             
@@ -2231,6 +2233,14 @@ declare module 'csharp' {
         enum RuntimePlatform { OSXEditor = 0, OSXPlayer = 1, WindowsPlayer = 2, OSXWebPlayer = 3, OSXDashboardPlayer = 4, WindowsWebPlayer = 5, WindowsEditor = 7, IPhonePlayer = 8, XBOX360 = 10, PS3 = 9, Android = 11, NaCl = 12, FlashPlayer = 15, LinuxPlayer = 13, LinuxEditor = 16, WebGLPlayer = 17, MetroPlayerX86 = 18, WSAPlayerX86 = 18, MetroPlayerX64 = 19, WSAPlayerX64 = 19, MetroPlayerARM = 20, WSAPlayerARM = 20, WP8Player = 21, BB10Player = 22, BlackBerryPlayer = 22, TizenPlayer = 23, PSP2 = 24, PS4 = 25, PSM = 26, XboxOne = 27, SamsungTVPlayer = 28, WiiU = 30, tvOS = 31, Switch = 32, Lumin = 33, Stadia = 34 }
         enum SystemLanguage { Afrikaans = 0, Arabic = 1, Basque = 2, Belarusian = 3, Bulgarian = 4, Catalan = 5, Chinese = 6, Czech = 7, Danish = 8, Dutch = 9, English = 10, Estonian = 11, Faroese = 12, Finnish = 13, French = 14, German = 15, Greek = 16, Hebrew = 17, Hugarian = 18, Icelandic = 19, Indonesian = 20, Italian = 21, Japanese = 22, Korean = 23, Latvian = 24, Lithuanian = 25, Norwegian = 26, Polish = 27, Portuguese = 28, Romanian = 29, Russian = 30, SerboCroatian = 31, Slovak = 32, Slovenian = 33, Spanish = 34, Swedish = 35, Thai = 36, Turkish = 37, Ukrainian = 38, Vietnamese = 39, ChineseSimplified = 40, ChineseTraditional = 41, Unknown = 42, Hungarian = 18 }
         enum NetworkReachability { NotReachable = 0, ReachableViaCarrierDataNetwork = 1, ReachableViaLocalAreaNetwork = 2 }
+        class TextAsset extends UnityEngine.Object {
+            public text: string;
+            public bytes: number[];
+            public constructor();
+            public constructor(text: string);
+            public ToString():string;
+            
+        }
         
     }
     namespace System.Collections.Generic {
@@ -2892,6 +2902,7 @@ declare module 'csharp' {
             public static PreloadJS(jsLabel: string):System.Threading.Tasks.Task$1<boolean>;
             public static LoadPrefab(address: string):System.Threading.Tasks.Task$1<UnityEngine.GameObject>;
             public static LoadTextAsset(address: string):System.Threading.Tasks.Task$1<UnityEngine.TextAsset>;
+            public static LoadTextBytes(address: string):System.Threading.Tasks.Task$1<ArrayBuffer>;
             public static LoadSprite(address: string):System.Threading.Tasks.Task$1<UnityEngine.Sprite>;
             public static ReleaseAddressGO(go: UnityEngine.Object):void;
             

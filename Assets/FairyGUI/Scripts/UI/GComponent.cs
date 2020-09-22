@@ -100,6 +100,13 @@ namespace FairyGUI
                 _peerTable = null;
             }
 #endif
+
+#if FAIRYGUI_PUERTS
+            if (__onDispose != null)
+                __onDispose();
+            __onConstruct = null;
+            __onDispose = null;
+#endif
         }
 
         /// <summary>
@@ -1564,6 +1571,10 @@ namespace FairyGUI
 #if FAIRYGUI_TOLUA
             CallLua("ctor");
 #endif
+#if FAIRYGUI_PUERTS
+            if (__onConstruct != null)
+                __onConstruct();
+#endif
         }
 
         virtual protected void ConstructExtension(ByteBuffer buffer)
@@ -1663,6 +1674,11 @@ namespace FairyGUI
 
             return false;
         }
+#endif
+
+#if FAIRYGUI_PUERTS
+        public Action __onConstruct;
+        public Action __onDispose;
 #endif
     }
 }

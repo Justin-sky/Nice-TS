@@ -37,6 +37,18 @@ export class ResManager extends Singleton<ResManager>{
         }
     }
 
+
+    async loadTextBytes(address:string){
+
+        try{
+            let task = NiceTS.ResourceManager.LoadTextBytes(address);
+            let bytes = await $promise(task);
+            return bytes;
+        }catch(ex){
+            console.error(`LoadTextBytes :${address} : ${ex}`)
+        }
+    }
+
     async loadSprite(address:string){
 
         try{

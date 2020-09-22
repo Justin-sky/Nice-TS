@@ -88,7 +88,8 @@ public class PuertsConfig
                 typeof(UnityEngine.UI.Toggle),
                 typeof(UnityEngine.UI.Toggle.ToggleEvent),
                 typeof(UnityEngine.Events.UnityEvent<bool>),
-                typeof(UnityEngine.Application),
+                typeof(Application),
+                typeof(TextAsset),
 
                 typeof(MonoSingleton<NiceTS.TService>),
                 typeof(Logger),

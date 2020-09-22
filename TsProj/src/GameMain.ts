@@ -3,9 +3,8 @@ import {UnitTest} from './unittest/UnitTest';
 import { GameObjectPool } from './framework/common/GameObjectPool';
 import { UIManager } from './framework/ui/UIManager';
 import { ResManager } from './framework/common/ResManager';
-import { ExcelManager } from './data/excel/ExcelManager';
 
-import { JsManager ,GameLaunch } from 'csharp';
+import { JsManager ,GameLaunch, NiceTS } from 'csharp';
 import { SceneDef } from './framework/scene/SceneDef';
 import { SceneManager } from './framework/scene/SceneManager';
 
@@ -30,7 +29,7 @@ class GameMain{
             ResManager.Instance(ResManager);
     
             //预加载excel数据
-            ExcelManager.Instance(ExcelManager);
+            //ExcelManager.Instance(ExcelManager);
       
             //do Unit Test
             UnitTest.doTest();
