@@ -37,7 +37,7 @@ namespace Puerts
 
         public JsEnv(ILoader loader, int debugPort = -1)
         {
-            const int libVersionExpect = 5;
+            const int libVersionExpect = 6;
             int libVersion = PuertsDLL.GetLibVersion();
             if (libVersion != libVersionExpect)
             {
@@ -113,7 +113,7 @@ namespace Puerts
             ExecuteFile("puerts/polyfill.js");
         }
 
-        public void ExecuteFile(string filename)
+        void ExecuteFile(string filename)
         {
             if (loader.FileExists(filename))
             {
@@ -225,6 +225,12 @@ namespace Puerts
         {
             GeneralGetterManager.RegisterGetter(type, getter);
             GeneralSetterManager.RegisterSetter(type, setter);
+        }
+        
+        //use by BlittableCopy
+        public int GetTypeId(Type type)
+        {
+            return TypeRegister.GetTypeId(isolate, type);
         }
 
         public int Index
@@ -452,6 +458,7 @@ namespace Puerts
 #if THREAD_SAFE
             lock(this) {
 #endif
+            ReleasePendingJSFunctions();
             PuertsDLL.InspectorTick(isolate);
             tickHandler.ForEach(fn =>
             {
@@ -538,6 +545,30 @@ namespace Puerts
             if (disposed)
             {
                 throw new InvalidOperationException("JsEnv had disposed!");
+            }
+        }
+
+        Queue<IntPtr> jsFuncQueue = new Queue<IntPtr>();
+
+        internal void EnqueueJSFunction(IntPtr nativeJsFuncPtr)
+        {
+            if (disposed || nativeJsFuncPtr == IntPtr.Zero) return;
+
+            lock (jsFuncQueue)
+            {
+                jsFuncQueue.Enqueue(nativeJsFuncPtr);
+            }
+        }
+
+        internal void ReleasePendingJSFunctions()
+        {
+            lock (jsFuncQueue)
+            {
+                while (jsFuncQueue.Count > 0)
+                {
+                    IntPtr nativeJsFuncPtr = jsFuncQueue.Dequeue();
+                    PuertsDLL.ReleaseJSFunction(isolate, nativeJsFuncPtr);
+                }
             }
         }
     }

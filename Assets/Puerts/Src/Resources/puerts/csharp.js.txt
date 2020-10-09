@@ -35,7 +35,7 @@ var global = global || (function () { return this; }());
             let nestedTypes = puerts.getNestedTypes(csType);
             if (nestedTypes) {
                 for(var i = 0; i < nestedTypes.Length; i++) {
-                    let ntype = nestedTypes[i];
+                    let ntype = nestedTypes.get_Item(i);
                     cls[ntype.Name] = csTypeToClass(ntype);
                 }
             }
@@ -127,11 +127,31 @@ var global = global || (function () { return this; }());
         return cls.__p_innerTypeCache;
     }
     
+    function bindThisToFirstArgument(func) {
+        return function(...args) {
+            return func.apply(null, [this, ...args]);
+        }
+    }
+    
+    function extension(cls, extension) {
+        for(var key in extension) {
+            var func = extension[key];
+            if (typeof func == 'function' && key != 'constructor') {
+                Object.defineProperty(cls.prototype, key, {
+                    value: bindThisToFirstArgument(func),
+                    writable: false,
+                    configurable: false
+                });
+            }
+        }
+    }
+    
     puerts.$ref = ref;
     puerts.$unref = unref;
     puerts.$set = setref;
     puerts.$promise = taskToPromise;
     puerts.$generic = makeGeneric;
     puerts.$typeof = getType;
+    puerts.$extension = extension;
 
 }(global));

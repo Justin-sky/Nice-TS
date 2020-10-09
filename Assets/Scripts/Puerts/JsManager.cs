@@ -41,7 +41,7 @@ public class JsManager:MonoSingleton<JsManager>
 
         //调试端口：8080
         jsEnv = new JsEnv(new JsLoader(), 8080);
-        jsEnv.ExecuteFile("puerts/flatbuffers.js");
+        //jsEnv.ExecuteFile("puerts/flatbuffers.js");
         if (jsEnv == null)
         {
             Logger.LogError("InitJsEnv null!!!");

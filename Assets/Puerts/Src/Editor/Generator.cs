@@ -117,6 +117,19 @@ namespace Puerts.Editor
             }
         }
 
+        static Type RemoveRefAndToConstraintType(Type type)
+        {
+            if (type.IsGenericParameter && type.BaseType != null && type.BaseType != typeof(object) && type.BaseType != typeof(ValueType)) return RemoveRefAndToConstraintType(type.BaseType);
+            else if (type.IsByRef) return RemoveRefAndToConstraintType(type.GetElementType());
+            else return type;
+        }
+
+        static Type ToConstraintType(Type type, bool isGenericTypeDefinition)
+        {
+            if (!isGenericTypeDefinition && type.IsGenericParameter && type.BaseType != null && type.BaseType != typeof(object) && type.BaseType != typeof(ValueType)) return ToConstraintType(type.BaseType, false);
+            else return type;
+        }
+
         static ParameterGenInfo ToParameterGenInfo(ParameterInfo parameterInfo)
         {
             var ExpectJsType = GeneralGetterManager.GetJsTypeMask(parameterInfo.ParameterType);
@@ -124,13 +137,13 @@ namespace Puerts.Editor
             {
                 IsOut = !parameterInfo.IsIn && parameterInfo.IsOut && parameterInfo.ParameterType.IsByRef,
                 IsByRef = parameterInfo.ParameterType.IsByRef,
-                TypeName = (parameterInfo.ParameterType.IsByRef ? parameterInfo.ParameterType.GetElementType() : parameterInfo.ParameterType).GetFriendlyName(),
+                TypeName = RemoveRefAndToConstraintType(parameterInfo.ParameterType).GetFriendlyName(),
                 ExpectJsType = ToCode(ExpectJsType),
                 IsParams = parameterInfo.IsDefined(typeof(ParamArrayAttribute), false),
             };
             if (result.IsParams)
             {
-                result.TypeName = parameterInfo.ParameterType.GetElementType().GetFriendlyName();
+                result.TypeName = RemoveRefAndToConstraintType(parameterInfo.ParameterType.GetElementType()).GetFriendlyName();
             }
             result.ExpectCsType = ((ExpectJsType & JsValueType.NativeObject) == JsValueType.NativeObject) ? string.Format("typeof({0})", result.TypeName) : "null";
             FillEnumInfo(result, parameterInfo.ParameterType);
@@ -233,7 +246,7 @@ namespace Puerts.Editor
                 result = new OverloadGenInfo()
                 {
                     ParameterInfos = methodInfo.GetParameters().Select(info => ToParameterGenInfo(info)).ToArray(),
-                    TypeName = methodInfo.ReturnType.GetFriendlyName(),
+                    TypeName = RemoveRefAndToConstraintType(methodInfo.ReturnType).GetFriendlyName(),
                     IsVoid = methodInfo.ReturnType == typeof(void)
                 };
                 FillEnumInfo(result, methodInfo.ReturnType);
@@ -248,7 +261,7 @@ namespace Puerts.Editor
                         result = new OverloadGenInfo()
                         {
                             ParameterInfos = methodInfo.GetParameters().Select(info => ToParameterGenInfo(info)).Take(i).ToArray(),
-                            TypeName = methodInfo.ReturnType.GetFriendlyName(),
+                            TypeName = RemoveRefAndToConstraintType(methodInfo.ReturnType).GetFriendlyName(),
                             IsVoid = methodInfo.ReturnType == typeof(void)
                         };
                         FillEnumInfo(result, methodInfo.ReturnType);
@@ -301,10 +314,78 @@ namespace Puerts.Editor
             return ret;
         }
 
+        static bool isDefined(MemberInfo test, Type type)
+        {
+#if PUERTS_GENERAL
+            return test.GetCustomAttributes(false).Any(ca => ca.GetType().ToString() == type.ToString());
+#else
+            return test.IsDefined(type, false);
+#endif
+        }
+
+        static Dictionary<Type, HashSet<Type>> extensionTypes = null;
+
+        static bool IsClass(Type type)
+        {
+#if !UNITY_WSA || UNITY_EDITOR
+            return type.IsClass;
+#else
+            return type.GetTypeInfo().IsClass;
+#endif
+        }
+
+        static Type getExtendedType(MethodInfo method)
+        {
+            var type = method.GetParameters()[0].ParameterType;
+            if (!type.IsGenericParameter)
+                return type;
+            var parameterConstraints = type.GetGenericParameterConstraints();
+            if (parameterConstraints.Length == 0)
+            {
+                Debug.LogError(method + "," + method.DeclaringType);
+                throw new InvalidOperationException();
+            }
+
+            var firstParameterConstraint = parameterConstraints[0];
+            if (!IsClass(firstParameterConstraint))
+                throw new InvalidOperationException();
+            return firstParameterConstraint;
+        }
+
+        static Type[] GetExtensionTypes(Type checkType, HashSet<Type> genTypeSet)
+        {
+            if (extensionTypes == null)
+            {
+                var extensionMethods = from type in genTypeSet
+                                       from method in type.GetMethods(BindingFlags.Static | BindingFlags.Public)
+                                       where isDefined(method, typeof(System.Runtime.CompilerServices.ExtensionAttribute)) && Utils.IsSupportedMethod(method)
+                                             select method;
+                extensionTypes = new Dictionary<Type, HashSet<Type>>();
+                foreach (var method in extensionMethods)
+                {
+                    HashSet<Type> extendTypes;
+                    var t = getExtendedType(method);
+                    if (!extensionTypes.TryGetValue(t, out extendTypes))
+                    {
+                        extendTypes = new HashSet<Type>();
+                        extensionTypes.Add(t, extendTypes);
+                    }
+                    var declaringType = method.DeclaringType;
+                    if (!extendTypes.Contains(declaringType)) extendTypes.Add(declaringType);
+                }
+            }
+            HashSet<Type> ret;
+            if (!extensionTypes.TryGetValue(checkType, out ret))
+            {
+                return new Type[] { };
+            }
+            return ret.ToArray();
+        }
+
         static TypeGenInfo ToTypeGenInfo(Type type)
         {
             var methodGroups = type.GetMethods(Flags).Where(m => !isFiltered(m))
-                .Where(m => !m.IsSpecialName && !m.IsGenericMethodDefinition)
+                .Where(m => !m.IsSpecialName && Puerts.Utils.IsSupportedMethod(m))
                 .GroupBy(m => new MethodKey { Name = m.Name, IsStatic = m.IsStatic })
                 .Select(i => i.Cast<MethodBase>().ToList());
             var indexs = type.GetProperties(Flags).Where(m => !isFiltered(m))
@@ -351,7 +432,7 @@ namespace Puerts.Editor
         }
 
         // #lizard forgives
-        static string GetTsTypeName(Type type)
+        static string GetTsTypeName(Type type, bool isParams = false)
         {
             if (type == typeof(int))
                 return "number";
@@ -390,7 +471,7 @@ namespace Puerts.Editor
             else if (type.IsByRef)
                 return "$Ref<" + GetTsTypeName(type.GetElementType()) + ">";
             else if (type.IsArray)
-                return GetTsTypeName(type.GetElementType()) + "[]";
+                return isParams ? (GetTsTypeName(type.GetElementType()) + "[]") : ("System.Array$1<" + GetTsTypeName(type.GetElementType()) + ">");
             else if (type.IsGenericType)
             {
                 var fullName = type.FullName == null ? type.ToString() : type.FullName;
@@ -405,14 +486,15 @@ namespace Puerts.Editor
                 return type.FullName.Replace('+', '.');
         }
 
-        static TsParameterGenInfo ToTsParameterGenInfo(ParameterInfo parameterInfo)
+        static TsParameterGenInfo ToTsParameterGenInfo(ParameterInfo parameterInfo, bool isGenericTypeDefinition)
         {
+            var isParams = parameterInfo.IsDefined(typeof(ParamArrayAttribute), false);
             return new TsParameterGenInfo()
             {
                 Name = parameterInfo.Name,
                 IsByRef = parameterInfo.ParameterType.IsByRef,
-                TypeName = GetTsTypeName(parameterInfo.ParameterType),
-                IsParams = parameterInfo.IsDefined(typeof(ParamArrayAttribute), false),
+                TypeName = GetTsTypeName(ToConstraintType(parameterInfo.ParameterType, isGenericTypeDefinition), isParams),
+                IsParams = isParams,
                 IsOptional = parameterInfo.IsOptional
             };
         }
@@ -433,13 +515,13 @@ namespace Puerts.Editor
             public bool IsStatic;
         }
 
-        public static TsMethodGenInfo ToTsMethodGenInfo(MethodBase methodBase)
+        public static TsMethodGenInfo ToTsMethodGenInfo(MethodBase methodBase, bool isGenericTypeDefinition)
         {
             return new TsMethodGenInfo()
             {
                 Name = methodBase.IsConstructor ? "constructor" : methodBase.Name,
-                ParameterInfos = methodBase.GetParameters().Select(info => ToTsParameterGenInfo(info)).ToArray(),
-                TypeName = methodBase.IsConstructor ? "" : GetTsTypeName((methodBase as MethodInfo).ReturnType),
+                ParameterInfos = methodBase.GetParameters().Select(info => ToTsParameterGenInfo(info, isGenericTypeDefinition)).ToArray(),
+                TypeName = methodBase.IsConstructor ? "" : GetTsTypeName(ToConstraintType((methodBase as MethodInfo).ReturnType, isGenericTypeDefinition)),
                 IsConstructor = methodBase.IsConstructor,
                 IsStatic = methodBase.IsStatic,
             };
@@ -459,6 +541,7 @@ namespace Puerts.Editor
             public TsTypeGenInfo BaseType;
             public bool IsEnum;
             public string EnumKeyValues;
+            public string[] ExtensionTypes;
         }
 
         public static bool IsGetterOrSetter(MethodInfo method)
@@ -497,9 +580,9 @@ namespace Puerts.Editor
                 Name = type.Name.Replace('`', '$'),
                 Methods = genTypeSet.Contains(type) ? (type.IsAbstract ? new MethodBase[] { } : type.GetConstructors(Flags).Where(m => !isFiltered(m)).Cast<MethodBase>())
                     .Concat(type.GetMethods(Flags)
-                        .Where(m => !isFiltered(m) && !IsGetterOrSetter(m) && !m.IsGenericMethodDefinition)
+                        .Where(m => !isFiltered(m) && !IsGetterOrSetter(m) && (type.IsGenericTypeDefinition && !m.IsGenericMethodDefinition || Puerts.Utils.IsSupportedMethod(m)))
                         .Cast<MethodBase>())
-                    .Select(m => ToTsMethodGenInfo(m)).ToArray() : new TsMethodGenInfo[] { },
+                    .Select(m => ToTsMethodGenInfo(m, type.IsGenericTypeDefinition)).ToArray() : new TsMethodGenInfo[] { },
                 Properties = genTypeSet.Contains(type) ? type.GetFields(Flags).Where(m => !isFiltered(m))
                     .Select(f => new TsPropertyGenInfo() { Name = f.Name, TypeName = GetTsTypeName(f.FieldType), IsStatic = f.IsStatic })
                     .Concat(
@@ -510,6 +593,7 @@ namespace Puerts.Editor
                 IsDelegate = (IsDelegate(type) && type != typeof(Delegate)),
                 IsInterface = type.IsInterface,
                 Namespace = type.Namespace,
+                ExtensionTypes = GetExtensionTypes(type, genTypeSet).Select(t => t.IsGenericType ? GetTsTypeName(t) : t.Name.Replace('`', '$')).ToArray()
             };
 
             if (result.IsGenericTypeDefinition)
@@ -676,7 +760,7 @@ namespace Puerts.Editor
 
             HashSet<Type> refTypes = new HashSet<Type>();
 
-            foreach(var type in types)
+            foreach (var type in types)
             {
                 AddRefType(refTypes, type);
                 var defType = type.IsGenericType ? type.GetGenericTypeDefinition() : type;
@@ -702,6 +786,8 @@ namespace Puerts.Editor
                     }
                 }
             }
+
+            if (!genTypeSet.Contains(typeof(Array)) && !refTypes.Contains(typeof(Array))) AddRefType(refTypes, typeof(Array));
 
             return new TypingGenInfo()
             {

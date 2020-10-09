@@ -5,8 +5,8 @@ import { FairyGUI } from "csharp";
 import { binder } from "../common/NiceDecorator";
 
 
-export abstract class UIPage extends UIPanel{
 
+export abstract class UIPage extends UIPanel{
     public get uiType(): UITypeDef {    
         return UITypeDef.Page;
     }

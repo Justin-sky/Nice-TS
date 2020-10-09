@@ -202,23 +202,23 @@ export class UnitTest{
         console.log("sleep ..end");
 
 
-        console.log("flatbuffer =============================");
-        try{
-            let bytes:ArrayBuffer = await ResManager.Instance(ResManager).loadTextBytes("Config/fb/unitconfig.bytes")
-            let unitByte = new flatbuffers.ByteBuffer(new Uint8Array(bytes));
-            console.log(unitByte);
-            let unitconfig:fb.unitconfigTB = fb.unitconfigTB.getRootAsunitconfigTB(unitByte)
-            console.log(unitconfig.unitconfigTRSLength());
+        // console.log("flatbuffer =============================");
+        // try{
+        //     let bytes:ArrayBuffer = await ResManager.Instance(ResManager).loadTextBytes("Config/fb/unitconfig.bytes")
+        //     let unitByte = new flatbuffers.ByteBuffer(new Uint8Array(bytes));
+        //     console.log(unitByte);
+        //     let unitconfig:fb.unitconfigTB = fb.unitconfigTB.getRootAsunitconfigTB(unitByte)
+        //     console.log(unitconfig.unitconfigTRSLength());
             
     
-            for(let i=0; i<unitconfig.unitconfigTRSLength(); i++){
-                let a =  unitconfig.unitconfigTRS(i);
-                console.log(a.Name());
-            }
+        //     for(let i=0; i<unitconfig.unitconfigTRSLength(); i++){
+        //         let a =  unitconfig.unitconfigTRS(i);
+        //         console.log(a.Name());
+        //     }
 
-        }catch(ex){
-            console.error(ex);
-        }
+        // }catch(ex){
+        //     console.error(ex);
+        // }
         
     }
 
