@@ -90,26 +90,25 @@ var global = global || (function () {
     const timers = new PriorityQueue([], (a, b) => a.next_time - b.next_time);
     let next = 0;
     global.__tgjsRegisterTickHandler(timerUpdate)
-    global.__tgjsRegisterTickHandler = undefined;
+    delete global.__tgjsRegisterTickHandler;
 
     function timerUpdate() {
         const now = Date.now();
         while (true) {
             const time = timers.peek();
             if (time && time.next_time <= now) {
-
+                timers.pop();
                 if(removing_timers.has(time.id)){
                     removing_timers.delete(time.id)
                 }
                 else {
-
-                    time.handler(time.args);
                     if (time.timeout) {
                         time.next_time = now + time.timeout;
                         timers.push(time);
                     }
+                    time.handler(time.args);
                 }
-                timers.pop();
+
             } else {
                 break;
             }

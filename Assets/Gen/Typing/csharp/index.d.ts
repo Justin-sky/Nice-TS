@@ -2,6 +2,18 @@
 declare module 'csharp' {
     interface $Ref<T> {}
     
+    type $Extension<T1, T2> = {
+        [P in keyof T2] : T2[P] extends (obj:T1, ...args: infer P) => infer R ? (...args: P) => R : never;
+    }
+    
+    namespace System {
+        interface Array$1<T> extends System.Array {
+            get_Item(index: number):T;
+            
+            set_Item(index: number, value: T):void;
+        }
+    }
+    
     type $Task<T> = System.Threading.Tasks.Task$1<T>
     
     namespace FairyGUI {
@@ -42,7 +54,7 @@ declare module 'csharp' {
             public x: number;
             public y: number;
             public keyCode: UnityEngine.KeyCode;
-            public character: System.Char;
+            public character: number;
             public modifiers: UnityEngine.EventModifiers;
             public mouseWheelDelta: number;
             public touchId: number;
@@ -354,7 +366,7 @@ declare module 'csharp' {
             public Contains(child: FairyGUI.DisplayObject):boolean;
             public GetChildAt(index: number):FairyGUI.DisplayObject;
             public GetChild(name: string):FairyGUI.DisplayObject;
-            public GetChildren():FairyGUI.DisplayObject[];
+            public GetChildren():System.Array$1<FairyGUI.DisplayObject>;
             public GetChildIndex(child: FairyGUI.DisplayObject):number;
             public RemoveChild(child: FairyGUI.DisplayObject):FairyGUI.DisplayObject;
             public RemoveChild(child: FairyGUI.DisplayObject, dispose: boolean):FairyGUI.DisplayObject;
@@ -368,14 +380,12 @@ declare module 'csharp' {
             public ChangeChildrenOrder(indice: System.Collections.Generic.IList$1<number>, objs: System.Collections.Generic.IList$1<FairyGUI.DisplayObject>):void;
             public GetDescendants(backward: boolean):System.Collections.Generic.IEnumerator$1<FairyGUI.DisplayObject>;
             public CreateGraphics():void;
-            public GetBounds(targetSpace: FairyGUI.DisplayObject):UnityEngine.Rect;
             public GetRenderCamera():UnityEngine.Camera;
             public HitTest(stagePoint: UnityEngine.Vector2, forTouch: boolean):FairyGUI.DisplayObject;
             public IsAncestorOf(obj: FairyGUI.DisplayObject):boolean;
             public InvalidateBatchingState(childrenChanged: boolean):void;
             public SetChildrenLayer(value: number):void;
-            public Update(context: FairyGUI.UpdateContext):void;
-            public Dispose():void;
+            public InvalidateBatchingState():void;
             
         }
         class NGraphics extends System.Object {
@@ -401,12 +411,11 @@ declare module 'csharp' {
             public add_afterUpdate(value: System.Action):void;
             public remove_afterUpdate(value: System.Action):void;
             public static Instantiate():void;
-            public Dispose():void;
             public SetFous(newFocus: FairyGUI.DisplayObject, byKey?: boolean):void;
             public DoKeyNavigate(backward: boolean):void;
             public GetTouchPosition(touchId: number):UnityEngine.Vector2;
             public GetTouchTarget(touchId: number):FairyGUI.DisplayObject;
-            public GetAllTouch(result: number[]):number[];
+            public GetAllTouch(result: System.Array$1<number>):System.Array$1<number>;
             public ResetInputState():void;
             public CancelClick(touchId: number):void;
             public EnableSound():void;
@@ -513,7 +522,6 @@ declare module 'csharp' {
             public viewWidth: number;
             public viewHeight: number;
             public constructor();
-            public Dispose():void;
             public InvalidateBatchingState(childChanged: boolean):void;
             public AddChild(child: FairyGUI.GObject):FairyGUI.GObject;
             public AddChildAt(child: FairyGUI.GObject, index: number):FairyGUI.GObject;
@@ -528,7 +536,7 @@ declare module 'csharp' {
             public GetChildByPath(path: string):FairyGUI.GObject;
             public GetVisibleChild(name: string):FairyGUI.GObject;
             public GetChildInGroup(group: FairyGUI.GGroup, name: string):FairyGUI.GObject;
-            public GetChildren():FairyGUI.GObject[];
+            public GetChildren():System.Array$1<FairyGUI.GObject>;
             public GetChildIndex(child: FairyGUI.GObject):number;
             public SetChildIndex(child: FairyGUI.GObject, index: number):void;
             public SetChildIndexBefore(child: FairyGUI.GObject, index: number):number;
@@ -544,12 +552,10 @@ declare module 'csharp' {
             public GetTransition(name: string):FairyGUI.Transition;
             public IsChildInView(child: FairyGUI.GObject):boolean;
             public GetFirstChildInView():number;
-            public HandleControllerChanged(c: FairyGUI.Controller):void;
             public SetBoundsChangedFlag():void;
             public EnsureBoundsCorrect():void;
-            public ConstructFromResource():void;
             public ConstructFromXML(xml: FairyGUI.Utils.XML):void;
-            public Setup_AfterAdd(buffer: FairyGUI.Utils.ByteBuffer, beginPos: number):void;
+            public InvalidateBatchingState():void;
             
         }
         class GearXY extends FairyGUI.GearBase {
@@ -576,8 +582,6 @@ declare module 'csharp' {
             public constructor();
             public SetBoundsChangedFlag(positionChangedOnly?: boolean):void;
             public EnsureBoundsCorrect():void;
-            public Setup_BeforeAdd(buffer: FairyGUI.Utils.ByteBuffer, beginPos: number):void;
-            public Setup_AfterAdd(buffer: FairyGUI.Utils.ByteBuffer, beginPos: number):void;
             
         }
         class GRoot extends FairyGUI.GComponent {
@@ -592,7 +596,6 @@ declare module 'csharp' {
             public focus: FairyGUI.GObject;
             public soundVolume: number;
             public constructor();
-            public Dispose():void;
             public SetContentScaleFactor(designResolutionX: number, designResolutionY: number):void;
             public SetContentScaleFactor(designResolutionX: number, designResolutionY: number, screenMatchMode: FairyGUI.UIContentScaler.ScreenMatchMode):void;
             public SetContentScaleFactor(constantScaleFactor: number):void;
@@ -641,8 +644,6 @@ declare module 'csharp' {
             public material: UnityEngine.Material;
             public shader: string;
             public constructor();
-            public ConstructFromResource():void;
-            public Setup_BeforeAdd(buffer: FairyGUI.Utils.ByteBuffer, beginPos: number):void;
             
         }
         class GButton extends FairyGUI.GComponent {
@@ -672,8 +673,6 @@ declare module 'csharp' {
             public constructor();
             public FireClick(downEffect: boolean, clickCall?: boolean):void;
             public GetTextField():FairyGUI.GTextField;
-            public HandleControllerChanged(c: FairyGUI.Controller):void;
-            public Setup_AfterAdd(buffer: FairyGUI.Utils.ByteBuffer, beginPos: number):void;
             
         }
         class GLabel extends FairyGUI.GComponent {
@@ -686,7 +685,6 @@ declare module 'csharp' {
             public color: UnityEngine.Color;
             public constructor();
             public GetTextField():FairyGUI.GTextField;
-            public Setup_AfterAdd(buffer: FairyGUI.Utils.ByteBuffer, beginPos: number):void;
             
         }
         class GProgressBar extends FairyGUI.GComponent {
@@ -698,7 +696,6 @@ declare module 'csharp' {
             public constructor();
             public TweenValue(value: number, duration: number):FairyGUI.GTweener;
             public Update(newValue: number):void;
-            public Setup_AfterAdd(buffer: FairyGUI.Utils.ByteBuffer, beginPos: number):void;
             
         }
         class GSlider extends FairyGUI.GComponent {
@@ -712,7 +709,6 @@ declare module 'csharp' {
             public value: number;
             public wholeNumbers: boolean;
             public constructor();
-            public Setup_AfterAdd(buffer: FairyGUI.Utils.ByteBuffer, beginPos: number):void;
             
         }
         class GComboBox extends FairyGUI.GComponent {
@@ -724,9 +720,9 @@ declare module 'csharp' {
             public text: string;
             public titleColor: UnityEngine.Color;
             public titleFontSize: number;
-            public items: string[];
-            public icons: string[];
-            public values: string[];
+            public items: System.Array$1<string>;
+            public icons: System.Array$1<string>;
+            public values: System.Array$1<string>;
             public itemList: System.Collections.Generic.List$1<string>;
             public valueList: System.Collections.Generic.List$1<string>;
             public iconList: System.Collections.Generic.List$1<string>;
@@ -737,9 +733,6 @@ declare module 'csharp' {
             public constructor();
             public ApplyListChange():void;
             public GetTextField():FairyGUI.GTextField;
-            public HandleControllerChanged(c: FairyGUI.Controller):void;
-            public Dispose():void;
-            public Setup_AfterAdd(buffer: FairyGUI.Utils.ByteBuffer, beginPos: number):void;
             public UpdateDropdownList():void;
             
         }
@@ -761,9 +754,7 @@ declare module 'csharp' {
             public constructor();
             public SetVar(name: string, value: string):FairyGUI.GTextField;
             public FlushVars():void;
-            public HasCharacter(ch: System.Char):boolean;
-            public Setup_BeforeAdd(buffer: FairyGUI.Utils.ByteBuffer, beginPos: number):void;
-            public Setup_AfterAdd(buffer: FairyGUI.Utils.ByteBuffer, beginPos: number):void;
+            public HasCharacter(ch: number):boolean;
             
         }
         class GRichTextField extends FairyGUI.GTextField {
@@ -795,7 +786,6 @@ declare module 'csharp' {
             public constructor();
             public SetSelection(start: number, length: number):void;
             public ReplaceSelection(value: string):void;
-            public Setup_BeforeAdd(buffer: FairyGUI.Utils.ByteBuffer, beginPos: number):void;
             
         }
         class GLoader extends FairyGUI.GObject {
@@ -825,9 +815,7 @@ declare module 'csharp' {
             public filter: FairyGUI.IFilter;
             public blendMode: FairyGUI.BlendMode;
             public constructor();
-            public Dispose():void;
             public Advance(time: number):void;
-            public Setup_BeforeAdd(buffer: FairyGUI.Utils.ByteBuffer, beginPos: number):void;
             
         }
         class GLoader3D extends FairyGUI.GObject {
@@ -858,12 +846,9 @@ declare module 'csharp' {
             public isVirtual: boolean;
             public numItems: number;
             public constructor();
-            public Dispose():void;
             public GetFromPool(url: string):FairyGUI.GObject;
             public AddItemFromPool():FairyGUI.GObject;
             public AddItemFromPool(url: string):FairyGUI.GObject;
-            public AddChildAt(child: FairyGUI.GObject, index: number):FairyGUI.GObject;
-            public RemoveChildAt(index: number, dispose: boolean):FairyGUI.GObject;
             public RemoveChildToPoolAt(index: number):void;
             public RemoveChildToPool(child: FairyGUI.GObject):void;
             public RemoveChildrenToPool():void;
@@ -882,18 +867,14 @@ declare module 'csharp' {
             public ResizeToFit():void;
             public ResizeToFit(itemCount: number):void;
             public ResizeToFit(itemCount: number, minSize: number):void;
-            public HandleControllerChanged(c: FairyGUI.Controller):void;
             public ScrollToView(index: number):void;
             public ScrollToView(index: number, ani: boolean):void;
             public ScrollToView(index: number, ani: boolean, setFirst: boolean):void;
-            public GetFirstChildInView():number;
             public ChildIndexToItemIndex(index: number):number;
             public ItemIndexToChildIndex(index: number):number;
             public SetVirtual():void;
             public SetVirtualAndLoop():void;
             public RefreshVirtualList():void;
-            public Setup_BeforeAdd(buffer: FairyGUI.Utils.ByteBuffer, beginPos: number):void;
-            public Setup_AfterAdd(buffer: FairyGUI.Utils.ByteBuffer, beginPos: number):void;
             
         }
         class GGraph extends FairyGUI.GObject {
@@ -905,11 +886,10 @@ declare module 'csharp' {
             public AddAfterMe(target: FairyGUI.GObject):void;
             public SetNativeObject(obj: FairyGUI.DisplayObject):void;
             public DrawRect(aWidth: number, aHeight: number, lineSize: number, lineColor: UnityEngine.Color, fillColor: UnityEngine.Color):void;
-            public DrawRoundRect(aWidth: number, aHeight: number, fillColor: UnityEngine.Color, corner: number[]):void;
+            public DrawRoundRect(aWidth: number, aHeight: number, fillColor: UnityEngine.Color, corner: System.Array$1<number>):void;
             public DrawEllipse(aWidth: number, aHeight: number, fillColor: UnityEngine.Color):void;
             public DrawPolygon(aWidth: number, aHeight: number, points: System.Collections.Generic.IList$1<UnityEngine.Vector2>, fillColor: UnityEngine.Color):void;
             public DrawPolygon(aWidth: number, aHeight: number, points: System.Collections.Generic.IList$1<UnityEngine.Vector2>, fillColor: UnityEngine.Color, lineSize: number, lineColor: UnityEngine.Color):void;
-            public Setup_BeforeAdd(buffer: FairyGUI.Utils.ByteBuffer, beginPos: number):void;
             
         }
         class GMovieClip extends FairyGUI.GObject {
@@ -927,8 +907,6 @@ declare module 'csharp' {
             public SyncStatus(anotherMc: FairyGUI.GMovieClip):void;
             public Advance(time: number):void;
             public SetPlaySettings(start: number, end: number, times: number, endAt: number):void;
-            public ConstructFromResource():void;
-            public Setup_BeforeAdd(buffer: FairyGUI.Utils.ByteBuffer, beginPos: number):void;
             
         }
         class GTree extends FairyGUI.GList {
@@ -1003,7 +981,7 @@ declare module 'csharp' {
             public underline: boolean;
             public italic: boolean;
             public strikethrough: boolean;
-            public gradientColor: UnityEngine.Color32[];
+            public gradientColor: System.Array$1<UnityEngine.Color32>;
             public align: FairyGUI.AlignType;
             public specialStyle: FairyGUI.TextFormat.SpecialStyle;
             public outline: number;
@@ -1014,11 +992,14 @@ declare module 'csharp' {
             public SetColor(value: number):void;
             public EqualStyle(aFormat: FairyGUI.TextFormat):boolean;
             public CopyFrom(source: FairyGUI.TextFormat):void;
-            public FillVertexColors(vertexColors: UnityEngine.Color32[]):void;
+            public FillVertexColors(vertexColors: System.Array$1<UnityEngine.Color32>):void;
             
         }
         enum AutoSizeType { None = 0, Both = 1, Height = 2, Shrink = 3 }
         class RichTextField extends FairyGUI.Container {
+            
+        }
+        class Emoji extends System.Object {
             
         }
         class InputTextField extends FairyGUI.RichTextField {
@@ -1169,7 +1150,6 @@ declare module 'csharp' {
             public CloseModalWait():boolean;
             public CloseModalWait(requestingCmd: number):boolean;
             public Init():void;
-            public Dispose():void;
             
         }
         enum PopupDirection { Auto = 0, Up = 1, Down = 2 }
@@ -1228,7 +1208,7 @@ declare module 'csharp' {
             public assetPath: string;
             public customId: string;
             public resBundle: UnityEngine.AssetBundle;
-            public dependencies: System.Collections.Generic.Dictionary$2<string, string>[];
+            public dependencies: System.Array$1<System.Collections.Generic.Dictionary$2<string, string>>;
             public constructor();
             public static add_onReleaseResource(value: System.Action$1<FairyGUI.PackageItem>):void;
             public static remove_onReleaseResource(value: System.Action$1<FairyGUI.PackageItem>):void;
@@ -1241,8 +1221,8 @@ declare module 'csharp' {
             public static AddPackage(desc: UnityEngine.AssetBundle, res: UnityEngine.AssetBundle, mainAssetName: string):FairyGUI.UIPackage;
             public static AddPackage(descFilePath: string):FairyGUI.UIPackage;
             public static AddPackage(assetPath: string, loadFunc: FairyGUI.UIPackage.LoadResource):FairyGUI.UIPackage;
-            public static AddPackage(descData: number[], assetNamePrefix: string, loadFunc: FairyGUI.UIPackage.LoadResource):FairyGUI.UIPackage;
-            public static AddPackage(descData: number[], assetNamePrefix: string, loadFunc: FairyGUI.UIPackage.LoadResourceAsync):FairyGUI.UIPackage;
+            public static AddPackage(descData: System.Array$1<number>, assetNamePrefix: string, loadFunc: FairyGUI.UIPackage.LoadResource):FairyGUI.UIPackage;
+            public static AddPackage(descData: System.Array$1<number>, assetNamePrefix: string, loadFunc: FairyGUI.UIPackage.LoadResourceAsync):FairyGUI.UIPackage;
             public static RemovePackage(packageIdOrName: string):void;
             public static RemoveAllPackages():void;
             public static GetPackages():System.Collections.Generic.List$1<FairyGUI.UIPackage>;
@@ -1403,10 +1383,8 @@ declare module 'csharp' {
             public static CreateDelegate(type: System.Type, target: any, method: string, ignoreCase: boolean):Function;
             public DynamicInvoke(...args: any[]):any;
             public Clone():any;
-            public Equals(obj: any):boolean;
-            public GetHashCode():number;
             public GetObjectData(info: System.Runtime.Serialization.SerializationInfo, context: System.Runtime.Serialization.StreamingContext):void;
-            public GetInvocationList():Function[];
+            public GetInvocationList():System.Array$1<Function>;
             public static Combine(a: Function, b: Function):Function;
             public static Combine(...delegates: Function[]):Function;
             public static Remove(source: Function, value: Function):Function;
@@ -1447,8 +1425,8 @@ declare module 'csharp' {
             public static FilterName: System.Reflection.MemberFilter;
             public static FilterNameIgnoreCase: System.Reflection.MemberFilter;
             public static Missing: any;
-            public static Delimiter: System.Char;
-            public static EmptyTypes: System.Type[];
+            public static Delimiter: number;
+            public static EmptyTypes: System.Array$1<System.Type>;
             public MemberType: System.Reflection.MemberTypes;
             public DeclaringType: System.Type;
             public DeclaringMethod: System.Reflection.MethodBase;
@@ -1505,7 +1483,7 @@ declare module 'csharp' {
             public HasElementType: boolean;
             public IsContextful: boolean;
             public IsMarshalByRef: boolean;
-            public GenericTypeArguments: System.Type[];
+            public GenericTypeArguments: System.Array$1<System.Type>;
             public IsSecurityCritical: boolean;
             public IsSecuritySafeCritical: boolean;
             public IsSecurityTransparent: boolean;
@@ -1526,62 +1504,62 @@ declare module 'csharp' {
             public static GetTypeFromCLSID(clsid: System.Guid, server: string):System.Type;
             public static GetTypeFromCLSID(clsid: System.Guid, server: string, throwOnError: boolean):System.Type;
             public static GetTypeCode(type: System.Type):System.TypeCode;
-            public InvokeMember(name: string, invokeAttr: System.Reflection.BindingFlags, binder: System.Reflection.Binder, target: any, args: any[], modifiers: System.Reflection.ParameterModifier[], culture: System.Globalization.CultureInfo, namedParameters: string[]):any;
-            public InvokeMember(name: string, invokeAttr: System.Reflection.BindingFlags, binder: System.Reflection.Binder, target: any, args: any[], culture: System.Globalization.CultureInfo):any;
-            public InvokeMember(name: string, invokeAttr: System.Reflection.BindingFlags, binder: System.Reflection.Binder, target: any, args: any[]):any;
+            public InvokeMember(name: string, invokeAttr: System.Reflection.BindingFlags, binder: System.Reflection.Binder, target: any, args: System.Array$1<any>, modifiers: System.Array$1<System.Reflection.ParameterModifier>, culture: System.Globalization.CultureInfo, namedParameters: System.Array$1<string>):any;
+            public InvokeMember(name: string, invokeAttr: System.Reflection.BindingFlags, binder: System.Reflection.Binder, target: any, args: System.Array$1<any>, culture: System.Globalization.CultureInfo):any;
+            public InvokeMember(name: string, invokeAttr: System.Reflection.BindingFlags, binder: System.Reflection.Binder, target: any, args: System.Array$1<any>):any;
             public static GetTypeHandle(o: any):System.RuntimeTypeHandle;
             public GetArrayRank():number;
-            public GetConstructor(bindingAttr: System.Reflection.BindingFlags, binder: System.Reflection.Binder, callConvention: System.Reflection.CallingConventions, types: System.Type[], modifiers: System.Reflection.ParameterModifier[]):System.Reflection.ConstructorInfo;
-            public GetConstructor(bindingAttr: System.Reflection.BindingFlags, binder: System.Reflection.Binder, types: System.Type[], modifiers: System.Reflection.ParameterModifier[]):System.Reflection.ConstructorInfo;
-            public GetConstructor(types: System.Type[]):System.Reflection.ConstructorInfo;
-            public GetConstructors():System.Reflection.ConstructorInfo[];
-            public GetConstructors(bindingAttr: System.Reflection.BindingFlags):System.Reflection.ConstructorInfo[];
-            public GetMethod(name: string, bindingAttr: System.Reflection.BindingFlags, binder: System.Reflection.Binder, callConvention: System.Reflection.CallingConventions, types: System.Type[], modifiers: System.Reflection.ParameterModifier[]):System.Reflection.MethodInfo;
-            public GetMethod(name: string, bindingAttr: System.Reflection.BindingFlags, binder: System.Reflection.Binder, types: System.Type[], modifiers: System.Reflection.ParameterModifier[]):System.Reflection.MethodInfo;
-            public GetMethod(name: string, types: System.Type[], modifiers: System.Reflection.ParameterModifier[]):System.Reflection.MethodInfo;
-            public GetMethod(name: string, types: System.Type[]):System.Reflection.MethodInfo;
+            public GetConstructor(bindingAttr: System.Reflection.BindingFlags, binder: System.Reflection.Binder, callConvention: System.Reflection.CallingConventions, types: System.Array$1<System.Type>, modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.ConstructorInfo;
+            public GetConstructor(bindingAttr: System.Reflection.BindingFlags, binder: System.Reflection.Binder, types: System.Array$1<System.Type>, modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.ConstructorInfo;
+            public GetConstructor(types: System.Array$1<System.Type>):System.Reflection.ConstructorInfo;
+            public GetConstructors():System.Array$1<System.Reflection.ConstructorInfo>;
+            public GetConstructors(bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.ConstructorInfo>;
+            public GetMethod(name: string, bindingAttr: System.Reflection.BindingFlags, binder: System.Reflection.Binder, callConvention: System.Reflection.CallingConventions, types: System.Array$1<System.Type>, modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.MethodInfo;
+            public GetMethod(name: string, bindingAttr: System.Reflection.BindingFlags, binder: System.Reflection.Binder, types: System.Array$1<System.Type>, modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.MethodInfo;
+            public GetMethod(name: string, types: System.Array$1<System.Type>, modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.MethodInfo;
+            public GetMethod(name: string, types: System.Array$1<System.Type>):System.Reflection.MethodInfo;
             public GetMethod(name: string, bindingAttr: System.Reflection.BindingFlags):System.Reflection.MethodInfo;
             public GetMethod(name: string):System.Reflection.MethodInfo;
-            public GetMethods():System.Reflection.MethodInfo[];
-            public GetMethods(bindingAttr: System.Reflection.BindingFlags):System.Reflection.MethodInfo[];
+            public GetMethods():System.Array$1<System.Reflection.MethodInfo>;
+            public GetMethods(bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.MethodInfo>;
             public GetField(name: string, bindingAttr: System.Reflection.BindingFlags):System.Reflection.FieldInfo;
             public GetField(name: string):System.Reflection.FieldInfo;
-            public GetFields():System.Reflection.FieldInfo[];
-            public GetFields(bindingAttr: System.Reflection.BindingFlags):System.Reflection.FieldInfo[];
+            public GetFields():System.Array$1<System.Reflection.FieldInfo>;
+            public GetFields(bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.FieldInfo>;
             public GetInterface(name: string):System.Type;
             public GetInterface(name: string, ignoreCase: boolean):System.Type;
-            public GetInterfaces():System.Type[];
-            public FindInterfaces(filter: System.Reflection.TypeFilter, filterCriteria: any):System.Type[];
+            public GetInterfaces():System.Array$1<System.Type>;
+            public FindInterfaces(filter: System.Reflection.TypeFilter, filterCriteria: any):System.Array$1<System.Type>;
             public GetEvent(name: string):System.Reflection.EventInfo;
             public GetEvent(name: string, bindingAttr: System.Reflection.BindingFlags):System.Reflection.EventInfo;
-            public GetEvents():System.Reflection.EventInfo[];
-            public GetEvents(bindingAttr: System.Reflection.BindingFlags):System.Reflection.EventInfo[];
-            public GetProperty(name: string, bindingAttr: System.Reflection.BindingFlags, binder: System.Reflection.Binder, returnType: System.Type, types: System.Type[], modifiers: System.Reflection.ParameterModifier[]):System.Reflection.PropertyInfo;
-            public GetProperty(name: string, returnType: System.Type, types: System.Type[], modifiers: System.Reflection.ParameterModifier[]):System.Reflection.PropertyInfo;
+            public GetEvents():System.Array$1<System.Reflection.EventInfo>;
+            public GetEvents(bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.EventInfo>;
+            public GetProperty(name: string, bindingAttr: System.Reflection.BindingFlags, binder: System.Reflection.Binder, returnType: System.Type, types: System.Array$1<System.Type>, modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.PropertyInfo;
+            public GetProperty(name: string, returnType: System.Type, types: System.Array$1<System.Type>, modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.PropertyInfo;
             public GetProperty(name: string, bindingAttr: System.Reflection.BindingFlags):System.Reflection.PropertyInfo;
-            public GetProperty(name: string, returnType: System.Type, types: System.Type[]):System.Reflection.PropertyInfo;
-            public GetProperty(name: string, types: System.Type[]):System.Reflection.PropertyInfo;
+            public GetProperty(name: string, returnType: System.Type, types: System.Array$1<System.Type>):System.Reflection.PropertyInfo;
+            public GetProperty(name: string, types: System.Array$1<System.Type>):System.Reflection.PropertyInfo;
             public GetProperty(name: string, returnType: System.Type):System.Reflection.PropertyInfo;
             public GetProperty(name: string):System.Reflection.PropertyInfo;
-            public GetProperties(bindingAttr: System.Reflection.BindingFlags):System.Reflection.PropertyInfo[];
-            public GetProperties():System.Reflection.PropertyInfo[];
-            public GetNestedTypes():System.Type[];
-            public GetNestedTypes(bindingAttr: System.Reflection.BindingFlags):System.Type[];
+            public GetProperties(bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.PropertyInfo>;
+            public GetProperties():System.Array$1<System.Reflection.PropertyInfo>;
+            public GetNestedTypes():System.Array$1<System.Type>;
+            public GetNestedTypes(bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Type>;
             public GetNestedType(name: string):System.Type;
             public GetNestedType(name: string, bindingAttr: System.Reflection.BindingFlags):System.Type;
-            public GetMember(name: string):System.Reflection.MemberInfo[];
-            public GetMember(name: string, bindingAttr: System.Reflection.BindingFlags):System.Reflection.MemberInfo[];
-            public GetMember(name: string, type: System.Reflection.MemberTypes, bindingAttr: System.Reflection.BindingFlags):System.Reflection.MemberInfo[];
-            public GetMembers():System.Reflection.MemberInfo[];
-            public GetMembers(bindingAttr: System.Reflection.BindingFlags):System.Reflection.MemberInfo[];
-            public GetDefaultMembers():System.Reflection.MemberInfo[];
-            public FindMembers(memberType: System.Reflection.MemberTypes, bindingAttr: System.Reflection.BindingFlags, filter: System.Reflection.MemberFilter, filterCriteria: any):System.Reflection.MemberInfo[];
-            public GetGenericParameterConstraints():System.Type[];
+            public GetMember(name: string):System.Array$1<System.Reflection.MemberInfo>;
+            public GetMember(name: string, bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.MemberInfo>;
+            public GetMember(name: string, type: System.Reflection.MemberTypes, bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.MemberInfo>;
+            public GetMembers():System.Array$1<System.Reflection.MemberInfo>;
+            public GetMembers(bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.MemberInfo>;
+            public GetDefaultMembers():System.Array$1<System.Reflection.MemberInfo>;
+            public FindMembers(memberType: System.Reflection.MemberTypes, bindingAttr: System.Reflection.BindingFlags, filter: System.Reflection.MemberFilter, filterCriteria: any):System.Array$1<System.Reflection.MemberInfo>;
+            public GetGenericParameterConstraints():System.Array$1<System.Type>;
             public MakeGenericType(...typeArguments: System.Type[]):System.Type;
             public GetElementType():System.Type;
-            public GetGenericArguments():System.Type[];
+            public GetGenericArguments():System.Array$1<System.Type>;
             public GetGenericTypeDefinition():System.Type;
-            public GetEnumNames():string[];
+            public GetEnumNames():System.Array$1<string>;
             public GetEnumValues():System.Array;
             public GetEnumUnderlyingType():System.Type;
             public IsEnumDefined(value: any):boolean;
@@ -1590,13 +1568,11 @@ declare module 'csharp' {
             public IsInstanceOfType(o: any):boolean;
             public IsAssignableFrom(c: System.Type):boolean;
             public IsEquivalentTo(other: System.Type):boolean;
-            public ToString():string;
-            public static GetTypeArray(args: any[]):System.Type[];
+            public static GetTypeArray(args: System.Array$1<any>):System.Array$1<System.Type>;
             public Equals(o: any):boolean;
             public Equals(o: System.Type):boolean;
             public static op_Equality(left: System.Type, right: System.Type):boolean;
             public static op_Inequality(left: System.Type, right: System.Type):boolean;
-            public GetHashCode():number;
             public GetInterfaceMap(interfaceType: System.Type):System.Reflection.InterfaceMapping;
             public GetType():System.Type;
             public static GetType(typeName: string):System.Type;
@@ -1604,6 +1580,7 @@ declare module 'csharp' {
             public static GetType(typeName: string, throwOnError: boolean, ignoreCase: boolean):System.Type;
             public static ReflectionOnlyGetType(typeName: string, throwIfNotFound: boolean, ignoreCase: boolean):System.Type;
             public static GetTypeFromHandle(handle: System.RuntimeTypeHandle):System.Type;
+            public GetType():System.Type;
             
         }
         class Byte extends System.ValueType {
@@ -1670,12 +1647,12 @@ declare module 'csharp' {
             public GetComponentInChildren(type: System.Type, includeInactive: boolean):UnityEngine.Component;
             public GetComponentInChildren(type: System.Type):UnityEngine.Component;
             public GetComponentInParent(type: System.Type):UnityEngine.Component;
-            public GetComponents(type: System.Type):UnityEngine.Component[];
+            public GetComponents(type: System.Type):System.Array$1<UnityEngine.Component>;
             public GetComponents(type: System.Type, results: System.Collections.Generic.List$1<UnityEngine.Component>):void;
-            public GetComponentsInChildren(type: System.Type):UnityEngine.Component[];
-            public GetComponentsInChildren(type: System.Type, includeInactive: boolean):UnityEngine.Component[];
-            public GetComponentsInParent(type: System.Type):UnityEngine.Component[];
-            public GetComponentsInParent(type: System.Type, includeInactive: boolean):UnityEngine.Component[];
+            public GetComponentsInChildren(type: System.Type):System.Array$1<UnityEngine.Component>;
+            public GetComponentsInChildren(type: System.Type, includeInactive: boolean):System.Array$1<UnityEngine.Component>;
+            public GetComponentsInParent(type: System.Type):System.Array$1<UnityEngine.Component>;
+            public GetComponentsInParent(type: System.Type, includeInactive: boolean):System.Array$1<UnityEngine.Component>;
             public TryGetComponent(type: System.Type, component: $Ref<UnityEngine.Component>):boolean;
             public static FindWithTag(tag: string):UnityEngine.GameObject;
             public SendMessageUpwards(methodName: string, options: UnityEngine.SendMessageOptions):void;
@@ -1685,7 +1662,7 @@ declare module 'csharp' {
             public SetActive(value: boolean):void;
             public CompareTag(tag: string):boolean;
             public static FindGameObjectWithTag(tag: string):UnityEngine.GameObject;
-            public static FindGameObjectsWithTag(tag: string):UnityEngine.GameObject[];
+            public static FindGameObjectsWithTag(tag: string):System.Array$1<UnityEngine.GameObject>;
             public SendMessageUpwards(methodName: string, value: any, options: UnityEngine.SendMessageOptions):void;
             public SendMessageUpwards(methodName: string, value: any):void;
             public SendMessageUpwards(methodName: string):void;
@@ -1703,22 +1680,24 @@ declare module 'csharp' {
             public hideFlags: UnityEngine.HideFlags;
             public constructor();
             public GetInstanceID():number;
-            public GetHashCode():number;
-            public Equals(other: any):boolean;
             public static op_Implicit(exists: UnityEngine.Object):boolean;
             public static Instantiate(original: UnityEngine.Object, position: UnityEngine.Vector3, rotation: UnityEngine.Quaternion):UnityEngine.Object;
             public static Instantiate(original: UnityEngine.Object, position: UnityEngine.Vector3, rotation: UnityEngine.Quaternion, parent: UnityEngine.Transform):UnityEngine.Object;
             public static Instantiate(original: UnityEngine.Object):UnityEngine.Object;
             public static Instantiate(original: UnityEngine.Object, parent: UnityEngine.Transform):UnityEngine.Object;
             public static Instantiate(original: UnityEngine.Object, parent: UnityEngine.Transform, instantiateInWorldSpace: boolean):UnityEngine.Object;
+            public static Instantiate(original: UnityEngine.Object):UnityEngine.Object;
+            public static Instantiate(original: UnityEngine.Object, position: UnityEngine.Vector3, rotation: UnityEngine.Quaternion):UnityEngine.Object;
+            public static Instantiate(original: UnityEngine.Object, position: UnityEngine.Vector3, rotation: UnityEngine.Quaternion, parent: UnityEngine.Transform):UnityEngine.Object;
+            public static Instantiate(original: UnityEngine.Object, parent: UnityEngine.Transform):UnityEngine.Object;
+            public static Instantiate(original: UnityEngine.Object, parent: UnityEngine.Transform, worldPositionStays: boolean):UnityEngine.Object;
             public static Destroy(obj: UnityEngine.Object, t: number):void;
             public static Destroy(obj: UnityEngine.Object):void;
             public static DestroyImmediate(obj: UnityEngine.Object, allowDestroyingAssets: boolean):void;
             public static DestroyImmediate(obj: UnityEngine.Object):void;
-            public static FindObjectsOfType(type: System.Type):UnityEngine.Object[];
+            public static FindObjectsOfType(type: System.Type):System.Array$1<UnityEngine.Object>;
             public static DontDestroyOnLoad(target: UnityEngine.Object):void;
             public static FindObjectOfType(type: System.Type):UnityEngine.Object;
-            public ToString():string;
             public static op_Equality(x: UnityEngine.Object, y: UnityEngine.Object):boolean;
             public static op_Inequality(x: UnityEngine.Object, y: UnityEngine.Object):boolean;
             
@@ -1796,12 +1775,12 @@ declare module 'csharp' {
             public GetComponent(type: string):UnityEngine.Component;
             public GetComponentInChildren(t: System.Type, includeInactive: boolean):UnityEngine.Component;
             public GetComponentInChildren(t: System.Type):UnityEngine.Component;
-            public GetComponentsInChildren(t: System.Type, includeInactive: boolean):UnityEngine.Component[];
-            public GetComponentsInChildren(t: System.Type):UnityEngine.Component[];
+            public GetComponentsInChildren(t: System.Type, includeInactive: boolean):System.Array$1<UnityEngine.Component>;
+            public GetComponentsInChildren(t: System.Type):System.Array$1<UnityEngine.Component>;
             public GetComponentInParent(t: System.Type):UnityEngine.Component;
-            public GetComponentsInParent(t: System.Type, includeInactive: boolean):UnityEngine.Component[];
-            public GetComponentsInParent(t: System.Type):UnityEngine.Component[];
-            public GetComponents(type: System.Type):UnityEngine.Component[];
+            public GetComponentsInParent(t: System.Type, includeInactive: boolean):System.Array$1<UnityEngine.Component>;
+            public GetComponentsInParent(t: System.Type):System.Array$1<UnityEngine.Component>;
+            public GetComponents(type: System.Type):System.Array$1<UnityEngine.Component>;
             public GetComponents(type: System.Type, results: System.Collections.Generic.List$1<UnityEngine.Component>):void;
             public CompareTag(tag: string):boolean;
             public SendMessageUpwards(methodName: string, value: any, options: UnityEngine.SendMessageOptions):void;
@@ -1856,7 +1835,6 @@ declare module 'csharp' {
             public static Scale(a: UnityEngine.Vector3, b: UnityEngine.Vector3):UnityEngine.Vector3;
             public Scale(scale: UnityEngine.Vector3):void;
             public static Cross(lhs: UnityEngine.Vector3, rhs: UnityEngine.Vector3):UnityEngine.Vector3;
-            public GetHashCode():number;
             public Equals(other: any):boolean;
             public Equals(other: UnityEngine.Vector3):boolean;
             public static Reflect(inDirection: UnityEngine.Vector3, inNormal: UnityEngine.Vector3):UnityEngine.Vector3;
@@ -1907,6 +1885,9 @@ declare module 'csharp' {
             public constructor();
             
         }
+        class Vector4 extends System.ValueType {
+            
+        }
         class AudioClip extends UnityEngine.Object {
             
         }
@@ -1920,9 +1901,6 @@ declare module 'csharp' {
             
         }
         class AssetBundle extends UnityEngine.Object {
-            
-        }
-        class Vector4 extends System.ValueType {
             
         }
         class Debug extends System.Object {
@@ -2041,15 +2019,15 @@ declare module 'csharp' {
             public trails: UnityEngine.ParticleSystem.TrailModule;
             public customData: UnityEngine.ParticleSystem.CustomDataModule;
             public constructor();
-            public SetParticles(particles: UnityEngine.ParticleSystem.Particle[], size: number, offset: number):void;
-            public SetParticles(particles: UnityEngine.ParticleSystem.Particle[], size: number):void;
-            public SetParticles(particles: UnityEngine.ParticleSystem.Particle[]):void;
+            public SetParticles(particles: System.Array$1<UnityEngine.ParticleSystem.Particle>, size: number, offset: number):void;
+            public SetParticles(particles: System.Array$1<UnityEngine.ParticleSystem.Particle>, size: number):void;
+            public SetParticles(particles: System.Array$1<UnityEngine.ParticleSystem.Particle>):void;
             public SetParticles(particles: Unity.Collections.NativeArray$1<UnityEngine.ParticleSystem.Particle>, size: number, offset: number):void;
             public SetParticles(particles: Unity.Collections.NativeArray$1<UnityEngine.ParticleSystem.Particle>, size: number):void;
             public SetParticles(particles: Unity.Collections.NativeArray$1<UnityEngine.ParticleSystem.Particle>):void;
-            public GetParticles(particles: UnityEngine.ParticleSystem.Particle[], size: number, offset: number):number;
-            public GetParticles(particles: UnityEngine.ParticleSystem.Particle[], size: number):number;
-            public GetParticles(particles: UnityEngine.ParticleSystem.Particle[]):number;
+            public GetParticles(particles: System.Array$1<UnityEngine.ParticleSystem.Particle>, size: number, offset: number):number;
+            public GetParticles(particles: System.Array$1<UnityEngine.ParticleSystem.Particle>, size: number):number;
+            public GetParticles(particles: System.Array$1<UnityEngine.ParticleSystem.Particle>):number;
             public GetParticles(particles: Unity.Collections.NativeArray$1<UnityEngine.ParticleSystem.Particle>, size: number, offset: number):number;
             public GetParticles(particles: Unity.Collections.NativeArray$1<UnityEngine.ParticleSystem.Particle>, size: number):number;
             public GetParticles(particles: Unity.Collections.NativeArray$1<UnityEngine.ParticleSystem.Particle>):number;
@@ -2188,8 +2166,8 @@ declare module 'csharp' {
             public static CanStreamedLevelBeLoaded(levelIndex: number):boolean;
             public static CanStreamedLevelBeLoaded(levelName: string):boolean;
             public static IsPlaying(obj: UnityEngine.Object):boolean;
-            public static GetBuildTags():string[];
-            public static SetBuildTags(buildTags: string[]):void;
+            public static GetBuildTags():System.Array$1<string>;
+            public static SetBuildTags(buildTags: System.Array$1<string>):void;
             public static HasProLicense():boolean;
             public static RequestAdvertisingIdentifierAsync(delegateMethod: UnityEngine.Application.AdvertisingIdentifierCallback):boolean;
             public static OpenURL(url: string):void;
@@ -2230,15 +2208,17 @@ declare module 'csharp' {
             
         }
         enum UserAuthorization { WebCam = 1, Microphone = 2 }
-        enum RuntimePlatform { OSXEditor = 0, OSXPlayer = 1, WindowsPlayer = 2, OSXWebPlayer = 3, OSXDashboardPlayer = 4, WindowsWebPlayer = 5, WindowsEditor = 7, IPhonePlayer = 8, XBOX360 = 10, PS3 = 9, Android = 11, NaCl = 12, FlashPlayer = 15, LinuxPlayer = 13, LinuxEditor = 16, WebGLPlayer = 17, MetroPlayerX86 = 18, WSAPlayerX86 = 18, MetroPlayerX64 = 19, WSAPlayerX64 = 19, MetroPlayerARM = 20, WSAPlayerARM = 20, WP8Player = 21, BB10Player = 22, BlackBerryPlayer = 22, TizenPlayer = 23, PSP2 = 24, PS4 = 25, PSM = 26, XboxOne = 27, SamsungTVPlayer = 28, WiiU = 30, tvOS = 31, Switch = 32, Lumin = 33, Stadia = 34 }
+        enum RuntimePlatform { OSXEditor = 0, OSXPlayer = 1, WindowsPlayer = 2, OSXWebPlayer = 3, OSXDashboardPlayer = 4, WindowsWebPlayer = 5, WindowsEditor = 7, IPhonePlayer = 8, XBOX360 = 10, PS3 = 9, Android = 11, NaCl = 12, FlashPlayer = 15, LinuxPlayer = 13, LinuxEditor = 16, WebGLPlayer = 17, MetroPlayerX86 = 18, WSAPlayerX86 = 18, MetroPlayerX64 = 19, WSAPlayerX64 = 19, MetroPlayerARM = 20, WSAPlayerARM = 20, WP8Player = 21, BB10Player = 22, BlackBerryPlayer = 22, TizenPlayer = 23, PSP2 = 24, PS4 = 25, PSM = 26, XboxOne = 27, SamsungTVPlayer = 28, WiiU = 30, tvOS = 31, Switch = 32, Lumin = 33, Stadia = 34, CloudRendering = 35 }
         enum SystemLanguage { Afrikaans = 0, Arabic = 1, Basque = 2, Belarusian = 3, Bulgarian = 4, Catalan = 5, Chinese = 6, Czech = 7, Danish = 8, Dutch = 9, English = 10, Estonian = 11, Faroese = 12, Finnish = 13, French = 14, German = 15, Greek = 16, Hebrew = 17, Hugarian = 18, Icelandic = 19, Indonesian = 20, Italian = 21, Japanese = 22, Korean = 23, Latvian = 24, Lithuanian = 25, Norwegian = 26, Polish = 27, Portuguese = 28, Romanian = 29, Russian = 30, SerboCroatian = 31, Slovak = 32, Slovenian = 33, Spanish = 34, Swedish = 35, Thai = 36, Turkish = 37, Ukrainian = 38, Vietnamese = 39, ChineseSimplified = 40, ChineseTraditional = 41, Unknown = 42, Hungarian = 18 }
         enum NetworkReachability { NotReachable = 0, ReachableViaCarrierDataNetwork = 1, ReachableViaLocalAreaNetwork = 2 }
         class TextAsset extends UnityEngine.Object {
             public text: string;
-            public bytes: number[];
+            public bytes: System.Array$1<number>;
             public constructor();
             public constructor(text: string);
-            public ToString():string;
+            
+        }
+        class Sprite extends UnityEngine.Object {
             
         }
         
@@ -2269,9 +2249,9 @@ declare module 'csharp' {
             public BinarySearch(item: T, comparer: System.Collections.Generic.IComparer$1<T>):number;
             public Clear():void;
             public Contains(item: T):boolean;
-            public CopyTo(array: T[]):void;
-            public CopyTo(index: number, array: T[], arrayIndex: number, count: number):void;
-            public CopyTo(array: T[], arrayIndex: number):void;
+            public CopyTo(array: System.Array$1<T>):void;
+            public CopyTo(index: number, array: System.Array$1<T>, arrayIndex: number, count: number):void;
+            public CopyTo(array: System.Array$1<T>, arrayIndex: number):void;
             public Exists(match: System.Predicate$1<T>):boolean;
             public Find(match: System.Predicate$1<T>):T;
             public FindAll(match: System.Predicate$1<T>):System.Collections.Generic.List$1<T>;
@@ -2303,7 +2283,7 @@ declare module 'csharp' {
             public Sort(comparer: System.Collections.Generic.IComparer$1<T>):void;
             public Sort(index: number, count: number, comparer: System.Collections.Generic.IComparer$1<T>):void;
             public Sort(comparison: System.Comparison$1<T>):void;
-            public ToArray():T[];
+            public ToArray():System.Array$1<T>;
             public TrimExcess():void;
             public TrueForAll(match: System.Predicate$1<T>):boolean;
             
@@ -2434,12 +2414,10 @@ declare module 'csharp' {
             public rootCount: number;
             public isSubScene: boolean;
             public IsValid():boolean;
-            public GetRootGameObjects():UnityEngine.GameObject[];
+            public GetRootGameObjects():System.Array$1<UnityEngine.GameObject>;
             public GetRootGameObjects(rootGameObjects: System.Collections.Generic.List$1<UnityEngine.GameObject>):void;
             public static op_Equality(lhs: UnityEngine.SceneManagement.Scene, rhs: UnityEngine.SceneManagement.Scene):boolean;
             public static op_Inequality(lhs: UnityEngine.SceneManagement.Scene, rhs: UnityEngine.SceneManagement.Scene):boolean;
-            public GetHashCode():number;
-            public Equals(other: any):boolean;
             
         }
         class SceneManager extends System.Object {
@@ -2627,7 +2605,7 @@ declare module 'csharp' {
     }
     namespace UnityEngine.UI {
         class Selectable extends UnityEngine.EventSystems.UIBehaviour {
-            public static allSelectablesArray: UnityEngine.UI.Selectable[];
+            public static allSelectablesArray: System.Array$1<UnityEngine.UI.Selectable>;
             public static allSelectableCount: number;
             public navigation: UnityEngine.UI.Navigation;
             public transition: UnityEngine.UI.Selectable.Transition;
@@ -2638,7 +2616,7 @@ declare module 'csharp' {
             public interactable: boolean;
             public image: UnityEngine.UI.Image;
             public animator: UnityEngine.Animator;
-            public static AllSelectablesNoAlloc(selectables: UnityEngine.UI.Selectable[]):number;
+            public static AllSelectablesNoAlloc(selectables: System.Array$1<UnityEngine.UI.Selectable>):number;
             public IsInteractable():boolean;
             public FindSelectable(dir: UnityEngine.Vector3):UnityEngine.UI.Selectable;
             public FindSelectableOnLeft():UnityEngine.UI.Selectable;
@@ -2705,7 +2683,7 @@ declare module 'csharp' {
             public characterValidation: UnityEngine.UI.InputField.CharacterValidation;
             public readOnly: boolean;
             public multiLine: boolean;
-            public asteriskChar: System.Char;
+            public asteriskChar: number;
             public wasCanceled: boolean;
             public caretPosition: number;
             public selectionAnchorPosition: number;
@@ -2723,7 +2701,6 @@ declare module 'csharp' {
             public OnBeginDrag(eventData: UnityEngine.EventSystems.PointerEventData):void;
             public OnDrag(eventData: UnityEngine.EventSystems.PointerEventData):void;
             public OnEndDrag(eventData: UnityEngine.EventSystems.PointerEventData):void;
-            public OnPointerDown(eventData: UnityEngine.EventSystems.PointerEventData):void;
             public ProcessEvent(e: UnityEngine.Event):void;
             public OnUpdateSelected(eventData: UnityEngine.EventSystems.BaseEventData):void;
             public ForceLabelUpdate():void;
@@ -2731,10 +2708,8 @@ declare module 'csharp' {
             public LayoutComplete():void;
             public GraphicUpdateComplete():void;
             public ActivateInputField():void;
-            public OnSelect(eventData: UnityEngine.EventSystems.BaseEventData):void;
             public OnPointerClick(eventData: UnityEngine.EventSystems.PointerEventData):void;
             public DeactivateInputField():void;
-            public OnDeselect(eventData: UnityEngine.EventSystems.BaseEventData):void;
             public OnSubmit(eventData: UnityEngine.EventSystems.BaseEventData):void;
             public CalculateLayoutInputHorizontal():void;
             public CalculateLayoutInputVertical():void;
@@ -2804,8 +2779,8 @@ declare module 'csharp' {
         class OnChangeEvent extends UnityEngine.Events.UnityEvent$1<string> {
             
         }
-        type OnValidateInput = (text: string, charIndex: number, addedChar: System.Char) => System.Char;
-        var OnValidateInput: {new (func: (text: string, charIndex: number, addedChar: System.Char) => System.Char): OnValidateInput;}
+        type OnValidateInput = (text: string, charIndex: number, addedChar: number) => number;
+        var OnValidateInput: {new (func: (text: string, charIndex: number, addedChar: number) => number): OnValidateInput;}
         enum ContentType { Standard = 0, Autocorrected = 1, IntegerNumber = 2, DecimalNumber = 3, Alphanumeric = 4, Name = 5, EmailAddress = 6, Password = 7, Pin = 8, Custom = 9 }
         enum LineType { SingleLine = 0, MultiLineSubmit = 1, MultiLineNewline = 2 }
         enum InputType { Standard = 0, AutoCorrect = 1, Password = 2 }
@@ -2827,6 +2802,56 @@ declare module 'csharp' {
         var LowMemoryCallback: {new (func: () => void): LowMemoryCallback;}
         type LogCallback = (condition: string, stackTrace: string, type: UnityEngine.LogType) => void;
         var LogCallback: {new (func: (condition: string, stackTrace: string, type: UnityEngine.LogType) => void): LogCallback;}
+        
+    }
+    namespace NiceTS {
+        class TService extends MonoSingleton$1<NiceTS.TService> {
+            public MemoryStreamManager: Microsoft.IO.RecyclableMemoryStreamManager;
+            public needStartSendChannel: System.Collections.Generic.List$1<bigint>;
+            public constructor();
+            public GetChannel():NiceTS.TChannel;
+            public MarkNeedStartSend(id: bigint):void;
+            public Remove(id: bigint):void;
+            public Update():void;
+            
+        }
+        class ResourceManager extends System.Object {
+            public static OnFBLoadedHandle: System.Action$2<string, System.Array$1<number>>;
+            public constructor();
+            public static init():void;
+            public static ReleaseFGUIPackage(packageName: string):void;
+            public static LoadFairyGUIPackage(address: string, packageName: string):System.Threading.Tasks.Task;
+            public static PreadloadFB(fbLabel: string):System.Threading.Tasks.Task$1<boolean>;
+            public static PreloadJS(jsLabel: string):System.Threading.Tasks.Task$1<boolean>;
+            public static LoadPrefab(address: string):System.Threading.Tasks.Task$1<UnityEngine.GameObject>;
+            public static LoadTextAsset(address: string):System.Threading.Tasks.Task$1<UnityEngine.TextAsset>;
+            public static LoadTextBytes(address: string):System.Threading.Tasks.Task$1<ArrayBuffer>;
+            public static LoadSprite(address: string):System.Threading.Tasks.Task$1<UnityEngine.Sprite>;
+            public static ReleaseAddressGO(go: UnityEngine.Object):void;
+            
+        }
+        class TChannel extends System.Object {
+            public errorCallback: NiceTS.ErrorCallback;
+            public readCallback: NiceTS.ReadCallback;
+            public Service: NiceTS.TService;
+            public Id: bigint;
+            public IsSending: boolean;
+            public Error: number;
+            public RemoteAddress: string;
+            public constructor(service: NiceTS.TService);
+            public Connect(address: string):void;
+            public Send(ab: ArrayBuffer):void;
+            public StartSend():void;
+            public SendAsync(buffer: System.Array$1<number>, offset: number, count: number):void;
+            public StartRecv():void;
+            public RecvAsync(buffer: System.Array$1<number>, offset: number, count: number):void;
+            public Dispose():void;
+            
+        }
+        type ErrorCallback = (channel: NiceTS.TChannel, code: number) => void;
+        var ErrorCallback: {new (func: (channel: NiceTS.TChannel, code: number) => void): ErrorCallback;}
+        type ReadCallback = (arrayBuffer: ArrayBuffer) => void;
+        var ReadCallback: {new (func: (arrayBuffer: ArrayBuffer) => void): ReadCallback;}
         
     }
     
@@ -2881,56 +2906,6 @@ declare module 'csharp' {
         }
         
     
-    namespace NiceTS {
-        class TService extends MonoSingleton$1<NiceTS.TService> {
-            public MemoryStreamManager: Microsoft.IO.RecyclableMemoryStreamManager;
-            public needStartSendChannel: System.Collections.Generic.List$1<bigint>;
-            public constructor();
-            public GetChannel():NiceTS.TChannel;
-            public MarkNeedStartSend(id: bigint):void;
-            public Remove(id: bigint):void;
-            public Update():void;
-            
-        }
-        class ResourceManager extends System.Object {
-            public static OnFBLoadedHandle: System.Action$2<string, number[]>;
-            public constructor();
-            public static init():void;
-            public static ReleaseFGUIPackage(packageName: string):void;
-            public static LoadFairyGUIPackage(address: string, packageName: string):System.Threading.Tasks.Task;
-            public static PreadloadFB(fbLabel: string):System.Threading.Tasks.Task$1<boolean>;
-            public static PreloadJS(jsLabel: string):System.Threading.Tasks.Task$1<boolean>;
-            public static LoadPrefab(address: string):System.Threading.Tasks.Task$1<UnityEngine.GameObject>;
-            public static LoadTextAsset(address: string):System.Threading.Tasks.Task$1<UnityEngine.TextAsset>;
-            public static LoadTextBytes(address: string):System.Threading.Tasks.Task$1<ArrayBuffer>;
-            public static LoadSprite(address: string):System.Threading.Tasks.Task$1<UnityEngine.Sprite>;
-            public static ReleaseAddressGO(go: UnityEngine.Object):void;
-            
-        }
-        class TChannel extends System.Object {
-            public errorCallback: NiceTS.ErrorCallback;
-            public readCallback: NiceTS.ReadCallback;
-            public Service: NiceTS.TService;
-            public Id: bigint;
-            public IsSending: boolean;
-            public Error: number;
-            public RemoteAddress: string;
-            public constructor(service: NiceTS.TService);
-            public Connect(address: string):void;
-            public Send(ab: ArrayBuffer):void;
-            public StartSend():void;
-            public SendAsync(buffer: number[], offset: number, count: number):void;
-            public StartRecv():void;
-            public RecvAsync(buffer: number[], offset: number, count: number):void;
-            public Dispose():void;
-            
-        }
-        type ErrorCallback = (channel: NiceTS.TChannel, code: number) => void;
-        var ErrorCallback: {new (func: (channel: NiceTS.TChannel, code: number) => void): ErrorCallback;}
-        type ReadCallback = (arrayBuffer: ArrayBuffer) => void;
-        var ReadCallback: {new (func: (arrayBuffer: ArrayBuffer) => void): ReadCallback;}
-        
-    }
     namespace System.Threading.Tasks {
         class Task extends System.Object {
             
@@ -2940,17 +2915,17 @@ declare module 'csharp' {
         }
         
     }
-    namespace Microsoft.IO {
-        class RecyclableMemoryStreamManager extends System.Object {
-            
-        }
-        
-    }
     namespace Puerts {
         class ArrayBuffer extends System.Object {
             
         }
         class JsEnv extends System.Object {
+            
+        }
+        
+    }
+    namespace Microsoft.IO {
+        class RecyclableMemoryStreamManager extends System.Object {
             
         }
         

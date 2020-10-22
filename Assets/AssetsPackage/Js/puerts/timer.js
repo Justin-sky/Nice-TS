@@ -86,34 +86,29 @@ var global = global || (function () {
         }
     }
 
-    let global_time = 0;
     const removing_timers = new Set();
     const timers = new PriorityQueue([], (a, b) => a.next_time - b.next_time);
     let next = 0;
-    global.__tgjsRegisterTickHandler(() => {
-        global_time = Date.now();
-        timerUpdate();
-    })
-    global.__tgjsRegisterTickHandler = undefined;
+    global.__tgjsRegisterTickHandler(timerUpdate)
+    delete global.__tgjsRegisterTickHandler;
 
     function timerUpdate() {
-        const now = global_time;
+        const now = Date.now();
         while (true) {
             const time = timers.peek();
             if (time && time.next_time <= now) {
-
+                timers.pop();
                 if(removing_timers.has(time.id)){
                     removing_timers.delete(time.id)
                 }
                 else {
-
-                    time.handler(time.args);
                     if (time.timeout) {
                         time.next_time = now + time.timeout;
                         timers.push(time);
                     }
+                    time.handler(time.args);
                 }
-                timers.pop();
+
             } else {
                 break;
             }
@@ -129,7 +124,7 @@ var global = global || (function () {
             t = time;
         timers.push({
             id:++next,
-            next_time: t + global_time,
+            next_time: t + Date.now(),
             args: arg,
             handler: fn,
         });
@@ -145,7 +140,7 @@ var global = global || (function () {
             t = time;
         timers.push({
             id:++next,
-            next_time: t + global_time,
+            next_time: t + Date.now(),
             handler: fn,
             args: arg,
             timeout: t

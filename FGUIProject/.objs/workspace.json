@@ -1,19 +1,19 @@
 {
   "libview.firstColumnWidth": 364,
-  "snapToGrid": true,
   "libview.iconScale": 0,
   "doc.openedDocs": [
     "ui://y4b7yuun10wwi53",
     "ui://yt4d8ma4pyg650",
     "ui://ynb47g4jpyg64t",
-    "ui://l64dumk9pyg651",
     "ui://l64dumk9pyg64v",
     "ui://l64dumk9pyg64w",
-    "ui://l64dumk9feeg54",
-    "ui://l64dumk9pyg652"
+    "ui://l64dumk9feeg54"
   ],
   "auxline1": true,
   "canvasColor": 10066329,
+  "auxline2": true,
+  "doc.activeDoc": "ui://l64dumk9pyg64w",
+  "libview.twoColumn": false,
   "libview.expandedNodes": [
     "y4b7yuun",
     "/",
@@ -40,17 +40,11 @@
     "l64dumk9",
     "/ui/",
     "l64dumk9",
-    "/ui/level/",
-    "l64dumk9",
-    "/ui/login/",
-    "l64dumk9",
-    "/ui/shop/"
+    "/ui/login/"
   ],
-  "doc.activeDoc": "ui://l64dumk9pyg64w",
-  "libview.twoColumn": false,
-  "auxline2": true,
-  "gridSize": 30,
+  "snapToGrid": true,
   "backgroundColor": 6710886,
   "libview.currentGroup": "",
+  "gridSize": 30,
   "gridColor": 80
 }

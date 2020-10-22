@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.unity.2d.animation": {
-      "version": "3.2.3",
+      "version": "3.2.5",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -9,7 +9,7 @@
         "com.unity.mathematics": "1.1.0",
         "com.unity.2d.sprite": "1.0.0"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.2d.common": {
       "version": "2.0.2",
@@ -18,7 +18,7 @@
       "dependencies": {
         "com.unity.2d.sprite": "1.0.0"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
@@ -27,7 +27,7 @@
       "dependencies": {}
     },
     "com.unity.addressables": {
-      "version": "1.8.4",
+      "version": "1.8.5",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -36,49 +36,49 @@
         "com.unity.modules.unitywebrequest": "1.0.0",
         "com.unity.modules.unitywebrequestassetbundle": "1.0.0"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.assetgraph": {
       "version": "1.7.2-preview",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.cinemachine": {
       "version": "2.6.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.ext.nunit": {
       "version": "1.0.0",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.inputsystem": {
       "version": "1.0.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.mathematics": {
       "version": "1.1.0",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.quicksearch": {
       "version": "2.0.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.render-pipelines.core": {
       "version": "7.4.3",
@@ -87,7 +87,7 @@
       "dependencies": {
         "com.unity.ugui": "1.0.0"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.render-pipelines.universal": {
       "version": "7.4.3",
@@ -97,14 +97,14 @@
         "com.unity.render-pipelines.core": "7.4.3",
         "com.unity.shadergraph": "7.4.3"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.scriptablebuildpipeline": {
       "version": "1.7.3",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.shadergraph": {
       "version": "7.4.3",
@@ -113,7 +113,7 @@
       "dependencies": {
         "com.unity.render-pipelines.core": "7.4.3"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
       "version": "1.1.16",
@@ -124,7 +124,7 @@
         "com.unity.modules.imgui": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.textmeshpro": {
       "version": "2.0.1",
@@ -133,21 +133,22 @@
       "dependencies": {
         "com.unity.ugui": "1.0.0"
       },
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
       "version": "1.2.16",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.cn"
+      "url": "https://packages.unity.com"
     },
     "com.unity.ugui": {
       "version": "1.0.0",
       "depth": 1,
       "source": "builtin",
       "dependencies": {
-        "com.unity.modules.ui": "1.0.0"
+        "com.unity.modules.ui": "1.0.0",
+        "com.unity.modules.imgui": "1.0.0"
       }
     },
     "com.unity.modules.ai": {

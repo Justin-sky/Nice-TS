@@ -444,6 +444,8 @@ namespace Puerts.Editor
                 return "number";
             else if (type == typeof(sbyte))
                 return "number";
+            else if (type == typeof(char))
+                return "number";
             else if (type == typeof(ushort))
                 return "number";
             else if (type == typeof(bool))
@@ -573,13 +575,25 @@ namespace Puerts.Editor
             return getMethod == null ? setMethod.IsStatic : getMethod.IsStatic;
         }
 
+        static MethodInfo[] GetMethodsForTsTypeGen(Type type, HashSet<Type> genTypeSet)
+        {
+            var declMethods = type.GetMethods(Flags)
+                .Where(m => m.GetBaseDefinition() == m || !genTypeSet.Contains(m.GetBaseDefinition().DeclaringType)).ToArray();
+
+            var methodNames = declMethods.Select(m => m.Name).ToArray();
+
+            return type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static)
+                .Where(m => genTypeSet.Contains(m.DeclaringType) && methodNames.Contains(m.Name))
+                .Concat(declMethods).Distinct().ToArray();
+        }
+
         public static TsTypeGenInfo ToTsTypeGenInfo(Type type, HashSet<Type> genTypeSet)
         {
             var result = new TsTypeGenInfo()
             {
                 Name = type.Name.Replace('`', '$'),
                 Methods = genTypeSet.Contains(type) ? (type.IsAbstract ? new MethodBase[] { } : type.GetConstructors(Flags).Where(m => !isFiltered(m)).Cast<MethodBase>())
-                    .Concat(type.GetMethods(Flags)
+                    .Concat(GetMethodsForTsTypeGen(type, genTypeSet)
                         .Where(m => !isFiltered(m) && !IsGetterOrSetter(m) && (type.IsGenericTypeDefinition && !m.IsGenericMethodDefinition || Puerts.Utils.IsSupportedMethod(m)))
                         .Cast<MethodBase>())
                     .Select(m => ToTsMethodGenInfo(m, type.IsGenericTypeDefinition)).ToArray() : new TsMethodGenInfo[] { },
@@ -593,7 +607,9 @@ namespace Puerts.Editor
                 IsDelegate = (IsDelegate(type) && type != typeof(Delegate)),
                 IsInterface = type.IsInterface,
                 Namespace = type.Namespace,
-                ExtensionTypes = GetExtensionTypes(type, genTypeSet).Select(t => t.IsGenericType ? GetTsTypeName(t) : t.Name.Replace('`', '$')).ToArray()
+                ExtensionTypes = GetExtensionTypes(type, genTypeSet).
+                    Select(t => t.IsGenericType ? GetTsTypeName(t) : 
+                        (String.IsNullOrEmpty(t.Namespace) ? "" : (t.Namespace+ ".")) + t.Name.Replace('`', '$')).ToArray()
             };
 
             if (result.IsGenericTypeDefinition)
@@ -715,17 +731,17 @@ namespace Puerts.Editor
         static void AddRefType(HashSet<Type> refTypes, Type type)
         {
             var rawType = GetRawType(type);
-            if (refTypes.Contains(rawType) || type.IsPointer || rawType.IsPointer) return;
-            if (!rawType.IsGenericParameter)
-            {
-                refTypes.Add(rawType);
-            }
             if (type.IsGenericType)
             {
                 foreach (var gt in type.GetGenericArguments())
                 {
                     AddRefType(refTypes, gt);
                 }
+            }
+            if (refTypes.Contains(rawType) || type.IsPointer || rawType.IsPointer) return;
+            if (!rawType.IsGenericParameter)
+            {
+                refTypes.Add(rawType);
             }
 
             if (IsDelegate(type) && type != typeof(Delegate) && type != typeof(MulticastDelegate))
@@ -811,9 +827,9 @@ namespace Puerts.Editor
         public static void GenerateCode()
         {
             var start = DateTime.Now;
-            var saveTo = Application.dataPath + "/Gen/";
+            var saveTo = Configure.GetCodeOutputDirectory();
             Directory.CreateDirectory(saveTo);
-            Directory.CreateDirectory(saveTo + "Typing/csharp");
+            Directory.CreateDirectory(Path.Combine(saveTo, "Typing/csharp"));
             GenerateCode(saveTo);
             Debug.Log("finished! use " + (DateTime.Now - start).TotalMilliseconds + " ms");
             AssetDatabase.Refresh();
@@ -823,9 +839,9 @@ namespace Puerts.Editor
         public static void GenerateDTS()
         {
             var start = DateTime.Now;
-            var saveTo = Application.dataPath + "/Gen/";
+            var saveTo = Configure.GetCodeOutputDirectory();
             Directory.CreateDirectory(saveTo);
-            Directory.CreateDirectory(saveTo + "Typing/csharp");
+            Directory.CreateDirectory(Path.Combine(saveTo, "Typing/csharp"));
             GenerateCode(saveTo, true);
             Debug.Log("finished! use " + (DateTime.Now - start).TotalMilliseconds + " ms");
             AssetDatabase.Refresh();
@@ -834,7 +850,7 @@ namespace Puerts.Editor
         [MenuItem("puerts/Clear Generated Code", false, 2)]
         public static void ClearAll()
         {
-            var saveTo = Application.dataPath + "/Gen/";
+            var saveTo = Configure.GetCodeOutputDirectory();
             if (Directory.Exists(saveTo))
             {
                 Directory.Delete(saveTo, true);
