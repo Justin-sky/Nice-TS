@@ -51,7 +51,6 @@ export class RedHintsManager extends Singleton<RedHintsManager>{
    public setRedHintOpenOrClose(red: number, isOpen: boolean) {
         if (this._childNum[red] > 0) {
             console.log("红点数据设置错误：不能直接对高级的红点数据操作");
-            debugger;
             return;
         }
         this.doSetRedHintOpenOrClose(red, isOpen ? 1 : 0);
@@ -64,12 +63,10 @@ export class RedHintsManager extends Singleton<RedHintsManager>{
     private setParent(child: number, parent: number) {
         if (this._parentIndex[parent] == child) {
             console.log("关系反了");
-            debugger;
             return;
         }
         if (this._parentIndex[child]) {
             console.log("重复设置");
-            debugger;
             return;
         }
         this._parentIndex[child] = parent;
@@ -81,15 +78,15 @@ export class RedHintsManager extends Singleton<RedHintsManager>{
     private doSetRedHintOpenOrClose(red: number, value: number) {
         if (this._data[red] != value) {
             this._data[red] = value;
-            var _parent: number = this._parentIndex[red]
+            let _parent: number = this._parentIndex[red]
             if (_parent) {
                 //如果有父级，更新父级
-                var index: number = this._childIndex[red];//获取在父级中的索引
+                let index: number = this._childIndex[red];//获取在父级中的索引
                 this.doSetRedHintOpenOrClose(_parent, value > 0 ? this._data[_parent] | this.addV(index) : this._data[_parent] & this.subV(index));//设置父级的值
             }
 
             //发改变事件:全局事件
-            emit(RedHintsManager.RED_HINT_VALUE_CHANGED, red);
+            //emit(RedHintsManager.RED_HINT_VALUE_CHANGED, red);
             //红点事件，局部事件
             RedHintsMessageManager.Instance(RedHintsMessageManager).broadcast(red, value);
         }

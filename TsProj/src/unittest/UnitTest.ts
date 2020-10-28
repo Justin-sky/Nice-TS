@@ -7,6 +7,8 @@ import { SkillConfigTB, SkillConfigTR } from '../data/excel/SkillConfig';
 import { Opcode } from '../data/pb/Opcode';
 import { fb } from '../data/fb/unitconfig_generated';
 import { UnitConfigTB } from '../data/excel/UnitConfig';
+import { RedHintsMessageManager } from '../framework/redhints/RedHintsMessageManager';
+import { enumRedHints, RedHintsManager } from '../framework/redhints/RedHintsManager';
 
 
 export class UnitTest{
@@ -198,7 +200,7 @@ export class UnitTest{
 
         
         console.log("sleep =============================");
-        await TimeUtil.sleep(5000);
+        await TimeUtil.sleep(1000);
         console.log("sleep ..end");
 
 
@@ -219,7 +221,50 @@ export class UnitTest{
         // }catch(ex){
         //     console.error(ex);
         // }
-        
+
+        try{
+            console.log("测试红点系统 =============================");
+
+            RedHintsMessageManager.Instance(RedHintsMessageManager).addListener(
+                enumRedHints.chat,
+                this,
+                function(){
+                    console.log("red hints chat...");
+                }
+            );
+            RedHintsMessageManager.Instance(RedHintsMessageManager).addListener(
+                enumRedHints.chat_family,
+                this,
+                function(){
+                    console.log("red hints chat_family...");
+                }
+            );
+            RedHintsMessageManager.Instance(RedHintsMessageManager).addListener(
+                enumRedHints.chat_system,
+                this,
+                function(){
+                    console.log("red hints chat...");
+                }
+            );
+
+            RedHintsManager.Instance(RedHintsManager).setRedHintOpenOrClose(
+                enumRedHints.chat_family, true
+            );
+            let r_chat = RedHintsManager.Instance(RedHintsManager).checkRedIsOpen(
+                enumRedHints.chat
+            ) ;
+            let r_chat_family = RedHintsManager.Instance(RedHintsManager).checkRedIsOpen(
+                enumRedHints.chat_family
+            ) ;
+            let r_chat_system = RedHintsManager.Instance(RedHintsManager).checkRedIsOpen(
+                enumRedHints.chat_system
+            ) ;
+            console.log(r_chat, r_chat_family, r_chat_system)
+
+        }catch(error){
+            console.log(error)
+        }
+
     }
 
     
