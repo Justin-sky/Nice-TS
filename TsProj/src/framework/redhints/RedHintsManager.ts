@@ -46,6 +46,19 @@ export class RedHintsManager extends Singleton<RedHintsManager>{
     }
 
     /**
+     * 设置红点的开启和关闭
+    */
+   public setRedHintOpenOrClose(red: number, isOpen: boolean) {
+        if (this._childNum[red] > 0) {
+            console.log("红点数据设置错误：不能直接对高级的红点数据操作");
+            debugger;
+            return;
+        }
+        this.doSetRedHintOpenOrClose(red, isOpen ? 1 : 0);
+    }
+
+
+    /**
      * 记录父子关系：子---父
     */
     private setParent(child: number, parent: number) {
@@ -64,17 +77,7 @@ export class RedHintsManager extends Singleton<RedHintsManager>{
         this._childNum[parent]++;//子项数量增加
         this._childIndex[child] = this._childNum[parent];//子项的索引 从1开始
     }
-    /**
-     * 设置红点的开启和关闭
-    */
-    public setRedHintOpenOrClose(red: number, isOpen: boolean) {
-        if (this._childNum[red] > 0) {
-            console.log("红点数据设置错误：不能直接对高级的红点数据操作");
-            debugger;
-            return;
-        }
-        this.doSetRedHintOpenOrClose(red, isOpen ? 1 : 0);
-    }
+
     private doSetRedHintOpenOrClose(red: number, value: number) {
         if (this._data[red] != value) {
             this._data[red] = value;
