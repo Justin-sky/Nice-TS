@@ -295,7 +295,7 @@ namespace NiceTS
 				}
 				catch (Exception ee)
 				{
-					Logger.LogError($"ip: {this.RemoteAddress} {ee}");
+					Log.Error( LogGroups.Engine, $"ip: {this.RemoteAddress} {ee}");
 					this.OnError(ErrorCode.ERR_SocketError);
 					return;
 				}
@@ -306,7 +306,7 @@ namespace NiceTS
 				}
 				catch (Exception ee)
 				{
-					Logger.LogError(ee.ToString());
+					Log.Error(LogGroups.Engine, ee.ToString());
 				}
 			}
 

@@ -44,7 +44,7 @@ public class JsManager:MonoSingleton<JsManager>
         //jsEnv.ExecuteFile("puerts/flatbuffers.js");
         if (jsEnv == null)
         {
-            Logger.LogError("InitJsEnv null!!!");
+            Log.Error(LogGroups.Engine, "InitJsEnv null!!!");
         }
        
         //声明Action： 值类型才需要这样添加
@@ -69,7 +69,7 @@ public class JsManager:MonoSingleton<JsManager>
 
             }catch(Exception e)
             {
-                Logger.LogError(e.ToString());
+                Log.Error(LogGroups.Engine, e.ToString());
             }
             
         }
@@ -104,7 +104,7 @@ public class JsManager:MonoSingleton<JsManager>
             }catch(Exception ex)
             {
                 string msg = string.Format("js exception : {0}\n {1}", ex.Message, ex.StackTrace);
-                Logger.LogError(msg, null);
+                Log.Error(LogGroups.Engine, msg, null);
             }
         }
     }

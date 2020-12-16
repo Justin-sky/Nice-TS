@@ -1,57 +1,43 @@
 ﻿using FairyGUI;
 using NiceTS;
 using System.Threading.Tasks;
-
+using UnityEngine;
 
 public class GameLaunch : MonoSingleton<GameLaunch>
 {
 
-    public LaunchPage launchPage;
+    public GameObject launchPageGO;
 
     async Task Start()
     {
-        LoggerHelper.Instance.Startup();
         JsManager.Instance.Startup();
-      
+
         //初始化FairyGUI
         GRoot.inst.SetContentScaleFactor(1280, 720, UIContentScaler.ScreenMatchMode.MatchWidthOrHeight);
         UIPackage.unloadBundleByFGUI = false;
 
-        
-        UIObjectFactory.SetPackageItemExtension(LaunchPage.URL, typeof(LaunchPage));
-        UIObjectFactory.SetPackageItemExtension(UINoticeWin.URL, typeof(UINoticeWin));
-
         //加载FairyGUI Package
         ResourceManager.init();
-        await ResourceManager.LoadFairyGUIPackage("common_fui.bytes", "common");
-        await ResourceManager.LoadFairyGUIPackage("launch_fui.bytes", "launch");
 
-
-        //加载更新界面
-        launchPage = LaunchPage.CreateInstance();
-        launchPage.Show();
-        
         //Test
-        UINoticeWin notice = UINoticeWin.CreateInstance();
-        notice.ShowOneButton("test test", () => {
+        UINoticeWin notice = UINoticeWin.Inst;
+        notice.ShowOneButton("test test", () =>
+        {
             notice.Hide();
         });
         await notice.WaitForResponse();
 
-
         // 开始更新
+        var launchPage = launchPageGO.GetComponent<LaunchPage>();
         if (launchPage != null)
         {
             await launchPage.CheckUpdate();
         }
- 
+
     }
 
     public void JsLuanchFinish()
     {
-        if (this.launchPage != null)
-        {
-            this.launchPage.Dispose();
-        }
+     
     }
 }

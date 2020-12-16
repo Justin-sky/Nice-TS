@@ -1,42 +1,30 @@
 ﻿using FairyGUI;
-using FairyGUI.Utils;
 using NiceTS;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-public class LaunchPage : GComponent
+
+public class LaunchPage : MonoBehaviour
 {
     public const string URL = "ui://ynb47g4jpyg64t";
 
+    private GComponent _mainView;
     private GTextField gTextField;
     private GProgressBar gProgress;
 
-
-    public override void ConstructFromXML(XML xml)
+    void Start()
     {
-        base.ConstructFromXML(xml);
-
-        gTextField = this.GetChild("updateTxt") as GTextField;
-        gProgress = this.GetChild("updateProgress") as GProgressBar;
-        gProgress.visible = false;
-    }
-
-
-    public static LaunchPage CreateInstance()
-    { 
-        return UIPackage.CreateObjectFromURL(URL) as LaunchPage;
-    }
-
-    public void Show()
-    {
-        GRoot.inst.AddChild(this);
-    }
-
-    public void Hide(bool disposed = false)
-    {
-        GRoot.inst.RemoveChild(this, disposed);
+        _mainView = this.GetComponent<UIPanel>().ui;
+        if (_mainView != null)
+        {
+            gTextField = _mainView.GetChild("updateTxt").asTextField;
+            gProgress = _mainView.GetChild("updateProgress").asProgress;
+            gProgress.visible = false;
+        }
+       
     }
 
 
@@ -51,8 +39,8 @@ public class LaunchPage : GComponent
         var a = Addressables.RuntimePath;
         var catalogs = await Addressables.CheckForCatalogUpdates(false).Task;
        
-        Logger.Log(string.Format("CheckIfNeededUpdate use {0}ms", (DateTime.Now - start).Milliseconds));
-        Logger.Log($"catalog count: {catalogs.Count} === check status: {catalogs}");
+        Log.Debug(LogGroups.UI, string.Format("CheckIfNeededUpdate use {0}ms", (DateTime.Now - start).Milliseconds));
+        Log.Debug(LogGroups.UI, $"catalog count: {catalogs.Count} === check status: {catalogs}");
 
         if (catalogs != null && catalogs.Count > 0)
         {
@@ -62,7 +50,7 @@ public class LaunchPage : GComponent
 
             start = DateTime.Now;
             var locators = await Addressables.UpdateCatalogs(catalogs, false).Task;
-            Logger.Log($"locator count: {locators.Count}");
+            Log.Debug(LogGroups.UI, $"locator count: {locators.Count}");
 
             foreach (var v in locators)
             {
@@ -70,11 +58,11 @@ public class LaunchPage : GComponent
                 keys.AddRange(v.Keys);
 
                 var size = await Addressables.GetDownloadSizeAsync(keys).Task;
-                Logger.Log($"download size:{size}");
+                Log.Debug(LogGroups.UI, $"download size:{size}");
 
                 if (size > 0)
                 {
-                    UINoticeWin notice = UINoticeWin.CreateInstance();
+                    UINoticeWin notice = UINoticeWin.Inst;
                     notice.ShowOneButton($"本次更新大小：{size}", () => {
                         notice.Hide();
                     });
@@ -86,7 +74,7 @@ public class LaunchPage : GComponent
                     while (!downloadHandle.IsDone)
                     {
                         float percentage = downloadHandle.PercentComplete;
-                        Logger.Log($"download pregress: {percentage}");
+                        Log.Debug(LogGroups.UI, $"download pregress: {percentage}");
                         gProgress.value = percentage * 100;
 
                     }
@@ -94,7 +82,7 @@ public class LaunchPage : GComponent
                 }
             }
 
-            Logger.Log(string.Format("UpdateFinish use {0}ms", (DateTime.Now - start).Milliseconds));
+            Log.Debug(LogGroups.UI, string.Format("UpdateFinish use {0}ms", (DateTime.Now - start).Milliseconds));
             UpdateFinish();
 
             Addressables.Release(locators);

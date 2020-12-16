@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using NiceTS;
 
 public class P
 {
     public void TestP()
     {
-        Logger.Log("TestＰ");
+        Log.Debug( LogGroups.Console, "TestＰ");
     }
 }
 

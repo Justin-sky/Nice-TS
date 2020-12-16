@@ -2,13 +2,17 @@
 using FairyGUI.Utils;
 using System;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace NiceTS
 {
-    public class UINoticeWin: GComponent
+    public class UINoticeWin: MonoBehaviour
     {
         public const string URL = "ui://y4b7yuunpyg64q";
 
+        private static  UINoticeWin _uiNoticeWinInst;
+
+        private GComponent _mainView;
         private GTextField gText;
         private GButton bakBtn;
         private GButton retryBtn;
@@ -33,43 +37,51 @@ namespace NiceTS
             }
         }
 
-        public override void ConstructFromXML(XML xml)
+        public static UINoticeWin Inst
         {
-            base.ConstructFromXML(xml);
+            get { return _uiNoticeWinInst; }
+        }
 
-            gText = this.GetChild("noticeText") as GTextField;
-            bakBtn = this.GetChild("backBtn") as GButton;
-            retryBtn = this.GetChild("retryBtn") as GButton;
-            okBtn = this.GetChild("okBtn") as GButton;
+        void Awake()
+        {
+            if (_uiNoticeWinInst == null) _uiNoticeWinInst = this;
 
+            _mainView = this.GetComponent<UIPanel>().ui;
             
+
+            if (_mainView != null)
+            {
+                gText = _mainView.GetChild("noticeText").asTextField;
+                bakBtn = _mainView.GetChild("backBtn").asButton;
+                retryBtn = _mainView.GetChild("retryBtn").asButton;
+                okBtn = _mainView.GetChild("okBtn").asButton;
+
+                _mainView.visible = false;
+            }
         }
 
-        public static UINoticeWin CreateInstance()
-        {
-
-            return UIPackage.CreateObjectFromURL(URL) as UINoticeWin;
-
-        }
 
         public void ShowOneButton(string msg, Action okClick)
         {
-            this.x = 500;
-            this.y = 200;
+            if (_mainView == null) return;
+
+            _mainView.visible = true;
+            _mainView.SetXY(350, 200);
+
             this.LastClickIndex = -1;
             
             gText.text = msg;
             okBtn.onClick.Add(()=> {
-                Logger.Log("button click");
+                Log.Debug(LogGroups.UI,"button click");
                 this.LastClickIndex = 3;
                 okClick?.Invoke(); 
             });
-            GRoot.inst.AddChild(this);
+  
         }
 
         public void Hide()
         {
-            GRoot.inst.RemoveChild(this);
+            _mainView.visible = false;
         }
 
         public async Task WaitForResponse()

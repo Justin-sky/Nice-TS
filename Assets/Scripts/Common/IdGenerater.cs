@@ -52,12 +52,12 @@ namespace NiceTS
 
 			if (++value > ushort.MaxValue - 1)
 			{
-				Logger.LogError($"id is not enough! value: {value}");
+				Log.Error(LogGroups.Engine, $"id is not enough! value: {value}");
 			}
 
 			if (time > int.MaxValue)
 			{
-				Logger.LogError($"time > int.MaxValue value: {time}");
+				Log.Error(LogGroups.Engine, $"time > int.MaxValue value: {time}");
 			}
 
 			IdStruct idStruct = new IdStruct((uint)time, (ushort)value);

@@ -38,7 +38,7 @@ namespace NiceTS
 				}
 				if (c < 0)
 				{
-					Logger.LogError($"CircularBuffer count < 0: {this.bufferQueue.Count}, {this.LastIndex}, {this.FirstIndex}");
+					Log.Error(LogGroups.Engine, $"CircularBuffer count < 0: {this.bufferQueue.Count}, {this.LastIndex}, {this.FirstIndex}");
 				}
 				return c;
 			}

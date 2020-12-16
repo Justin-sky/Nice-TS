@@ -70,7 +70,7 @@ namespace NiceTS
                 }
                 catch (Exception e)
                 {
-                    Logger.LogError(e.ToString());
+                    Log.Error(LogGroups.Engine, e.ToString());
                 }
             }
 

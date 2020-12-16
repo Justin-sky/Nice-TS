@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using NiceTS;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace fb
@@ -38,7 +39,7 @@ namespace fb
             }
             else
             {
-                Logger.LogError($"Not Found in cache, Skill FB : {key} ");
+                Log.Error(LogGroups.Engine, $"Not Found in cache, Skill FB : {key} ");
                 return null;
             }
         }
