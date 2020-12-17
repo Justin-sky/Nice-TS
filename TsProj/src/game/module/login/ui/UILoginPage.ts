@@ -11,6 +11,7 @@ import { UIMessageManger } from "../../../event/UIMessageManager";
 import { UIMessage } from "../../../event/UIMessage";
 import { SceneManager } from "../../../../framework/scene/SceneManager";
 import { SceneDef } from "../../../../framework/scene/SceneDef";
+import { storyUI } from "../../../../data/ui/story";
 
 
 
@@ -28,6 +29,8 @@ export class UILoginPage extends UIPage{
     @binder("loginBtn")
     public m_loginBtn:FairyGUI.GButton;
 
+    @binder("storyBtn")
+    public m_storyBtn:FairyGUI.GButton;
 
     private gateId:any;
     private gateKey:number|Long;
@@ -37,6 +40,13 @@ export class UILoginPage extends UIPage{
         
         this.m_loginBtn.onClick.Add(()=>{
             this.onLoginClick();
+        });
+
+        this.m_storyBtn.onClick.Add(()=>{
+            UIManager.Instance(UIManager).openWindow(
+                storyUI.PackageName, 
+                storyUI.UIStoryWin,
+                null);
         });
 
         this.m_selserverBtn.onClick.Add(()=>{

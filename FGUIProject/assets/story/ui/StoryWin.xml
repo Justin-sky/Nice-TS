@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="500,400">
+<component size="500,400" designImageAlpha="1" bgColor="#333333">
   <displayList>
-    <richtext id="n0_alle" name="speakerTxt" xy="73,36" size="341,108" fontSize="12" autoSize="none" text="对话详情&#xA;对话详情&#xA;对话详情&#xA;对话详情&#xA;对&#xA;对话详情&#xA;">
+    <image id="n7_alle" name="n7" src="pyg62m" fileName="atlas/common/ui_comm_bg_underlay_e.png" pkg="y4b7yuun" xy="-30,-53" size="555,499"/>
+    <richtext id="n0_alle" name="speakerTxt" xy="63,1" size="351,83" fontSize="20" autoSize="height" text="对话详情&#xA;对话详情&#xA;对话详情">
       <relation target="" sidePair="center-center,top-top"/>
     </richtext>
-    <list id="n6_alle" name="btnList" xy="64,175" size="353,183" overflow="scroll" lineGap="10" defaultItem="ui://y4b7yuunpyg64s">
+    <list id="n6_alle" name="btnList" xy="64,115" size="353,183" overflow="scroll" lineGap="10" defaultItem="ui://y4b7yuunpyg64s">
       <relation target="n0_alle" sidePair="top-bottom"/>
       <relation target="" sidePair="center-center"/>
       <item/>

@@ -2,17 +2,18 @@
 
 EXTERNAL Mutiply(x,y)
 EXTERNAL GetCharacterName()
-EXTERNAL LocalizeText(args)
+EXTERNAL GetCharacterNameByMutiParams(p1, p2, p3)
 
    
 === function GetCharacterName() 
     ~ return "Justin"
 
-
+=== function GetCharacterNameByMutiParams(p1, p2, p3)
+    ~ return "abc"
 
 
 === story1 === 
-999:当你靠近前眼邪洞时，它似乎从沉睡中苏醒了过来，某个声音从洞穴深处响起，“你若放弃生命或财富，或许会得到奖赏，如果你能证明自己的价值的话...”
+999:{GetCharacterNameByMutiParams(1,2,3)}当你靠近前眼邪洞时，它似乎从沉睡中苏醒了过来，某个声音从洞穴深处响起，“你若放弃生命或财富，或许会得到奖赏，如果你能证明自己的价值的话...”
 你通常是不会向来历不明的怪物献上祭品的，但你决定为这个洞窟破个例。
 {GetCharacterName()}, 你打算献上祭品吗？
 + [献上财富。（支付25个金币，有10%的几率获得一件神器）]->story1

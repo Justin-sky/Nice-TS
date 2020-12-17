@@ -276,7 +276,18 @@ export class UnitTest{
 
             var json = await (await ResManager.Instance(ResManager).loadTextAsset("Story/TestStory.json")).text;
             let story = new Story(json);
-            console.log(story.ContinueMaximally());
+            story.ChoosePathString("story1", true);
+            story.BindExternalFunction("GetCharacterName",()=>{
+                return "Justin Test";
+            })
+            story.BindExternalFunctionGeneral("GetCharacterNameByMutiParams",(args:[])=>{
+                console.log(args.length);
+                return "TTTT";
+            })
+
+            console.log(story.Continue());
+            console.log(story.Continue());
+            console.log(story.Continue());
         }catch(error){
             console.log(error)
         }

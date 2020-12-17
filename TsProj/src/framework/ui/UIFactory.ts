@@ -9,6 +9,8 @@ import { homeUI } from "../../data/ui/home";
 import { UIMsgBox } from "./UILib/UIMsgBox";
 import { UISelServerWin } from "../../game/module/login/ui/UISelServerWin";
 import { UIShopPage } from "../../game/module/home/ui/UIShopPage";
+import { storyUI } from "../../data/ui/story";
+import { UIStoryWin } from "../../game/module/story/UIStoryWin";
 
 
 
@@ -49,6 +51,11 @@ export class UIFactory{
                     break;
                 case homeUI.UIShopPage:
                     ui = new UIShopPage();
+                    break;
+
+                    //story
+                case storyUI.UIStoryWin:
+                    ui = new UIStoryWin();
                     break;
             }
 

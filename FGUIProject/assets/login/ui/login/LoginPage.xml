@@ -13,5 +13,8 @@
     <component id="n10_u93s" name="selserverBtn" src="u93s55" fileName="ui/login/SelServerBtn.xml" xy="490,536" size="202,43">
       <Button title="点击选择服务器..."/>
     </component>
+    <component id="n11_alle" name="storyBtn" src="pyg64s" fileName="ui/common/CommonBtn.xml" pkg="y4b7yuun" xy="136,153">
+      <Button title="测试Story"/>
+    </component>
   </displayList>
 </component>

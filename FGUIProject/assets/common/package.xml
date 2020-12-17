@@ -12,7 +12,7 @@
     <image id="pyg62j" name="ui_comm_bg_underlay_h.png" path="/atlas/common/" exported="true"/>
     <image id="pyg62k" name="ui_comm_bg_underlay_g.png" path="/atlas/common/" exported="true"/>
     <image id="pyg62l" name="ui_comm_bg_underlay_f.png" path="/atlas/common/" exported="true"/>
-    <image id="pyg62m" name="ui_comm_bg_underlay_e.png" path="/atlas/common/" exported="true"/>
+    <image id="pyg62m" name="ui_comm_bg_underlay_e.png" path="/atlas/common/" exported="true" scale="9grid" scale9grid="16,13,23,26"/>
     <image id="pyg62n" name="ui_comm_bg_underlay_d.png" path="/atlas/common/" exported="true" scale="9grid" scale9grid="101,53,72,76"/>
     <image id="pyg62o" name="ui_comm_bg_underlay_c.png" path="/atlas/common/" exported="true"/>
     <image id="pyg62p" name="ui_comm_bg_underlay_b.png" path="/atlas/common/" exported="true"/>
