@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="500,400">
+  <displayList>
+    <richtext id="n0_alle" name="speakerTxt" xy="73,36" size="341,108" fontSize="12" autoSize="none" text="对话详情&#xA;对话详情&#xA;对话详情&#xA;对话详情&#xA;对&#xA;对话详情&#xA;">
+      <relation target="" sidePair="center-center,top-top"/>
+    </richtext>
+    <list id="n6_alle" name="btnList" xy="64,175" size="353,183" overflow="scroll" lineGap="10" defaultItem="ui://y4b7yuunpyg64s">
+      <relation target="n0_alle" sidePair="top-bottom"/>
+      <relation target="" sidePair="center-center"/>
+      <item/>
+      <item/>
+    </list>
+  </displayList>
+</component>

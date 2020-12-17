@@ -17,6 +17,7 @@
 		"yaml-loader": "^0.6.0"
 	},
 	"dependencies": {
-		"@types/flatbuffers": "^1.10.0"
+		"@types/flatbuffers": "^1.10.0",
+		"inkjs": "^1.11.0"
 	}
 }

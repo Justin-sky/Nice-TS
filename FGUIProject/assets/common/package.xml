@@ -6,7 +6,7 @@
     <image id="pyg62d" name="ui_comm_btn_d.png" path="/atlas/common/" exported="true"/>
     <image id="pyg62e" name="ui_comm_btn_close.png" path="/atlas/common/" exported="true"/>
     <image id="pyg62f" name="ui_comm_btn_c.png" path="/atlas/common/" exported="true" scale="9grid" scale9grid="11,9,22,18"/>
-    <image id="pyg62g" name="ui_comm_btn_a.png" path="/atlas/common/" exported="true"/>
+    <image id="pyg62g" name="ui_comm_btn_a.png" path="/atlas/common/" exported="true" scale="9grid" scale9grid="36,13,72,26"/>
     <image id="pyg62h" name="ui_comm_btn_b.png" path="/atlas/common/" exported="true" scale="9grid" scale9grid="9,11,18,22"/>
     <image id="pyg62i" name="ui_comm_bg_underlay_pic.png" path="/atlas/common/" exported="true"/>
     <image id="pyg62j" name="ui_comm_bg_underlay_h.png" path="/atlas/common/" exported="true"/>

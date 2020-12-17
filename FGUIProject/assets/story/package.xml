@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="hmkwpkqf">
+  <resources>
+    <component id="alle0" name="StoryWin.xml" path="/ui/" exported="true"/>
+  </resources>
+  <publish name="" genCode="true"/>
+</packageDescription>

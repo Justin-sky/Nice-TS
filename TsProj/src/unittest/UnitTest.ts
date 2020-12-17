@@ -9,6 +9,7 @@ import { fb } from '../data/fb/unitconfig_generated';
 import { UnitConfigTB } from '../data/excel/UnitConfig';
 import { RedHintsMessageManager } from '../framework/redhints/RedHintsMessageManager';
 import { enumRedHints, RedHintsManager } from '../framework/redhints/RedHintsManager';
+import { Story } from 'inkjs';
 
 
 export class UnitTest{
@@ -222,6 +223,8 @@ export class UnitTest{
         //     console.error(ex);
         // }
 
+
+
         try{
             console.log("测试红点系统 =============================");
 
@@ -264,6 +267,20 @@ export class UnitTest{
         }catch(error){
             console.log(error)
         }
+
+
+        
+        try{
+            console.log("Ink Story =============================");
+
+
+            var json = await (await ResManager.Instance(ResManager).loadTextAsset("Story/TestStory.json")).text;
+            let story = new Story(json);
+            console.log(story.ContinueMaximally());
+        }catch(error){
+            console.log(error)
+        }
+
 
     }
 
