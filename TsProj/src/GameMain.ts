@@ -7,6 +7,7 @@ import { ResManager } from './framework/common/ResManager';
 import { JsManager ,GameLaunch, NiceTS } from 'csharp';
 import { SceneDef } from './framework/scene/SceneDef';
 import { SceneManager } from './framework/scene/SceneManager';
+import { StoryManager } from './framework/ink/StoryManager';
 
 
 
@@ -27,7 +28,9 @@ class GameMain{
     
             UIManager.Instance(UIManager);
             ResManager.Instance(ResManager);
-    
+            StoryManager.Instance(StoryManager).initialize();
+
+
             //预加载excel数据
             //ExcelManager.Instance(ExcelManager);
       
