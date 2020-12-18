@@ -45,4 +45,13 @@ export class StoryManager extends Singleton<StoryManager>{
     public loadCurrent():void{
         if(this._inkWriter!=null) this._inkWriter.load();
     }
+
+    public getVariable(variableName:string):any{
+        return this._inkWriter.getVariable(variableName);
+    }
+
+    public setVariable(variableName:string, value:any){
+        this.inkWriter.setVariable(variableName, value);
+    }
+
 }

@@ -4,7 +4,9 @@ export class InkStateInspector{
 
     public BindInkMethods(inkStory:Story):void{
         
+        //3参数以下采用此方式
         this.bindInkMethodOnce(inkStory,"GetCharacterName",this.getCharacterName);
+        //3参数以上采用此方式 
         this.bindInkMethodOnceGeneral(inkStory,"GetCharacterNameByMutiParams",this.getCharacterNameMutiParams);
     
     }

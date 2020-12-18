@@ -1,8 +1,10 @@
 import { FairyGUI } from "csharp";
 import { Choice } from "inkjs/engine/Choice";
+import { storyUI } from "../../../data/ui/story";
 import { binder } from "../../../framework/common/NiceDecorator";
 import { StoryManager } from "../../../framework/ink/StoryManager";
 import { StoryMessageManager } from "../../../framework/ink/StoryMessageManager";
+import { UIManager } from "../../../framework/ui/UIManager";
 import { UIWindow } from "../../../framework/ui/UIWindow";
 
 export class UIStoryWin extends UIWindow{
@@ -53,6 +55,7 @@ export class UIStoryWin extends UIWindow{
             this.OnStoryFinished
         );
         
+        this.optionsMap.clear();
         StoryManager.Instance(StoryManager).beginStory("story2");
     }
 
@@ -104,6 +107,8 @@ export class UIStoryWin extends UIWindow{
     private OnStoryFinished():void{
 
         console.log("Story Finished")
+
+        UIManager.Instance(UIManager).closeWindow(storyUI.UIStoryWin,null);
     }
 
 
