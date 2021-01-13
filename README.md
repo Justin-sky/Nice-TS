@@ -19,7 +19,7 @@ Road Map ：
 
 请在Unity2019.4以上环境运行
 
-Clone[服务器：https://github.com/Justin-sky/Nice-ET ](https://github.com/Justin-sky/Nice-ET)代码到本地，VS安装.net core 3.1开发环境
+服务端： https://github.com/Justin-sky/Nice-KT
 
 #### 文档
 
