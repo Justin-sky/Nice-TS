@@ -1,0 +1,1816 @@
+fileFormatVersion: 2
+guid: e4fc05577dd509243ab60b06b0f24ba0
+timeCreated: 1606405466
+licenseType: Free
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: StatusStasis
+  - first:
+      213: 21300002
+    second: OnRally
+  - first:
+      213: 21300004
+    second: StatusMeleeWeakness
+  - first:
+      213: 21300006
+    second: CardSpellPlayed
+  - first:
+      213: 21300008
+    second: OnAnyUnitDeath
+  - first:
+      213: 21300010
+    second: OnAttack
+  - first:
+      213: 21300012
+    second: OnDeath
+  - first:
+      213: 21300014
+    second: OnEaten
+  - first:
+      213: 21300016
+    second: OnEnchant
+  - first:
+      213: 21300018
+    second: OnFeed
+  - first:
+      213: 21300020
+    second: OnHeal
+  - first:
+      213: 21300022
+    second: OnKill
+  - first:
+      213: 21300024
+    second: StartOfTurn
+  - first:
+      213: 21300026
+    second: StatusAmbush
+  - first:
+      213: 21300028
+    second: StatusArmor
+  - first:
+      213: 21300030
+    second: StatusBuff
+  - first:
+      213: 21300032
+    second: StatusCapturedSoul
+  - first:
+      213: 21300034
+    second: StatusDamageShield
+  - first:
+      213: 21300036
+    second: StatusDazed
+  - first:
+      213: 21300038
+    second: StatusDebuff
+  - first:
+      213: 21300040
+    second: StatusEndless
+  - first:
+      213: 21300042
+    second: StatusEphemeral
+  - first:
+      213: 21300044
+    second: StatusHaste
+  - first:
+      213: 21300046
+    second: StatusHealImmunity
+  - first:
+      213: 21300048
+    second: StatusImmune
+  - first:
+      213: 21300050
+    second: StatusInert
+  - first:
+      213: 21300052
+    second: StatusLifeSteal
+  - first:
+      213: 21300054
+    second: StatusMultiStrike
+  - first:
+      213: 21300056
+    second: StatusPoison
+  - first:
+      213: 21300058
+    second: StatusRegen
+  - first:
+      213: 21300060
+    second: StatusRelentless
+  - first:
+      213: 21300062
+    second: StatusRooted
+  - first:
+      213: 21300064
+    second: StatusScorch
+  - first:
+      213: 21300066
+    second: StatusSilenced
+  - first:
+      213: 21300068
+    second: StatusSpark
+  - first:
+      213: 21300070
+    second: StatusSpellShield
+  - first:
+      213: 21300072
+    second: StatusSpellWeakness
+  - first:
+      213: 21300074
+    second: StatusSpikes
+  - first:
+      213: 21300076
+    second: StatusSplash
+  - first:
+      213: 21300078
+    second: StatusStealth
+  - first:
+      213: 21300080
+    second: StatusSweep
+  - first:
+      213: 21300082
+    second: StatusCardless
+  - first:
+      213: 21300084
+    second: StatusFragile
+  - first:
+      213: 21300086
+    second: StatusBuffet
+  - first:
+      213: 21300088
+    second: StatusBlessing
+  externalObjects: {}
+  usedFileIDs: []
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 4
+  maxTextureSize: 184
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: StatusStasis
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 54
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -9.999999, y: 12}
+        - {x: -12, y: 11}
+        - {x: -12, y: -8}
+        - {x: -11, y: -12}
+        - {x: 9, y: -12}
+        - {x: 12, y: -4}
+        - {x: 12, y: 8}
+        - {x: 8, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: baf8da64641f4ab5bd8cb48e02529051
+      internalID: 21300000
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OnRally
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 158
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -12, y: 12}
+        - {x: -12, y: 4}
+        - {x: -8, y: -9.999999}
+        - {x: -7, y: -12}
+        - {x: 7, y: -12}
+        - {x: 9.999999, y: -11}
+        - {x: 12, y: -9.999999}
+        - {x: 12, y: 9}
+        - {x: 11, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbec18981dee4cd78526588291d110ed
+      internalID: 21300002
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusMeleeWeakness
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 106
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -9.999999, y: 12}
+        - {x: -9.999999, y: -3}
+        - {x: -1, y: -12}
+        - {x: 11, y: -12}
+        - {x: 11, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: b285ace14e7a44b39e24d6fe06086473
+      internalID: 21300004
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardSpellPlayed
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 158
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -5, y: -6}
+        - {x: -7, y: -8}
+        - {x: -7, y: -11}
+        - {x: -6, y: -12}
+        - {x: -1, y: -12}
+        - {x: 0, y: -11}
+        - {x: 0, y: -9}
+        - {x: -3, y: -6}
+      - - {x: -9, y: 12}
+        - {x: -12, y: 9}
+        - {x: -12, y: -6}
+        - {x: -5, y: -8}
+        - {x: -3, y: -9}
+        - {x: 9, y: -9}
+        - {x: 12, y: -3}
+        - {x: 12, y: 4}
+        - {x: 3, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d03d49196ad647288c3785d06fb03c04
+      internalID: 21300006
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OnAnyUnitDeath
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 132
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -12, y: 12}
+        - {x: -12, y: -7}
+        - {x: -7, y: -12}
+        - {x: 11, y: -12}
+        - {x: 12, y: -9.999999}
+        - {x: 12, y: 2}
+        - {x: 2, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab4f191fa4df40cd8e7cefc09041df00
+      internalID: 21300008
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OnAttack
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 106
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -12, y: 12}
+        - {x: -12, y: -8}
+        - {x: -7, y: -12}
+        - {x: 12, y: -12}
+        - {x: 12, y: 7}
+        - {x: 8, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0040a30cb26e461f8aacc4629ff19944
+      internalID: 21300010
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OnDeath
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 80
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -8, y: 12}
+        - {x: -12, y: 9}
+        - {x: -12, y: -12}
+        - {x: 11, y: -12}
+        - {x: 12, y: -9.999999}
+        - {x: 12, y: 11}
+        - {x: 9.999999, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19f80a2e35404ebea1e31a6eb4fe2628
+      internalID: 21300012
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OnEaten
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 54
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -12, y: 12}
+        - {x: -12, y: -9}
+        - {x: -9, y: -12}
+        - {x: 12, y: -12}
+        - {x: 12, y: 12}
+      - - {x: 0, y: 1}
+        - {x: 0, y: -2}
+        - {x: 1, y: -2}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98a7caa6e30f49e381dc8873a5f03448
+      internalID: 21300014
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OnEnchant
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 28
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -12, y: 0}
+        - {x: -12, y: -12}
+        - {x: -2, y: -12}
+        - {x: 0, y: -11}
+        - {x: 0, y: -4}
+        - {x: -5, y: 0}
+      - - {x: 2, y: -2}
+        - {x: 0, y: -4}
+        - {x: 0, y: -8}
+        - {x: 2, y: -12}
+        - {x: 12, y: -12}
+        - {x: 12, y: 0}
+        - {x: 7, y: 0}
+      - - {x: 0, y: 12}
+        - {x: -8, y: 7}
+        - {x: -8, y: 4}
+        - {x: -4, y: -2}
+        - {x: 2, y: -2}
+        - {x: 8, y: 2}
+        - {x: 8, y: 6}
+        - {x: 3, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a9221f2214141f7aa9fdacaf5cab1da
+      internalID: 21300016
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OnFeed
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 2
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -6, y: 12}
+        - {x: -12, y: 9}
+        - {x: -12, y: 1}
+        - {x: -9.999999, y: -1}
+        - {x: -9, y: -1}
+        - {x: -11, y: -1}
+        - {x: -12, y: -2}
+        - {x: -12, y: -9.999999}
+        - {x: -7, y: -12}
+        - {x: 5, y: -12}
+        - {x: 12, y: -8}
+        - {x: 12, y: 9.999999}
+        - {x: 11, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e1033df3de8442a9ce0191dfafa21a4
+      internalID: 21300018
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OnHeal
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 158
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -6, y: 11}
+        - {x: -11, y: 5}
+        - {x: -11, y: -5}
+        - {x: -4, y: -11}
+        - {x: 5, y: -11}
+        - {x: 11, y: -4}
+        - {x: 11, y: 5}
+        - {x: 5, y: 11}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 119a03e28ca64f5aa30afbacae15c41e
+      internalID: 21300020
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OnKill
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 158
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -12, y: 12}
+        - {x: -12, y: -9}
+        - {x: -7, y: -12}
+        - {x: 12, y: -12}
+        - {x: 12, y: 7}
+        - {x: 0, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f93e4d945c184d07b50249f447592ebd
+      internalID: 21300022
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StartOfTurn
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 158
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -9.999999, y: 12}
+        - {x: -9.999999, y: -12}
+        - {x: 9.999999, y: -12}
+        - {x: 9.999999, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4805533593d542ecac02948eff4dfc11
+      internalID: 21300024
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusAmbush
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 158
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -8, y: 12}
+        - {x: -12, y: 7}
+        - {x: -12, y: -5}
+        - {x: -6, y: -11}
+        - {x: -4, y: -12}
+        - {x: 5, y: -12}
+        - {x: 12, y: -3}
+        - {x: 12, y: 6}
+        - {x: 4, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67911531a3ab4e5d8416769ae006dec1
+      internalID: 21300026
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusArmor
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 132
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -8, y: 12}
+        - {x: -12, y: 9.999999}
+        - {x: -12, y: -6}
+        - {x: -6, y: -11}
+        - {x: -5, y: -12}
+        - {x: 6, y: -12}
+        - {x: 12, y: -5}
+        - {x: 12, y: 9.999999}
+        - {x: 9, y: 12}
+      - - {x: -2, y: 4}
+        - {x: -1, y: 6}
+        - {x: 1, y: 6}
+        - {x: 5, y: 3}
+        - {x: -5, y: 3}
+      tessellationDetail: 0
+      bones: []
+      spriteID: df37f6c2ad9e48d38f0abe67089e5934
+      internalID: 21300028
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusBuff
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 80
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -12, y: 12}
+        - {x: -12, y: -9}
+        - {x: -9.999999, y: -12}
+        - {x: 12, y: -12}
+        - {x: 12, y: 11}
+        - {x: 11, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc852f2b1594422b916c31da9f2657db
+      internalID: 21300030
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusCapturedSoul
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 28
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -8, y: 12}
+        - {x: -11, y: 9.999999}
+        - {x: -11, y: -7}
+        - {x: -9, y: -12}
+        - {x: 3, y: -12}
+        - {x: 11, y: -8}
+        - {x: 11, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94233320d99342d2867a270e49c69420
+      internalID: 21300032
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusDamageShield
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 132
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -3, y: -1}
+        - {x: -8, y: 0}
+        - {x: -2, y: 2}
+        - {x: -2, y: -2}
+        - {x: -1, y: -5}
+        - {x: 6, y: -12}
+        - {x: 11, y: -12}
+        - {x: 11, y: 12}
+        - {x: -12, y: 12}
+        - {x: -12, y: -9}
+        - {x: -8, y: -12}
+        - {x: 0, y: -12}
+        - {x: 1, y: -9.999999}
+        - {x: 1, y: -8}
+        - {x: -1, y: -6}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74abd9ad418c4660ac4e61d68144e8ed
+      internalID: 21300034
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusDazed
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 132
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -12, y: 12}
+        - {x: -12, y: -9}
+        - {x: -9.999999, y: -12}
+        - {x: 12, y: -12}
+        - {x: 12, y: 9.999999}
+        - {x: 11, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 735b9966366c410484602dec8e575d06
+      internalID: 21300036
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusDebuff
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 132
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -5, y: 12}
+        - {x: -9, y: 9}
+        - {x: -12, y: 7}
+        - {x: -12, y: -9}
+        - {x: -9, y: -9.999999}
+        - {x: 0, y: -12}
+        - {x: 12, y: -12}
+        - {x: 12, y: 6}
+        - {x: 8, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 785c2d4a24ae43a1a96a02b014e612a7
+      internalID: 21300038
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusEndless
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 132
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -12, y: 7}
+        - {x: -12, y: -6}
+        - {x: -9, y: -7}
+        - {x: 12, y: -7}
+        - {x: 12, y: 6}
+        - {x: 9, y: 7}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f76e0044aa724983bd740ebdae33fd08
+      internalID: 21300040
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusEphemeral
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 132
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -4, y: 12}
+        - {x: -8, y: 5}
+        - {x: -8, y: -5}
+        - {x: -7, y: -12}
+        - {x: 7, y: -12}
+        - {x: 8, y: -5}
+        - {x: 8, y: 5}
+        - {x: 1, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fbb7082645b49419a2317e59cc58335
+      internalID: 21300042
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusHaste
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 80
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -12, y: 12}
+        - {x: -12, y: -6}
+        - {x: -8, y: -12}
+        - {x: 9.999999, y: -12}
+        - {x: 12, y: 2}
+        - {x: 12, y: 9.999999}
+        - {x: 9.999999, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd81a9de3d834c7099f1b82f0e5cedd6
+      internalID: 21300044
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusHealImmunity
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 54
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -11, y: 12}
+        - {x: -12, y: 9.999999}
+        - {x: -12, y: -3}
+        - {x: -1, y: -12}
+        - {x: 6, y: -12}
+        - {x: 12, y: -7}
+        - {x: 12, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 428fa017c250462a9b21435c1a306358
+      internalID: 21300046
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusImmune
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 28
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -1, y: 0}
+        - {x: 0, y: 4}
+        - {x: 0, y: -7}
+        - {x: 2, y: -12}
+        - {x: 11, y: -12}
+        - {x: 12, y: -8}
+        - {x: 12, y: 11}
+        - {x: 9, y: 12}
+        - {x: -11, y: 12}
+        - {x: -12, y: 11}
+        - {x: -12, y: -7}
+        - {x: -11, y: -12}
+        - {x: -2, y: -12}
+        - {x: -1, y: -9.999999}
+        - {x: 0, y: -6}
+        - {x: 0, y: -3}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7952cc0283dc49cf99aefc08e3092ee0
+      internalID: 21300048
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusInert
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 2
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -12, y: 12}
+        - {x: -12, y: -12}
+        - {x: 12, y: -12}
+        - {x: 12, y: 1}
+        - {x: 9, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c0c151471d249efacb8b564a9c899ea
+      internalID: 21300050
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusLifeSteal
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 106
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -9.999999, y: 12}
+        - {x: -12, y: 9}
+        - {x: -12, y: -12}
+        - {x: 9.999999, y: -12}
+        - {x: 12, y: -11}
+        - {x: 12, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca1a143dbb5a427b83379d368c3bd873
+      internalID: 21300052
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusMultiStrike
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 106
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: 12, y: -7}
+        - {x: 12, y: 8}
+        - {x: 5, y: 12}
+        - {x: -9, y: 12}
+        - {x: -12, y: 9}
+        - {x: -12, y: -6}
+        - {x: -8, y: -12}
+        - {x: 7, y: -12}
+        - {x: 7, y: -8}
+        - {x: 2, y: -3}
+        - {x: 6, y: -7}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d79bdec6c992456db8db45201a0282c9
+      internalID: 21300054
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusPoison
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 106
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -7, y: 12}
+        - {x: -9, y: 11}
+        - {x: -12, y: 9}
+        - {x: -12, y: -7}
+        - {x: -8, y: -12}
+        - {x: 7, y: -12}
+        - {x: 12, y: -8}
+        - {x: 12, y: 7}
+        - {x: 8, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54b105c3326146c081537c1f2eee743c
+      internalID: 21300056
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusRegen
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 80
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -11, y: 12}
+        - {x: -12, y: 9.999999}
+        - {x: -12, y: -3}
+        - {x: -5, y: -12}
+        - {x: 3, y: -12}
+        - {x: 12, y: -6}
+        - {x: 12, y: 11}
+        - {x: 11, y: 12}
+      - - {x: 2, y: 4}
+        - {x: 3, y: 5}
+        - {x: 3, y: 6}
+        - {x: 1, y: 4}
+        - {x: 1, y: 3}
+        - {x: 4, y: 0}
+        - {x: 5, y: 1}
+        - {x: 2, y: 1}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d01af9954c4a4c15abcc632bcfdb7fd9
+      internalID: 21300058
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusRelentless
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 54
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: 4, y: -1}
+        - {x: 6, y: 2}
+        - {x: 6, y: 6}
+        - {x: 2, y: 12}
+        - {x: -7, y: 12}
+        - {x: -12, y: 7}
+        - {x: -12, y: -12}
+        - {x: 11, y: -12}
+        - {x: 12, y: -5}
+        - {x: 12, y: 2}
+        - {x: 9.999999, y: 3}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bb20a0070dd48deb08f55d35ee9a631
+      internalID: 21300060
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusRooted
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 28
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -3, y: 12}
+        - {x: -12, y: 9}
+        - {x: -12, y: -12}
+        - {x: 12, y: -12}
+        - {x: 12, y: 9.999999}
+        - {x: 9.999999, y: 12}
+      - - {x: 0, y: 6}
+        - {x: 0, y: 7}
+        - {x: -1, y: 7}
+        - {x: 0, y: 6}
+        - {x: 1, y: 7}
+        - {x: 4, y: 7}
+        - {x: 5, y: 6}
+        - {x: 6, y: 6}
+        - {x: 5, y: 7}
+        - {x: 3, y: 7}
+        - {x: 0, y: 6}
+        - {x: -3, y: 2}
+        - {x: -3, y: 3}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 822e210a110844c2900b758fe75e1b4c
+      internalID: 21300062
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusScorch
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 2
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -2, y: 12}
+        - {x: -12, y: 3}
+        - {x: -12, y: -9}
+        - {x: -9.999999, y: -12}
+        - {x: 12, y: -12}
+        - {x: 12, y: 6}
+        - {x: 9.999999, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e0f15d6c631453d9ff929c89e80eb91
+      internalID: 21300064
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusSilenced
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 80
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -12, y: 12}
+        - {x: -12, y: 8}
+        - {x: -9, y: 3}
+        - {x: -12, y: -5}
+        - {x: -12, y: -12}
+        - {x: 12, y: -12}
+        - {x: 12, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41385dce3f4a4d188721806ff1310848
+      internalID: 21300066
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusSpark
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 80
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -7, y: 12}
+        - {x: -6, y: 9}
+        - {x: -9.999999, y: 8}
+        - {x: -12, y: 6}
+        - {x: -12, y: -7}
+        - {x: -7, y: -12}
+        - {x: 11, y: -12}
+        - {x: 12, y: -11}
+        - {x: 12, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b0825276767449a8058dd03f67105da
+      internalID: 21300068
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusSpellShield
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 80
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -5, y: -6}
+        - {x: -8, y: -9}
+        - {x: -8, y: -9.999999}
+        - {x: -6, y: -12}
+        - {x: -1, y: -12}
+        - {x: 0, y: -11}
+        - {x: 0, y: -9}
+        - {x: -3, y: -6}
+      - - {x: 4, y: 12}
+        - {x: -12, y: 5}
+        - {x: -12, y: -6}
+        - {x: 5, y: -12}
+        - {x: 11, y: -12}
+        - {x: 11, y: 12}
+      - - {x: -5, y: 12}
+        - {x: -8, y: 9.999999}
+        - {x: -6, y: 5}
+        - {x: -2, y: 5}
+        - {x: 0, y: 7}
+        - {x: 0, y: 9.999999}
+        - {x: -2, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 706d90cc704e4649a9da35768faf8af1
+      internalID: 21300070
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusSpellWeakness
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 54
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: 4, y: 4}
+        - {x: -5, y: 4}
+        - {x: -9.999999, y: 2}
+        - {x: -9.999999, y: -9.999999}
+        - {x: -4, y: -12}
+        - {x: 3, y: -12}
+        - {x: 7, y: -7}
+        - {x: 7, y: -4}
+      - - {x: 6, y: 11}
+        - {x: 2, y: 7}
+        - {x: 2, y: 6}
+        - {x: 7, y: 1}
+        - {x: 8, y: 1}
+        - {x: 12, y: 5}
+        - {x: 12, y: 7}
+        - {x: 8, y: 11}
+      - - {x: -11, y: 12}
+        - {x: -12, y: 9}
+        - {x: -12, y: 5}
+        - {x: -9, y: 4}
+        - {x: -8, y: 4}
+        - {x: -5, y: 5}
+        - {x: -5, y: 9.999999}
+        - {x: -6, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf72166ee3594fd78905f140aaf62e3d
+      internalID: 21300072
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusSpikes
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 28
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -8, y: 12}
+        - {x: -12, y: 9.999999}
+        - {x: -12, y: -8}
+        - {x: -9, y: -12}
+        - {x: 12, y: -12}
+        - {x: 12, y: 9.999999}
+        - {x: 9.999999, y: 12}
+      - - {x: 0, y: -5}
+        - {x: 1, y: -4}
+        - {x: 1, y: -3}
+        - {x: 0, y: -4}
+        - {x: 0, y: -6}
+        - {x: 1, y: -7}
+        - {x: 0, y: -6}
+      - - {x: -4, y: 5}
+        - {x: -4, y: 4}
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1176154379349e581da0adbc1dbd6c6
+      internalID: 21300074
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusSplash
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 2
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: 9, y: 12}
+        - {x: -12, y: 12}
+        - {x: -12, y: -12}
+        - {x: 9, y: -12}
+      - - {x: -3, y: 4}
+        - {x: -3, y: -3}
+        - {x: 0, y: -4}
+        - {x: 9.999999, y: -4}
+        - {x: 12, y: -3}
+        - {x: 12, y: 4}
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2e0071ae6474058a861e64aec66b148
+      internalID: 21300076
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusStealth
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 54
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -9.999999, y: -7}
+        - {x: -4, y: -7}
+        - {x: -1, y: -6}
+        - {x: -1, y: 5}
+        - {x: -2, y: 7}
+        - {x: -12, y: 7}
+        - {x: -12, y: -4}
+      - - {x: 6, y: 7}
+        - {x: 1, y: 3}
+        - {x: 1, y: -4}
+        - {x: 5, y: -7}
+        - {x: 12, y: -7}
+        - {x: 12, y: 7}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d693cf6495d6472b9d236250082ca824
+      internalID: 21300078
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusSweep
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 28
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -9.999999, y: 12}
+        - {x: -12, y: 9}
+        - {x: -12, y: -1}
+        - {x: -6, y: -12}
+        - {x: 8, y: -12}
+        - {x: 12, y: -4}
+        - {x: 12, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e9c5c08e8c2412d8fd039ebfd2f3505
+      internalID: 21300080
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusCardless
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 2
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -8, y: 12}
+        - {x: -9, y: 11}
+        - {x: -9, y: -11}
+        - {x: -8, y: -12}
+        - {x: 8, y: -12}
+        - {x: 9, y: -11}
+        - {x: 9, y: 11}
+        - {x: 8, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9446c32a7c014730aa2a0547f16f9166
+      internalID: 21300082
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusFragile
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 106
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -9.999999, y: 12}
+        - {x: -12, y: 8}
+        - {x: -12, y: -7}
+        - {x: -7, y: -12}
+        - {x: 4, y: -12}
+        - {x: 12, y: -8}
+        - {x: 12, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 703aa2af77a64c3cadc339db06959bec
+      internalID: 21300084
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusBuffet
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 54
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: 11, y: 8}
+        - {x: 8, y: 11}
+        - {x: 5, y: 12}
+        - {x: -6, y: 12}
+        - {x: -12, y: 6}
+        - {x: -12, y: -5}
+        - {x: -7, y: -12}
+        - {x: 5, y: -12}
+        - {x: 11, y: -9.999999}
+        - {x: 12, y: -6}
+        - {x: 12, y: 6}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2adda435cd0c4b2c9f04348f35329c26
+      internalID: 21300086
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusBlessing
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 106
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: -12}
+        - {x: -12, y: -12}
+        - {x: -12, y: 12}
+        - {x: 12, y: 12}
+      physicsShape:
+      - - {x: -5, y: 12}
+        - {x: -12, y: 9}
+        - {x: -12, y: -12}
+        - {x: 12, y: -12}
+        - {x: 12, y: 9.999999}
+        - {x: 7, y: 12}
+      - - {x: 0, y: -2}
+        - {x: -3, y: 1}
+        - {x: -4, y: 0}
+        - {x: -6, y: -1}
+        - {x: 2, y: -5}
+        - {x: 5, y: 0}
+        - {x: 3, y: 1}
+        - {x: 0, y: -2}
+        - {x: 0, y: -3}
+      tessellationDetail: 0
+      bones: []
+      spriteID: aeadbd00ad7a422dbfae36096c11ab6f
+      internalID: 21300088
+      vertices: []
+      indices:
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID:
+    internalID: 0
+    vertices: []
+    indices:
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag:
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData:
+  assetBundleName:
+  assetBundleVariant:

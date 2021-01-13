@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="300,350">
+  <displayList>
+    <image id="n0_w6jk" name="n0" src="w6jkb" fileName="images/zhongfeiyang.png" xy="12,0" size="273,246"/>
+    <image id="n3_w6jk" name="n3" src="w6jk1" fileName="images/BG_yuan.png" xy="104,246" size="63,56" group="n5_w6jk"/>
+    <text id="n4_w6jk" name="n4" xy="108,248" size="50,52" group="n5_w6jk" fontSize="38" color="#ffffff" autoSize="none" text="10"/>
+    <group id="n5_w6jk" name="n5" xy="104,246" size="63,56"/>
+    <image id="n1_w6jk" name="n1" src="w6jk1" fileName="images/BG_yuan.png" xy="33,248" size="63,56" group="n6_w6jk"/>
+    <text id="n2_w6jk" name="n2" xy="43,248" size="48,52" group="n6_w6jk" fontSize="38" color="#ffffff" text="10"/>
+    <group id="n6_w6jk" name="n6" xy="33,248" size="63,56"/>
+    <image id="n7_w6jk" name="n7" src="w6jk1" fileName="images/BG_yuan.png" xy="176,247" size="63,56"/>
+    <text id="n8_w6jk" name="n8" xy="181,247" size="48,52" fontSize="38" color="#ffffff" text="11"/>
+  </displayList>
+</component>

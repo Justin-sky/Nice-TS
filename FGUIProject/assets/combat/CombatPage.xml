@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1080,1920">
+  <controller name="c1" pages="" selected="-1"/>
+  <displayList>
+    <image id="n4_w6jk" name="n4" src="w6jk9" fileName="images/faxian.png" xy="374,1738" size="232,176"/>
+    <image id="n5_w6jk" name="n5" src="w6jk1" fileName="images/BG_yuan.png" xy="180,1818" size="101,96"/>
+    <text id="n6_w6jk" name="draw_pile_txt" xy="196,1830" size="63,66" fontSize="50" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="20"/>
+    <image id="n7_w6jk" name="n7" src="w6jk1" fileName="images/BG_yuan.png" xy="703,1808" size="111,110"/>
+    <text id="n8_w6jk" name="discard_pile_txt" xy="724,1831" size="66,66" fontSize="50" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="15"/>
+    <image id="n9_w6jk" name="n9" src="w6jka" fileName="images/dianran.png" xy="17,1806" size="122,104"/>
+    <text id="n10_w6jk" name="run_cost_txt" xy="60,1741" size="54,96" fontSize="74" color="#00ff00" autoSize="none" text="3"/>
+    <component id="n11_w6jk" name="end_run_btn" src="pyg64s" fileName="ui/common/CommonBtn.xml" pkg="y4b7yuun" xy="892,1814" size="164,75">
+      <Button title="结束回合"/>
+    </component>
+    <text id="n28_w6jk" name="player_hp_txt" xy="449,1867" size="94,56" fontSize="42" color="#00ff00" autoSize="none" text="100"/>
+    <text id="n29_w6jk" name="player_attack_txt" xy="464,1736" size="52,56" fontSize="42" color="#ff0000" text="20"/>
+    <component id="n30_i390" name="handcardComp" src="i390f" fileName="HandCard.xml" xy="-2,1094" size="1076,422"/>
+  </displayList>
+</component>

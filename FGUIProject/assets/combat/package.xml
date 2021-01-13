@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="w69vialg">
+  <resources>
+    <image id="w6jk0" name="BG_kuang.png" path="/images/" exported="true"/>
+    <image id="w6jk1" name="BG_yuan.png" path="/images/" exported="true"/>
+    <image id="w6jk2" name="di5.png" path="/images/" exported="true" scale="9grid" scale9grid="18,18,36,36"/>
+    <image id="w6jk3" name="kapai_di.png" path="/images/" exported="true"/>
+    <image id="w6jk4" name="kapai1.png" path="/images/" exported="true"/>
+    <image id="w6jk5" name="maotouying.png" path="/images/" exported="true"/>
+    <component id="w6jk6" name="Card.xml" path="/" exported="true"/>
+    <image id="w6jk7" name="beipan.png" path="/images/" exported="true"/>
+    <component id="w6jk8" name="CombatPage.xml" path="/" exported="true"/>
+    <image id="w6jk9" name="faxian.png" path="/images/" exported="true"/>
+    <image id="w6jka" name="dianran.png" path="/images/" exported="true"/>
+    <image id="w6jkb" name="zhongfeiyang.png" path="/images/" exported="true"/>
+    <component id="w6jkc" name="character.xml" path="/" exported="true"/>
+    <component id="w6jkd" name="Room.xml" path="/" exported="true"/>
+    <component id="i390e" name="test.xml" path="/" exported="true"/>
+    <component id="i390f" name="HandCard.xml" path="/"/>
+  </resources>
+  <publish name="" genCode="true"/>
+</packageDescription>

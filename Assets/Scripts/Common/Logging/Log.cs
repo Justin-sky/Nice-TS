@@ -235,26 +235,6 @@ namespace NiceTS
 			}
 		}
 
-		[Conditional("NICETS_LOGGING_ENABLED")]
-		public static void AddLogListener(Action<string> listener)
-		{
-			LogProviderSignal obj = _logger.GetProvider(typeof(LogProviderSignal)) as LogProviderSignal;
-			if (obj != null)
-			{
-				obj.AddListener(listener);
-			}
-		}
-
-		[Conditional("NICETS_LOGGING_ENABLED")]
-		public static void RemoveLogListener(Action<string> listener)
-		{
-			LogProviderSignal obj = _logger.GetProvider(typeof(LogProviderSignal)) as LogProviderSignal;
-			if (obj != null)
-			{
-				obj.RemoveListener(listener);
-			}
-		}
-
 		private static bool IsGroupEnabled(LogGroups group)
 		{
 			return (_enabledLogGroups & group) == group;
@@ -287,13 +267,13 @@ namespace NiceTS
 				if (!num || a != text)
 				{
 					LogPath = Path.Combine(text, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".log");
-					SetLogProvider(new LogProviderMultiple(new LogProviderUnityConsole(), new LogProviderFile(LogPath), new LogProviderSignal()));
+					
 				}
 			}
 			else if (_logger.GetProvider(typeof(LogProviderFile)) != null)
 			{
 				LogPath = null;
-				SetLogProvider(new LogProviderMultiple(new LogProviderUnityConsole(), new LogProviderSignal()));
+	
 			}
 			return true;
 		}

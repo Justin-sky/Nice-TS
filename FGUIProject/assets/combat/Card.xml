@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="380,568" pivot="0.5,1" anchor="true" bgColorEnabled="true" bgColor="#333333">
+  <displayList>
+    <image id="n13_w6jk" name="n13" src="w6jk0" fileName="images/BG_kuang.png" xy="13,8" size="358,561" flip="hz"/>
+    <image id="n2_w6jk" name="n2" src="w6jk3" fileName="images/kapai_di.png" xy="-9,1"/>
+    <image id="n3_w6jk" name="n3" src="w6jk7" fileName="images/beipan.png" xy="45,39"/>
+    <image id="n4_w6jk" name="cost_bg" src="w6jk1" fileName="images/BG_yuan.png" xy="12,13" size="88,81"/>
+    <text id="n5_w6jk" name="cost_txt" xy="28,24" size="56,54" fontSize="40" color="#ffffff" autoSize="none" text="10"/>
+    <richtext id="n6_w6jk" name="effect_txt" xy="43,348" size="292,118" fontSize="20" color="#ffffff" autoSize="none" text="     &lt;b&gt;消耗&lt;/b&gt;&#xA;打出后，卡组里每有一张祸患卡牌，就一层多重攻击&#xA;"/>
+    <text id="n8_w6jk" name="attack_txt" xy="21,490" size="62,66" fontSize="50" color="#ffffff" text="11"/>
+    <text id="n9_w6jk" name="hp_txt" xy="300,489" size="62,66" fontSize="50" color="#ffffff" text="12"/>
+    <image id="n10_w6jk" name="size_bg" src="w6jk1" fileName="images/BG_yuan.png" xy="135,23" size="142,35"/>
+    <text id="n11_w6jk" name="size_txt" xy="196,19" size="21,42" fontSize="30" color="#ffffff" text="3"/>
+  </displayList>
+</component>

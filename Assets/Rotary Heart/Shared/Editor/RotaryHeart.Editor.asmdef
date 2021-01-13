@@ -1,0 +1,8 @@
+{
+    "name": "RotaryHeart",
+    "references": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

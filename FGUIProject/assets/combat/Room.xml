@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1080,921">
+  <displayList>
+    <image id="n14_w6jk" name="n14" src="w6jk2" fileName="images/di5.png" xy="2,364" size="879,80" group="n20_w6jk"/>
+    <text id="n15_w6jk" name="room_size_txt" xy="19,367" size="36,74" group="n20_w6jk" fontSize="56" color="#ffffff" text="5"/>
+    <group id="n20_w6jk" name="n20" xy="2,364" size="879,80"/>
+    <component id="n22_w6jk" name="n22" src="w6jkc" fileName="character.xml" xy="290,515"/>
+    <component id="n23_w6jk" name="n23" src="w6jkc" fileName="character.xml" xy="0,532"/>
+    <component id="n24_w6jk" name="n24" src="w6jkc" fileName="character.xml" xy="617,498" size="279,304" scale="0.843,0.844"/>
+    <component id="n25_w6jk" name="n25" src="w6jkc" fileName="character.xml" xy="327,6"/>
+    <component id="n26_w6jk" name="n26" src="w6jkc" fileName="character.xml" xy="623,0"/>
+    <component id="n27_w6jk" name="n27" src="w6jkc" fileName="character.xml" xy="11,13"/>
+  </displayList>
+</component>

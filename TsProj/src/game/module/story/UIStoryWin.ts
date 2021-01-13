@@ -56,6 +56,8 @@ export class UIStoryWin extends UIWindow{
         );
         
         this.optionsMap.clear();
+        this.shouldContineStory = false;
+
         StoryManager.Instance(StoryManager).beginStory("story2");
     }
 
