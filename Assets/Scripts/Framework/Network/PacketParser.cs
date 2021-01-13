@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 
 namespace NiceTS
 {
@@ -53,6 +54,8 @@ namespace NiceTS
 							this.buffer.Read(this.memoryStream.GetBuffer(), 0, Packet.PacketSizeLength);
 
 							this.packetSize = BitConverter.ToInt32(this.memoryStream.GetBuffer(), 0);
+							this.packetSize = IPAddress.NetworkToHostOrder(this.packetSize);
+
 							if (this.packetSize > ushort.MaxValue * 16 || this.packetSize < Packet.MinPacketSize)
 							{
 								throw new Exception($"recv packet size error, 可能是外网探测端口: {this.packetSize}");

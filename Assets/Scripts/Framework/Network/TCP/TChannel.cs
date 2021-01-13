@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
+using UnityEngine;
 
 namespace NiceTS
 {
@@ -151,6 +152,17 @@ namespace NiceTS
 				throw new Exception($"send packet too large: {stream.Length}");
 			}
 			this.packetSizeCache.WriteTo(0, ab.Bytes.Length);
+			
+			Array.Reverse(this.packetSizeCache);
+
+			//foreach(var i in this.packetSizeCache)
+   //         {
+			//	Debug.Log("C#: "+i);
+   //         }
+			//foreach(var i in ab.Bytes)
+   //         {
+			//	Debug.Log("C#: " + i);
+			//}
 
 			this.sendBuffer.Write(this.packetSizeCache, 0, this.packetSizeCache.Length);
 			this.sendBuffer.Write(ab.Bytes, 0, ab.Bytes.Length);

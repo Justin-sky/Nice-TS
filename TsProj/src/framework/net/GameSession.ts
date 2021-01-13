@@ -2,6 +2,7 @@ import { Singleton } from "../common/Singleton";
 import { Opcode } from "../../data/pb/Opcode";
 import { NetErrorCode } from "./NetErrorCode";
 import { NiceTS } from "csharp";
+import { MessageParser } from "./MessageParser";
 
 
 export class MsgPack{
@@ -23,6 +24,10 @@ export class GameSession extends Singleton<GameSession>{
     private channel:any;
     private requestCallback:Map<number,MsgPack> = new Map<number,MsgPack>();
     private listeners:Map<number,Function> = new Map<number,Function>();
+
+    //返回的服务器ID, 类型
+    private _serverId:number = -1;
+    private _serverType:number = 0;
 
     constructor(){
         super();
@@ -62,16 +67,22 @@ export class GameSession extends Singleton<GameSession>{
     }
 
     //发送protoubf消息
+    //消息： rpc_id[4] - opcode[2] - server_id[2] - server_type[1] - 
     public send(opcode:number,rpcid:number, message:Uint8Array, callBack:Function){
         
-        //封装消息：opcode+msg
-        let lenBuf:Uint8Array = new Uint8Array(2);
-        lenBuf[1] = opcode >>> 8;
-        lenBuf[0] = opcode & 0xff;
+        //封装消息：
+        let rpcBuf:Uint8Array = MessageParser.encodeInt(rpcid); //4
+        let opcodeBuf:Uint8Array = MessageParser.encodeShort(opcode); //2
+        let serveridBuf:Uint8Array = MessageParser.encodeShort(this._serverId); //2
+        let servertypeBuf:Uint8Array = MessageParser.encodeByte(this._serverType); //1
 
-        let sendArray:Uint8Array = new Uint8Array(message.length + 2);
-        sendArray.set(lenBuf);
-        sendArray.set(message,2);
+
+        let sendArray:Uint8Array = new Uint8Array(4 + 2 + 2 + 1 +message.length);
+        sendArray.set(rpcBuf);
+        sendArray.set(opcodeBuf,    4);
+        sendArray.set(serveridBuf,  4 + 2);
+        sendArray.set(servertypeBuf, 4 + 2 + 2);
+        sendArray.set(message,       4 + 2 + 2 + 1);
         
         if(callBack != null){
             let msgPack:MsgPack = new MsgPack();
@@ -81,8 +92,10 @@ export class GameSession extends Singleton<GameSession>{
 
             this.requestCallback.set(rpcid, msgPack);
         }
-
-        //Logger.log("send array: "+sendArray);
+        // for(let i in sendArray){
+        //     console.log("TS -- send array: "+i);
+        // }
+        //Console.log("send array: "+sendArray);
         this.channel.Send(sendArray);
     }
 
@@ -94,14 +107,19 @@ export class GameSession extends Singleton<GameSession>{
         
         let msgBuf = new Uint8Array(buffer);
 
-        let  opcode = msgBuf[1] << 8 | msgBuf[0];
-         let msgBytes:Uint8Array = msgBuf.subarray(2);
+        let rpcid = MessageParser.decodeInt(msgBuf.subarray(0,4));
+        let opcode = MessageParser.decodeShort(msgBuf.subarray(4,6));
+        let serverid = MessageParser.decodeShort(msgBuf.subarray(6,8));
+        let servertype = MessageParser.decodeByte(msgBuf.subarray(8,9));
 
+        this._serverId = serverid;
+        this._serverType = servertype;
+
+        let msgBytes:Uint8Array = msgBuf.subarray(9);
         let decodeMsg =  Opcode.decode(opcode, msgBytes);
-        let rpcId = decodeMsg.rpcId;
 
 
-        if(rpcId==undefined || !this.requestCallback.has(rpcId)){
+        if(rpcid==undefined || !this.requestCallback.has(rpcid)){
             //检查是否是服务器下发的消息
             if(this.listeners.has(opcode)){
                 let listen = this.listeners.get(opcode);
@@ -109,10 +127,10 @@ export class GameSession extends Singleton<GameSession>{
             }
 
         }else{
-            let msgPack:MsgPack = this.requestCallback.get(rpcId);
+            let msgPack:MsgPack = this.requestCallback.get(rpcid);
             msgPack.callback(decodeMsg.msgObj);  
 
-            this.requestCallback.delete(rpcId);
+            this.requestCallback.delete(rpcid);
 
         }
 

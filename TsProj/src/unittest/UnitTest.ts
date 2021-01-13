@@ -2,14 +2,12 @@ import {TimeUtil} from '../framework/util/TimeUtil';
 import {SingletonTest} from './SingletonTest';
 import {Messenger} from '../framework/common/Messenger';
 import { ResManager } from '../framework/common/ResManager';
-import { NiceET } from '../data/pb/OuterMessage';
 import { SkillConfigTB, SkillConfigTR } from '../data/excel/SkillConfig';
 import { Opcode } from '../data/pb/Opcode';
-import { fb } from '../data/fb/unitconfig_generated';
-import { UnitConfigTB } from '../data/excel/UnitConfig';
 import { RedHintsMessageManager } from '../framework/redhints/RedHintsMessageManager';
 import { enumRedHints, RedHintsManager } from '../framework/redhints/RedHintsManager';
 import { Story } from 'inkjs';
+import { nice_ts } from '../data/pb/login';
 
 
 export class UnitTest{
@@ -122,38 +120,28 @@ export class UnitTest{
         console.log("Protobuf =============================");
 
         try{
-            let c2m_req = {
-                "RpcId" : 11,
-                "ActorId" : 998,
-                "request" : "test"
+            let c2rLogin = {
+                "Account" : "test",
+                "Password" : "1234"
             };
 
 
             //验证
-           let v1 = NiceET.C2M_TestRequest.verify(c2m_req);
-           console.log("verify pb: "+ v1);
-            
-            let msg = NiceET.C2M_TestRequest.create(c2m_req);
-            msg.RpcId = 100000;
-            msg.request = "good bye";
-            msg.ActorId = 88888;
+            let v1 = nice_ts.C2R_Login.verify(c2rLogin);
+            console.log("verify pb: "+ v1);
 
-            console.log(msg);
+            let msg = nice_ts.C2R_Login.create(c2rLogin)
+            msg.Account = "test1"
+            msg.Password = "1122"
+            console.log(msg)
 
-            let buf = NiceET.C2M_TestRequest.encode(msg).finish();
-            console.log(buf);
+            let buf = nice_ts.C2R_Login.encode(msg).finish()
+            console.log(buf)
 
-            let de_buf = NiceET.C2M_TestRequest.decode(buf);
-            console.log(de_buf.RpcId);
-            console.log(de_buf.request);
+            let de_buf = nice_ts.C2R_Login.decode(buf)
+            console.log(de_buf.Account)
+            console.log(de_buf.Password)
 
-            let de_m = NiceET.C2M_TestRequest.decode;
-            let de_m_t = de_m(buf);
-            console.log("========:"+de_m_t.request);
-
-            console.log("protobuf opcode:");
-            let op_test = Opcode.map[Opcode.C2M_TESTREQUEST](buf);
-            console.log("test opcode: "+ op_test.request);
 
         }catch(ex){
             console.log(ex);

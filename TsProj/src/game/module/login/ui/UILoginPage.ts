@@ -2,7 +2,6 @@ import { UIPage } from "../../../../framework/ui/UIPage";
 import { binder } from "../../../../framework/common/NiceDecorator";
 import { FairyGUI } from "csharp";
 import { SessionManager } from "../../../../framework/net/SessionManager";
-import { NiceET } from "../../../../data/pb/OuterMessage";
 import { LoginAPI } from "../../../api/LoginAPI";
 import { UIManager } from "../../../../framework/ui/UIManager";
 import { loginUI } from "../../../../data/ui/login";
@@ -12,6 +11,7 @@ import { UIMessage } from "../../../event/UIMessage";
 import { SceneManager } from "../../../../framework/scene/SceneManager";
 import { SceneDef } from "../../../../framework/scene/SceneDef";
 import { storyUI } from "../../../../data/ui/story";
+import { nice_ts } from "../../../../data/pb/login";
 
 
 
@@ -130,7 +130,7 @@ export class UILoginPage extends UIPage{
             LoginAPI.loginRealmServer(
                 account, 
                 password,
-                (msg:NiceET.R2C_Login)=>{
+                (msg:nice_ts.R2C_Login)=>{
 
                     this.gateId = msg.GateId;
                     this.gateKey = msg.Key;
@@ -157,7 +157,7 @@ export class UILoginPage extends UIPage{
         LoginAPI.loginGateServer(
             this.gateId,
             this.gateKey,
-            (msg:NiceET.G2C_LoginGate)=>{
+            (msg:nice_ts.G2C_LoginGate)=>{
 
                 let playerID = msg.PlayerId;
                 console.log("login gate response.." +playerID);
