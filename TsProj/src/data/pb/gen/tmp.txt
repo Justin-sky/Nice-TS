@@ -1,0 +1,3 @@
+var Long = require("long");
+$protobuf.util.Long = Long;
+$protobuf.configure();

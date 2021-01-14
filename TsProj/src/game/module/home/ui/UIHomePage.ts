@@ -6,6 +6,7 @@ import { common } from "protobufjs";
 import { commonUI } from "../../../../data/ui/common";
 import { homeUI } from "../../../../data/ui/home";
 import { VoHome } from "../vo/VoHome";
+import { LoginAPI } from "../../../api/LoginAPI";
 
 
 
@@ -73,6 +74,10 @@ export class UIHomePage extends UIPage{
     }
     public onbagBtn(){
         console.log("on bag ..");
+
+        //benchmark test
+        LoginAPI.benchmarkTest();
+
     }
     public onshopBtn(){
         

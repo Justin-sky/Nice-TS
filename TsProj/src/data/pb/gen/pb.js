@@ -10,6 +10,7 @@ var Long = require("long");
 $protobuf.util.Long = Long;
 $protobuf.configure();
 
+
 // Exported root namespace
 var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
@@ -1018,6 +1019,448 @@ $root.nice_ts = (function() {
         };
 
         return G2C_LoginGate;
+    })();
+
+    nice_ts.C2GS_Test = (function() {
+
+        /**
+         * Properties of a C2GS_Test.
+         * @memberof nice_ts
+         * @interface IC2GS_Test
+         * @property {number|null} [testID] C2GS_Test testID
+         * @property {string|null} [testName] C2GS_Test testName
+         */
+
+        /**
+         * Constructs a new C2GS_Test.
+         * @memberof nice_ts
+         * @classdesc Represents a C2GS_Test.
+         * @implements IC2GS_Test
+         * @constructor
+         * @param {nice_ts.IC2GS_Test=} [properties] Properties to set
+         */
+        function C2GS_Test(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C2GS_Test testID.
+         * @member {number} testID
+         * @memberof nice_ts.C2GS_Test
+         * @instance
+         */
+        C2GS_Test.prototype.testID = 0;
+
+        /**
+         * C2GS_Test testName.
+         * @member {string} testName
+         * @memberof nice_ts.C2GS_Test
+         * @instance
+         */
+        C2GS_Test.prototype.testName = "";
+
+        /**
+         * Creates a new C2GS_Test instance using the specified properties.
+         * @function create
+         * @memberof nice_ts.C2GS_Test
+         * @static
+         * @param {nice_ts.IC2GS_Test=} [properties] Properties to set
+         * @returns {nice_ts.C2GS_Test} C2GS_Test instance
+         */
+        C2GS_Test.create = function create(properties) {
+            return new C2GS_Test(properties);
+        };
+
+        /**
+         * Encodes the specified C2GS_Test message. Does not implicitly {@link nice_ts.C2GS_Test.verify|verify} messages.
+         * @function encode
+         * @memberof nice_ts.C2GS_Test
+         * @static
+         * @param {nice_ts.IC2GS_Test} message C2GS_Test message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C2GS_Test.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.testID != null && Object.hasOwnProperty.call(message, "testID"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.testID);
+            if (message.testName != null && Object.hasOwnProperty.call(message, "testName"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.testName);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified C2GS_Test message, length delimited. Does not implicitly {@link nice_ts.C2GS_Test.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof nice_ts.C2GS_Test
+         * @static
+         * @param {nice_ts.IC2GS_Test} message C2GS_Test message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C2GS_Test.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a C2GS_Test message from the specified reader or buffer.
+         * @function decode
+         * @memberof nice_ts.C2GS_Test
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {nice_ts.C2GS_Test} C2GS_Test
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C2GS_Test.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.nice_ts.C2GS_Test();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.testID = reader.int32();
+                    break;
+                case 2:
+                    message.testName = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a C2GS_Test message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof nice_ts.C2GS_Test
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {nice_ts.C2GS_Test} C2GS_Test
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C2GS_Test.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a C2GS_Test message.
+         * @function verify
+         * @memberof nice_ts.C2GS_Test
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        C2GS_Test.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.testID != null && message.hasOwnProperty("testID"))
+                if (!$util.isInteger(message.testID))
+                    return "testID: integer expected";
+            if (message.testName != null && message.hasOwnProperty("testName"))
+                if (!$util.isString(message.testName))
+                    return "testName: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a C2GS_Test message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof nice_ts.C2GS_Test
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {nice_ts.C2GS_Test} C2GS_Test
+         */
+        C2GS_Test.fromObject = function fromObject(object) {
+            if (object instanceof $root.nice_ts.C2GS_Test)
+                return object;
+            var message = new $root.nice_ts.C2GS_Test();
+            if (object.testID != null)
+                message.testID = object.testID | 0;
+            if (object.testName != null)
+                message.testName = String(object.testName);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a C2GS_Test message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof nice_ts.C2GS_Test
+         * @static
+         * @param {nice_ts.C2GS_Test} message C2GS_Test
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        C2GS_Test.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.testID = 0;
+                object.testName = "";
+            }
+            if (message.testID != null && message.hasOwnProperty("testID"))
+                object.testID = message.testID;
+            if (message.testName != null && message.hasOwnProperty("testName"))
+                object.testName = message.testName;
+            return object;
+        };
+
+        /**
+         * Converts this C2GS_Test to JSON.
+         * @function toJSON
+         * @memberof nice_ts.C2GS_Test
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        C2GS_Test.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return C2GS_Test;
+    })();
+
+    nice_ts.GS2C_Test = (function() {
+
+        /**
+         * Properties of a GS2C_Test.
+         * @memberof nice_ts
+         * @interface IGS2C_Test
+         * @property {number|null} [Error] GS2C_Test Error
+         * @property {string|null} [Message] GS2C_Test Message
+         * @property {string|null} [testResponse] GS2C_Test testResponse
+         */
+
+        /**
+         * Constructs a new GS2C_Test.
+         * @memberof nice_ts
+         * @classdesc Represents a GS2C_Test.
+         * @implements IGS2C_Test
+         * @constructor
+         * @param {nice_ts.IGS2C_Test=} [properties] Properties to set
+         */
+        function GS2C_Test(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * GS2C_Test Error.
+         * @member {number} Error
+         * @memberof nice_ts.GS2C_Test
+         * @instance
+         */
+        GS2C_Test.prototype.Error = 0;
+
+        /**
+         * GS2C_Test Message.
+         * @member {string} Message
+         * @memberof nice_ts.GS2C_Test
+         * @instance
+         */
+        GS2C_Test.prototype.Message = "";
+
+        /**
+         * GS2C_Test testResponse.
+         * @member {string} testResponse
+         * @memberof nice_ts.GS2C_Test
+         * @instance
+         */
+        GS2C_Test.prototype.testResponse = "";
+
+        /**
+         * Creates a new GS2C_Test instance using the specified properties.
+         * @function create
+         * @memberof nice_ts.GS2C_Test
+         * @static
+         * @param {nice_ts.IGS2C_Test=} [properties] Properties to set
+         * @returns {nice_ts.GS2C_Test} GS2C_Test instance
+         */
+        GS2C_Test.create = function create(properties) {
+            return new GS2C_Test(properties);
+        };
+
+        /**
+         * Encodes the specified GS2C_Test message. Does not implicitly {@link nice_ts.GS2C_Test.verify|verify} messages.
+         * @function encode
+         * @memberof nice_ts.GS2C_Test
+         * @static
+         * @param {nice_ts.IGS2C_Test} message GS2C_Test message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GS2C_Test.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.testResponse != null && Object.hasOwnProperty.call(message, "testResponse"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.testResponse);
+            if (message.Error != null && Object.hasOwnProperty.call(message, "Error"))
+                writer.uint32(/* id 91, wireType 0 =*/728).int32(message.Error);
+            if (message.Message != null && Object.hasOwnProperty.call(message, "Message"))
+                writer.uint32(/* id 92, wireType 2 =*/738).string(message.Message);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified GS2C_Test message, length delimited. Does not implicitly {@link nice_ts.GS2C_Test.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof nice_ts.GS2C_Test
+         * @static
+         * @param {nice_ts.IGS2C_Test} message GS2C_Test message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GS2C_Test.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a GS2C_Test message from the specified reader or buffer.
+         * @function decode
+         * @memberof nice_ts.GS2C_Test
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {nice_ts.GS2C_Test} GS2C_Test
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GS2C_Test.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.nice_ts.GS2C_Test();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 91:
+                    message.Error = reader.int32();
+                    break;
+                case 92:
+                    message.Message = reader.string();
+                    break;
+                case 1:
+                    message.testResponse = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a GS2C_Test message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof nice_ts.GS2C_Test
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {nice_ts.GS2C_Test} GS2C_Test
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GS2C_Test.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a GS2C_Test message.
+         * @function verify
+         * @memberof nice_ts.GS2C_Test
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        GS2C_Test.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Error != null && message.hasOwnProperty("Error"))
+                if (!$util.isInteger(message.Error))
+                    return "Error: integer expected";
+            if (message.Message != null && message.hasOwnProperty("Message"))
+                if (!$util.isString(message.Message))
+                    return "Message: string expected";
+            if (message.testResponse != null && message.hasOwnProperty("testResponse"))
+                if (!$util.isString(message.testResponse))
+                    return "testResponse: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a GS2C_Test message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof nice_ts.GS2C_Test
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {nice_ts.GS2C_Test} GS2C_Test
+         */
+        GS2C_Test.fromObject = function fromObject(object) {
+            if (object instanceof $root.nice_ts.GS2C_Test)
+                return object;
+            var message = new $root.nice_ts.GS2C_Test();
+            if (object.Error != null)
+                message.Error = object.Error | 0;
+            if (object.Message != null)
+                message.Message = String(object.Message);
+            if (object.testResponse != null)
+                message.testResponse = String(object.testResponse);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a GS2C_Test message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof nice_ts.GS2C_Test
+         * @static
+         * @param {nice_ts.GS2C_Test} message GS2C_Test
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        GS2C_Test.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.testResponse = "";
+                object.Error = 0;
+                object.Message = "";
+            }
+            if (message.testResponse != null && message.hasOwnProperty("testResponse"))
+                object.testResponse = message.testResponse;
+            if (message.Error != null && message.hasOwnProperty("Error"))
+                object.Error = message.Error;
+            if (message.Message != null && message.hasOwnProperty("Message"))
+                object.Message = message.Message;
+            return object;
+        };
+
+        /**
+         * Converts this GS2C_Test to JSON.
+         * @function toJSON
+         * @memberof nice_ts.GS2C_Test
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        GS2C_Test.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GS2C_Test;
     })();
 
     return nice_ts;

@@ -409,4 +409,202 @@ export namespace nice_ts {
          */
         public toJSON(): { [k: string]: any };
     }
+
+    /** Properties of a C2GS_Test. */
+    interface IC2GS_Test {
+
+        /** C2GS_Test testID */
+        testID?: (number|null);
+
+        /** C2GS_Test testName */
+        testName?: (string|null);
+    }
+
+    /** Represents a C2GS_Test. */
+    class C2GS_Test implements IC2GS_Test {
+
+        /**
+         * Constructs a new C2GS_Test.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: nice_ts.IC2GS_Test);
+
+        /** C2GS_Test testID. */
+        public testID: number;
+
+        /** C2GS_Test testName. */
+        public testName: string;
+
+        /**
+         * Creates a new C2GS_Test instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns C2GS_Test instance
+         */
+        public static create(properties?: nice_ts.IC2GS_Test): nice_ts.C2GS_Test;
+
+        /**
+         * Encodes the specified C2GS_Test message. Does not implicitly {@link nice_ts.C2GS_Test.verify|verify} messages.
+         * @param message C2GS_Test message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: nice_ts.IC2GS_Test, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified C2GS_Test message, length delimited. Does not implicitly {@link nice_ts.C2GS_Test.verify|verify} messages.
+         * @param message C2GS_Test message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: nice_ts.IC2GS_Test, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a C2GS_Test message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C2GS_Test
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): nice_ts.C2GS_Test;
+
+        /**
+         * Decodes a C2GS_Test message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns C2GS_Test
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): nice_ts.C2GS_Test;
+
+        /**
+         * Verifies a C2GS_Test message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a C2GS_Test message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns C2GS_Test
+         */
+        public static fromObject(object: { [k: string]: any }): nice_ts.C2GS_Test;
+
+        /**
+         * Creates a plain object from a C2GS_Test message. Also converts values to other types if specified.
+         * @param message C2GS_Test
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: nice_ts.C2GS_Test, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this C2GS_Test to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a GS2C_Test. */
+    interface IGS2C_Test {
+
+        /** GS2C_Test Error */
+        Error?: (number|null);
+
+        /** GS2C_Test Message */
+        Message?: (string|null);
+
+        /** GS2C_Test testResponse */
+        testResponse?: (string|null);
+    }
+
+    /** Represents a GS2C_Test. */
+    class GS2C_Test implements IGS2C_Test {
+
+        /**
+         * Constructs a new GS2C_Test.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: nice_ts.IGS2C_Test);
+
+        /** GS2C_Test Error. */
+        public Error: number;
+
+        /** GS2C_Test Message. */
+        public Message: string;
+
+        /** GS2C_Test testResponse. */
+        public testResponse: string;
+
+        /**
+         * Creates a new GS2C_Test instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GS2C_Test instance
+         */
+        public static create(properties?: nice_ts.IGS2C_Test): nice_ts.GS2C_Test;
+
+        /**
+         * Encodes the specified GS2C_Test message. Does not implicitly {@link nice_ts.GS2C_Test.verify|verify} messages.
+         * @param message GS2C_Test message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: nice_ts.IGS2C_Test, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GS2C_Test message, length delimited. Does not implicitly {@link nice_ts.GS2C_Test.verify|verify} messages.
+         * @param message GS2C_Test message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: nice_ts.IGS2C_Test, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GS2C_Test message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GS2C_Test
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): nice_ts.GS2C_Test;
+
+        /**
+         * Decodes a GS2C_Test message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GS2C_Test
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): nice_ts.GS2C_Test;
+
+        /**
+         * Verifies a GS2C_Test message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GS2C_Test message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GS2C_Test
+         */
+        public static fromObject(object: { [k: string]: any }): nice_ts.GS2C_Test;
+
+        /**
+         * Creates a plain object from a GS2C_Test message. Also converts values to other types if specified.
+         * @param message GS2C_Test
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: nice_ts.GS2C_Test, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GS2C_Test to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
 }

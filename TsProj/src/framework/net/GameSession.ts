@@ -116,23 +116,29 @@ export class GameSession extends Singleton<GameSession>{
         this._serverType = servertype;
 
         let msgBytes:Uint8Array = msgBuf.subarray(9);
-        let decodeMsg =  Opcode.decode(opcode, msgBytes);
+
+        try{
+            let decodeMsg =  Opcode.decode(opcode, msgBytes);
 
 
-        if(rpcid==undefined || !this.requestCallback.has(rpcid)){
-            //检查是否是服务器下发的消息
-            if(this.listeners.has(opcode)){
-                let listen = this.listeners.get(opcode);
-                listen(decodeMsg.msgObj);
+            if(rpcid==undefined || !this.requestCallback.has(rpcid)){
+                //检查是否是服务器下发的消息
+                if(this.listeners.has(opcode)){
+                    let listen = this.listeners.get(opcode);
+                    listen(decodeMsg.msgObj);
+                }
+    
+            }else{
+                let msgPack:MsgPack = this.requestCallback.get(rpcid);
+                msgPack.callback(decodeMsg.msgObj);  
+    
+                this.requestCallback.delete(rpcid);
+    
             }
-
-        }else{
-            let msgPack:MsgPack = this.requestCallback.get(rpcid);
-            msgPack.callback(decodeMsg.msgObj);  
-
-            this.requestCallback.delete(rpcid);
-
+        }catch(e){
+            console.error("parse msg error, opcode:"+opcode)
         }
+        
 
     }
 

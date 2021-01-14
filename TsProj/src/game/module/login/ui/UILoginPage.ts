@@ -11,8 +11,7 @@ import { UIMessage } from "../../../event/UIMessage";
 import { SceneManager } from "../../../../framework/scene/SceneManager";
 import { SceneDef } from "../../../../framework/scene/SceneDef";
 import { storyUI } from "../../../../data/ui/story";
-import { nice_ts } from "../../../../data/pb/login";
-
+import { nice_ts } from "../../../../data/pb/gen/pb";
 
 
 

@@ -3,11 +3,10 @@ import {SingletonTest} from './SingletonTest';
 import {Messenger} from '../framework/common/Messenger';
 import { ResManager } from '../framework/common/ResManager';
 import { SkillConfigTB, SkillConfigTR } from '../data/excel/SkillConfig';
-import { Opcode } from '../data/pb/Opcode';
 import { RedHintsMessageManager } from '../framework/redhints/RedHintsMessageManager';
 import { enumRedHints, RedHintsManager } from '../framework/redhints/RedHintsManager';
 import { Story } from 'inkjs';
-import { nice_ts } from '../data/pb/login';
+import { nice_ts } from '../data/pb/gen/pb';
 
 
 export class UnitTest{

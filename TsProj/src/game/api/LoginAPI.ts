@@ -1,9 +1,31 @@
-import { nice_ts } from "../../data/pb/login";
+import { nice_ts } from "../../data/pb/gen/pb";
 import { Opcode } from "../../data/pb/Opcode";
 import { SessionManager } from "../../framework/net/SessionManager";
 
 
 export class LoginAPI{
+
+    public static benchmarkTest(){
+
+        let msg = nice_ts.C2GS_Test.create();
+        msg.testID = 100;
+        msg.testName = "benchmark test";
+        let buf = nice_ts.C2GS_Test.encode(msg).finish();
+ 
+        for(let i=0; i<1000;i++){
+            let rpcId = SessionManager.Instance(SessionManager).gateRpcID;
+            SessionManager.Instance(SessionManager).sendGateMsg(
+                Opcode.MSG_C2GS_Test,
+                rpcId,
+                buf,
+                (response:any)=>{
+                    let msg  =  response as nice_ts.GS2C_Test;
+                    console.log("code: "+msg.Error +",msg:"+msg.Message +",res:"+msg.testResponse);
+                }
+            )
+        }
+        
+    }
 
 
     public static loginRealmServer(account:string, password:string, callback:Function){
