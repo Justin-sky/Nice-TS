@@ -7,13 +7,17 @@ export class LoginAPI{
 
     public static benchmarkTest(){
 
-        let msg = nice_ts.C2GS_Test.create();
-        msg.testID = 100;
-        msg.testName = "benchmark test";
-        let buf = nice_ts.C2GS_Test.encode(msg).finish();
- 
-        for(let i=0; i<1000;i++){
+        
+        for(let i=1; i<1000;i++){
+            let msg = nice_ts.C2GS_Test.create();
+            msg.testID = i;
+            msg.testName = "benchmark test";
+            let buf = nice_ts.C2GS_Test.encode(msg).finish();
+
             let rpcId = SessionManager.Instance(SessionManager).gateRpcID;
+            //test
+            rpcId = i
+            console.log("send msg: "+rpcId)
             SessionManager.Instance(SessionManager).sendGateMsg(
                 Opcode.MSG_C2GS_Test,
                 rpcId,
