@@ -27,7 +27,7 @@ export class GameSession extends Singleton<GameSession>{
 
     //返回的服务器ID, 类型
     private _serverId:number = -1;
-    private _serverType:number = 0;
+    private _serverType:number = 1;
 
     constructor(){
         super();
