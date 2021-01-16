@@ -7,6 +7,8 @@ import { commonUI } from "../../../../data/ui/common";
 import { homeUI } from "../../../../data/ui/home";
 import { VoHome } from "../vo/VoHome";
 import { LoginAPI } from "../../../api/LoginAPI";
+import { GameSession } from "../../../../framework/net/GameSession";
+import { Opcode } from "../../../../data/pb/Opcode";
 
 
 
@@ -57,6 +59,9 @@ export class UIHomePage extends UIPage{
         this.m_hpLbl.text = vo.hp.toString();
         this.m_moneyLbl.text = vo.money.toString();
 
+        GameSession.Instance(GameSession).listen(Opcode.MSG_GS2C_Test,function(msg){
+            console.log("收到服务器下发的消息。。。。")
+        })
     }
     public onClose(arg:any):void{
         super.onClose(arg);

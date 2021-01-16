@@ -8,7 +8,7 @@ export class LoginAPI{
     public static benchmarkTest(){
 
         
-        for(let i=1; i<1000;i++){
+        for(let i=1; i<2;i++){
             let msg = nice_ts.C2GS_Test.create();
             msg.testID = i;
             msg.testName = "benchmark test";
