@@ -9,6 +9,7 @@ import { VoHome } from "../vo/VoHome";
 import { LoginAPI } from "../../../api/LoginAPI";
 import { GameSession } from "../../../../framework/net/GameSession";
 import { Opcode } from "../../../../data/pb/Opcode";
+import { nice_ts } from "../../../../data/pb/gen/pb";
 
 
 
@@ -59,8 +60,8 @@ export class UIHomePage extends UIPage{
         this.m_hpLbl.text = vo.hp.toString();
         this.m_moneyLbl.text = vo.money.toString();
 
-        GameSession.Instance(GameSession).listen(Opcode.MSG_GS2C_Test,function(msg){
-            console.log("收到服务器下发的消息。。。。")
+        GameSession.Instance(GameSession).listen(Opcode.MSG_GS2C_Test,function(msg:nice_ts.GS2C_Test){
+            console.log("收到服务器下发的消息。。。。"+msg.testResponse)
         })
     }
     public onClose(arg:any):void{
