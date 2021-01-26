@@ -11,6 +11,7 @@ using Sirenix.Utilities.Editor;
 using UnityEngine.Serialization;
 using System.Linq;
 using System.Reflection;
+using Newtonsoft.Json;
 
 namespace NiceTS.Combat
 {
@@ -34,6 +35,7 @@ namespace NiceTS.Combat
 
         //[LabelText("区域场引导配置"), ShowIf("TargetSelectType", SkillTargetSelectType.AreaSelect)]
         //public GameObject AreaGuideObj;
+        [JsonIgnore]
         [LabelText("区域场配置"), ShowIf("TargetSelectType", SkillTargetSelectType.AreaSelect)]
         public GameObject AreaCollider;
 
@@ -97,12 +99,18 @@ namespace NiceTS.Combat
             GUILayout.Space(10);
             SirenixEditorGUI.BeginBox("技能表现");
         }
+        
         [OnInspectorGUI("BeginBox", append: false)]
         [LabelText("技能动作")]
+        [JsonIgnore]
         public AnimationClip SkillAnimationClip;
+
         [LabelText("技能特效")]
+        [JsonIgnore]
         public GameObject SkillEffectObject;
+
         [LabelText("技能音效")]
+        [JsonIgnore]
         [OnInspectorGUI("EndBox", append: true)]
         public AudioClip SkillAudio;
         private void EndBox()
@@ -115,6 +123,8 @@ namespace NiceTS.Combat
 
         [TextArea, LabelText("技能描述")]
         public string SkillDescription;
+
+        [JsonIgnore]
         [SerializeField, LabelText("自动重命名")]
         public bool AutoRename { get { return StatusConfigObject.AutoRenameStatic; } set { StatusConfigObject.AutoRenameStatic = value; } }
 

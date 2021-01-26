@@ -9,6 +9,7 @@ using Sirenix.Utilities.Editor;
 using System.Linq;
 using UnityEditor;
 using System.Reflection;
+using Newtonsoft.Json;
 
 namespace NiceTS.Combat
 {
@@ -144,10 +145,13 @@ namespace NiceTS.Combat
             GUILayout.Space(10);
             SirenixEditorGUI.BeginBox("状态表现");
         }
+
+        [JsonIgnore]
         [LabelText("状态特效")]
         [OnInspectorGUI("BeginBox", append: false)]
         public GameObject ParticleEffect;
 
+        [JsonIgnore]
         [LabelText("状态音效")]
         [OnInspectorGUI("EndBox", append: true)]
         public AudioClip Audio;
@@ -161,8 +165,11 @@ namespace NiceTS.Combat
 
         [TextArea, LabelText("状态描述")]
         public string StatusDescription;
+
+        [JsonIgnore]
         [SerializeField, LabelText("自动重命名")]
         public bool AutoRename { get { return AutoRenameStatic; } set { AutoRenameStatic = value; } }
+        [JsonIgnore]
         public static bool AutoRenameStatic = true;
 
         //private bool NeedClearLog;
