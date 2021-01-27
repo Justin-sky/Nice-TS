@@ -15,25 +15,42 @@ namespace NiceTS.Combat
 {
     [CreateAssetMenu(fileName = "状态配置", menuName = "技能|状态/状态配置")]
     //[LabelText("状态配置")]
+    [JsonObject(MemberSerialization.OptIn)]
     public class StatusConfigObject : SerializedScriptableObject
     {
+        [JsonProperty(PropertyName = "id")]
         [LabelText(StatusIdLabel), DelayedProperty]
         public string ID = "Status1";
+
+        [JsonProperty(PropertyName = "name")]
         [LabelText(StatusNameLabel), DelayedProperty]
         public string Name = "状态1";
+
+        [JsonProperty(PropertyName = "statusType")]
         [LabelText(StatusTypeLabel)]
         public StatusType StatusType;
+
+        [JsonProperty(PropertyName = "duration")]
         [HideInInspector]
         public uint Duration;
+
+        [JsonProperty(PropertyName = "showInStatusSlots")]
         [LabelText("是否在状态栏显示"), UnityEngine.Serialization.FormerlySerializedAs("ShowInStatusIconList")]
         public bool ShowInStatusSlots;
+
+        [JsonProperty(PropertyName = "canStack")]
         [LabelText("能否叠加")]
         public bool CanStack;
+
+        [JsonProperty(PropertyName = "maxStack")]
         [LabelText("最高叠加层数"), ShowIf("CanStack"), Range(0, 99)]
         public int MaxStack = 0;
 
+        [JsonProperty(PropertyName = "enableChildrenStatuses")]
         [LabelText("子状态效果")]
         public bool EnableChildrenStatuses;
+
+        [JsonProperty(PropertyName = "childrenStatuses")]
         [OnInspectorGUI("DrawSpace", append: true)]
         [HideReferenceObjectPicker]
         [LabelText("子状态效果列表"), ShowIf("EnableChildrenStatuses"), ListDrawerSettings(DraggableItems = false, ShowItemCount = false, CustomAddFunction = "AddChildStatus")]
@@ -49,33 +66,47 @@ namespace NiceTS.Combat
             GUILayout.Space(20);
         }
 
+        [JsonProperty(PropertyName= "enabledStateModify")]
         [ToggleGroup("EnabledStateModify", "行为禁制")]
         public bool EnabledStateModify;
+
+        [JsonProperty(PropertyName = "actionControlType")]
         [ToggleGroup("EnabledStateModify")]
         public ActionControlType ActionControlType;
 
+        [JsonProperty(PropertyName = "enabledAttributeModify")]
         [ToggleGroup("EnabledAttributeModify", "属性修饰")]
         public bool EnabledAttributeModify;
+
+        [JsonProperty(PropertyName = "attributeType")]
         [ToggleGroup("EnabledAttributeModify")]
         public AttributeType AttributeType;
+
+        [JsonProperty(PropertyName = "numericValue")]
         [ToggleGroup("EnabledAttributeModify"), LabelText("数值参数")]
         public string NumericValue;
+
+        [JsonProperty(PropertyName = "modifyType")]
         [ToggleGroup("EnabledAttributeModify")]
         public ModifyType ModifyType;
         //[ToggleGroup("EnabledAttributeModify"), LabelText("属性修饰")]
         //[DictionaryDrawerSettings(KeyLabel =)]
         //public Dictionary<NumericType, string> AttributeChanges = new Dictionary<NumericType, string>();
 
+        [JsonProperty(PropertyName = "enabledLogicTrigger")]
         [ToggleGroup("EnabledLogicTrigger", "逻辑触发")]
         public bool EnabledLogicTrigger;
 
+        [JsonProperty(PropertyName ="effects")]
         [ToggleGroup("EnabledLogicTrigger")]
         [LabelText("效果列表")/*, Space(30)*/]
         [ListDrawerSettings(Expanded = true, DraggableItems = true, ShowItemCount = false, HideAddButton = true)]
         [HideReferenceObjectPicker]
         public List<Effect> Effects = new List<Effect>();
+
         [HorizontalGroup("EnabledLogicTrigger/Hor2", PaddingLeft = 40, PaddingRight = 40)]
         [HideLabel]
+        [JsonIgnore]
         [OnValueChanged("AddEffect")]
         [ValueDropdown("EffectTypeSelect")]
         public string EffectTypeName = "(添加效果)";
@@ -163,6 +194,7 @@ namespace NiceTS.Combat
             GUILayout.Space(10);
         }
 
+        [JsonIgnore]
         [TextArea, LabelText("状态描述")]
         public string StatusDescription;
 
@@ -215,7 +247,7 @@ namespace NiceTS.Combat
                     return;
                 }
                 var fileName = Path.GetFileName(assetPath);
-                var newName = $"Status_{this.ID}_{this.Name}";
+                var newName = $"Status_{this.ID}";
                 if (!fileName.StartsWith(newName))
                 {
                     //Debug.Log(assetPath);
@@ -225,24 +257,21 @@ namespace NiceTS.Combat
         }
 
 
-#if EGamePlay_EN
-        private const string StatusIdLabel = "StatusID";
-        private const string StatusNameLabel = "Name";
-        private const string StatusTypeLabel = "Type";
-#else
         private const string StatusIdLabel = "状态ID";
         private const string StatusNameLabel = "状态名称";
         private const string StatusTypeLabel = "状态类型";
-#endif
     }
 
+    [JsonObject(MemberSerialization.OptIn)]
     public class ChildStatus
     {
+        [JsonProperty(PropertyName = "statusConfigObject")]
         [LabelText("状态效果")]
-        public StatusConfigObject StatusConfigObject;
+        public String StatusConfigObject;
 
+        [JsonProperty(PropertyName ="params")]
         [LabelText("参数列表"), HideReferenceObjectPicker]
-        public Dictionary<string, string> Params = new Dictionary<string, string>();
+        public Dictionary<string, string> param = new Dictionary<string, string>();
     }
 
     public enum StatusType

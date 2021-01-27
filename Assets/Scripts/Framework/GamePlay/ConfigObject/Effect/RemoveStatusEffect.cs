@@ -1,10 +1,13 @@
-﻿using Sirenix.OdinInspector;
+﻿using Newtonsoft.Json;
+using Sirenix.OdinInspector;
 
 namespace NiceTS.Combat
 {
+    [JsonObject(MemberSerialization.OptIn)]
     [Effect("移除状态效果", 40)]
     public class RemoveStatusEffect : Effect
     {
+        public override string @class => "RemoveStatusEffect";
         public override string Label
         {
             get
@@ -17,6 +20,7 @@ namespace NiceTS.Combat
             }
         }
 
+        [JsonProperty(PropertyName = "removeStatus")]
         [ToggleGroup("Enabled")]
         [LabelText("状态配置")]
         public StatusConfigObject RemoveStatus;
