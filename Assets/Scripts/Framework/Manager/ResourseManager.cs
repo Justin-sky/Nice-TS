@@ -94,8 +94,18 @@ namespace NiceTS
 
         public static async Task<SceneInstance> LoadScene(string sceneName, LoadSceneMode mode, Action<float> update, bool isActiveOnLoaded = true, int priority = 100)
         {
-            var s = await Addressables.LoadSceneAsync(sceneName, mode, isActiveOnLoaded, priority).Task;
-            return s;
+            var handle = Addressables.LoadSceneAsync(sceneName, mode, isActiveOnLoaded, priority);
+
+            var _update = GlobalMonoBehavior.Instance.AddUpdate(e: () =>
+            {
+                update?.Invoke(handle.PercentComplete);
+            });
+
+            var res = await handle.Task;
+
+            GlobalMonoBehavior.Instance.RemoveUpdate(_update);
+
+            return res;
         }
 
         public static async Task<SceneInstance> UnloadScene(SceneInstance sceneInstance, bool autoReleaseHandler = true)

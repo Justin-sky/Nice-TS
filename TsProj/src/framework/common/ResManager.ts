@@ -14,7 +14,7 @@ export class ResManager extends Singleton<ResManager>{
             let single = UnityEngine.SceneManagement.LoadSceneMode.Single;
 
             let task = NiceTS.ResourceManager.LoadScene(sceneName, single,(progress:Number)=>{
-
+                console.log("load scene: "+progress)
             });
 
             let scenInstance = await $promise(task)

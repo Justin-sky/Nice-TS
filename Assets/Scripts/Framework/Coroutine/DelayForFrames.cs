@@ -30,7 +30,7 @@ namespace NiceTS
 		public DelayForFrames Start()
 		{
 			Stop();
-			_coroutine = GlobalMonoBehavior.Inst.StartCoroutine(Run(_numFrames, _callbackDone, _callbackUpdate));
+			_coroutine = GlobalMonoBehavior.Instance.StartCoroutine(Run(_numFrames, _callbackDone, _callbackUpdate));
 			return this;
 		}
 
@@ -38,7 +38,7 @@ namespace NiceTS
 		{
 			if (_coroutine != null)
 			{
-				GlobalMonoBehavior.Inst.StopCoroutine(_coroutine);
+				GlobalMonoBehavior.Instance.StopCoroutine(_coroutine);
 				_coroutine = null;
 			}
 		}
