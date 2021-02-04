@@ -18,7 +18,7 @@ export class SceneManager extends Singleton<SceneManager>{
         super();
     }
 
-    public async loadScene(scene:string, onLoadComplete:Function){
+    public async loadScene(scene:string){
         
         try{
 

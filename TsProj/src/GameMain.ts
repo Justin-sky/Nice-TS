@@ -38,7 +38,7 @@ class GameMain{
             UnitTest.doTest();
 
             //进入登录模块
-            SceneManager.Instance(SceneManager).loadScene(SceneDef.LoginScene,()=>{});
+            await SceneManager.Instance(SceneManager).loadScene(SceneDef.LoginScene);
 
             
             //JS启动完成，通知C#层

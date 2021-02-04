@@ -161,7 +161,7 @@ export class UILoginPage extends UIPage{
                 let playerID = msg.PlayerId;
                 console.log("login gate response.." +playerID);
 
-                SceneManager.Instance(SceneManager).loadScene(SceneDef.HomeScene,()=>{});
+                SceneManager.Instance(SceneManager).loadScene(SceneDef.HomeScene);
             });
     }
 
