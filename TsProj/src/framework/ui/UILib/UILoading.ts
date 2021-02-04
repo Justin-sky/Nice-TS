@@ -23,9 +23,7 @@ export class  UILoading extends UIPanel{
         return UITypeDef.Loading;
     }
 
-    public onOpen(arg:any):void{
-        super.onOpen(arg);
-
+    public onShow(arg:any):void{
         this.progressLoading.value = 0;
         this.progressLoading.visible = true;
 
@@ -38,8 +36,6 @@ export class  UILoading extends UIPanel{
     }
 
     public onClose(arg:any):void{
-        super.onClose(arg);
-
         this.progressLoading.visible = false;
         UIMessageManger.Instance(UIMessageManger).removeListenerByCode(
             UIMessage.MSG_SCENE_PROGRESS

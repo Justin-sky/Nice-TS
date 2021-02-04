@@ -32,12 +32,11 @@ export abstract class UIPanel {
     }
 
     public abstract onAwake():void;
-    public onUpdate():void{}
+    public abstract onShow(vo:any):void;
+    public abstract onClose(arg:any):void;
 
-    public onOpen(vo:any):void{
-        this.layer = UILayerDef.getDefaultLayer(this.uiType);
-    }
-    public onClose(arg:any):void{}
+
+    public onUpdate():void{}
 
     public awake():void{
         this.onAwake();
@@ -56,20 +55,17 @@ export abstract class UIPanel {
         this.onUpdate();
     }
 
-    public open(arg:any):void{
+    private _internalOpen(arg:any):void{
         
-        this.onOpen(arg);
-
+        this.layer = UILayerDef.getDefaultLayer(this.uiType);
         FairyGUI.GRoot.inst.AddChild(this.fui);
 
-
+        this.onShow(arg);
     }
 
     public close(arg:any = null):void{
 
-
         this.onClose(arg);
-
         FairyGUI.GRoot.inst.RemoveChild(this.fui);
 
     }

@@ -64,7 +64,8 @@ export class UIManager extends Singleton<UIManager>{
         }
 
         if(ui != null){
-            ui.open(arg);
+            // ###  ui as any 调用私有方法
+            (ui as any)._internalOpen(arg);
         }
 
         return ui;

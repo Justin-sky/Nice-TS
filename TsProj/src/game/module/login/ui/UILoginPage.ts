@@ -68,8 +68,8 @@ export class UILoginPage extends UIPage{
     }
 
 
-    public onOpen(vo:any):void{
-        super.onOpen(vo);
+    public onShow(vo:any):void{
+        super.onShow(vo);
 
          //监听选服消息
          UIMessageManger.Instance(UIMessageManger).addListener(

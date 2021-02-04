@@ -52,8 +52,8 @@ export class UIHomePage extends UIPage{
     }
 
     
-    public onOpen(vo:VoHome):void{
-        super.onOpen(vo);
+    public onShow(vo:VoHome):void{
+        super.onShow(vo);
 
         this.m_nameLbl.text = vo.name;
         this.m_mpLbl.text = vo.mp.toString();

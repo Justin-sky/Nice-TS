@@ -29,8 +29,8 @@ export class UIMsgBox extends UIWindow{
         this.bindAll(this)
     }
 
-    public onOpen(arg:any):void{
-        super.onOpen(arg);
+    public onShow(arg:any):void{
+        
 
         
     }

@@ -26,15 +26,13 @@ export abstract class UIPage extends UIPanel{
     }
 
 
-    public onOpen(vo:any):void{
-        super.onOpen(vo);
+    public onShow(vo:any):void{
 
-        
     
     }
-    public onClose(arg:any):void{
-        super.onClose(arg);
 
+    public onClose(arg:any):void{
+   
     }
 
     private onBtnGoBack(){

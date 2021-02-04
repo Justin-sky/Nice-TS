@@ -11,8 +11,8 @@ export class UIShopPage extends UIPage{
     }
 
     
-    public onOpen(vo:any):void{
-        super.onOpen(vo);
+    public onShow(vo:any):void{
+        super.onShow(vo);
 
         
     }

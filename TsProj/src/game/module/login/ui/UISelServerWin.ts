@@ -63,8 +63,8 @@ export class UISelServerWin extends UIWindow{
     }
 
 
-    public onOpen(vo:VoServer):void{
-        super.onOpen(vo);
+    public onShow(vo:VoServer):void{
+        super.onShow(vo);
         this.voServer = vo;
 
         this.areaList.SetVirtual();

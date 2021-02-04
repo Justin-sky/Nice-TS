@@ -20,8 +20,7 @@ export class UIMsgTips extends UIWidge{
     }
 
 
-    public onOpen(arg:any):void{
-        super.onOpen(arg);
+    public onShow(arg:any):void{
 
         this.m_tip.text = arg as string;
         this.m_alpha = 1;
@@ -41,7 +40,6 @@ export class UIMsgTips extends UIWidge{
     }
 
     public onClose(arg:any):void{
-        super.onClose(arg);
 
         clearInterval(this.m_intervel);
     }

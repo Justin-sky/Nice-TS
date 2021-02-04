@@ -36,8 +36,8 @@ export class UIStoryWin extends UIWindow{
         });
     }
 
-    public onOpen(vo:any):void{
-        super.onOpen(vo);
+    public onShow(vo:any):void{
+        super.onShow(vo);
 
         StoryMessageManager.Instance(StoryMessageManager).addListener(
             StoryMessageManager.ONCONTENTREADY,
