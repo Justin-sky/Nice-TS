@@ -36,6 +36,8 @@ public class GameLaunch : MonoSingleton<GameLaunch>
 
     }
 
+    private void Update() => ThreadSynchronizationContext.Instance.Update();
+
     public void JsLuanchFinish()
     {
      
