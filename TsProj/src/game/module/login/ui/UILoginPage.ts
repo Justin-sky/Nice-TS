@@ -34,7 +34,7 @@ export class UILoginPage extends UIPage{
     private gateId:any;
     private gateKey:number|Long;
 
-    public onAwake():void{
+    public async onAwake(){
         super.onAwake();
         
         this.m_loginBtn.onClick.Add(()=>{
@@ -52,14 +52,12 @@ export class UILoginPage extends UIPage{
             this.openSelServerWin();
         });
 
-        this.m_loginBtn.enabled = false;
+        
 
-        SessionManager.Instance(SessionManager).connectRealmServer(
-            (code:number)=>{
-                    this.m_loginBtn.enabled = true;
-
-             } ,(code:number)=>{
-             });
+        let connected = await SessionManager.Instance(SessionManager).connectRealmServer();
+        
+        this.m_loginBtn.enabled = connected;
+        console.log("connect ream server: "+connected)
     }
     
 
@@ -117,7 +115,7 @@ export class UILoginPage extends UIPage{
             voServer);
     }
 
-    private onLoginClick(){
+    private async onLoginClick(){
 
         let account = this.m_account.text;
         let password = this.m_password.text;
@@ -126,46 +124,31 @@ export class UILoginPage extends UIPage{
 
         if(account != "" && password != ""){
             
-            LoginAPI.loginRealmServer(
-                account, 
-                password,
-                (msg:nice_ts.R2C_Login)=>{
-
-                    this.gateId = msg.GateId;
+            let msg = await LoginAPI.loginRealmServer(account, password)
+            this.gateId = msg.GateId;
                     this.gateKey = msg.Key;
                     console.log("login ream succ, gate addr:"+msg.Address + ",key:"+msg.Key);
 
                     SessionManager.Instance(SessionManager).disconnectRealmServer();
                     
                     //登录网关服
-                    SessionManager.Instance(SessionManager).connectGateServer(
-                        msg.Address,
-                        (code:number)=>{this.onConnGateSucc(code); },
-                        (code:number)=>{this.onConnGateErr(code); }
-                    );
-                
-                });
+                     let connected = await SessionManager.Instance(SessionManager).connectGateServer(msg.Address);
+                     if(connected){
+                            console.log("connect gate succ")
+
+                            let msg = await LoginAPI.loginGateServer( this.gateId, this.gateKey)
+
+                            let playerID = msg.PlayerId;
+                            console.log("login gate response.." +playerID);
+
+                            SceneManager.Instance(SceneManager).loadScene(SceneDef.HomeScene);
+
+                     }else{
+                        console.log("connect gate err ")
+                     }
+
 
         }
 
-    }
-
-    private onConnGateSucc(code:number){
-        console.log("connect gate succ: "+code)
-
-        LoginAPI.loginGateServer(
-            this.gateId,
-            this.gateKey,
-            (msg:nice_ts.G2C_LoginGate)=>{
-
-                let playerID = msg.PlayerId;
-                console.log("login gate response.." +playerID);
-
-                SceneManager.Instance(SceneManager).loadScene(SceneDef.HomeScene);
-            });
-    }
-
-    private onConnGateErr(code:number){
-        console.log("connect gate err: "+code)
     }
 }

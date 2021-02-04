@@ -1,4 +1,5 @@
 
+import { Opcode } from "../../data/pb/Opcode";
 import { GameConfig } from "../../global/GameConfig";
 import { Singleton } from "../common/Singleton";
 import { GameSession } from "./GameSession";
@@ -19,31 +20,30 @@ export class SessionManager extends Singleton<SessionManager>{
         return this.sessionGate.rpcId;
     }
 
-    public connectRealmServer(onSucc:Function, onError:Function){
+    public async connectRealmServer():Promise<boolean> {
 
-        //登录验证服
-        this.sessionReam = GameSession.Instance(GameSession).connectChannel(
-            GameConfig.realmServerIP+":"+GameConfig.realmServerPort,
-            (channel:any,code:number)=>{
-                this.onReamSocketErr(channel, code, onSucc, onError);
-            }
-        );
+        let promise = new Promise<boolean>(resove =>{
+            this.sessionReam = GameSession.Instance(GameSession).connectChannel(
+                GameConfig.realmServerIP+":"+GameConfig.realmServerPort,
+                (channel:any,code:number)=>{
+                    if(code == NetErrorCode.ERR_SocketConnSucc){
+                        this.sessionReam.id = channel.Id;
+                  
+                        resove(true);
+                    }else{
+            
+                        resove(false);
+            
+                        console.error("login reamserver err, code: "+code + ",id:"+channel.Id);
+            
+                    }
+                }
+            );
+
+        });
+        return promise
     }
 
-    public onReamSocketErr(channel:any, code:number, onSucc:Function, onError:Function){
-       
-        if(code == NetErrorCode.ERR_SocketConnSucc){
-            this.sessionReam.id = channel.Id;
-      
-            onSucc(code);
-        }else{
-
-            onError(code);
-
-            console.error("login reamserver err, code: "+code + ",id:"+channel.Id);
-
-        }
-    }
     
     public disconnectRealmServer(){
         this.sessionReam.disconnect();
@@ -51,51 +51,67 @@ export class SessionManager extends Singleton<SessionManager>{
     }
 
 
-    public sendRealmMsg(opcode:number,rpcID:number, buf:Uint8Array,callback:Function){
+    public async sendRealmMsg(opcode:number,msg:any):Promise<any>{
         
-        this.sessionReam.send(opcode, rpcID, buf, (response:any)=>{
-            callback(response);
+        let rpcID = this.sessionReam.rpcId
+        let promise = new Promise<any>((resove) => {
+
+            let buf = Opcode.encode(opcode, msg)
+
+            this.sessionReam.send(opcode, rpcID, buf, (response:any)=>{
+            
+                resove(response)
+            });
+        })
+        
+        return promise
+    }
+
+
+    public async connectGateServer(address:string):Promise<boolean>{
+
+        let promise = new Promise<boolean>(resove =>{
+            this.sessionGate = GameSession.Instance(GameSession).connectChannel(
+                address,
+                (channel:any,code:number)=>{
+                    console.log("login Gate Server: "+code);
+    
+                    if(code == NetErrorCode.ERR_SocketConnSucc){
+                        this.sessionGate.id = channel.Id;
+                    
+                        resove(true)
+                    }else{
+                        resove(false)
+            
+                        console.error("gate server err, code: "+code + ",id:"+channel.Id);
+                    }
+                }
+            );
+
         });
+        return promise
     }
 
-
-    public connectGateServer(address:string,onSucc:Function, onError:Function){
-
-        this.sessionGate = GameSession.Instance(GameSession).connectChannel(
-            address,
-            (channel:any,code:number)=>{
-                console.log("login Gate Server: "+code);
-
-                this.onGateSocketErr(channel, code, onSucc, onError);
-            }
-        );
-    }
-
-    public onGateSocketErr(channel:any, code:number,onSucc:Function, onError:Function){
-        if(code == NetErrorCode.ERR_SocketConnSucc){
-            this.sessionGate.id = channel.Id;
-        
-            onSucc(code);
-
-        }else{
-
-            onError(code);
-
-            console.error("gate server err, code: "+code + ",id:"+channel.Id);
-        }
-
-    }
 
     public disconnectGateServer(){
         this.sessionGate.disconnect();
         this.sessionGate = null;
     }
 
-    public sendGateMsg(opcode:number,rpcID:number, buf:Uint8Array,callback:Function){
+    public async sendGateMsg(opcode:number, msg:any):Promise<any>{
 
-        this.sessionGate.send(opcode, rpcID, buf, (response:any)=>{
+        let rpcID = this.sessionGate.rpcId
+        let promise = new Promise<any>((resove) => {
 
-           callback(response);
-        });
+            let buf = Opcode.encode(opcode, msg)
+
+            this.sessionGate.send(opcode, rpcID, buf, (response:any)=>{
+            
+                resove(response)
+            });
+        })
+        
+        return promise
+
     }
 }   
