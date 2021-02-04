@@ -4,6 +4,8 @@ using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.ResourceProviders;
+using UnityEngine.SceneManagement;
 
 namespace NiceTS
 {
@@ -88,6 +90,18 @@ namespace NiceTS
                 Log.Error(LogGroups.Engine, "加载JS失败......");
                 return false;
             }
+        }
+
+        public static async Task<SceneInstance> LoadScene(string sceneName, LoadSceneMode mode, Action<float> update, bool isActiveOnLoaded = true, int priority = 100)
+        {
+            var s = await Addressables.LoadSceneAsync(sceneName, mode, isActiveOnLoaded, priority).Task;
+            return s;
+        }
+
+        public static async Task<SceneInstance> UnloadScene(SceneInstance sceneInstance, bool autoReleaseHandler = true)
+        {
+            var res = await Addressables.UnloadSceneAsync(sceneInstance, autoReleaseHandler).Task;
+            return res;
         }
 
         public static async Task<GameObject> LoadPrefab(string address)

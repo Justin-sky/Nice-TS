@@ -96,6 +96,8 @@ public class PuertsConfig
                 typeof(NiceTS.ResourceManager),
                 typeof(UnityEngine.SceneManagement.SceneManager),
                 typeof(UnityEngine.SceneManagement.Scene),
+                typeof(UnityEngine.SceneManagement.LoadSceneMode),
+                typeof(UnityEngine.ResourceManagement.ResourceProviders.SceneInstance),
                 typeof(AsyncOperation),
                 typeof(NiceTS.TService),
                 typeof(NiceTS.TChannel),

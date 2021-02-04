@@ -68,9 +68,9 @@ export class UnitTest{
 
         console.log("ResourceManager =============================");
 
-        let prefab = await ResManager.Instance(ResManager).loadPrefab("Models/1001/Character.prefab") ;
+       // let prefab = await ResManager.Instance(ResManager).loadPrefab("Models/1001/Character.prefab") ;
         
-        console.log(prefab);
+        //console.log(prefab);
 
         //let inst = CS.UnityEngine.GameObject.Instantiate(prefab);
         //inst.name = "Test Ch";

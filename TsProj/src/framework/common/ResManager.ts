@@ -1,12 +1,45 @@
 
 import { Singleton } from './Singleton';
 import { $promise } from 'puerts';
-import {NiceTS} from 'csharp';
+import {NiceTS, UnityEngine} from 'csharp';
 
 export class ResManager extends Singleton<ResManager>{
 
     constructor(){
         super();
+    }
+
+    async loadScene(sceneName:string){
+        try{
+            let single = UnityEngine.SceneManagement.LoadSceneMode.Single;
+
+            let task = NiceTS.ResourceManager.LoadScene(sceneName, single,(progress:Number)=>{
+
+            });
+
+            let scenInstance = await $promise(task)
+            return scenInstance
+
+        }catch(ex){
+
+            console.error(`Load Scene :${sceneName} : ${ex}`)
+
+            return null;
+        }
+    }
+
+
+    async unloadScene(sceneInstance:UnityEngine.ResourceManagement.ResourceProviders.SceneInstance){
+        try{
+            let task= NiceTS.ResourceManager.UnloadScene(sceneInstance)
+            let go = await $promise(task);
+            return go;
+        }catch(ex){
+
+            console.error(`Unload scene  : ${ex}`)
+
+            return null;
+        }
     }
 
     async loadPrefab(address:string){

@@ -23,7 +23,8 @@ public class AddressableTools
          "static_shaders",
          "static_fb",
          "static_fairygui",
-         "static_story"
+         "static_story",
+         "static_scenes"
         };
 
         var start = DateTime.Now;
