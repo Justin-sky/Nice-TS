@@ -5,8 +5,8 @@
     <text id="n1_pyg6" name="n1" xy="374,436" size="82,35" fontSize="25" bold="true" text="账号："/>
     <text id="n2_pyg6" name="n2" xy="376,488" size="82,35" fontSize="25" bold="true" text="密码："/>
     <text id="n3_pyg6" name="n3" xy="374,542" size="108,35" fontSize="25" bold="true" text="服务器："/>
-    <text id="n4_pyg6" name="account" xy="485,436" size="400,35" fontSize="25" color="#333333" autoSize="none" text="" input="true" prompt="请输入帐号"/>
-    <text id="n5_pyg6" name="password" xy="484,483" size="400,35" fontSize="25" color="#333333" autoSize="none" text="" input="true" prompt="请输入密码："/>
+    <text id="n4_pyg6" name="account" xy="485,436" size="400,35" fontSize="25" color="#333333" autoSize="none" text="123" input="true" prompt="请输入帐号"/>
+    <text id="n5_pyg6" name="password" xy="484,483" size="400,35" fontSize="25" color="#333333" autoSize="none" text="123" input="true" prompt="请输入密码："/>
     <component id="n7_b23n" name="loginBtn" src="pyg64s" fileName="ui/common/CommonBtn.xml" pkg="y4b7yuun" xy="541,620">
       <Button title="登录"/>
     </component>
@@ -15,6 +15,9 @@
     </component>
     <component id="n11_alle" name="storyBtn" src="pyg64s" fileName="ui/common/CommonBtn.xml" pkg="y4b7yuun" xy="136,153">
       <Button title="测试Story"/>
+    </component>
+    <component id="n12_kc3s" name="newGuideBtn" src="pyg64s" fileName="ui/common/CommonBtn.xml" pkg="y4b7yuun" xy="782,167">
+      <Button title="新手引导"/>
     </component>
   </displayList>
 </component>

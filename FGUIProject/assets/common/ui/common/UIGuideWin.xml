@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720" mask="n1_kc3s" reversedMask="true">
+  <displayList>
+    <graph id="n0_kc3s" name="n0" xy="0,0" size="1280,720" type="rect" lineSize="0" fillColor="#b2000000">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <graph id="n1_kc3s" name="focus" xy="362,327" size="200,200" touchable="false" type="eclipse" lineSize="0"/>
+  </displayList>
+</component>

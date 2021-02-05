@@ -12,6 +12,7 @@ import { UIShopPage } from "../../game/module/home/ui/UIShopPage";
 import { storyUI } from "../../data/ui/story";
 import { UIStoryWin } from "../../game/module/story/UIStoryWin";
 import { combatUI } from "../../data/ui/combat";
+import { UIGuideWin } from "../../game/module/guide/UIGuideWin";
 
 
 
@@ -41,6 +42,8 @@ export class UIFactory{
                         case commonUI.UILoadingPage:
                             ui = new UILoading();
                             break;
+                        case commonUI.UIUIGuideWin:
+                            ui = new UIGuideWin()
                     }
         
                     break

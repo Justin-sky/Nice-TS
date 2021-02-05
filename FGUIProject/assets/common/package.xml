@@ -175,6 +175,7 @@
     <component id="pyg64s" name="CommonBtn.xml" path="/ui/common/" exported="true"/>
     <component id="10wwi53" name="LoadingPage.xml" path="/ui/common/" exported="true"/>
     <component id="10wwi54" name="LoadingProgress.xml" path="/ui/common/"/>
+    <component id="ajzbi55" name="UIGuideWin.xml" path="/ui/common/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

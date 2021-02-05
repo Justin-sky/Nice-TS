@@ -12,6 +12,8 @@ import { SceneManager } from "../../../../framework/scene/SceneManager";
 import { SceneDef } from "../../../../framework/scene/SceneDef";
 import { storyUI } from "../../../../data/ui/story";
 import { nice_ts } from "../../../../data/pb/gen/pb";
+import { combatUI } from "../../../../data/ui/combat";
+import { commonUI } from "../../../../data/ui/common";
 
 
 
@@ -31,6 +33,9 @@ export class UILoginPage extends UIPage{
     @binder("storyBtn")
     public m_storyBtn:FairyGUI.GButton;
 
+    @binder("newGuideBtn")
+    public m_newGuideBtn:FairyGUI.GButton;
+
     private gateId:any;
     private gateKey:number|Long;
 
@@ -46,6 +51,14 @@ export class UILoginPage extends UIPage{
                 storyUI.PackageName, 
                 storyUI.UIStoryWin,
                 null);
+        });
+
+        this.m_newGuideBtn.onClick.Add(()=>{
+            UIManager.Instance(UIManager).openWindow(
+                commonUI.PackageName,
+                commonUI.UIUIGuideWin,
+                null
+            );
         });
 
         this.m_selserverBtn.onClick.Add(()=>{
