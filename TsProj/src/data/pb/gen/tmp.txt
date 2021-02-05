@@ -1,3 +1,10 @@
+
+添加如下代码：
 var Long = require("long");
 $protobuf.util.Long = Long;
 $protobuf.configure();
+
+
+
+或者pb引用为：
+var $protobuf = require("protobufjs/dist/protobuf");
