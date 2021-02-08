@@ -5,7 +5,7 @@ import { binder } from "../../../framework/common/NiceDecorator";
 import { StoryManager } from "../../../framework/ink/StoryManager";
 import { StoryMessageManager } from "../../../framework/ink/StoryMessageManager";
 import { UIWindow } from "../../../framework/ui/UIWindow";
-import { SStoryManager, SStoryMessageManager, SUIManager } from "../../../global/GameConfig";
+import { S} from "../../../global/GameConfig";
 
 export class UIStoryWin extends UIWindow{
 
@@ -28,10 +28,10 @@ export class UIStoryWin extends UIWindow{
         this.m_btnList.onClickItem.Add((event:FairyGUI.EventContext)=>{
              let clickId:number = this.m_btnList.GetChildIndex(event.data);
             if(this.shouldContineStory){
-                SStoryManager.advanceStory();
+                S.StoryManager.advanceStory();
             }else{
                 this.optionsMap.clear();
-                SStoryManager.selectChoice(this.allChoices[clickId])
+                S.StoryManager.selectChoice(this.allChoices[clickId])
             }
         });
     }
@@ -39,17 +39,17 @@ export class UIStoryWin extends UIWindow{
     public onShow(vo:any):void{
         super.onShow(vo);
 
-        SStoryMessageManager.addListener(
+        S.StoryMessageManager.addListener(
             StoryMessageManager.ONCONTENTREADY,
             this,
             this.OnContentReady
         );
-        SStoryMessageManager.addListener(
+        S.StoryMessageManager.addListener(
             StoryMessageManager.ONCHOICESPRESENTED,
             this,
             this.OnChoicesPresented
         );
-        SStoryMessageManager.addListener(
+        S.StoryMessageManager.addListener(
             StoryMessageManager.ONSTORYFINISHED,
             this,
             this.OnStoryFinished
@@ -58,7 +58,7 @@ export class UIStoryWin extends UIWindow{
         this.optionsMap.clear();
         this.shouldContineStory = false;
 
-        SStoryManager.beginStory("story2");
+        S.StoryManager.beginStory("story2");
     }
 
 
@@ -70,7 +70,7 @@ export class UIStoryWin extends UIWindow{
     {
         this.m_speakerTxt.text = speakerContent;
 
-        if(StoryManager.Instance(StoryManager).canContinue){
+        if(S.StoryManager.canContinue){
             this.shouldContineStory = true;
 
             this.m_btnList.numItems = 1;
@@ -110,22 +110,22 @@ export class UIStoryWin extends UIWindow{
 
         console.log("Story Finished")
 
-        SUIManager.closeWindow(storyUI.UIStoryWin,null);
+        S.UIManager.closeWindow(storyUI.UIStoryWin,null);
     }
 
 
     public onClose(arg:any):void{
         super.onClose(arg);
 
-        SStoryMessageManager.removeListener(
+        S.StoryMessageManager.removeListener(
             StoryMessageManager.ONCONTENTREADY,
             this.OnContentReady
         );
-        SStoryMessageManager.removeListener(
+        S.StoryMessageManager.removeListener(
             StoryMessageManager.ONCHOICESPRESENTED,
             this.OnChoicesPresented
         );
-        SStoryMessageManager.removeListener(
+        S.StoryMessageManager.removeListener(
             StoryMessageManager.ONSTORYFINISHED,
             this.OnStoryFinished
         );

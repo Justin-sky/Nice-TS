@@ -17,13 +17,14 @@ export  class GameConfig{
 
 }
 
-
-export const SUIManager = UIManager.Instance(UIManager);
-export const SUIMessageManger = UIMessageManger.Instance(UIMessageManger);
-export const SSceneManager = SceneManager.Instance(SceneManager);
-export const SGameObjectPool = GameObjectPool.Instance(GameObjectPool);
-export const SResManager = ResManager.Instance(ResManager);
-export const SStoryManager = StoryManager.Instance(StoryManager);
-export const SSessionManager = SessionManager.Instance(SessionManager);
-export const SGameSession = GameSession.Instance(GameSession);
-export const SStoryMessageManager = StoryMessageManager.Instance(StoryMessageManager);
+export class S{
+    public static UIManager = UIManager.Instance(UIManager);
+    public static UIMessageManger = UIMessageManger.Instance(UIMessageManger);
+    public static SceneManager = SceneManager.Instance(SceneManager);
+    public static GameObjectPool = GameObjectPool.Instance(GameObjectPool);
+    public static ResManager = ResManager.Instance(ResManager);
+    public static StoryManager = StoryManager.Instance(StoryManager);
+    public static SessionManager = SessionManager.Instance(SessionManager);
+    public static GameSession = GameSession.Instance(GameSession);
+    public static StoryMessageManager = StoryMessageManager.Instance(StoryMessageManager);
+}

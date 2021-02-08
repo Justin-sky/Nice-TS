@@ -8,7 +8,7 @@ import { VoHome } from "../vo/VoHome";
 import { LoginAPI } from "../../../api/LoginAPI";
 import { Opcode } from "../../../../data/pb/Opcode";
 import { nice_ts } from "../../../../data/pb/gen/pb";
-import { SGameSession, SUIManager } from "../../../../global/GameConfig";
+import { S } from "../../../../global/GameConfig";
 
 
 
@@ -59,7 +59,7 @@ export class UIHomePage extends UIPage{
         this.m_hpLbl.text = vo.hp.toString();
         this.m_moneyLbl.text = vo.money.toString();
 
-        SGameSession.listen(Opcode.MSG_GS2C_Test,function(msg:nice_ts.GS2C_Test){
+        S.GameSession.listen(Opcode.MSG_GS2C_Test,function(msg:nice_ts.GS2C_Test){
             console.log("收到服务器下发的消息。。。。"+msg.testResponse)
         })
     }
@@ -71,7 +71,7 @@ export class UIHomePage extends UIPage{
 
     public onchatBtn(){
 
-        SUIManager.openWindow(
+        S.UIManager.openWindow(
             commonUI.PackageName,
             commonUI.UIUINoticeWin,
             null);
@@ -86,7 +86,7 @@ export class UIHomePage extends UIPage{
     }
     public onshopBtn(){
         
-        SUIManager.openPage(
+        S.UIManager.openPage(
             homeUI.PackageName,
             homeUI.UIShopPage);
     }

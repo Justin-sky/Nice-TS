@@ -1,6 +1,6 @@
 import { nice_ts } from "../../data/pb/gen/pb";
 import { Opcode } from "../../data/pb/Opcode";
-import { SSessionManager } from "../../global/GameConfig";
+import { S } from "../../global/GameConfig";
 
 
 export class LoginAPI{
@@ -13,7 +13,7 @@ export class LoginAPI{
             msg.testID = i;
             msg.testName = "benchmark test";
 
-            let response = await SSessionManager.sendGateMsg(
+            let response = await S.SessionManager.sendGateMsg(
                 Opcode.MSG_C2GS_Test,
                 msg
             )
@@ -30,7 +30,7 @@ export class LoginAPI{
          msg.Account = account;
          msg.Password = password;
 
-         let response = await SSessionManager.sendRealmMsg(
+         let response = await S.SessionManager.sendRealmMsg(
             Opcode.MSG_C2R_Login,
             msg
         )
@@ -45,7 +45,7 @@ export class LoginAPI{
         msg.GateId = gateId;
         msg.Key = gateKey;
         
-        let response = await SSessionManager.sendGateMsg(
+        let response = await S.SessionManager.sendGateMsg(
             Opcode.MSG_C2G_LoginGate,
             msg
         );

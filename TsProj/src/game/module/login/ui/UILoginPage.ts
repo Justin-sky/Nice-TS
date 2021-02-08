@@ -8,7 +8,7 @@ import { UIMessage } from "../../../event/UIMessage";
 import { SceneDef } from "../../../../framework/scene/SceneDef";
 import { storyUI } from "../../../../data/ui/story";
 import { commonUI } from "../../../../data/ui/common";
-import { SSceneManager, SSessionManager, SUIManager, SUIMessageManger } from "../../../../global/GameConfig";
+import { S } from "../../../../global/GameConfig";
 
 
 
@@ -42,14 +42,14 @@ export class UILoginPage extends UIPage{
         });
 
         this.m_storyBtn.onClick.Add(()=>{
-            SUIManager.openWindow(
+            S.UIManager.openWindow(
                 storyUI.PackageName, 
                 storyUI.UIStoryWin,
                 null);
         });
 
         this.m_newGuideBtn.onClick.Add(()=>{
-            SUIManager.openWindow(
+            S.UIManager.openWindow(
                 commonUI.PackageName,
                 commonUI.UIUIGuideWin,
                 null
@@ -62,7 +62,7 @@ export class UILoginPage extends UIPage{
 
         
 
-        let connected = await SSessionManager.connectRealmServer();
+        let connected = await S.SessionManager.connectRealmServer();
         
         this.m_loginBtn.enabled = connected;
         console.log("connect ream server: "+connected)
@@ -80,7 +80,7 @@ export class UILoginPage extends UIPage{
         super.onShow(vo);
 
          //监听选服消息
-         SUIMessageManger.addListener(
+         S.UIMessageManger.addListener(
             UIMessage.MSG_SELECT_SERVER,
             this,
             this.onSelectServer
@@ -89,7 +89,7 @@ export class UILoginPage extends UIPage{
     public onClose(arg:any):void{
         super.onClose(arg);
 
-        SUIMessageManger.removeListener(
+        S.UIMessageManger.removeListener(
             UIMessage.MSG_SELECT_SERVER,
             this.onSelectServer
         );
@@ -117,7 +117,7 @@ export class UILoginPage extends UIPage{
             }
         }
 
-        SUIManager.openWindow(
+        S.UIManager.openWindow(
             loginUI.PackageName, 
             loginUI.UISelServerWin,
             voServer);
@@ -137,10 +137,10 @@ export class UILoginPage extends UIPage{
                     this.gateKey = msg.Key;
                     console.log("login ream succ, gate addr:"+msg.Address + ",key:"+msg.Key);
 
-                    SSessionManager.disconnectRealmServer();
+                    S.SessionManager.disconnectRealmServer();
                     
                     //登录网关服
-                     let connected = await SSessionManager.connectGateServer(msg.Address);
+                     let connected = await S.SessionManager.connectGateServer(msg.Address);
                      if(connected){
                             console.log("connect gate succ")
 
@@ -149,7 +149,7 @@ export class UILoginPage extends UIPage{
                             let playerID = msg.PlayerId;
                             console.log("login gate response.." +playerID);
 
-                            SSceneManager.loadScene(SceneDef.HomeScene);
+                            S.SceneManager.loadScene(SceneDef.HomeScene);
 
                      }else{
                         console.log("connect gate err ")
