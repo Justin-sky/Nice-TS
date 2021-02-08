@@ -2,6 +2,7 @@
 using Puerts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
@@ -15,51 +16,8 @@ public class PuertsConfig
     {
         get
         {
-            return new List<Type>()
+            var list =  new List<Type>()
             {
-                typeof(FairyGUI.EventContext),
-                typeof(FairyGUI.EventDispatcher),
-                typeof(FairyGUI.EventListener),
-                typeof(FairyGUI.InputEvent),
-                typeof(FairyGUI.DisplayObject),
-                typeof(FairyGUI.Container),
-                typeof(FairyGUI.Stage),
-                typeof(FairyGUI.Controller),
-                typeof(FairyGUI.GObject),
-                typeof(FairyGUI.GGraph),
-                typeof(FairyGUI.GGroup),
-                typeof(FairyGUI.GImage),
-                typeof(FairyGUI.GLoader),
-                typeof(FairyGUI.GMovieClip),
-                typeof(FairyGUI.TextFormat),
-                typeof(FairyGUI.GTextField),
-                typeof(FairyGUI.GRichTextField),
-                typeof(FairyGUI.GTextInput),
-                typeof(FairyGUI.GComponent),
-                typeof(FairyGUI.GList),
-                typeof(FairyGUI.GRoot),
-                typeof(FairyGUI.GLabel),
-                typeof(FairyGUI.GButton),
-                typeof(FairyGUI.GComboBox),
-                typeof(FairyGUI.GProgressBar),
-                typeof(FairyGUI.GSlider),
-                typeof(FairyGUI.PopupMenu),
-                typeof(FairyGUI.ScrollPane),
-                typeof(FairyGUI.Transition),
-                typeof(FairyGUI.UIPackage),
-                typeof(FairyGUI.Window),
-                typeof(FairyGUI.GObjectPool),
-                typeof(FairyGUI.Relations),
-                typeof(FairyGUI.RelationType),
-                typeof(FairyGUI.Timers),
-                typeof(FairyGUI.GTween),
-                typeof(FairyGUI.GTweener),
-                typeof(FairyGUI.EaseType),
-                typeof(FairyGUI.TweenValue),
-                typeof(FairyGUI.UIObjectFactory),
-                typeof(FairyGUI.ListItemRenderer),
-                typeof(FairyGUI.EventListener),
-                typeof(FairyGUI.GoWrapper),
 
                 typeof(Debug),
                 typeof(Vector3),
@@ -105,7 +63,27 @@ public class PuertsConfig
                 typeof(GameLaunch),
 
             };
+
+            List<string> namespaces = new List<string>()
+            {
+                "FairyGUI",
+                "FairyGUI.Utils",
+            };
+
+            Assembly[] ass = AppDomain.CurrentDomain.GetAssemblies();
+            list.AddRange((from assembly in ass
+                             where !(assembly.ManifestModule is System.Reflection.Emit.ModuleBuilder)
+                             from type in assembly.GetExportedTypes()
+                             where type.Namespace != null && namespaces.Contains(type.Namespace) && !isExcluded(type)
+                                   && type.BaseType != typeof(MulticastDelegate) && !type.IsEnum
+                             select type));
+            return list;
         }
+    }
+
+    static bool isExcluded(Type type)
+    {
+        return false;
     }
 
     [BlittableCopy]
