@@ -1,13 +1,8 @@
 
 import {UnitTest} from './unittest/UnitTest';
-import { GameObjectPool } from './framework/common/GameObjectPool';
-import { UIManager } from './framework/ui/UIManager';
-import { ResManager } from './framework/common/ResManager';
-
 import { JsManager ,GameLaunch, NiceTS } from 'csharp';
 import { SceneDef } from './framework/scene/SceneDef';
-import { SceneManager } from './framework/scene/SceneManager';
-import { StoryManager } from './framework/ink/StoryManager';
+import { SGameObjectPool, SSceneManager, SStoryManager } from './global/GameConfig';
 
 
 
@@ -23,12 +18,8 @@ class GameMain{
         try{
             console.log("Game start in JS....");
 
-            //启动单例
-            GameObjectPool.Instance(GameObjectPool);
-    
-            UIManager.Instance(UIManager);
-            ResManager.Instance(ResManager);
-            StoryManager.Instance(StoryManager).initialize();
+            
+            SStoryManager.initialize();
 
 
             //预加载excel数据
@@ -38,7 +29,7 @@ class GameMain{
             UnitTest.doTest();
 
             //进入登录模块
-            await SceneManager.Instance(SceneManager).loadScene(SceneDef.LoginScene);
+            await SSceneManager.loadScene(SceneDef.LoginScene);
 
             
             //JS启动完成，通知C#层
@@ -52,7 +43,7 @@ class GameMain{
 
     public onApplicationQuit():void {
 
-        GameObjectPool.Instance(GameObjectPool).cleanup(true);
+        SGameObjectPool.cleanup(true);
         console.log("Game onApplicationQuit in JS....");
     }
 

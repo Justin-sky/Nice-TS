@@ -1,6 +1,6 @@
 import { homeUI } from "../../../../data/ui/home";
 import { BaseScene } from "../../../../framework/scene/BaseScene";
-import { UIManager } from "../../../../framework/ui/UIManager";
+import { SUIManager } from "../../../../global/GameConfig";
 import { VoHome } from "../vo/VoHome";
 
 
@@ -25,7 +25,7 @@ export class HomeScene extends BaseScene{
         vo.mp = 3300;
         vo.money = 666;
 
-        UIManager.Instance(UIManager).openPageInScene(
+        SUIManager.openPageInScene(
             homeUI.PackageName,
             homeUI.UIHomePage,
             vo);

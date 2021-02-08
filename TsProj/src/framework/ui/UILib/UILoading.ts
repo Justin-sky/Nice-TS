@@ -2,8 +2,8 @@ import { UIPanel } from "../UIPanel";
 import { UITypeDef } from "../UIDefine";
 import { FairyGUI } from "csharp";
 import { binder } from "../../common/NiceDecorator";
-import { UIMessageManger } from "../../../game/event/UIMessageManager";
 import { UIMessage } from "../../../game/event/UIMessage";
+import { SUIMessageManger } from "../../../global/GameConfig";
 
 
 
@@ -27,7 +27,7 @@ export class  UILoading extends UIPanel{
         this.progressLoading.value = 0;
         this.progressLoading.visible = true;
 
-        UIMessageManger.Instance(UIMessageManger).addListener(
+        SUIMessageManger.addListener(
             UIMessage.MSG_SCENE_PROGRESS,
             this,
             (progress:number)=>{
@@ -37,7 +37,7 @@ export class  UILoading extends UIPanel{
 
     public onClose(arg:any):void{
         this.progressLoading.visible = false;
-        UIMessageManger.Instance(UIMessageManger).removeListenerByCode(
+        SUIMessageManger.removeListenerByCode(
             UIMessage.MSG_SCENE_PROGRESS
         );
     }

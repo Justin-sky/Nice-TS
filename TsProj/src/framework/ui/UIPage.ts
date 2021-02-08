@@ -1,8 +1,7 @@
 import { UIPanel } from "./UIPanel";
 import { UITypeDef, UIComDefs } from "./UIDefine";
-import { UIManager } from "./UIManager";
 import { FairyGUI } from "csharp";
-import { binder } from "../common/NiceDecorator";
+import { SUIManager } from "../../global/GameConfig";
 
 
 
@@ -36,7 +35,7 @@ export abstract class UIPage extends UIPanel{
     }
 
     private onBtnGoBack(){
-        UIManager.Instance(UIManager).goBackPage();
+        SUIManager.goBackPage();
     }
 
 } 

@@ -1,9 +1,7 @@
 import { commonUI } from "../../data/ui/common";
 import { UIMessage } from "../../game/event/UIMessage";
-import { UIMessageManger } from "../../game/event/UIMessageManager";
-import { ResManager } from "../common/ResManager";
+import { SResManager, SUIManager, SUIMessageManger } from "../../global/GameConfig";
 import { Singleton } from "../common/Singleton";
-import { UIManager } from "../ui/UIManager";
 import { BaseScene } from "./BaseScene";
 import { SceneFactory } from "./SceneFactory";
 
@@ -23,7 +21,7 @@ export class SceneManager extends Singleton<SceneManager>{
         try{
 
             //打开Loading界面
-            UIManager.Instance(UIManager).openLoading(commonUI.PackageName, commonUI.UILoadingPage);
+            SUIManager.openLoading(commonUI.PackageName, commonUI.UILoadingPage);
 
             //清理旧场景
             if(this.currentScene){
@@ -32,7 +30,7 @@ export class SceneManager extends Singleton<SceneManager>{
             }
 
             //开始加载场景
-            let sceneInstance = await ResManager.Instance(ResManager).loadScene(scene);
+            let sceneInstance = await SResManager.loadScene(scene);
 
             //开始加载进入场景的资源
             this.currentScene =  SceneFactory.createScene(scene);
@@ -45,7 +43,7 @@ export class SceneManager extends Singleton<SceneManager>{
                 let progress = this.currentScene.finishCount/this.currentScene.totalCount;
                 console.log("progress:"+progress + " = "+this.currentScene.finishCount + " = "+this.currentScene.totalCount);
 
-                UIMessageManger.Instance(UIMessageManger).broadcast(
+                SUIMessageManger.broadcast(
                     UIMessage.MSG_SCENE_PROGRESS,
                     progress*100);
 
@@ -57,7 +55,7 @@ export class SceneManager extends Singleton<SceneManager>{
             //加载完成
             clearInterval(progressInterval)
             this.currentScene.onComplete()
-            UIManager.Instance(UIManager).closeLoading(commonUI.UILoadingPage);
+            SUIManager.closeLoading(commonUI.UILoadingPage);
 
         }catch(ex){
             console.log("load scene excep:"+ex);

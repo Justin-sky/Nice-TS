@@ -1,7 +1,5 @@
 import { UnityEngine } from "csharp";
-import { GameObjectPool } from "../common/GameObjectPool";
-import { ResManager } from "../common/ResManager";
-
+import { SGameObjectPool, SResManager } from "../../global/GameConfig";
 
 export abstract class BaseScene{
 
@@ -46,14 +44,14 @@ export abstract class BaseScene{
         let premises = [];
 
         this.preloadFairyGUIPackage.forEach((value, key)=>{
-            let premise = ResManager.Instance(ResManager).loadFairyGUIPackage(key, value,()=>{
+            let premise = SResManager.loadFairyGUIPackage(key, value,()=>{
                 this.finishCount ++;
             });
             premises.push(premise);
         });
 
         this.preloadPrefab.forEach((value, key)=>{
-            let premise = GameObjectPool.Instance(GameObjectPool).preLoadGameObjectAsync(key, value,()=>{
+            let premise = SGameObjectPool.preLoadGameObjectAsync(key, value,()=>{
                 this.finishCount++;
             })
             premises.push(premise);
@@ -67,14 +65,14 @@ export abstract class BaseScene{
 
             console.log("destroy scene: "+key);
 
-            ResManager.Instance(ResManager).releaseFairyGUIPackage(value);
+            SResManager.releaseFairyGUIPackage(value);
         });
 
         //清理资源缓存
-        GameObjectPool.Instance(GameObjectPool).cleanup(true);
+        SGameObjectPool.cleanup(true);
 
         //卸载场景
-        ResManager.Instance(ResManager).unloadScene(this.sceneInstance);
+        SResManager.unloadScene(this.sceneInstance);
         
         this.preloadFairyGUIPackage.clear();
         this.preloadPrefab.clear();

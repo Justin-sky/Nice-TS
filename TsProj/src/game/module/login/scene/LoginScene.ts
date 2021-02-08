@@ -3,6 +3,7 @@ import { loginUI } from "../../../../data/ui/login";
 import { storyUI } from "../../../../data/ui/story";
 import { BaseScene } from "../../../../framework/scene/BaseScene";
 import { UIManager } from "../../../../framework/ui/UIManager";
+import { SUIManager } from "../../../../global/GameConfig";
 
 
 
@@ -20,7 +21,7 @@ export class LoginScene extends BaseScene{
 
     public onComplete() {
         
-        UIManager.Instance(UIManager).openPageInScene(
+        SUIManager.openPageInScene(
             loginUI.PackageName,
             loginUI.UILoginPage,
             null);

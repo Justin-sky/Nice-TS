@@ -4,8 +4,8 @@ import { storyUI } from "../../../data/ui/story";
 import { binder } from "../../../framework/common/NiceDecorator";
 import { StoryManager } from "../../../framework/ink/StoryManager";
 import { StoryMessageManager } from "../../../framework/ink/StoryMessageManager";
-import { UIManager } from "../../../framework/ui/UIManager";
 import { UIWindow } from "../../../framework/ui/UIWindow";
+import { SStoryManager, SStoryMessageManager, SUIManager } from "../../../global/GameConfig";
 
 export class UIStoryWin extends UIWindow{
 
@@ -28,10 +28,10 @@ export class UIStoryWin extends UIWindow{
         this.m_btnList.onClickItem.Add((event:FairyGUI.EventContext)=>{
              let clickId:number = this.m_btnList.GetChildIndex(event.data);
             if(this.shouldContineStory){
-                StoryManager.Instance(StoryManager).advanceStory();
+                SStoryManager.advanceStory();
             }else{
                 this.optionsMap.clear();
-                StoryManager.Instance(StoryManager).selectChoice(this.allChoices[clickId])
+                SStoryManager.selectChoice(this.allChoices[clickId])
             }
         });
     }
@@ -39,17 +39,17 @@ export class UIStoryWin extends UIWindow{
     public onShow(vo:any):void{
         super.onShow(vo);
 
-        StoryMessageManager.Instance(StoryMessageManager).addListener(
+        SStoryMessageManager.addListener(
             StoryMessageManager.ONCONTENTREADY,
             this,
             this.OnContentReady
         );
-        StoryMessageManager.Instance(StoryMessageManager).addListener(
+        SStoryMessageManager.addListener(
             StoryMessageManager.ONCHOICESPRESENTED,
             this,
             this.OnChoicesPresented
         );
-        StoryMessageManager.Instance(StoryMessageManager).addListener(
+        SStoryMessageManager.addListener(
             StoryMessageManager.ONSTORYFINISHED,
             this,
             this.OnStoryFinished
@@ -58,7 +58,7 @@ export class UIStoryWin extends UIWindow{
         this.optionsMap.clear();
         this.shouldContineStory = false;
 
-        StoryManager.Instance(StoryManager).beginStory("story2");
+        SStoryManager.beginStory("story2");
     }
 
 
@@ -110,22 +110,22 @@ export class UIStoryWin extends UIWindow{
 
         console.log("Story Finished")
 
-        UIManager.Instance(UIManager).closeWindow(storyUI.UIStoryWin,null);
+        SUIManager.closeWindow(storyUI.UIStoryWin,null);
     }
 
 
     public onClose(arg:any):void{
         super.onClose(arg);
 
-        StoryMessageManager.Instance(StoryMessageManager).removeListener(
+        SStoryMessageManager.removeListener(
             StoryMessageManager.ONCONTENTREADY,
             this.OnContentReady
         );
-        StoryMessageManager.Instance(StoryMessageManager).removeListener(
+        SStoryMessageManager.removeListener(
             StoryMessageManager.ONCHOICESPRESENTED,
             this.OnChoicesPresented
         );
-        StoryMessageManager.Instance(StoryMessageManager).removeListener(
+        SStoryMessageManager.removeListener(
             StoryMessageManager.ONSTORYFINISHED,
             this.OnStoryFinished
         );

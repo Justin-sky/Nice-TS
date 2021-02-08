@@ -1,19 +1,14 @@
 import { UIPage } from "../../../../framework/ui/UIPage";
 import { binder } from "../../../../framework/common/NiceDecorator";
 import { FairyGUI } from "csharp";
-import { SessionManager } from "../../../../framework/net/SessionManager";
 import { LoginAPI } from "../../../api/LoginAPI";
-import { UIManager } from "../../../../framework/ui/UIManager";
 import { loginUI } from "../../../../data/ui/login";
 import { VoServer, VoServerItem } from "../vo/VoServer";
-import { UIMessageManger } from "../../../event/UIMessageManager";
 import { UIMessage } from "../../../event/UIMessage";
-import { SceneManager } from "../../../../framework/scene/SceneManager";
 import { SceneDef } from "../../../../framework/scene/SceneDef";
 import { storyUI } from "../../../../data/ui/story";
-import { nice_ts } from "../../../../data/pb/gen/pb";
-import { combatUI } from "../../../../data/ui/combat";
 import { commonUI } from "../../../../data/ui/common";
+import { SSceneManager, SSessionManager, SUIManager, SUIMessageManger } from "../../../../global/GameConfig";
 
 
 
@@ -47,14 +42,14 @@ export class UILoginPage extends UIPage{
         });
 
         this.m_storyBtn.onClick.Add(()=>{
-            UIManager.Instance(UIManager).openWindow(
+            SUIManager.openWindow(
                 storyUI.PackageName, 
                 storyUI.UIStoryWin,
                 null);
         });
 
         this.m_newGuideBtn.onClick.Add(()=>{
-            UIManager.Instance(UIManager).openWindow(
+            SUIManager.openWindow(
                 commonUI.PackageName,
                 commonUI.UIUIGuideWin,
                 null
@@ -67,7 +62,7 @@ export class UILoginPage extends UIPage{
 
         
 
-        let connected = await SessionManager.Instance(SessionManager).connectRealmServer();
+        let connected = await SSessionManager.connectRealmServer();
         
         this.m_loginBtn.enabled = connected;
         console.log("connect ream server: "+connected)
@@ -85,7 +80,7 @@ export class UILoginPage extends UIPage{
         super.onShow(vo);
 
          //监听选服消息
-         UIMessageManger.Instance(UIMessageManger).addListener(
+         SUIMessageManger.addListener(
             UIMessage.MSG_SELECT_SERVER,
             this,
             this.onSelectServer
@@ -94,7 +89,7 @@ export class UILoginPage extends UIPage{
     public onClose(arg:any):void{
         super.onClose(arg);
 
-        UIMessageManger.Instance(UIMessageManger).removeListener(
+        SUIMessageManger.removeListener(
             UIMessage.MSG_SELECT_SERVER,
             this.onSelectServer
         );
@@ -122,7 +117,7 @@ export class UILoginPage extends UIPage{
             }
         }
 
-        UIManager.Instance(UIManager).openWindow(
+        SUIManager.openWindow(
             loginUI.PackageName, 
             loginUI.UISelServerWin,
             voServer);
@@ -142,10 +137,10 @@ export class UILoginPage extends UIPage{
                     this.gateKey = msg.Key;
                     console.log("login ream succ, gate addr:"+msg.Address + ",key:"+msg.Key);
 
-                    SessionManager.Instance(SessionManager).disconnectRealmServer();
+                    SSessionManager.disconnectRealmServer();
                     
                     //登录网关服
-                     let connected = await SessionManager.Instance(SessionManager).connectGateServer(msg.Address);
+                     let connected = await SSessionManager.connectGateServer(msg.Address);
                      if(connected){
                             console.log("connect gate succ")
 
@@ -154,7 +149,7 @@ export class UILoginPage extends UIPage{
                             let playerID = msg.PlayerId;
                             console.log("login gate response.." +playerID);
 
-                            SceneManager.Instance(SceneManager).loadScene(SceneDef.HomeScene);
+                            SSceneManager.loadScene(SceneDef.HomeScene);
 
                      }else{
                         console.log("connect gate err ")

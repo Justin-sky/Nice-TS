@@ -1,8 +1,8 @@
 import { FairyGUI } from "csharp";
 import { binder } from "../../../../framework/common/NiceDecorator";
 import { UIWindow } from "../../../../framework/ui/UIWindow";
+import { SUIMessageManger } from "../../../../global/GameConfig";
 import { UIMessage } from "../../../event/UIMessage";
-import { UIMessageManger } from "../../../event/UIMessageManager";
 import { VoServer, VoServerItem } from "../vo/VoServer";
 
 
@@ -54,7 +54,7 @@ export class UISelServerWin extends UIWindow{
 
         let selItem:VoServerItem = this.voServer.serverMap.get(this.clickAreaIndex+1)[this.clickServerIndex];
 
-        UIMessageManger.Instance(UIMessageManger).broadcast(
+        SUIMessageManger.broadcast(
             UIMessage.MSG_SELECT_SERVER,
             selItem
         );

@@ -2,14 +2,13 @@ import { UIPage } from "../../../../framework/ui/UIPage";
 import { binder } from "../../../../framework/common/NiceDecorator";
 import { FairyGUI } from "csharp";
 import { UIManager } from "../../../../framework/ui/UIManager";
-import { common } from "protobufjs";
 import { commonUI } from "../../../../data/ui/common";
 import { homeUI } from "../../../../data/ui/home";
 import { VoHome } from "../vo/VoHome";
 import { LoginAPI } from "../../../api/LoginAPI";
-import { GameSession } from "../../../../framework/net/GameSession";
 import { Opcode } from "../../../../data/pb/Opcode";
 import { nice_ts } from "../../../../data/pb/gen/pb";
+import { SGameSession, SUIManager } from "../../../../global/GameConfig";
 
 
 
@@ -60,7 +59,7 @@ export class UIHomePage extends UIPage{
         this.m_hpLbl.text = vo.hp.toString();
         this.m_moneyLbl.text = vo.money.toString();
 
-        GameSession.Instance(GameSession).listen(Opcode.MSG_GS2C_Test,function(msg:nice_ts.GS2C_Test){
+        SGameSession.listen(Opcode.MSG_GS2C_Test,function(msg:nice_ts.GS2C_Test){
             console.log("收到服务器下发的消息。。。。"+msg.testResponse)
         })
     }
@@ -72,7 +71,7 @@ export class UIHomePage extends UIPage{
 
     public onchatBtn(){
 
-        UIManager.Instance(UIManager).openWindow(
+        SUIManager.openWindow(
             commonUI.PackageName,
             commonUI.UIUINoticeWin,
             null);
@@ -87,7 +86,7 @@ export class UIHomePage extends UIPage{
     }
     public onshopBtn(){
         
-        UIManager.Instance(UIManager).openPage(
+        SUIManager.openPage(
             homeUI.PackageName,
             homeUI.UIShopPage);
     }
