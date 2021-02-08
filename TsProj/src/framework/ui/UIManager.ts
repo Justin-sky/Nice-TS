@@ -5,7 +5,6 @@ import { UIWindow } from './UIWindow';
 import { UIWidge } from './UIWidge';
 import { UIPanel } from './UIPanel';
 import { UIFactory } from './UIFactory';
-import { SceneDef } from '../scene/SceneDef';
 import { homeUI } from '../../data/ui/home';
 
 
@@ -32,7 +31,7 @@ export class UIManager extends Singleton<UIManager>{
 
     }
 
-    private closeAllLoadedPanel():void{
+    private distroyAllLoadedPanel():void{
 
         for(let i= this.m_listLoadedPanel.length-1; i>=0; i--){
             let panel = this.m_listLoadedPanel[i];
@@ -48,7 +47,7 @@ export class UIManager extends Singleton<UIManager>{
 
     public clean():void{
 
-        this.closeAllLoadedPanel();
+        this.distroyAllLoadedPanel();
 
         this.m_pageTrackStack.length = 0;
         this.m_listLoadedPanel.length = 0;
@@ -113,7 +112,7 @@ export class UIManager extends Singleton<UIManager>{
         this.m_currentPage.name = page;
         this.m_currentPage.arg = arg;
 
-        this.closeAllLoadedPanel();
+        this.distroyAllLoadedPanel();
 
         this.open(pkg, page, arg);
     }

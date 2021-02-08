@@ -59,7 +59,7 @@ public class PuertsConfig
                 typeof(FairyGUI.UIObjectFactory),
                 typeof(FairyGUI.ListItemRenderer),
                 typeof(FairyGUI.EventListener),
-             
+                typeof(FairyGUI.GoWrapper),
 
                 typeof(Debug),
                 typeof(Vector3),

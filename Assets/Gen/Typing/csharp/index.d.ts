@@ -2792,6 +2792,28 @@ declare module 'csharp' {
         
         enum ObjectType { Image = 0, MovieClip = 1, Swf = 2, Graph = 3, Loader = 4, Group = 5, Text = 6, RichText = 7, InputText = 8, Component = 9, List = 10, Label = 11, Button = 12, ComboBox = 13, ProgressBar = 14, Slider = 15, ScrollBar = 16, Tree = 17, Loader3D = 18 }
         
+        class GoWrapper extends FairyGUI.DisplayObject {
+            
+            public get wrapTarget(): UnityEngine.GameObject;
+            public set wrapTarget(value: UnityEngine.GameObject);
+            
+            public get renderingOrder(): number;
+            public set renderingOrder(value: number);
+            
+            public constructor();
+            
+            public constructor($go: UnityEngine.GameObject);
+            
+            public add_onUpdate($value: System.Action$1<FairyGUI.UpdateContext>):void;
+            
+            public remove_onUpdate($value: System.Action$1<FairyGUI.UpdateContext>):void;
+            
+            public SetWrapTarget($target: UnityEngine.GameObject, $cloneMaterial: boolean):void;
+            
+            public CacheRenderers():void;
+            
+        }
+        
     }
     namespace System {
         
@@ -6054,6 +6076,8 @@ declare module 'csharp' {
             
             public static ReleaseAddressGO($go: UnityEngine.Object):void;
             
+            public static ReleaseAddress($address: string):void;
+            
             public static GetStatusSummary():string;
             
         }
@@ -6162,6 +6186,10 @@ declare module 'csharp' {
     namespace UnityEngine.ResourceManagement.ResourceProviders {
         
         class SceneInstance extends System.ValueType {
+            
+            public get Scene(): UnityEngine.SceneManagement.Scene;
+            
+            public ActivateAsync():UnityEngine.AsyncOperation;
             
         }
         

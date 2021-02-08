@@ -19,5 +19,6 @@
     <component id="n12_kc3s" name="newGuideBtn" src="pyg64s" fileName="ui/common/CommonBtn.xml" pkg="y4b7yuun" xy="782,167">
       <Button title="新手引导"/>
     </component>
+    <graph id="n13_xqty" name="hold" xy="469,225" size="100,100" lineSize="0" fillColor="#00ffffff"/>
   </displayList>
 </component>

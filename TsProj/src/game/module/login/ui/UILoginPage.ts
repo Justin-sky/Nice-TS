@@ -1,6 +1,6 @@
 import { UIPage } from "../../../../framework/ui/UIPage";
 import { binder } from "../../../../framework/common/NiceDecorator";
-import { FairyGUI } from "csharp";
+import { FairyGUI, UnityEngine } from "csharp";
 import { LoginAPI } from "../../../api/LoginAPI";
 import { loginUI } from "../../../../data/ui/login";
 import { VoServer, VoServerItem } from "../vo/VoServer";
@@ -31,6 +31,9 @@ export class UILoginPage extends UIPage{
     @binder("newGuideBtn")
     public m_newGuideBtn:FairyGUI.GButton;
 
+    @binder("hold")
+    public m_holder:FairyGUI.GGraph;
+
     private gateId:any;
     private gateKey:number|Long;
 
@@ -60,8 +63,6 @@ export class UILoginPage extends UIPage{
             this.openSelServerWin();
         });
 
-        
-
         let connected = await S.SessionManager.connectRealmServer();
         
         this.m_loginBtn.enabled = connected;
@@ -76,8 +77,15 @@ export class UILoginPage extends UIPage{
     }
 
 
-    public onShow(vo:any):void{
+    public async onShow(vo:any){
         super.onShow(vo);
+
+        //加载特效
+        let go = await S.ResManager.loadPrefab("Effect/Prefab/UI/ef_ui_pet_rank_yellow_test.prefab")
+        let inst = UnityEngine.GameObject.Instantiate(go) as UnityEngine.GameObject;
+        let wrapper = new FairyGUI.GoWrapper(inst);
+        this.m_holder.SetNativeObject(wrapper);
+
 
          //监听选服消息
          S.UIMessageManger.addListener(
@@ -88,6 +96,9 @@ export class UILoginPage extends UIPage{
     }
     public onClose(arg:any):void{
         super.onClose(arg);
+
+        //卸载铁效
+        S.ResManager.releaseAddress("Effect/Prefab/UI/ef_ui_pet_rank_yellow_test.prefab");
 
         S.UIMessageManger.removeListener(
             UIMessage.MSG_SELECT_SERVER,
