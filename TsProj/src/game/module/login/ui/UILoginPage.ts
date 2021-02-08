@@ -134,26 +134,26 @@ export class UILoginPage extends UIPage{
             
             let msg = await LoginAPI.loginRealmServer(account, password)
             this.gateId = msg.GateId;
-                    this.gateKey = msg.Key;
-                    console.log("login ream succ, gate addr:"+msg.Address + ",key:"+msg.Key);
+            this.gateKey = msg.Key;
+            console.log("login ream succ, gate addr:"+msg.Address + ",key:"+msg.Key);
 
-                    S.SessionManager.disconnectRealmServer();
-                    
-                    //登录网关服
-                     let connected = await S.SessionManager.connectGateServer(msg.Address);
-                     if(connected){
-                            console.log("connect gate succ")
+            S.SessionManager.disconnectRealmServer();
+            
+            //登录网关服
+            let connected = await S.SessionManager.connectGateServer(msg.Address);
+            if(connected){
+                console.log("connect gate succ")
 
-                            let msg = await LoginAPI.loginGateServer( this.gateId, this.gateKey)
+                let msg = await LoginAPI.loginGateServer( this.gateId, this.gateKey)
 
-                            let playerID = msg.PlayerId;
-                            console.log("login gate response.." +playerID);
+                let playerID = msg.PlayerId;
+                console.log("login gate response.." +playerID);
 
-                            S.SceneManager.loadScene(SceneDef.HomeScene);
+                S.SceneManager.loadScene(SceneDef.HomeScene);
 
-                     }else{
-                        console.log("connect gate err ")
-                     }
+            }else{
+            console.log("connect gate err ")
+            }
 
 
         }

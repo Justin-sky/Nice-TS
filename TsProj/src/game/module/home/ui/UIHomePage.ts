@@ -1,7 +1,6 @@
 import { UIPage } from "../../../../framework/ui/UIPage";
 import { binder } from "../../../../framework/common/NiceDecorator";
 import { FairyGUI } from "csharp";
-import { UIManager } from "../../../../framework/ui/UIManager";
 import { commonUI } from "../../../../data/ui/common";
 import { homeUI } from "../../../../data/ui/home";
 import { VoHome } from "../vo/VoHome";

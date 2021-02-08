@@ -2,7 +2,6 @@ import { FairyGUI } from "csharp";
 import { Choice } from "inkjs/engine/Choice";
 import { storyUI } from "../../../data/ui/story";
 import { binder } from "../../../framework/common/NiceDecorator";
-import { StoryManager } from "../../../framework/ink/StoryManager";
 import { StoryMessageManager } from "../../../framework/ink/StoryMessageManager";
 import { UIWindow } from "../../../framework/ui/UIWindow";
 import { S} from "../../../global/GameConfig";

@@ -1,6 +1,6 @@
 
 import {UnitTest} from './unittest/UnitTest';
-import { JsManager ,GameLaunch, NiceTS } from 'csharp';
+import { JsManager ,GameLaunch } from 'csharp';
 import { SceneDef } from './framework/scene/SceneDef';
 import { S } from './global/GameConfig';
 
