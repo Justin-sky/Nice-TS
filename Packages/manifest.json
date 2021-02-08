@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.unity.2d.animation": "3.2.5",
-    "com.unity.addressables": "1.8.5",
+    "com.unity.addressables": "1.16.16",
     "com.unity.assetgraph": "1.7.2-preview",
     "com.unity.cinemachine": "2.6.0",
     "com.unity.quicksearch": "2.0.2",
