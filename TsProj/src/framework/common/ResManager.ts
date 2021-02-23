@@ -113,10 +113,6 @@ export class ResManager extends Singleton<ResManager>{
         NiceTS.ResourceManager.ReleaseAddressGO(go);
     }
 
-    public releaseAddress(address:string){
-        NiceTS.ResourceManager.ReleaseAddress(address);
-    }
-
     public releaseFairyGUIPackage(packageName){
         NiceTS.ResourceManager.ReleaseFGUIPackage(packageName);
     }

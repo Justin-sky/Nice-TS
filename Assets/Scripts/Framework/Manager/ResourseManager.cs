@@ -148,10 +148,6 @@ namespace NiceTS
             Addressables.Release(go);
         }
 
-        public static void ReleaseAddress(string address)
-        {
-            Addressables.Release(address);
-        }
 
         public static string GetStatusSummary()
         {

@@ -36,6 +36,7 @@ export class UILoginPage extends UIPage{
 
     private gateId:any;
     private gateKey:number|Long;
+    private _effectGo:any = null;
 
     public async onAwake(){
         super.onAwake();
@@ -81,8 +82,8 @@ export class UILoginPage extends UIPage{
         super.onShow(vo);
 
         //加载特效
-        let go = await S.ResManager.loadPrefab("Effect/Prefab/UI/ef_ui_pet_rank_yellow_test.prefab")
-        let inst = UnityEngine.GameObject.Instantiate(go) as UnityEngine.GameObject;
+        this._effectGo = await S.ResManager.loadPrefab("Effect/Prefab/UI/ef_ui_pet_rank_yellow_test.prefab")
+        let inst = UnityEngine.GameObject.Instantiate(this._effectGo) as UnityEngine.GameObject;
         let wrapper = new FairyGUI.GoWrapper(inst);
         this.m_holder.SetNativeObject(wrapper);
 
@@ -98,7 +99,7 @@ export class UILoginPage extends UIPage{
         super.onClose(arg);
 
         //卸载铁效
-        S.ResManager.releaseAddress("Effect/Prefab/UI/ef_ui_pet_rank_yellow_test.prefab");
+        S.ResManager.releaseAddressGO(this._effectGo);
 
         S.UIMessageManger.removeListener(
             UIMessage.MSG_SELECT_SERVER,
@@ -141,33 +142,36 @@ export class UILoginPage extends UIPage{
 
         console.log(`account:${account} - password: ${password}`);
 
-        if(account != "" && password != ""){
+        S.SceneManager.loadScene(SceneDef.HomeScene);
+
+
+        // if(account != "" && password != ""){
             
-            let msg = await LoginAPI.loginRealmServer(account, password)
-            this.gateId = msg.GateId;
-            this.gateKey = msg.Key;
-            console.log("login ream succ, gate addr:"+msg.Address + ",key:"+msg.Key);
+        //     let msg = await LoginAPI.loginRealmServer(account, password)
+        //     this.gateId = msg.GateId;
+        //     this.gateKey = msg.Key;
+        //     console.log("login ream succ, gate addr:"+msg.Address + ",key:"+msg.Key);
 
-            S.SessionManager.disconnectRealmServer();
+        //     S.SessionManager.disconnectRealmServer();
             
-            //登录网关服
-            let connected = await S.SessionManager.connectGateServer(msg.Address);
-            if(connected){
-                console.log("connect gate succ")
+        //     //登录网关服
+        //     let connected = await S.SessionManager.connectGateServer(msg.Address);
+        //     if(connected){
+        //         console.log("connect gate succ")
 
-                let msg = await LoginAPI.loginGateServer( this.gateId, this.gateKey)
+        //         let msg = await LoginAPI.loginGateServer( this.gateId, this.gateKey)
 
-                let playerID = msg.PlayerId;
-                console.log("login gate response.." +playerID);
+        //         let playerID = msg.PlayerId;
+        //         console.log("login gate response.." +playerID);
 
-                S.SceneManager.loadScene(SceneDef.HomeScene);
+        //         S.SceneManager.loadScene(SceneDef.HomeScene);
 
-            }else{
-            console.log("connect gate err ")
-            }
+        //     }else{
+        //     console.log("connect gate err ")
+        //     }
 
 
-        }
+        //  }
 
     }
 }
