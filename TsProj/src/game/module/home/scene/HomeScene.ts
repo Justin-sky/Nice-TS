@@ -14,7 +14,6 @@ export class HomeScene extends BaseScene{
 
     public onEnter() {
 
-        this.addPreloadFairyGUIPackage(homeUI.PackageBytes,homeUI.PackageName);
     }
 
     public onComplete() {

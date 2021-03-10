@@ -1,4 +1,5 @@
 import { Story } from "inkjs/engine/Story";
+import { Logger } from "../logger/Logger";
 import { InkStateInspector } from "./InkStateInspector";
 import { StoryMessageManager } from "./StoryMessageManager";
 
@@ -34,7 +35,7 @@ export class InkWriter{
 
     public beginStory(knotName:string){
         if(this._currentStory == null){
-            console.warn("Trying to AdvanceStory in InkWriter when no story has been created");
+            Logger.warn("Trying to AdvanceStory in InkWriter when no story has been created");
             return;
         }
 
@@ -48,7 +49,7 @@ export class InkWriter{
 
 
     private giveReward():boolean{
-        console.log("give reward...");
+        Logger.log("give reward...");
 
         return true;
     }
@@ -61,7 +62,7 @@ export class InkWriter{
         if(this._allInkCommands.has(command)){
             return this._allInkCommands.get(command)(args);
         }
-        console.error("Could not find InkCommand with name:"+command);
+        Logger.error("Could not find InkCommand with name:"+command);
         return true;
     }
 
@@ -118,7 +119,7 @@ export class InkWriter{
 
     public advanceStory():void{
         if(this._currentStory == null){
-            console.warn("Trying to AdvanceStory in InkWriter when no story has been created");
+            Logger.warn("Trying to AdvanceStory in InkWriter when no story has been created");
         }
         else if(this._currentStory.canContinue){
             let text:string = this._currentStory.Continue().trim();
@@ -169,7 +170,7 @@ export class InkWriter{
 
     public selectChoice(choiceIndex:number):void{
         if(this._currentStory == null){
-            console.warn("Trying to ChooseChoice in InkWriter when no story has begun");
+            Logger.warn("Trying to ChooseChoice in InkWriter when no story has begun");
             return;
         }
         this._currentStory.ChooseChoiceIndex(choiceIndex);

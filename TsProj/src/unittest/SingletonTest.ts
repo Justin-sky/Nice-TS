@@ -1,6 +1,7 @@
 
 
 import {Singleton} from '../framework/common/Singleton';
+import { Logger } from '../framework/logger/Logger';
 
 export class SingletonTest extends Singleton<SingletonTest>{
 
@@ -9,7 +10,7 @@ export class SingletonTest extends Singleton<SingletonTest>{
     constructor(){
         super();
 
-        console.log("SingletonTest call constructor");
+        Logger.log("SingletonTest call constructor");
     }
 
     public add() : void {

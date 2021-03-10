@@ -3,6 +3,7 @@ import { Choice } from "inkjs/engine/Choice";
 import { storyUI } from "../../../data/ui/story";
 import { binder } from "../../../framework/common/NiceDecorator";
 import { StoryMessageManager } from "../../../framework/ink/StoryMessageManager";
+import { Logger } from "../../../framework/logger/Logger";
 import { UIWindow } from "../../../framework/ui/UIWindow";
 import { S} from "../../../global/GameConfig";
 
@@ -102,12 +103,12 @@ export class UIStoryWin extends UIWindow{
     private OnChoicesPresented(currentChoices:Choice[]){
       
         this.shouldContineStory = false;
-        console.log("....OnChoicesPresented......")
+        Logger.log("....OnChoicesPresented......")
     }
 
     private OnStoryFinished():void{
 
-        console.log("Story Finished")
+        Logger.log("Story Finished")
 
         S.UIManager.closeWindow(storyUI.UIStoryWin,null);
     }

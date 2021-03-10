@@ -17,7 +17,9 @@ namespace NiceTS
         {
             NTexture.CustomDestroyMethod += (Texture t) =>
             {
+                var name = t.name;
                 Addressables.Release(t);
+                Debug.Log("release C# :" + name);
                 Log.Error(LogGroups.Engine, ".... release addressable: " + t.name);
             };
         }
@@ -46,7 +48,7 @@ namespace NiceTS
                     }
                 });
             Addressables.Release(pkgAsset);
- 
+
         }
 
         public static async Task<bool> PreadloadFB(string fbLabel)
@@ -57,7 +59,7 @@ namespace NiceTS
             {
                 FlatBufferManager.Instance.ClearSkillCache();
 
-                foreach(var txt in list)
+                foreach (var txt in list)
                 {
                     FlatBufferManager.Instance.AddSkillCache(txt);
 
@@ -76,7 +78,7 @@ namespace NiceTS
         public static async Task<bool> PreloadJS(string jsLabel)
         {
             var list = await Addressables.LoadAssetsAsync<TextAsset>(jsLabel, null).Task;
-            if(list != null)
+            if (list != null)
             {
                 JsManager.Instance.jscache.Clear();
                 foreach (var txt in list)
@@ -114,10 +116,15 @@ namespace NiceTS
             return res;
         }
 
+        public static void UnloadSceneByName(string sceneName)
+        {
+            SceneManager.UnloadSceneAsync(sceneName);
+        }
+
         public static async Task<GameObject> LoadPrefab(string address)
         {
-            var res =  await Addressables.LoadAssetAsync<GameObject>(address).Task;
-           
+            var res = await Addressables.LoadAssetAsync<GameObject>(address).Task;
+
             return res;
         }
 
@@ -139,7 +146,7 @@ namespace NiceTS
         public static async Task<Sprite> LoadSprite(string address)
         {
             var res = await Addressables.LoadAssetAsync<Sprite>(address).Task;
-   
+
             return res;
         }
 

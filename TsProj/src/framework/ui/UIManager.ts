@@ -6,6 +6,8 @@ import { UIWidge } from './UIWidge';
 import { UIPanel } from './UIPanel';
 import { UIFactory } from './UIFactory';
 import { homeUI } from '../../data/ui/home';
+import { S } from '../../global/GameConfig';
+import { Logger } from '../logger/Logger';
 
 
 export class UIPageTrack{
@@ -39,7 +41,8 @@ export class UIManager extends Singleton<UIManager>{
             if(panel.isOpen){
                 panel.close();
             }
-
+            //卸载资源
+            S.ResManager.releaseFairyGUIPackage(panel.pkgName);
             panel.dispose();  
         }
         this.m_listLoadedPanel.length = 0;
@@ -53,11 +56,13 @@ export class UIManager extends Singleton<UIManager>{
         this.m_listLoadedPanel.length = 0;
     }
 
-    public open(pkg:string, name:string, arg?:any){
-
+    public async open(pkg:string, name:string, arg?:any){
+   
         let ui:any = this.getUI(name);
 
         if(ui == null){
+            //加载 package
+            await S.ResManager.loadFairyGUIPackage(pkg);
             ui = UIFactory.createUI(pkg, name);
             this.m_listLoadedPanel.push(ui);
         }
@@ -76,7 +81,7 @@ export class UIManager extends Singleton<UIManager>{
         for (const panel of this.m_listLoadedPanel) {
             if(panel.name == name){
 
-                console.log("find panel in cache: "+name);
+                Logger.log("find panel in cache: "+name);
 
                 return panel;
             }
@@ -149,9 +154,9 @@ export class UIManager extends Singleton<UIManager>{
 
     //==========================================================UIWindow
     //打开窗口
-    public openWindow(pkg:string, name:string, arg:any):UIWindow{
+    public async openWindow(pkg:string, name:string, arg:any){
 
-        let ui:UIWindow = this.open(pkg, name, arg);
+        let ui:UIWindow = await this.open(pkg, name, arg);
 
         return ui;
     }
@@ -167,9 +172,9 @@ export class UIManager extends Singleton<UIManager>{
 
     //==========================================================UIWidget
     //打开Widiget
-    public openWidget(pkg:string, name:string, arg:any):UIWidge{
+    public async openWidget(pkg:string, name:string, arg:any){
 
-        let ui:UIWidge = this.open(pkg, name, arg);
+        let ui:UIWidge = await this.open(pkg, name, arg);
 
         return ui;
     }

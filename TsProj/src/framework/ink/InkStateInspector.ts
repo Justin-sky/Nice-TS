@@ -1,4 +1,5 @@
 import { Story } from "inkjs/engine/Story";
+import { Logger } from "../logger/Logger";
 
 export class InkStateInspector{
 
@@ -24,7 +25,7 @@ export class InkStateInspector{
         try{
             inkStory.BindExternalFunction(funcName, func);
         }catch(err){
-            console.warn(err);
+            Logger.warn(err);
         }
         
     }
@@ -33,7 +34,7 @@ export class InkStateInspector{
         try{
             inkStory.BindExternalFunctionGeneral(funcName, func);
         }catch(err){
-            console.warn(err);
+            Logger.warn(err);
         }     
     }
 
@@ -42,7 +43,7 @@ export class InkStateInspector{
         try{
             inkStory.UnbindExternalFunction(funcName);
         }catch(err){
-            console.warn(err);
+            Logger.warn(err);
         }     
     }
 }

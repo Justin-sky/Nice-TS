@@ -24,10 +24,14 @@ public class JsLoader : ILoader
     {
 
 #if UNITY_EDITOR
-        var scriptDir = Path.Combine(Application.dataPath, "AssetsPackage/Js");
-        var jsPath = Path.Combine(scriptDir, filepath);
+        var puertsDir = Path.Combine(Application.dataPath, "AssetsPackage/Js");
+        var jsPath = Path.Combine(puertsDir, filepath);
+
+        var txt = File.ReadAllText(jsPath);
         debugpath = jsPath.Replace("/", "\\");
-#endif
+
+        return txt;
+#else
         debugpath = "";
         var jscache = JsManager.Instance.jscache;
         string jsName = filepath.Replace("puerts/", "");
@@ -37,5 +41,6 @@ public class JsLoader : ILoader
 
         if (txt == null) txt = "";
         return txt;
+#endif
     }
 }

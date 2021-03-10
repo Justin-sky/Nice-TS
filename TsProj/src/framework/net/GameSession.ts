@@ -3,6 +3,7 @@ import { Opcode } from "../../data/pb/Opcode";
 import { NetErrorCode } from "./NetErrorCode";
 import { NiceTS } from "csharp";
 import { MessageParser } from "./MessageParser";
+import { Logger } from "../logger/Logger";
 
 
 export class MsgPack{
@@ -93,9 +94,9 @@ export class GameSession extends Singleton<GameSession>{
             this.requestCallback.set(rpcid, msgPack);
         }
         // for(let i in sendArray){
-        //     console.log("TS -- send array: "+i);
+        //     Logger.log("TS -- send array: "+i);
         // }
-        //Console.log("send array: "+sendArray);
+        //Logger.log("send array: "+sendArray);
         this.channel.Send(sendArray);
     }
 
@@ -136,7 +137,7 @@ export class GameSession extends Singleton<GameSession>{
     
             }
         }catch(e){
-            console.error("parse msg error, opcode:"+opcode)
+            Logger.error("parse msg error, opcode:"+opcode)
         }
         
 
@@ -150,7 +151,7 @@ export class GameSession extends Singleton<GameSession>{
 
             if(value.retryTimes >= this.maxReSendTimes) {
                 //超过最大重发次数，丢弃
-                console.log(`Message resend too more, opcode:${key}, lastsend:${value.sendTime}`);
+                Logger.log(`Message resend too more, opcode:${key}, lastsend:${value.sendTime}`);
                 this.requestCallback.delete(key); 
             }else{
 
@@ -159,7 +160,7 @@ export class GameSession extends Singleton<GameSession>{
                     value.sendTime = currTime;
                     //重发消息
                     this.reSend(value.bytes);
-                    console.log(`resend message:, opcode:${key}, retry times:${value.retryTimes}`);
+                    Logger.log(`resend message:, opcode:${key}, retry times:${value.retryTimes}`);
                 }
             }
         });

@@ -3,6 +3,7 @@ import { ResManager } from "../framework/common/ResManager";
 import { StoryManager } from "../framework/ink/StoryManager";
 import { StoryMessageManager } from "../framework/ink/StoryMessageManager";
 import { GameSession } from "../framework/net/GameSession";
+import { HttpManager } from "../framework/net/HttpManager";
 import { SessionManager } from "../framework/net/SessionManager";
 import { SceneManager } from "../framework/scene/SceneManager";
 import { UIManager } from "../framework/ui/UIManager";
@@ -27,4 +28,5 @@ export class S{
     public static SessionManager = SessionManager.Instance(SessionManager);
     public static GameSession = GameSession.Instance(GameSession);
     public static StoryMessageManager = StoryMessageManager.Instance(StoryMessageManager);
+    public static HttpManager = HttpManager.Instance(HttpManager);
 }

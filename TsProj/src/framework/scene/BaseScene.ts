@@ -3,7 +3,6 @@ import { S } from "../../global/GameConfig";
 
 export abstract class BaseScene{
 
-    private preloadFairyGUIPackage:Map<string,string>;
     private preloadPrefab:Map<string,number>;
     private sceneInstance:UnityEngine.ResourceManagement.ResourceProviders.SceneInstance
 
@@ -11,18 +10,17 @@ export abstract class BaseScene{
     public totalCount = 0;
 
     constructor(){
-
-        this.preloadFairyGUIPackage = new Map<string,string>();
         this.preloadPrefab = new Map<string,number>();
         this.finishCount = 0;
     }
 
-    public addPreloadFairyGUIPackage(address:string, packageName:string){
-        this.preloadFairyGUIPackage.set(address,packageName);
-    }
-
     public addPreloadPrefab(address:string, instCount){
-        this.preloadPrefab.set(address, instCount);
+        if(!this.preloadPrefab.has(address))
+        {
+            this.preloadPrefab.set(address, instCount);
+            return
+        }
+        this.preloadPrefab.set(address, this.preloadPrefab.get(address) + instCount);
     }
 
     public setSceneInstance(sceneInstance:UnityEngine.ResourceManagement.ResourceProviders.SceneInstance){
@@ -35,20 +33,9 @@ export abstract class BaseScene{
 
     public async loadAssetsAsync(){
 
-        let fguiPkgCount = this.preloadFairyGUIPackage.size;
-        let prefabCount = this.preloadPrefab.size;
-
-        this.totalCount = fguiPkgCount + prefabCount;
-
+        this.totalCount = this.preloadPrefab.size;
 
         let premises = [];
-
-        this.preloadFairyGUIPackage.forEach((value, key)=>{
-            let premise = S.ResManager.loadFairyGUIPackage(key, value,()=>{
-                this.finishCount ++;
-            });
-            premises.push(premise);
-        });
 
         this.preloadPrefab.forEach((value, key)=>{
             let premise = S.GameObjectPool.preLoadGameObjectAsync(key, value,()=>{
@@ -61,20 +48,13 @@ export abstract class BaseScene{
     }
 
     public onDestroy(){
-        this.preloadFairyGUIPackage.forEach((value, key)=>{
-
-            console.log("destroy scene: "+key);
-
-            S.ResManager.releaseFairyGUIPackage(value);
-        });
-
+ 
         //清理资源缓存
         S.GameObjectPool.cleanup(true);
 
         //卸载场景
         S.ResManager.unloadScene(this.sceneInstance);
         
-        this.preloadFairyGUIPackage.clear();
         this.preloadPrefab.clear();
     }
 }

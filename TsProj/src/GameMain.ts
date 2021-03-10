@@ -3,6 +3,8 @@ import {UnitTest} from './unittest/UnitTest';
 import { JsManager ,GameLaunch } from 'csharp';
 import { SceneDef } from './framework/scene/SceneDef';
 import { S } from './global/GameConfig';
+import { Logger } from './framework/logger/Logger';
+import { commonUI } from './data/ui/common';
 
 
 
@@ -16,7 +18,7 @@ class GameMain{
     public async start() {
         
         try{
-            console.log("Game start in JS....");
+            Logger.log("Game start in JS....");
 
             
             S.StoryManager.initialize();
@@ -25,8 +27,11 @@ class GameMain{
             //预加载excel数据
             //ExcelManager.Instance(ExcelManager);
       
+            //加载通用FairyGUI资源
+            await S.ResManager.loadFairyGUIPackage(commonUI.PackageName);
+
             //do Unit Test
-            UnitTest.doTest();
+            //UnitTest.doTest();
 
             //进入登录模块
             await S.SceneManager.loadScene(SceneDef.LoginScene);
@@ -36,7 +41,7 @@ class GameMain{
             GameLaunch.Instance.JsLuanchFinish();
 
         }catch(ex){
-            console.error(ex);
+            Logger.error(ex);
         }
 
     }
@@ -44,12 +49,12 @@ class GameMain{
     public onApplicationQuit():void {
 
         S.GameObjectPool.cleanup(true);
-        console.log("Game onApplicationQuit in JS....");
+        Logger.log("Game onApplicationQuit in JS....");
     }
 
     public onDispose():void {
         
-        console.log("Game onDispose in JS....");
+        Logger.log("Game onDispose in JS....");
     }
     
 }

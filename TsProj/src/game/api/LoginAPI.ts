@@ -1,5 +1,6 @@
 import { nice_ts } from "../../data/pb/gen/pb";
 import { Opcode } from "../../data/pb/Opcode";
+import { Logger } from "../../framework/logger/Logger";
 import { S } from "../../global/GameConfig";
 
 
@@ -18,7 +19,7 @@ export class LoginAPI{
                 msg
             )
             let test  =  response as nice_ts.GS2C_Test;
-            console.log("code: "+test.Error +",msg:"+test.Message +",res:"+test.testResponse);
+            Logger.log("code: "+test.Error +",msg:"+test.Message +",res:"+test.testResponse);
         }
         
     }

@@ -5,6 +5,8 @@ export abstract class UIPanel {
 
     public fui:any;  //FairyGUI 对象
 
+    public pkgName:string;
+
 
     private _name:string;
     public set name(v:string){
@@ -55,6 +57,10 @@ export abstract class UIPanel {
         this.onUpdate();
     }
 
+    /**
+     * 此私有方法在UI Manager中调用 ，特殊调用。
+     * @param arg 
+     */
     private _internalOpen(arg:any):void{
         
         this.layer = UILayerDef.getDefaultLayer(this.uiType);

@@ -279,7 +279,12 @@ declare module 'csharp' {
              * @returns The location that RotateTowards generates. 
              */
             public static RotateTowards($current: UnityEngine.Vector3, $target: UnityEngine.Vector3, $maxRadiansDelta: number, $maxMagnitudeDelta: number):UnityEngine.Vector3;
-            /** Linearly interpolates between two points. */
+            /** Linearly interpolates between two points.
+             * @param a Start value, returned when t = 0.
+             * @param b End value, returned when t = 1.
+             * @param t Value used to interpolate between a and b.
+             * @returns Interpolated value, equals to a + (b - a) * t. 
+             */
             public static Lerp($a: UnityEngine.Vector3, $b: UnityEngine.Vector3, $t: number):UnityEngine.Vector3;
             /** Linearly interpolates between two vectors. */
             public static LerpUnclamped($a: UnityEngine.Vector3, $b: UnityEngine.Vector3, $t: number):UnityEngine.Vector3;
@@ -486,18 +491,17 @@ declare module 'csharp' {
              * @param allowDestroyingAssets Set to true to allow assets to be destroyed.
              */
             public static DestroyImmediate($obj: UnityEngine.Object):void;
-            /** Returns a list of all active loaded objects of Type type.
+            /** The older, non-generic version of this method. In most cases you should use the generic version of this method.
              * @param type The type of object to find.
-             * @param includeInactive If true, components attached to inactive GameObjects are also included.
-             * @returns The array of objects found matching the type specified. 
+             * @returns Returns an array of all active loaded objects of Type type. 
              */
             public static FindObjectsOfType($type: System.Type):System.Array$1<UnityEngine.Object>;
             /** Do not destroy the target Object when loading a new Scene. * @param target An Object not destroyed on Scene change.
              */
             public static DontDestroyOnLoad($target: UnityEngine.Object):void;
-            /** Returns the first active loaded object of Type type.
+            /** The older, non-generic version of this method. In most cases you should use the generic version of this method.
              * @param type The type of object to find.
-             * @returns This returns the  Object that matches the specified type. It returns null if no Object matches the type. 
+             * @returns Returns an array of all active loaded objects of Type type. 
              */
             public static FindObjectOfType($type: System.Type):UnityEngine.Object;
             
@@ -635,11 +639,12 @@ declare module 'csharp' {
             public Translate($translation: UnityEngine.Vector3, $relativeTo: UnityEngine.Transform):void;
             /** Moves the transform by x along the x axis, y along the y axis, and z along the z axis. */
             public Translate($x: number, $y: number, $z: number, $relativeTo: UnityEngine.Transform):void;
-            /** Applies a rotation of eulerAngles.z degrees around the z-axis, eulerAngles.x degrees around the x-axis, and eulerAngles.y degrees around the y-axis (in that order). * @param eulers The rotation to apply.
+            /** Applies a rotation of eulerAngles.z degrees around the z-axis, eulerAngles.x degrees around the x-axis, and eulerAngles.y degrees around the y-axis (in that order). * @param eulers The rotation to apply in euler angles.
              * @param relativeTo Determines whether to rotate the GameObject either locally to  the GameObject or relative to the Scene in world space.
              */
             public Rotate($eulers: UnityEngine.Vector3, $relativeTo: UnityEngine.Space):void;
-            
+            /** Applies a rotation of eulerAngles.z degrees around the z-axis, eulerAngles.x degrees around the x-axis, and eulerAngles.y degrees around the y-axis (in that order). * @param eulers The rotation to apply in euler angles.
+             */
             public Rotate($eulers: UnityEngine.Vector3):void;
             /** The implementation of this method applies a rotation of zAngle degrees around the z axis, xAngle degrees around the x axis, and yAngle degrees around the y axis (in that order). * @param relativeTo Determines whether to rotate the GameObject either locally to the GameObject or relative to the Scene in world space.
              * @param xAngle Degrees to rotate the GameObject around the X axis.
@@ -647,14 +652,19 @@ declare module 'csharp' {
              * @param zAngle Degrees to rotate the GameObject around the Z axis.
              */
             public Rotate($xAngle: number, $yAngle: number, $zAngle: number, $relativeTo: UnityEngine.Space):void;
-            
+            /** The implementation of this method applies a rotation of zAngle degrees around the z axis, xAngle degrees around the x axis, and yAngle degrees around the y axis (in that order). * @param xAngle Degrees to rotate the GameObject around the X axis.
+             * @param yAngle Degrees to rotate the GameObject around the Y axis.
+             * @param zAngle Degrees to rotate the GameObject around the Z axis.
+             */
             public Rotate($xAngle: number, $yAngle: number, $zAngle: number):void;
             /** Rotates the object around the given axis by the number of degrees defined by the given angle. * @param angle The degrees of rotation to apply.
              * @param axis The axis to apply rotation to.
              * @param relativeTo Determines whether to rotate the GameObject either locally to the GameObject or relative to the Scene in world space.
              */
             public Rotate($axis: UnityEngine.Vector3, $angle: number, $relativeTo: UnityEngine.Space):void;
-            
+            /** Rotates the object around the given axis by the number of degrees defined by the given angle. * @param axis The axis to apply rotation to.
+             * @param angle The degrees of rotation to apply.
+             */
             public Rotate($axis: UnityEngine.Vector3, $angle: number):void;
             /** Rotates the transform about axis passing through point in world coordinates by angle degrees. */
             public RotateAround($point: UnityEngine.Vector3, $axis: UnityEngine.Vector3, $angle: number):void;
@@ -899,7 +909,9 @@ declare module 'csharp' {
              * @returns A component of the matching type, if found. 
              */
             public GetComponentInChildren($type: System.Type):UnityEngine.Component;
-            /** Returns the component of Type type in the GameObject or any of its parents. * @param type Type of component to find.
+            /** Retrieves the component of Type type in the GameObject or any of its parents.
+             * @param type Type of component to find.
+             * @returns Returns a component if a component matching the type is found. Returns null otherwise. 
              */
             public GetComponentInParent($type: System.Type):UnityEngine.Component;
             /** Returns all components of Type type in the GameObject. * @param type The type of component to retrieve.
@@ -1001,7 +1013,7 @@ declare module 'csharp' {
             public get isPlaying(): boolean;
             /** Determines whether the Particle System is emitting particles. A Particle System may stop emitting when its emission module has finished, it has been paused or if the system has been stopped using ParticleSystem.Stop|Stop with the ParticleSystemStopBehavior.StopEmitting|StopEmitting flag. Resume emitting by calling ParticleSystem.Play|Play. */
             public get isEmitting(): boolean;
-            /** Determines whether the Particle System is stopped. */
+            /** Determines whether the Particle System is in the stopped state. */
             public get isStopped(): boolean;
             /** Determines whether the Particle System is paused. */
             public get isPaused(): boolean;
@@ -1170,6 +1182,10 @@ declare module 'csharp' {
             public TriggerSubEmitter($subEmitterIndex: number, $particles: System.Collections.Generic.List$1<UnityEngine.ParticleSystem.Particle>):void;
             
             public static ResetPreMappedBufferMemory():void;
+            /** Limits the amount of graphics memory Unity reserves for efficient rendering of Particle Systems. * @param vertexBuffersCount The maximum number of cached vertex buffers.
+             * @param indexBuffersCount The maximum number of cached index buffers.
+             */
+            public static SetMaximumPreMappedBufferCounts($vertexBuffersCount: number, $indexBuffersCount: number):void;
             
         }
         /** Representation of RGBA colors in 32 bit format. */
@@ -1535,6 +1551,10 @@ declare module 'csharp' {
             public constructor($text: string);
             
         }
+        /** Represents a Sprite object for use in 2D gameplay. */
+        class Sprite extends UnityEngine.Object {
+            
+        }
         /** Initializes a new instance of the Logger. */
         class Logger extends System.Object {
             /** Set  Logger.ILogHandler. */
@@ -1643,19 +1663,15 @@ declare module 'csharp' {
         interface ILogHandler {
             
         }
-        /** Represents a Sprite object for use in 2D gameplay. */
-        class Sprite extends UnityEngine.Object {
-            
-        }
         /** Render textures are textures that can be rendered to. */
         class RenderTexture extends UnityEngine.Texture {
             
         }
-        /** Base class for texture handling. Contains functionality that is common to both Texture2D and RenderTexture classes. */
+        /** Base class for texture handling. */
         class Texture extends UnityEngine.Object {
             
         }
-        /** Class for texture handling. */
+        /** Class that represents textures in C# code. */
         class Texture2D extends UnityEngine.Texture {
             
         }
@@ -1757,6 +1773,10 @@ declare module 'csharp' {
             
         }
         
+        class Int32 extends System.ValueType {
+            
+        }
+        
         class String extends System.Object {
             
         }
@@ -1766,10 +1786,6 @@ declare module 'csharp' {
         }
         
         class Exception extends System.Object {
-            
-        }
-        
-        class Int32 extends System.ValueType {
             
         }
         
@@ -2203,11 +2219,11 @@ declare module 'csharp' {
             
         }
         
-        type Action$2<T1,T2> = (arg1: T1, arg2: T2) => void;
-        
         class Int64 extends System.ValueType {
             
         }
+        
+        type Action$2<T1,T2> = (arg1: T1, arg2: T2) => void;
         
         class Nullable$1<T> extends System.ValueType {
             
@@ -2487,8 +2503,6 @@ declare module 'csharp' {
             public static op_Inequality($lhs: UnityEngine.SceneManagement.Scene, $rhs: UnityEngine.SceneManagement.Scene):boolean;
             
         }
-        /** Used when loading a Scene in a player. */
-        enum LoadSceneMode { Single = 0, Additive = 1 }
         /** Scene management at run-time. */
         class SceneManager extends System.Object {
             /** The total number of currently loaded Scenes. */
@@ -2674,6 +2688,8 @@ declare module 'csharp' {
         class CreateSceneParameters extends System.ValueType {
             
         }
+        /** Used when loading a Scene in a player. */
+        enum LoadSceneMode { Single = 0, Additive = 1 }
         /** This struct collects all the LoadScene parameters in to a single place. */
         class LoadSceneParameters extends System.ValueType {
             
@@ -2964,6 +2980,9 @@ declare module 'csharp' {
             public get shouldHideMobileInput(): boolean;
             public set shouldHideMobileInput(value: boolean);
             
+            public get shouldActivateOnSelect(): boolean;
+            public set shouldActivateOnSelect(value: boolean);
+            
             public get text(): string;
             public set text(value: string);
             
@@ -3226,6 +3245,17 @@ declare module 'csharp' {
         var LogCallback: {new (func: (condition: string, stackTrace: string, type: UnityEngine.LogType) => void): LogCallback;}
         
     }
+    namespace UnityEngine.ResourceManagement.ResourceProviders {
+        
+        class SceneInstance extends System.ValueType {
+            
+            public get Scene(): UnityEngine.SceneManagement.Scene;
+            
+            public ActivateAsync():UnityEngine.AsyncOperation;
+            
+        }
+        
+    }
     namespace NiceTS {
         
         class TService extends MonoSingleton$1<NiceTS.TService> {
@@ -3243,42 +3273,6 @@ declare module 'csharp' {
             public Remove($id: bigint):void;
             
             public Update():void;
-            
-        }
-        
-        class ResourceManager extends System.Object {
-            
-            public static OnFBLoadedHandle: System.Action$2<string, System.Array$1<number>>;
-            
-            public constructor();
-            
-            public static init():void;
-            
-            public static ReleaseFGUIPackage($packageName: string):void;
-            
-            public static LoadFairyGUIPackage($address: string, $packageName: string):System.Threading.Tasks.Task;
-            
-            public static PreadloadFB($fbLabel: string):System.Threading.Tasks.Task$1<boolean>;
-            
-            public static PreloadJS($jsLabel: string):System.Threading.Tasks.Task$1<boolean>;
-            
-            public static LoadScene($sceneName: string, $mode: UnityEngine.SceneManagement.LoadSceneMode, $update: System.Action$1<number>, $isActiveOnLoaded?: boolean, $priority?: number):System.Threading.Tasks.Task$1<UnityEngine.ResourceManagement.ResourceProviders.SceneInstance>;
-            
-            public static UnloadScene($sceneInstance: UnityEngine.ResourceManagement.ResourceProviders.SceneInstance, $autoReleaseHandler?: boolean):System.Threading.Tasks.Task$1<UnityEngine.ResourceManagement.ResourceProviders.SceneInstance>;
-            
-            public static LoadPrefab($address: string):System.Threading.Tasks.Task$1<UnityEngine.GameObject>;
-            
-            public static LoadTextAsset($address: string):System.Threading.Tasks.Task$1<UnityEngine.TextAsset>;
-            
-            public static LoadTextBytes($address: string):System.Threading.Tasks.Task$1<ArrayBuffer>;
-            
-            public static LoadSprite($address: string):System.Threading.Tasks.Task$1<UnityEngine.Sprite>;
-            
-            public static ReleaseAddressGO($go: UnityEngine.Object):void;
-            
-            public static ReleaseAddress($address: string):void;
-            
-            public static GetStatusSummary():string;
             
         }
         
@@ -3326,6 +3320,52 @@ declare module 'csharp' {
         type ReadCallback = (arrayBuffer: ArrayBuffer) => void;
         var ReadCallback: {new (func: (arrayBuffer: ArrayBuffer) => void): ReadCallback;}
         
+        class ResourceManager extends System.Object {
+            
+            public static OnFBLoadedHandle: System.Action$2<string, System.Array$1<number>>;
+            
+            public constructor();
+            
+            public static init():void;
+            
+            public static ReleaseFGUIPackage($packageName: string):void;
+            
+            public static LoadFairyGUIPackage($address: string, $packageName: string):System.Threading.Tasks.Task;
+            
+            public static PreadloadFB($fbLabel: string):System.Threading.Tasks.Task$1<boolean>;
+            
+            public static PreloadJS($jsLabel: string):System.Threading.Tasks.Task$1<boolean>;
+            
+            public static LoadScene($sceneName: string, $mode: UnityEngine.SceneManagement.LoadSceneMode, $update: System.Action$1<number>, $isActiveOnLoaded?: boolean, $priority?: number):System.Threading.Tasks.Task$1<UnityEngine.ResourceManagement.ResourceProviders.SceneInstance>;
+            
+            public static UnloadScene($sceneInstance: UnityEngine.ResourceManagement.ResourceProviders.SceneInstance, $autoReleaseHandler?: boolean):System.Threading.Tasks.Task$1<UnityEngine.ResourceManagement.ResourceProviders.SceneInstance>;
+            
+            public static UnloadSceneByName($sceneName: string):void;
+            
+            public static LoadPrefab($address: string):System.Threading.Tasks.Task$1<UnityEngine.GameObject>;
+            
+            public static LoadTextAsset($address: string):System.Threading.Tasks.Task$1<UnityEngine.TextAsset>;
+            
+            public static LoadTextBytes($address: string):System.Threading.Tasks.Task$1<ArrayBuffer>;
+            
+            public static LoadSprite($address: string):System.Threading.Tasks.Task$1<UnityEngine.Sprite>;
+            
+            public static ReleaseAddressGO($go: UnityEngine.Object):void;
+            
+            public static GetStatusSummary():string;
+            
+        }
+        
+        class HttpManager extends System.Object {
+            
+            public constructor();
+            
+            public static Get($url: string):System.Threading.Tasks.Task$1<string>;
+            
+            public static Post($url: string, $formdata: string):System.Threading.Tasks.Task$1<string>;
+            
+        }
+        
     }
     
         
@@ -3372,24 +3412,9 @@ declare module 'csharp' {
         }
         
     
-    namespace System.Threading.Tasks {
+    namespace Microsoft.IO {
         
-        class Task extends System.Object {
-            
-        }
-        
-        class Task$1<TResult> extends System.Threading.Tasks.Task {
-            
-        }
-        
-    }
-    namespace UnityEngine.ResourceManagement.ResourceProviders {
-        
-        class SceneInstance extends System.ValueType {
-            
-            public get Scene(): UnityEngine.SceneManagement.Scene;
-            
-            public ActivateAsync():UnityEngine.AsyncOperation;
+        class RecyclableMemoryStreamManager extends System.Object {
             
         }
         
@@ -3405,9 +3430,13 @@ declare module 'csharp' {
         }
         
     }
-    namespace Microsoft.IO {
+    namespace System.Threading.Tasks {
         
-        class RecyclableMemoryStreamManager extends System.Object {
+        class Task extends System.Object {
+            
+        }
+        
+        class Task$1<TResult> extends System.Threading.Tasks.Task {
             
         }
         

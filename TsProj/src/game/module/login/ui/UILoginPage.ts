@@ -9,6 +9,7 @@ import { SceneDef } from "../../../../framework/scene/SceneDef";
 import { storyUI } from "../../../../data/ui/story";
 import { commonUI } from "../../../../data/ui/common";
 import { S } from "../../../../global/GameConfig";
+import { Logger } from "../../../../framework/logger/Logger";
 
 
 
@@ -64,16 +65,16 @@ export class UILoginPage extends UIPage{
             this.openSelServerWin();
         });
 
-        let connected = await S.SessionManager.connectRealmServer();
+        // let connected = await S.SessionManager.connectRealmServer();
         
-        this.m_loginBtn.enabled = connected;
-        console.log("connect ream server: "+connected)
+        // this.m_loginBtn.enabled = connected;
+        // Logger.log("connect ream server: "+connected)
     }
     
 
     private onSelectServer(serverItem:VoServerItem){
 
-        console.log(" server selected: "+serverItem.serverName)
+        Logger.log(" server selected: "+serverItem.serverName)
         this.m_selserverBtn.text = serverItem.serverName;
     }
 
@@ -140,7 +141,7 @@ export class UILoginPage extends UIPage{
         let account = this.m_account.text;
         let password = this.m_password.text;
 
-        console.log(`account:${account} - password: ${password}`);
+        Logger.log(`account:${account} - password: ${password}`);
 
         S.SceneManager.loadScene(SceneDef.HomeScene);
 
@@ -150,24 +151,24 @@ export class UILoginPage extends UIPage{
         //     let msg = await LoginAPI.loginRealmServer(account, password)
         //     this.gateId = msg.GateId;
         //     this.gateKey = msg.Key;
-        //     console.log("login ream succ, gate addr:"+msg.Address + ",key:"+msg.Key);
+        //     Logger.log("login ream succ, gate addr:"+msg.Address + ",key:"+msg.Key);
 
         //     S.SessionManager.disconnectRealmServer();
             
         //     //登录网关服
         //     let connected = await S.SessionManager.connectGateServer(msg.Address);
         //     if(connected){
-        //         console.log("connect gate succ")
+        //         Logger.log("connect gate succ")
 
         //         let msg = await LoginAPI.loginGateServer( this.gateId, this.gateKey)
 
         //         let playerID = msg.PlayerId;
-        //         console.log("login gate response.." +playerID);
+        //         Logger.log("login gate response.." +playerID);
 
         //         S.SceneManager.loadScene(SceneDef.HomeScene);
 
         //     }else{
-        //     console.log("connect gate err ")
+        //     Logger.log("connect gate err ")
         //     }
 
 

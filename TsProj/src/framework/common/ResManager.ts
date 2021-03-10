@@ -2,19 +2,54 @@
 import { Singleton } from './Singleton';
 import { $promise } from 'puerts';
 import {NiceTS, UnityEngine} from 'csharp';
+import { Logger } from '../logger/Logger';
 
 export class ResManager extends Singleton<ResManager>{
+
+    private _pkgMap:Map<string,number> = new Map<string,number>();
 
     constructor(){
         super();
     }
 
-    async loadScene(sceneName:string){
-        try{
-            let single = UnityEngine.SceneManagement.LoadSceneMode.Single;
+    async loadFairyGUIPackage(packageName:string){
 
-            let task = NiceTS.ResourceManager.LoadScene(sceneName, single,(progress:Number)=>{
-                console.log("load scene: "+progress)
+        try{
+            let count = this._pkgMap.get(packageName);
+            if(count == null || count < 1){
+                //没有缓存，加载
+                let address = packageName+"_fui.bytes";
+                let task = NiceTS.ResourceManager.LoadFairyGUIPackage(address,packageName);
+                await $promise(task);
+                
+                this._pkgMap.set(packageName, 1);
+            }
+            else{
+                this._pkgMap.set(packageName, count+1);
+            }
+        }catch(ex){
+            Logger.error(`Load fairyGUI :${packageName} : ${ex}`)
+        }
+    }
+    
+    public releaseFairyGUIPackage(packageName){
+
+        let count = this._pkgMap.get(packageName);
+        if(count!=null && count>1){
+            this._pkgMap.set(packageName, count-1);
+        }else{
+
+            Logger.log(`release fagui package:${packageName}`);
+            this._pkgMap.delete(packageName);
+            NiceTS.ResourceManager.ReleaseFGUIPackage(packageName);
+        }
+    }
+
+    async loadScene(sceneName:string, mode = UnityEngine.SceneManagement.LoadSceneMode.Single){
+        try{
+          
+            let task = NiceTS.ResourceManager.LoadScene(sceneName, mode,(progress:Number)=>{
+                Logger.log("load scene: "+progress)
             });
 
             let scenInstance = await $promise(task)
@@ -22,7 +57,7 @@ export class ResManager extends Singleton<ResManager>{
 
         }catch(ex){
 
-            console.error(`Load Scene :${sceneName} : ${ex}`)
+            Logger.error(`Load Scene :${sceneName} : ${ex}`)
 
             return null;
         }
@@ -36,10 +71,15 @@ export class ResManager extends Singleton<ResManager>{
             return go;
         }catch(ex){
 
-            console.error(`Unload scene  : ${ex}`)
+            Logger.error(`Unload scene  : ${ex}`)
 
             return null;
         }
+    }
+
+    public unloadSceneByName(sceneName:string){
+
+        NiceTS.ResourceManager.UnloadSceneByName(sceneName);
     }
 
     async loadPrefab(address:string){
@@ -50,7 +90,7 @@ export class ResManager extends Singleton<ResManager>{
             return go;
         }catch(ex){
 
-            console.error(`Load prefab :${address} : ${ex}`)
+            Logger.error(`Load prefab :${address} : ${ex}`)
 
             return null;
         }
@@ -64,7 +104,7 @@ export class ResManager extends Singleton<ResManager>{
             let go = await $promise(task);
             return go;
         }catch(ex){
-            console.error(`Load textasset :${address} : ${ex}`)
+            Logger.error(`Load textasset :${address} : ${ex}`)
 
             return null;
         }
@@ -78,7 +118,7 @@ export class ResManager extends Singleton<ResManager>{
             let bytes = await $promise(task);
             return bytes;
         }catch(ex){
-            console.error(`LoadTextBytes :${address} : ${ex}`)
+            Logger.error(`LoadTextBytes :${address} : ${ex}`)
         }
     }
 
@@ -90,30 +130,18 @@ export class ResManager extends Singleton<ResManager>{
             return go;
 
         }catch(ex){
-            console.error(`Load sprite :${address} : ${ex}`)
+            Logger.error(`Load sprite :${address} : ${ex}`)
 
             return null;
         }
     }
 
-    async loadFairyGUIPackage(address:string, packageName:string, callback?:Function){
-
-        try{
-            let task = NiceTS.ResourceManager.LoadFairyGUIPackage(address,packageName);
-            await $promise(task);
-            
-            if(callback) callback();
-        }catch(ex){
-            console.error(`Load fairyGUI :${address} : ${ex}`)
-        }
-    }
 
     public releaseAddressGO(go:any){
 
         NiceTS.ResourceManager.ReleaseAddressGO(go);
     }
 
-    public releaseFairyGUIPackage(packageName){
-        NiceTS.ResourceManager.ReleaseFGUIPackage(packageName);
-    }
+
+    
 }

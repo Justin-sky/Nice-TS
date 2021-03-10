@@ -2,6 +2,7 @@ import { commonUI } from "../../data/ui/common";
 import { UIMessage } from "../../game/event/UIMessage";
 import { S } from "../../global/GameConfig";
 import { Singleton } from "../common/Singleton";
+import { Logger } from "../logger/Logger";
 import { BaseScene } from "./BaseScene";
 import { SceneFactory } from "./SceneFactory";
 
@@ -10,7 +11,7 @@ import { SceneFactory } from "./SceneFactory";
 
 export class SceneManager extends Singleton<SceneManager>{
 
-    private currentScene:BaseScene;
+    private currentScene:BaseScene = null;
 
     constructor(){
         super();
@@ -41,7 +42,7 @@ export class SceneManager extends Singleton<SceneManager>{
             let progressInterval = setInterval(()=>{
 
                 let progress = this.currentScene.finishCount/this.currentScene.totalCount;
-                console.log("progress:"+progress + " = "+this.currentScene.finishCount + " = "+this.currentScene.totalCount);
+                Logger.log("progress:"+progress + " = "+this.currentScene.finishCount + " = "+this.currentScene.totalCount);
 
                 S.UIMessageManger.broadcast(
                     UIMessage.MSG_SCENE_PROGRESS,
@@ -58,7 +59,7 @@ export class SceneManager extends Singleton<SceneManager>{
             S.UIManager.closeLoading(commonUI.UILoadingPage);
 
         }catch(ex){
-            console.log("load scene excep:"+ex);
+            Logger.log("load scene excep:"+ex);
         }
         
     }

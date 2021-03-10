@@ -1,8 +1,15 @@
+import { Entity } from "../../framework/entity/Entity";
 
-export class Player {
+export class Player extends Entity {
+
 
     public level:number;
     public hp:number;
 
+    constructor(){
+        super();
+        this.level = 1;
+        this.hp = 100;
+    }
 }
 

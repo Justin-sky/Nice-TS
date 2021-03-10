@@ -49,18 +49,20 @@ public class PuertsConfig
                 typeof(Application),
                 typeof(TextAsset),
 
-                typeof(MonoSingleton<NiceTS.TService>),
-                typeof(Logger),
-                typeof(NiceTS.ResourceManager),
                 typeof(UnityEngine.SceneManagement.SceneManager),
                 typeof(UnityEngine.SceneManagement.Scene),
                 typeof(UnityEngine.SceneManagement.LoadSceneMode),
                 typeof(UnityEngine.ResourceManagement.ResourceProviders.SceneInstance),
                 typeof(AsyncOperation),
+               
                 typeof(NiceTS.TService),
                 typeof(NiceTS.TChannel),
                 typeof(JsManager),
                 typeof(GameLaunch),
+                typeof(NiceTS.ResourceManager),
+                typeof(NiceTS.HttpManager),
+                 typeof(MonoSingleton<NiceTS.TService>),
+                typeof(Logger),
 
             };
 

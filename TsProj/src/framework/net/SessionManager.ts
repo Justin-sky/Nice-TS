@@ -2,6 +2,7 @@
 import { Opcode } from "../../data/pb/Opcode";
 import { GameConfig } from "../../global/GameConfig";
 import { Singleton } from "../common/Singleton";
+import { Logger } from "../logger/Logger";
 import { GameSession } from "./GameSession";
 import { NetErrorCode } from "./NetErrorCode";
 
@@ -34,7 +35,7 @@ export class SessionManager extends Singleton<SessionManager>{
             
                         resove(false);
             
-                        console.error("login reamserver err, code: "+code + ",id:"+channel.Id);
+                        Logger.error("login reamserver err, code: "+code + ",id:"+channel.Id);
             
                     }
                 }
@@ -74,7 +75,7 @@ export class SessionManager extends Singleton<SessionManager>{
             this.sessionGate = GameSession.Instance(GameSession).connectChannel(
                 address,
                 (channel:any,code:number)=>{
-                    console.log("login Gate Server: "+code);
+                    Logger.log("login Gate Server: "+code);
     
                     if(code == NetErrorCode.ERR_SocketConnSucc){
                         this.sessionGate.id = channel.Id;
@@ -83,7 +84,7 @@ export class SessionManager extends Singleton<SessionManager>{
                     }else{
                         resove(false)
             
-                        console.error("gate server err, code: "+code + ",id:"+channel.Id);
+                        Logger.error("gate server err, code: "+code + ",id:"+channel.Id);
                     }
                 }
             );

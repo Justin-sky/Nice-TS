@@ -13,6 +13,7 @@ import { storyUI } from "../../data/ui/story";
 import { UIStoryWin } from "../../game/module/story/UIStoryWin";
 import { combatUI } from "../../data/ui/combat";
 import { UIGuideWin } from "../../game/module/guide/UIGuideWin";
+import { Logger } from "../logger/Logger";
 
 
 
@@ -24,7 +25,7 @@ export class UIFactory{
     public static uiCache:Map<string,UIPanel> = new Map<string,UIPanel>();
 
     public static createUI(pkg:string, name:string){
-        console.log(`create UI: ${pkg}:${name}`)
+        Logger.log(`create UI: ${pkg}:${name}`)
         let comp = CS.FairyGUI.UIPackage.CreateObject(pkg, name).asCom
         
         let ui:UIPanel = this.uiCache.get(name);
@@ -87,13 +88,14 @@ export class UIFactory{
         if(ui!=null){
             ui.fui = comp;
             ui.name = name;
+            ui.pkgName = pkg;
 
             //绑定FairyGUI控件
             ui.bindAll(ui);
             ui.awake();
         
         }else{
-            console.error(`not create ui: ${pkg}-${name}`);
+            Logger.error(`not create ui: ${pkg}-${name}`);
         }
 
         return ui;

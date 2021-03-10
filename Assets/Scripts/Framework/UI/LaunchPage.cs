@@ -22,9 +22,9 @@ public class LaunchPage : MonoBehaviour
         {
             gTextField = _mainView.GetChild("updateTxt").asTextField;
             gProgress = _mainView.GetChild("updateProgress").asProgress;
-            gProgress.visible = false;
+            gProgress.visible = true;
         }
-       
+
     }
 
 
@@ -38,7 +38,7 @@ public class LaunchPage : MonoBehaviour
 
         var a = Addressables.RuntimePath;
         var catalogs = await Addressables.CheckForCatalogUpdates(false).Task;
-       
+
         Log.Debug(LogGroups.UI, string.Format("CheckIfNeededUpdate use {0}ms", (DateTime.Now - start).Milliseconds));
         Log.Debug(LogGroups.UI, $"catalog count: {catalogs.Count} === check status: {catalogs}");
 
@@ -54,10 +54,7 @@ public class LaunchPage : MonoBehaviour
 
             foreach (var v in locators)
             {
-                List<object> keys = new List<object>();
-                keys.AddRange(v.Keys);
-
-                var size = await Addressables.GetDownloadSizeAsync(keys).Task;
+                var size = await Addressables.GetDownloadSizeAsync(v.Keys).Task;
                 Log.Debug(LogGroups.UI, $"download size:{size}");
 
                 if (size > 0)
@@ -70,7 +67,7 @@ public class LaunchPage : MonoBehaviour
                     //等待确定
                     await notice.WaitForResponse();
 
-                    var downloadHandle = Addressables.DownloadDependenciesAsync(keys, Addressables.MergeMode.Union);
+                    var downloadHandle = Addressables.DownloadDependenciesAsync(v.Keys, Addressables.MergeMode.Union);
                     while (!downloadHandle.IsDone)
                     {
                         float percentage = downloadHandle.PercentComplete;
@@ -89,11 +86,7 @@ public class LaunchPage : MonoBehaviour
 
             Addressables.Release(catalogs);
         }
-
-        
-
         StartGame();
-
     }
 
     void StartGame()
@@ -112,5 +105,5 @@ public class LaunchPage : MonoBehaviour
 
     }
 
- 
+
 }

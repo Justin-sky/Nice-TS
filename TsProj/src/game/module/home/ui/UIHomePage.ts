@@ -8,6 +8,7 @@ import { LoginAPI } from "../../../api/LoginAPI";
 import { Opcode } from "../../../../data/pb/Opcode";
 import { nice_ts } from "../../../../data/pb/gen/pb";
 import { S } from "../../../../global/GameConfig";
+import { Logger } from "../../../../framework/logger/Logger";
 
 
 
@@ -59,7 +60,7 @@ export class UIHomePage extends UIPage{
         this.m_moneyLbl.text = vo.money.toString();
 
         S.GameSession.listen(Opcode.MSG_GS2C_Test,function(msg:nice_ts.GS2C_Test){
-            console.log("收到服务器下发的消息。。。。"+msg.testResponse)
+            Logger.log("收到服务器下发的消息。。。。"+msg.testResponse)
         })
     }
     public onClose(arg:any):void{
@@ -74,10 +75,10 @@ export class UIHomePage extends UIPage{
             commonUI.PackageName,
             commonUI.UIUINoticeWin,
             null);
-        console.log("on chat...");
+        Logger.log("on chat...");
     }
     public onbagBtn(){
-        console.log("on bag ..");
+        Logger.log("on bag ..");
 
         //benchmark test
         LoginAPI.benchmarkTest();
@@ -90,7 +91,7 @@ export class UIHomePage extends UIPage{
             homeUI.UIShopPage);
     }
     public onlevelBtn(){
-        console.log("on level...");
+        Logger.log("on level...");
     }
 
 }

@@ -1,5 +1,6 @@
 import { emit } from "puerts";
 import { Singleton } from "../common/Singleton";
+import { Logger } from "../logger/Logger";
 import { RedHintsMessageManager } from "./RedHintsMessageManager";
 
 export enum enumRedHints {
@@ -50,7 +51,7 @@ export class RedHintsManager extends Singleton<RedHintsManager>{
     */
    public setRedHintOpenOrClose(red: number, isOpen: boolean) {
         if (this._childNum[red] > 0) {
-            console.log("红点数据设置错误：不能直接对高级的红点数据操作");
+            Logger.log("红点数据设置错误：不能直接对高级的红点数据操作");
             return;
         }
         this.doSetRedHintOpenOrClose(red, isOpen ? 1 : 0);
@@ -62,11 +63,11 @@ export class RedHintsManager extends Singleton<RedHintsManager>{
     */
     private setParent(child: number, parent: number) {
         if (this._parentIndex[parent] == child) {
-            console.log("关系反了");
+            Logger.log("关系反了");
             return;
         }
         if (this._parentIndex[child]) {
-            console.log("重复设置");
+            Logger.log("重复设置");
             return;
         }
         this._parentIndex[child] = parent;
