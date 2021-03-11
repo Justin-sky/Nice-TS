@@ -1,12 +1,20 @@
 {
   "scripts": {
     "bundle:dev": "webpack --config webpack.config.debug.js --watch",
-    "bundle:publish": "webpack --config webpack.config.release.js"
+    "bundle:publish": "webpack --config webpack.config.release.js",
+    "test":"jest",
+    "test-c":"jest --coverage"
+  },
+  "jest":{
+    "testEnvironment": "node"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.20",
     "flatbuffers": "^1.12.0",
+    "jest": "^26.6.3",
     "protobufjs": "^6.10.1",
     "raw-loader": "^4.0.1",
+    "ts-jest": "^26.5.3",
     "ts-loader": "^8.0.3",
     "tsconfig-paths-webpack-plugin": "^3.3.0",
     "tslint": "^6.1.3",
