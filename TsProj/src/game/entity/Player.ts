@@ -1,7 +1,10 @@
-import { Entity } from "../../framework/entity/Entity";
+import { AEntity } from "../../framework/entity/AEntity";
 
-export class Player extends Entity {
+export class Player extends AEntity {
 
+    public onAwake(initData: any) {
+        
+    }
 
     public level:number;
     public hp:number;

@@ -1,9 +1,9 @@
-import { Entity } from "./Entity";
+import { AEntity } from "./AEntity";
 
 
 export abstract class Component{
 
-    public entity:Entity;
+    public entity:AEntity;
    
     public publish<T>(event:T, c: {new():T;}){
 
