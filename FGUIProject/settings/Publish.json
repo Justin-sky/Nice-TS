@@ -1,5 +1,5 @@
 {
-  "path": "C:\\Users\\Justin\\Documents\\u3dWorkspace\\NICE_Framework\\Nice-TS\\Assets\\AssetsPackage\\FairyGUI",
+  "path": "..\\Assets\\AssetsPackage\\FairyGUI",
   "branchPath": "",
   "fileExtension": "bytes",
   "packageCount": 2,
@@ -9,7 +9,7 @@
   "compressPNG": false,
   "codeGeneration": {
     "allowGenCode": true,
-    "codePath": "C:\\Users\\Justin\\Documents\\u3dWorkspace\\NICE_Framework\\Nice-TS\\TsProj\\src\\data\\ui",
+    "codePath": "..\\TsProj\\src\\data\\ui",
     "classNamePrefix": "",
     "memberNamePrefix": "m_",
     "packageName": null,
