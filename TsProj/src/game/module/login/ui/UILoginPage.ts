@@ -116,7 +116,7 @@ export class UILoginPage extends UIPage{
             voServer.areaMap.set(i,"分区"+i);
             voServer.serverMap.set(i, new Array<VoServerItem>());
 
-            for(let j=1; j<20; j++){
+            for(let j=1; j<200; j++){
 
                 let voServerItem:VoServerItem = new VoServerItem();
                 voServerItem.areaId = i;

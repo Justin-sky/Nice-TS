@@ -1,10 +1,11 @@
 
 import {UnitTest} from './unittest/UnitTest';
-import { JsManager ,GameLaunch } from 'csharp';
+import { JsManager ,GameLaunch, FairyGUI } from 'csharp';
 import { SceneDef } from './framework/scene/SceneDef';
 import { S } from './global/GameConfig';
 import { Logger } from './framework/logger/Logger';
 import { commonUI } from './data/ui/common';
+import { UIServerListItem } from './game/module/login/ui/UIServerListItem';
 
 
 
@@ -39,6 +40,15 @@ class GameMain{
             
             //JS启动完成，通知C#层
             GameLaunch.Instance.JsLuanchFinish();
+
+           // let pool = []
+            FairyGUI.UIObjectFactory.SetPackageItemExtension("ui://l64dumk9feeg54",
+            ()=>{
+                let item =  new UIServerListItem();
+               // pool.push(item)
+                return item;
+            })
+            
 
         }catch(ex){
             Logger.error(ex);

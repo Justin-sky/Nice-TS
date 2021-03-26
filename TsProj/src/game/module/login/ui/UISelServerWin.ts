@@ -51,12 +51,7 @@ export class UISelServerWin extends UIWindow{
         });
 
         let pool = [];
-        FairyGUI.UIObjectFactory.SetPackageItemExtension("ui://l64dumk9feeg54",
-        ()=>{
-            let item =  new UIServerListItem();
-            pool.push(item)
-            return item;
-        })
+       
     }
     
     private onSelectServer(){
