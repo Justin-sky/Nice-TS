@@ -3,7 +3,7 @@
   <resources>
     <component id="pyg64v" name="LoginPage.xml" path="/ui/login/" exported="true"/>
     <component id="pyg64w" name="SelServerWin.xml" path="/ui/login/" exported="true"/>
-    <component id="feeg54" name="SelServerItem.xml" path="/ui/login/"/>
+    <component id="feeg54" name="SelServerItem.xml" path="/ui/login/" exported="true"/>
     <component id="u93s55" name="SelServerBtn.xml" path="/ui/login/"/>
     <component id="u93s56" name="AreaItem.xml" path="/ui/login/"/>
   </resources>

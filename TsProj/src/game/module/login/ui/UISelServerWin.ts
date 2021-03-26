@@ -4,6 +4,7 @@ import { UIWindow } from "../../../../framework/ui/UIWindow";
 import { S } from "../../../../global/GameConfig";
 import { UIMessage } from "../../../event/UIMessage";
 import { VoServer, VoServerItem } from "../vo/VoServer";
+import { UIServerListItem } from "./UIServerListItem";
 
 
 
@@ -48,6 +49,14 @@ export class UISelServerWin extends UIWindow{
 
             this.title.text = "已选择服务器："+this.clickServerIndex;
         });
+
+        let pool = [];
+        FairyGUI.UIObjectFactory.SetPackageItemExtension("ui://l64dumk9feeg54",
+        ()=>{
+            let item =  new UIServerListItem();
+            pool.push(item)
+            return item;
+        })
     }
     
     private onSelectServer(){
@@ -75,7 +84,7 @@ export class UISelServerWin extends UIWindow{
         
 
         this.serverList.SetVirtual();
-        this.serverList.itemRenderer = (index:number, obj:FairyGUI.GObject)=>{
+        this.serverList.itemRenderer = (index:number, obj:UIServerListItem)=>{
             this.renderServerListItem(index, obj);
         };
         this.serverList.numItems = vo.serverMap.get(this.clickAreaIndex+1).length;
@@ -88,10 +97,14 @@ export class UISelServerWin extends UIWindow{
 
     }
 
-    private renderServerListItem(index:number, obj:FairyGUI.GObject){
-        let serverBtn:FairyGUI.GButton = obj.asButton;
+    private renderServerListItem(index:number, item:UIServerListItem){
 
-        serverBtn.text = this.voServer.serverMap.get(this.clickAreaIndex+1)[index].serverName;
+        if(item instanceof UIServerListItem){
+            console.log("1111111111111111111111")
+        }else{
+            console.log("333333333333333333")
+        }
+        item.itemLabel = this.voServer.serverMap.get(this.clickAreaIndex+1)[index].serverName;
         //serverBtn.icon = FairyGUI.UIPackage.
     }
 
