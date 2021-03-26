@@ -21,6 +21,7 @@ public class PuertsConfig
 
                 typeof(Debug),
                 typeof(Vector3),
+                typeof(Vector2),
                 typeof(List<int>),
                 //typeof(Dictionary<string, int>),
                 typeof(Time),

@@ -514,6 +514,151 @@ declare module 'csharp' {
         enum LogType { Error = 0, Assert = 1, Warning = 2, Log = 3, Exception = 4 }
         /** Option flags for specifying special treatment of a log message. */
         enum LogOption { None = 0, NoStacktrace = 1 }
+        /** Representation of 2D vectors and points. */
+        class Vector2 extends System.ValueType {
+            /** X component of the vector. */
+            public x: number;
+            /** Y component of the vector. */
+            public y: number;
+            
+            public static kEpsilon: number;
+            
+            public static kEpsilonNormalSqrt: number;
+            /** Returns this vector with a magnitude of 1 (Read Only). */
+            public get normalized(): UnityEngine.Vector2;
+            /** Returns the length of this vector (Read Only). */
+            public get magnitude(): number;
+            /** Returns the squared length of this vector (Read Only). */
+            public get sqrMagnitude(): number;
+            /** Shorthand for writing Vector2(0, 0). */
+            public static get zero(): UnityEngine.Vector2;
+            /** Shorthand for writing Vector2(1, 1). */
+            public static get one(): UnityEngine.Vector2;
+            /** Shorthand for writing Vector2(0, 1). */
+            public static get up(): UnityEngine.Vector2;
+            /** Shorthand for writing Vector2(0, -1). */
+            public static get down(): UnityEngine.Vector2;
+            /** Shorthand for writing Vector2(-1, 0). */
+            public static get left(): UnityEngine.Vector2;
+            /** Shorthand for writing Vector2(1, 0). */
+            public static get right(): UnityEngine.Vector2;
+            /** Shorthand for writing Vector2(float.PositiveInfinity, float.PositiveInfinity). */
+            public static get positiveInfinity(): UnityEngine.Vector2;
+            /** Shorthand for writing Vector2(float.NegativeInfinity, float.NegativeInfinity). */
+            public static get negativeInfinity(): UnityEngine.Vector2;
+            
+            public constructor($x: number, $y: number);
+            
+            public get_Item($index: number):number;
+            
+            public set_Item($index: number, $value: number):void;
+            /** Set x and y components of an existing Vector2. */
+            public Set($newX: number, $newY: number):void;
+            /** Linearly interpolates between vectors a and b by t. */
+            public static Lerp($a: UnityEngine.Vector2, $b: UnityEngine.Vector2, $t: number):UnityEngine.Vector2;
+            /** Linearly interpolates between vectors a and b by t. */
+            public static LerpUnclamped($a: UnityEngine.Vector2, $b: UnityEngine.Vector2, $t: number):UnityEngine.Vector2;
+            /** Moves a point current towards target. */
+            public static MoveTowards($current: UnityEngine.Vector2, $target: UnityEngine.Vector2, $maxDistanceDelta: number):UnityEngine.Vector2;
+            /** Multiplies two vectors component-wise. */
+            public static Scale($a: UnityEngine.Vector2, $b: UnityEngine.Vector2):UnityEngine.Vector2;
+            /** Multiplies every component of this vector by the same component of scale. */
+            public Scale($scale: UnityEngine.Vector2):void;
+            
+            public Normalize():void;
+            
+            public ToString():string;
+            /** Returns a nicely formatted string for this vector. */
+            public ToString($format: string):string;
+            /** Returns true if the given vector is exactly equal to this vector. */
+            public Equals($other: any):boolean;
+            
+            public Equals($other: UnityEngine.Vector2):boolean;
+            /** Reflects a vector off the vector defined by a normal. */
+            public static Reflect($inDirection: UnityEngine.Vector2, $inNormal: UnityEngine.Vector2):UnityEngine.Vector2;
+            /** Returns the 2D vector perpendicular to this 2D vector. The result is always rotated 90-degrees in a counter-clockwise direction for a 2D coordinate system where the positive Y axis goes up.
+             * @param inDirection The input direction.
+             * @returns The perpendicular direction. 
+             */
+            public static Perpendicular($inDirection: UnityEngine.Vector2):UnityEngine.Vector2;
+            /** Dot Product of two vectors. */
+            public static Dot($lhs: UnityEngine.Vector2, $rhs: UnityEngine.Vector2):number;
+            /** Returns the unsigned angle in degrees between from and to. * @param from The vector from which the angular difference is measured.
+             * @param to The vector to which the angular difference is measured.
+             */
+            public static Angle($from: UnityEngine.Vector2, $to: UnityEngine.Vector2):number;
+            /** Returns the signed angle in degrees between from and to. * @param from The vector from which the angular difference is measured.
+             * @param to The vector to which the angular difference is measured.
+             */
+            public static SignedAngle($from: UnityEngine.Vector2, $to: UnityEngine.Vector2):number;
+            /** Returns the distance between a and b. */
+            public static Distance($a: UnityEngine.Vector2, $b: UnityEngine.Vector2):number;
+            /** Returns a copy of vector with its magnitude clamped to maxLength. */
+            public static ClampMagnitude($vector: UnityEngine.Vector2, $maxLength: number):UnityEngine.Vector2;
+            
+            public static SqrMagnitude($a: UnityEngine.Vector2):number;
+            
+            public SqrMagnitude():number;
+            /** Returns a vector that is made from the smallest components of two vectors. */
+            public static Min($lhs: UnityEngine.Vector2, $rhs: UnityEngine.Vector2):UnityEngine.Vector2;
+            /** Returns a vector that is made from the largest components of two vectors. */
+            public static Max($lhs: UnityEngine.Vector2, $rhs: UnityEngine.Vector2):UnityEngine.Vector2;
+            /** Gradually changes a vector towards a desired goal over time. * @param current The current position.
+             * @param target The position we are trying to reach.
+             * @param currentVelocity The current velocity, this value is modified by the function every time you call it.
+             * @param smoothTime Approximately the time it will take to reach the target. A smaller value will reach the target faster.
+             * @param maxSpeed Optionally allows you to clamp the maximum speed.
+             * @param deltaTime The time since the last call to this function. By default Time.deltaTime.
+             */
+            public static SmoothDamp($current: UnityEngine.Vector2, $target: UnityEngine.Vector2, $currentVelocity: $Ref<UnityEngine.Vector2>, $smoothTime: number, $maxSpeed: number):UnityEngine.Vector2;
+            /** Gradually changes a vector towards a desired goal over time. * @param current The current position.
+             * @param target The position we are trying to reach.
+             * @param currentVelocity The current velocity, this value is modified by the function every time you call it.
+             * @param smoothTime Approximately the time it will take to reach the target. A smaller value will reach the target faster.
+             * @param maxSpeed Optionally allows you to clamp the maximum speed.
+             * @param deltaTime The time since the last call to this function. By default Time.deltaTime.
+             */
+            public static SmoothDamp($current: UnityEngine.Vector2, $target: UnityEngine.Vector2, $currentVelocity: $Ref<UnityEngine.Vector2>, $smoothTime: number):UnityEngine.Vector2;
+            /** Gradually changes a vector towards a desired goal over time. * @param current The current position.
+             * @param target The position we are trying to reach.
+             * @param currentVelocity The current velocity, this value is modified by the function every time you call it.
+             * @param smoothTime Approximately the time it will take to reach the target. A smaller value will reach the target faster.
+             * @param maxSpeed Optionally allows you to clamp the maximum speed.
+             * @param deltaTime The time since the last call to this function. By default Time.deltaTime.
+             */
+            public static SmoothDamp($current: UnityEngine.Vector2, $target: UnityEngine.Vector2, $currentVelocity: $Ref<UnityEngine.Vector2>, $smoothTime: number, $maxSpeed: number, $deltaTime: number):UnityEngine.Vector2;
+            
+            public static op_Addition($a: UnityEngine.Vector2, $b: UnityEngine.Vector2):UnityEngine.Vector2;
+            
+            public static op_Subtraction($a: UnityEngine.Vector2, $b: UnityEngine.Vector2):UnityEngine.Vector2;
+            
+            public static op_Multiply($a: UnityEngine.Vector2, $b: UnityEngine.Vector2):UnityEngine.Vector2;
+            
+            public static op_Division($a: UnityEngine.Vector2, $b: UnityEngine.Vector2):UnityEngine.Vector2;
+            
+            public static op_UnaryNegation($a: UnityEngine.Vector2):UnityEngine.Vector2;
+            
+            public static op_Multiply($a: UnityEngine.Vector2, $d: number):UnityEngine.Vector2;
+            
+            public static op_Multiply($d: number, $a: UnityEngine.Vector2):UnityEngine.Vector2;
+            
+            public static op_Division($a: UnityEngine.Vector2, $d: number):UnityEngine.Vector2;
+            
+            public static op_Equality($lhs: UnityEngine.Vector2, $rhs: UnityEngine.Vector2):boolean;
+            
+            public static op_Inequality($lhs: UnityEngine.Vector2, $rhs: UnityEngine.Vector2):boolean;
+            
+            public static op_Implicit($v: UnityEngine.Vector3):UnityEngine.Vector2;
+            
+            public static op_Implicit($v: UnityEngine.Vector2):UnityEngine.Vector3;
+            
+            public constructor();
+            
+            public Equals($obj: any):boolean;
+            
+            public static Equals($objA: any, $objB: any):boolean;
+            
+        }
         /** The interface to get time information from Unity. */
         class Time extends System.Object {
             /** The time at the beginning of this frame (Read Only). This is the time in seconds since the start of the game. */
@@ -1360,10 +1505,6 @@ declare module 'csharp' {
         }
         /** Enumeration of the different types of supported touchscreen keyboards. */
         enum TouchScreenKeyboardType { Default = 0, ASCIICapable = 1, NumbersAndPunctuation = 2, URL = 3, NumberPad = 4, PhonePad = 5, NamePhonePad = 6, EmailAddress = 7, NintendoNetworkAccount = 8, Social = 9, Search = 10, DecimalPad = 11 }
-        /** Representation of 2D vectors and points. */
-        class Vector2 extends System.ValueType {
-            
-        }
         /** A UnityGUI event. */
         class Event extends System.Object {
             

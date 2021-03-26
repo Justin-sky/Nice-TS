@@ -1,4 +1,4 @@
-import { ArrayMap } from "../common/ArrayMap";
+import { ArrayMap } from "../core/ArrayMap";
 import { Logger } from "../logger/Logger";
 import { Component } from "./Component";
 
