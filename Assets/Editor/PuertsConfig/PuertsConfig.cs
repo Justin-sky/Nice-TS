@@ -64,6 +64,8 @@ public class PuertsConfig
                 typeof(NiceTS.HttpManager),
                  typeof(MonoSingleton<NiceTS.TService>),
                 typeof(Logger),
+                typeof(TestP),
+                typeof(TestC)
 
             };
 

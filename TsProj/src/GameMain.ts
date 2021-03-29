@@ -32,7 +32,7 @@ class GameMain{
             await S.ResManager.loadFairyGUIPackage(commonUI.PackageName);
 
             //do Unit Test
-            //UnitTest.doTest();
+            UnitTest.doTest();
 
             //进入登录模块
             await S.SceneManager.loadScene(SceneDef.LoginScene);
@@ -41,13 +41,14 @@ class GameMain{
             //JS启动完成，通知C#层
             GameLaunch.Instance.JsLuanchFinish();
 
-           // let pool = []
-            FairyGUI.UIObjectFactory.SetPackageItemExtension("ui://l64dumk9feeg54",
-            ()=>{
+            let extItem = ()=>{
                 let item =  new UIServerListItem();
                // pool.push(item)
                 return item;
-            })
+            }
+
+           // let pool = []
+            FairyGUI.UIObjectFactory.SetPackageItemExtension("ui://l64dumk9feeg54",extItem)
             
 
         }catch(ex){

@@ -5,36 +5,40 @@ using System.Text;
 using System.Threading.Tasks;
 using NiceTS;
 
-public class P
+public class TestP
 {
-    public void TestP()
-    {
-        Log.Debug( LogGroups.Console, "TestＰ");
-    }
+   
 }
 
-public class Test:P
-{
-    public int a = 100;
 
-    internal static Test _inst;
-    public static Test inst
+public class TestC 
+{
+    public delegate TestP PCreator();
+    public static PCreator pCreator;  //PCreator
+
+
+    public static TestP _P; 
+
+    public static TestP getObj()
     {
-        get
+        if (_P == null)
         {
-            if (_inst == null)
-            {
-                _inst = new Test();
-            }
-
-            return _inst;
+            UnityEngine.Debug.LogWarning("null.....");
+            _P = pCreator();
         }
-       
+        else
+        {
+            
+        }
+        UnityEngine.Debug.LogWarning(_P);
+
+        return _P;
     }
 
-    public long testLong()
+    public static void SetPackageItemExtension(PCreator creator)
     {
-        return -5544070116807168770;
-    }
+        pCreator = creator;
 
+    }
 }
+

@@ -3552,6 +3552,24 @@ declare module 'csharp' {
             
         }
         
+        class TestP extends System.Object {
+            
+            public constructor();
+            
+        }
+        
+        class TestC extends System.Object {
+            
+            public static pCreator: TestC.PCreator;
+            
+            public constructor();
+            
+            public static getObj():TestP;
+            
+            public static SetPackageItemExtension($creator: TestC.PCreator):void;
+            
+        }
+        
     
     namespace Microsoft.IO {
         
@@ -3580,6 +3598,12 @@ declare module 'csharp' {
         class Task$1<TResult> extends System.Threading.Tasks.Task {
             
         }
+        
+    }
+    namespace TestC {
+        
+        type PCreator = () => TestP;
+        var PCreator: {new (func: () => TestP): PCreator;}
         
     }
     namespace FairyGUI {
@@ -6554,7 +6578,7 @@ declare module 'csharp' {
             
             public translated: boolean;
             
-            public extensionCreator: FairyGUI.UIObjectFactory.GComponentCreator;
+            public extensionCreator: FairyGUI.GComponentCreator;
             
             public bitmapFont: FairyGUI.BitmapFont;
             
@@ -6770,6 +6794,10 @@ declare module 'csharp' {
         }
         
         class GComponent extends FairyGUI.GObject {
+            
+            public __onConstruct: System.Action;
+            
+            public __onDispose: System.Action;
             
             public get rootContainer(): FairyGUI.Container;
             
@@ -7998,6 +8026,16 @@ declare module 'csharp' {
             
             public bringToFontOnClick: boolean;
             
+            public __onInit: System.Action;
+            
+            public __onShown: System.Action;
+            
+            public __onHide: System.Action;
+            
+            public __doShowAnimation: System.Action;
+            
+            public __doHideAnimation: System.Action;
+            
             public get contentPane(): FairyGUI.GComponent;
             public set contentPane(value: FairyGUI.GComponent);
             
@@ -8314,6 +8352,9 @@ declare module 'csharp' {
         
         enum ObjectType { Image = 0, MovieClip = 1, Swf = 2, Graph = 3, Loader = 4, Group = 5, Text = 6, RichText = 7, InputText = 8, Component = 9, List = 10, Label = 11, Button = 12, ComboBox = 13, ProgressBar = 14, Slider = 15, ScrollBar = 16, Tree = 17, Loader3D = 18 }
         
+        type GComponentCreator = () => FairyGUI.GComponent;
+        var GComponentCreator: {new (func: () => FairyGUI.GComponent): GComponentCreator;}
+        
         type PlayCompleteCallback = () => void;
         var PlayCompleteCallback: {new (func: () => void): PlayCompleteCallback;}
         
@@ -8543,7 +8584,7 @@ declare module 'csharp' {
             
             public static SetPackageItemExtension($url: string, $type: System.Type):void;
             
-            public static SetPackageItemExtension($url: string, $creator: FairyGUI.UIObjectFactory.GComponentCreator):void;
+            public static SetPackageItemExtension($url: string, $creator: FairyGUI.GComponentCreator):void;
             
             public static SetLoaderExtension($type: System.Type):void;
             
@@ -9465,15 +9506,6 @@ declare module 'csharp' {
         var TreeNodeWillExpandDelegate: {new (func: (node: FairyGUI.GTreeNode, expand: boolean) => void): TreeNodeWillExpandDelegate;}
         
     }
-    namespace FairyGUI.UIObjectFactory {
-        
-        type GComponentCreator = () => FairyGUI.GComponent;
-        var GComponentCreator: {new (func: () => FairyGUI.GComponent): GComponentCreator;}
-        
-        type GLoaderCreator = () => FairyGUI.GLoader;
-        var GLoaderCreator: {new (func: () => FairyGUI.GLoader): GLoaderCreator;}
-        
-    }
     namespace FairyGUI.TreeView {
         
         type TreeNodeCreateCellDelegate = (node: FairyGUI.TreeNode) => FairyGUI.GComponent;
@@ -9512,6 +9544,12 @@ declare module 'csharp' {
         var SoundLoader: {new (func: (url: string) => FairyGUI.NAudioClip): SoundLoader;}
         
         enum ConfigKey { DefaultFont = 0, ButtonSound = 1, ButtonSoundVolumeScale = 2, HorizontalScrollBar = 3, VerticalScrollBar = 4, DefaultScrollStep = 5, DefaultScrollBarDisplay = 6, DefaultScrollTouchEffect = 7, DefaultScrollBounceEffect = 8, TouchScrollSensitivity = 9, WindowModalWaiting = 10, GlobalModalWaiting = 11, PopupMenu = 12, PopupMenu_seperator = 13, LoaderErrorSign = 14, TooltipsWin = 15, DefaultComboBoxVisibleItemCount = 16, TouchDragSensitivity = 17, ClickDragSensitivity = 18, ModalLayerColor = 19, RenderingTextBrighterOnDesktop = 20, AllowSoftnessOnTopOrLeftSide = 21, InputCaretSize = 22, InputHighlightColor = 23, EnhancedTextOutlineEffect = 24, DepthSupportForPaintingMode = 25, RichTextRowVerticalAlign = 26, Branch = 27, PleaseSelect = 100 }
+        
+    }
+    namespace FairyGUI.UIObjectFactory {
+        
+        type GLoaderCreator = () => FairyGUI.GLoader;
+        var GLoaderCreator: {new (func: () => FairyGUI.GLoader): GLoaderCreator;}
         
     }
     namespace FairyGUI.Utils.UBBParser {

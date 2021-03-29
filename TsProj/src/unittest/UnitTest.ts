@@ -12,6 +12,7 @@ import { Logger } from '../framework/logger/Logger';
 import { PlayerManager } from '../game/entity/PlayerManager';
 import { BagComponent } from '../game/entity/component/BagComponent';
 import { PlayerInfoComponent } from '../game/entity/component/PlayerInfoComponent';
+import { TestC, TestP } from 'csharp';
 
 
 export class UnitTest{
@@ -320,12 +321,37 @@ export class UnitTest{
          bagC.unSubscribe<Event>(trigger2, Event);
  
          bagC.publish<Event>(event, Event);
+
+
+        //test delegate
+        TestC.SetPackageItemExtension(()=>{
+            return new TTestC();
+        })
+
+        setInterval(()=>{
+
+            let p = TestC.getObj();
+            if(p instanceof TTestC){
+                console.log("aaaaaaaaaaaaaaaa")
+            }else{
+                console.log("bbbbbbbbbbbbbbbbbbbb")
+            }
+
+        },1000)
  
     }
 
-    
 
 }
+
+class TTestC extends TestP{
+
+    public test(){
+        console.log("hello test delegate")
+    }
+}
+
+
 
 export class Event{
     id:number;
