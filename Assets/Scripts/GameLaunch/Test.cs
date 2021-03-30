@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NiceTS;
+using Puerts;
 
 public class TestP
 {
@@ -13,31 +14,18 @@ public class TestP
 
 public class TestC 
 {
-    public delegate TestP PCreator();
-    public static PCreator pCreator;  //PCreator
+    public static JSObject jsObject;
 
 
-    public static TestP _P; 
-
-    public static TestP getObj()
+    public static JSObject getObj()
     {
-        if (_P == null)
-        {
-            UnityEngine.Debug.LogWarning("null.....");
-            _P = pCreator();
-        }
-        else
-        {
-            
-        }
-        UnityEngine.Debug.LogWarning(_P);
 
-        return _P;
+        return jsObject;
     }
 
-    public static void SetPackageItemExtension(PCreator creator)
+    public static void SetPackageItemExtension(JSObject creator)
     {
-        pCreator = creator;
+        jsObject = creator;
 
     }
 }

@@ -324,13 +324,12 @@ export class UnitTest{
 
 
         //test delegate
-        TestC.SetPackageItemExtension(()=>{
-            return new TTestC();
-        })
+        TestC.SetPackageItemExtension(new TTestC())
 
         setInterval(()=>{
 
             let p = TestC.getObj();
+
             if(p instanceof TTestC){
                 console.log("aaaaaaaaaaaaaaaa")
             }else{

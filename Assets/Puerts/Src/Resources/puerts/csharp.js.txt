@@ -122,9 +122,7 @@ var global = global || (function () { return this; }());
     }
     
     function getType(cls) {
-        if (cls.__p_innerTypeCache) return cls.__p_innerTypeCache;
-        cls.__p_innerTypeCache = cls.__p_innerType;
-        return cls.__p_innerTypeCache;
+        return cls.__p_innerType;
     }
     
     function bindThisToFirstArgument(func) {
@@ -134,7 +132,7 @@ var global = global || (function () { return this; }());
     }
     
     function extension(cls, extension) {
-        for(var key in extension) {
+        Object.keys(extension).forEach(key=> {
             var func = extension[key];
             if (typeof func == 'function' && key != 'constructor') {
                 Object.defineProperty(cls.prototype, key, {
@@ -143,7 +141,7 @@ var global = global || (function () { return this; }());
                     configurable: false
                 });
             }
-        }
+        })
     }
     
     puerts.$ref = ref;

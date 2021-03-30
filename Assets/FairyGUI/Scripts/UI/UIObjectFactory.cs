@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Puerts;
+using System;
 using System.Collections.Generic;
 #if FAIRYGUI_TOLUA
 using LuaInterface;
@@ -15,6 +16,7 @@ namespace FairyGUI
         public delegate GLoader GLoaderCreator();
 
         static Dictionary<string, GComponentCreator> packageItemExtensions = new Dictionary<string, GComponentCreator>();
+        static Dictionary<string, JSObject> packageItemExtensionsPuerts = new Dictionary<string, JSObject>();
         static GLoaderCreator loaderCreator;
 
         /// <summary>
@@ -25,6 +27,18 @@ namespace FairyGUI
         public static void SetPackageItemExtension(string url, System.Type type)
         {
             SetPackageItemExtension(url, () => { return (GComponent)Activator.CreateInstance(type); });
+        }
+
+
+        public static void SetPackageItemExtension(string url, JSObject jSObject)
+        {
+            if (url == null)
+                throw new Exception("Invaild url: " + url);
+            PackageItem pi = UIPackage.GetItemByURL(url);
+            if (pi != null)
+                pi.jsObject = jSObject;
+
+            packageItemExtensionsPuerts[url] = jSObject;
         }
 
         /// <summary>
@@ -85,11 +99,16 @@ namespace FairyGUI
             if (!packageItemExtensions.TryGetValue(UIPackage.URL_PREFIX + pi.owner.id + pi.id, out pi.extensionCreator)
                 && !packageItemExtensions.TryGetValue(UIPackage.URL_PREFIX + pi.owner.name + "/" + pi.name, out pi.extensionCreator))
                 pi.extensionCreator = null;
+
+            if (!packageItemExtensionsPuerts.TryGetValue(UIPackage.URL_PREFIX + pi.owner.id + pi.id, out pi.jsObject)
+               && !packageItemExtensionsPuerts.TryGetValue(UIPackage.URL_PREFIX + pi.owner.name + "/" + pi.name, out pi.jsObject))
+                pi.jsObject = null;
         }
 
         public static void Clear()
         {
             packageItemExtensions.Clear();
+            packageItemExtensionsPuerts.Clear();
             loaderCreator = null;
         }
 
@@ -116,6 +135,11 @@ namespace FairyGUI
                 }
                 else
                     obj = NewObject(pi.objectType);
+
+                if(pi.jsObject != null)
+                {
+                    obj.jsObject = pi.jsObject;
+                }
             }
             else
                 obj = NewObject(pi.objectType);

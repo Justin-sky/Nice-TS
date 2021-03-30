@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using FairyGUI.Utils;
+using Puerts;
 
 namespace FairyGUI
 {
@@ -39,6 +40,7 @@ namespace FairyGUI
         //component
         public bool translated;
         public UIObjectFactory.GComponentCreator extensionCreator;
+        public JSObject jsObject;
 
         //font
         public BitmapFont bitmapFont;

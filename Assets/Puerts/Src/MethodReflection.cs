@@ -129,16 +129,19 @@ namespace Puerts
                 if (i < length)
                 {
                     var argJsType = callInfo.JsTypes[i];
-                    if (argJsType == JsValueType.JsObject)
+                    if (byRef[i])
                     {
-                        if (!byRef[i]) return false;
-                        if (!isOut[i])
+                        if (argJsType != JsValueType.JsObject)
                         {
-                            argJsType = PuertsDLL.GetJsValueType(callInfo.Isolate, callInfo.NativePtrs[i], true);
+                            return false;
+                        }
+                        if (isOut[i])
+                        {
+                            continue;
                         }
                         else
                         {
-                            continue;
+                            argJsType = PuertsDLL.GetJsValueType(callInfo.Isolate, callInfo.NativePtrs[i], true);
                         }
                     }
                     if ((typeMasks[i] & argJsType) != argJsType)
@@ -233,6 +236,9 @@ namespace Puerts
 
         ConstructorInfo constructorInfo = null;
 
+        Type type = null;
+
+
         GeneralGetterManager generalGetterManager = null;
 
         GeneralSetter resultSetter = null;
@@ -252,6 +258,17 @@ namespace Puerts
                 methodInfo = methodBase as MethodInfo;
                 resultSetter = generalSetterManager.GetTranslateFunc(methodInfo.ReturnType);
             }
+        }
+
+        // 供struct的无参默认构造函数使用
+        public OverloadReflectionWrap(Type type, GeneralGetterManager generalGetterManager)
+        {
+            ParameterInfo[] info = { };
+            parameters = new Parameters(info, generalGetterManager, null);
+
+            this.generalGetterManager = generalGetterManager;
+
+            this.type = type;
         }
 
         public bool IsMatch(CallInfo callInfo)
@@ -276,6 +293,10 @@ namespace Puerts
 
         public object Construct(CallInfo callInfo)
         {
+            if (constructorInfo == null && type != null) 
+            {
+                return Activator.CreateInstance(type);
+            }
             return constructorInfo.Invoke(parameters.GetArguments(callInfo));
         }
     }

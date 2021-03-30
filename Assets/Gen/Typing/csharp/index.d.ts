@@ -3560,13 +3560,15 @@ declare module 'csharp' {
         
         class TestC extends System.Object {
             
-            public static pCreator: TestC.PCreator;
+            public static jsObject: Puerts.JSObject;
+            
+            public static _P: Puerts.JSObject;
             
             public constructor();
             
-            public static getObj():TestP;
+            public static getObj():Puerts.JSObject;
             
-            public static SetPackageItemExtension($creator: TestC.PCreator):void;
+            public static SetPackageItemExtension($creator: Puerts.JSObject):void;
             
         }
         
@@ -3588,6 +3590,10 @@ declare module 'csharp' {
             
         }
         
+        class JSObject extends System.Object {
+            
+        }
+        
     }
     namespace System.Threading.Tasks {
         
@@ -3598,12 +3604,6 @@ declare module 'csharp' {
         class Task$1<TResult> extends System.Threading.Tasks.Task {
             
         }
-        
-    }
-    namespace TestC {
-        
-        type PCreator = () => TestP;
-        var PCreator: {new (func: () => TestP): PCreator;}
         
     }
     namespace FairyGUI {
@@ -4076,6 +4076,8 @@ declare module 'csharp' {
             public maxHeight: number;
             
             public dragBounds: System.Nullable$1<UnityEngine.Rect>;
+            
+            public jsObject: Puerts.JSObject;
             
             public packageItem: FairyGUI.PackageItem;
             
@@ -4566,7 +4568,7 @@ declare module 'csharp' {
             
             public static Instantiate():void;
             
-            public SetFous($newFocus: FairyGUI.DisplayObject, $byKey?: boolean):void;
+            public SetFocus($newFocus: FairyGUI.DisplayObject, $byKey?: boolean):void;
             
             public DoKeyNavigate($backward: boolean):void;
             
@@ -5326,8 +5328,6 @@ declare module 'csharp' {
             public static ID_BlendDstFactor: number;
             
             public static ID_ColorOption: number;
-            
-            public static ID_StencilComp2: number;
             
             public static ID_Stencil2: number;
             
@@ -6578,7 +6578,9 @@ declare module 'csharp' {
             
             public translated: boolean;
             
-            public extensionCreator: FairyGUI.GComponentCreator;
+            public extensionCreator: FairyGUI.UIObjectFactory.GComponentCreator;
+            
+            public jsObject: Puerts.JSObject;
             
             public bitmapFont: FairyGUI.BitmapFont;
             
@@ -6925,6 +6927,10 @@ declare module 'csharp' {
             public visibleItemCount: number;
             
             public dropdown: FairyGUI.GComponent;
+            
+            public sound: FairyGUI.NAudioClip;
+            
+            public soundVolumeScale: number;
             
             public get onChanged(): FairyGUI.EventListener;
             
@@ -8352,9 +8358,6 @@ declare module 'csharp' {
         
         enum ObjectType { Image = 0, MovieClip = 1, Swf = 2, Graph = 3, Loader = 4, Group = 5, Text = 6, RichText = 7, InputText = 8, Component = 9, List = 10, Label = 11, Button = 12, ComboBox = 13, ProgressBar = 14, Slider = 15, ScrollBar = 16, Tree = 17, Loader3D = 18 }
         
-        type GComponentCreator = () => FairyGUI.GComponent;
-        var GComponentCreator: {new (func: () => FairyGUI.GComponent): GComponentCreator;}
-        
         type PlayCompleteCallback = () => void;
         var PlayCompleteCallback: {new (func: () => void): PlayCompleteCallback;}
         
@@ -8584,7 +8587,9 @@ declare module 'csharp' {
             
             public static SetPackageItemExtension($url: string, $type: System.Type):void;
             
-            public static SetPackageItemExtension($url: string, $creator: FairyGUI.GComponentCreator):void;
+            public static SetPackageItemExtension($url: string, $jSObject: Puerts.JSObject):void;
+            
+            public static SetPackageItemExtension($url: string, $creator: FairyGUI.UIObjectFactory.GComponentCreator):void;
             
             public static SetLoaderExtension($type: System.Type):void;
             
@@ -9506,6 +9511,15 @@ declare module 'csharp' {
         var TreeNodeWillExpandDelegate: {new (func: (node: FairyGUI.GTreeNode, expand: boolean) => void): TreeNodeWillExpandDelegate;}
         
     }
+    namespace FairyGUI.UIObjectFactory {
+        
+        type GComponentCreator = () => FairyGUI.GComponent;
+        var GComponentCreator: {new (func: () => FairyGUI.GComponent): GComponentCreator;}
+        
+        type GLoaderCreator = () => FairyGUI.GLoader;
+        var GLoaderCreator: {new (func: () => FairyGUI.GLoader): GLoaderCreator;}
+        
+    }
     namespace FairyGUI.TreeView {
         
         type TreeNodeCreateCellDelegate = (node: FairyGUI.TreeNode) => FairyGUI.GComponent;
@@ -9544,12 +9558,6 @@ declare module 'csharp' {
         var SoundLoader: {new (func: (url: string) => FairyGUI.NAudioClip): SoundLoader;}
         
         enum ConfigKey { DefaultFont = 0, ButtonSound = 1, ButtonSoundVolumeScale = 2, HorizontalScrollBar = 3, VerticalScrollBar = 4, DefaultScrollStep = 5, DefaultScrollBarDisplay = 6, DefaultScrollTouchEffect = 7, DefaultScrollBounceEffect = 8, TouchScrollSensitivity = 9, WindowModalWaiting = 10, GlobalModalWaiting = 11, PopupMenu = 12, PopupMenu_seperator = 13, LoaderErrorSign = 14, TooltipsWin = 15, DefaultComboBoxVisibleItemCount = 16, TouchDragSensitivity = 17, ClickDragSensitivity = 18, ModalLayerColor = 19, RenderingTextBrighterOnDesktop = 20, AllowSoftnessOnTopOrLeftSide = 21, InputCaretSize = 22, InputHighlightColor = 23, EnhancedTextOutlineEffect = 24, DepthSupportForPaintingMode = 25, RichTextRowVerticalAlign = 26, Branch = 27, PleaseSelect = 100 }
-        
-    }
-    namespace FairyGUI.UIObjectFactory {
-        
-        type GLoaderCreator = () => FairyGUI.GLoader;
-        var GLoaderCreator: {new (func: () => FairyGUI.GLoader): GLoaderCreator;}
         
     }
     namespace FairyGUI.Utils.UBBParser {
