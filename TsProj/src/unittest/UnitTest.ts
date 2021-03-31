@@ -324,7 +324,7 @@ export class UnitTest{
 
 
         //test delegate
-        TestC.SetPackageItemExtension(new TTestC())
+        //TestC.setObj(new TTestC())
 
         setInterval(()=>{
 
@@ -356,3 +356,5 @@ export class Event{
     id:number;
     name:string;
 }
+
+
