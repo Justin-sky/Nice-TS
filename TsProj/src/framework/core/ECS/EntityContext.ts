@@ -1,6 +1,6 @@
+import { TypedObjectPool } from "../../common/TypedObjectPool";
 import { Entity } from "./Entity";
 import { ComponentGroupContext } from "./GroupContext";
-import { TypedObjectPool } from "../../common/TypedObjectPool";
 import { SyncDebugger } from "./SyncDebugger";
 
 type Class<T> = new (...args: any[]) => T;

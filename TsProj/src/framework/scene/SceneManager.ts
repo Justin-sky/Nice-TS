@@ -55,8 +55,12 @@ export class SceneManager extends Singleton<SceneManager>{
 
             //加载完成
             clearInterval(progressInterval)
-            this.currentScene.onComplete()
-            S.UIManager.closeLoading(commonUI.UILoadingPage);
+
+             //关闭所有Page
+             S.UIManager.closeAllPanels();
+
+            await this.currentScene.onComplete()
+            S.UIManager.closeLoading();
 
         }catch(ex){
             Logger.log("load scene excep:"+ex);
