@@ -1,4 +1,4 @@
-import { TypedObjectPool } from "./TypedObjectPool";
+import { TypedObjectPool } from "../common/TypedObjectPool";
 
 class TimeEvent {
     id: number;

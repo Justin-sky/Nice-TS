@@ -3,7 +3,7 @@ import { Vec2 } from "../Vec2";
 import { GroupID } from "./GroupID";
 import { theFramePool } from "../FramePool";
 import { EventSlots } from "./EventSlots";
-import { TypedObjectPool } from "../TypedObjectPool";
+import { TypedObjectPool } from "../../common/TypedObjectPool";
 
 type Class<T> = new (...args: any[]) => T;
 

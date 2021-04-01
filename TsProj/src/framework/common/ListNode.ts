@@ -1,4 +1,4 @@
-import { TypedObjectPool } from "../common/TypedObjectPool";
+import { TypedObjectPool } from "./TypedObjectPool";
 
 export class ListNode {
     private static _pool = new TypedObjectPool(ListNode);
