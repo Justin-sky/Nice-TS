@@ -324,7 +324,7 @@ export class UnitTest{
 
 
         //test delegate
-        //TestC.setObj(new TTestC())
+        TestC.SetPackageItemExtension(new TTestC())
 
         setInterval(()=>{
 

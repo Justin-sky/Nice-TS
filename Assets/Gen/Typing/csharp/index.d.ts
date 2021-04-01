@@ -3562,8 +3562,6 @@ declare module 'csharp' {
             
             public static jsObject: Puerts.JSObject;
             
-            public static _P: Puerts.JSObject;
-            
             public constructor();
             
             public static getObj():Puerts.JSObject;
